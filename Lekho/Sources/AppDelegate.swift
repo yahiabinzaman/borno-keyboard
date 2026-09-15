@@ -10,7 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let userDir = FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask
-        ).first!.appendingPathComponent("Lekho")
+        ).first!.appendingPathComponent("Borno")
 
         if !FileManager.default.fileExists(atPath: userDir.path) {
             WelcomeWindowController.shared.showWindow()

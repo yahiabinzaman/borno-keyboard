@@ -1,8 +1,8 @@
 import Cocoa
 import InputMethodKit
 
-@objc(LekhoInputController)
-class LekhoInputController: IMKInputController {
+@objc(BornoInputController)
+class BornoInputController: IMKInputController {
 
     // MARK: - Settings
 
@@ -73,7 +73,7 @@ class LekhoInputController: IMKInputController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(typingModeChanged),
-            name: .lekhoTypingModeChanged,
+            name: .bornoTypingModeChanged,
             object: nil
         )
     }
@@ -251,7 +251,7 @@ class LekhoInputController: IMKInputController {
         let appSupport = FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask
-        ).first!.appendingPathComponent("Lekho")
+        ).first!.appendingPathComponent("Borno")
 
         // Create directory if it doesn't exist
         try? FileManager.default.createDirectory(
@@ -393,7 +393,7 @@ class LekhoInputController: IMKInputController {
            let digit = chars.first,
            digit >= "0" && digit <= "9" {
             let digitValue = Int(String(digit))!
-            let bengaliDigit = String(LekhoInputController.bengaliDigits[digitValue])
+            let bengaliDigit = String(BornoInputController.bengaliDigits[digitValue])
             client.insertText(
                 bengaliDigit as NSString,
                 replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
@@ -411,7 +411,7 @@ class LekhoInputController: IMKInputController {
                 // type the digit as a Bengali numeral (matches no-session behavior).
                 commitTopCandidate(client: client)
                 let digitValue = Int(String(digit))!
-                let bengaliDigit = String(LekhoInputController.bengaliDigits[digitValue])
+                let bengaliDigit = String(BornoInputController.bengaliDigits[digitValue])
                 client.insertText(
                     bengaliDigit as NSString,
                     replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
@@ -778,5 +778,5 @@ class LekhoInputController: IMKInputController {
 }
 
 extension Notification.Name {
-    static let lekhoTypingModeChanged = Notification.Name("LekhoTypingModeChanged")
+    static let bornoTypingModeChanged = Notification.Name("LekhoTypingModeChanged")
 }

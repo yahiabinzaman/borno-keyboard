@@ -2,14 +2,14 @@ import Cocoa
 import InputMethodKit
 
 // Connection name MUST match Info.plist's InputMethodConnectionName
-let kConnectionName = "com.lekho.inputmethod.Lekho_Connection"
+let kConnectionName = "com.borno.inputmethod.Borno_Connection"
 
 // IMKServer must be a global to stay alive for the process lifetime
 var server: IMKServer!
 
 // Build identifier — check Console.app for "Lekho" to verify which build is running
-let lekhoBuildId = "build-20260506b"
-NSLog("Lekho: starting %@", lekhoBuildId)
+let lekhoBuildId = "borno-v0.2.5"
+NSLog("Borno: starting %@", lekhoBuildId)
 
 // Install a minimal main menu so the welcome window honors standard Mac
 // keyboard shortcuts (Cmd+W, Cmd+Q, Cmd+C/V/X/A) when it is the key window.
@@ -25,7 +25,7 @@ func installMainMenu() {
     // App menu (title is the leftmost item label macOS shows in the menu bar)
     let appMenuItem = NSMenuItem()
     mainMenu.addItem(appMenuItem)
-    let appMenu = NSMenu(title: "Lekho")
+    let appMenu = NSMenu(title: "Borno")
     appMenu.addItem(NSMenuItem(
         title: "Close Window",
         action: #selector(NSWindow.performClose(_:)),
@@ -35,7 +35,7 @@ func installMainMenu() {
         action: #selector(NSWindow.performClose(_:)),
         keyEquivalent: "q"))
     appMenu.addItem(NSMenuItem(
-        title: "Hide Lekho",
+        title: "Hide Borno",
         action: #selector(NSApplication.hide(_:)),
         keyEquivalent: "h"))
     appMenuItem.submenu = appMenu

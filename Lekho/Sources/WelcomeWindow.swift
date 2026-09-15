@@ -223,7 +223,7 @@ final class PillBadge: RoundedTintView {
 /// A selectable typing-mode card: radio indicator + title (+ optional badge) +
 /// wrapping description. The whole card is clickable.
 final class ModeCard: NSView {
-    let mode: LekhoInputController.TypingMode
+    let mode: BornoInputController.TypingMode
     var onSelect: (() -> Void)?
     var isSelected: Bool = false { didSet { updateSelection() } }
 
@@ -231,7 +231,7 @@ final class ModeCard: NSView {
     private let titleLabel = NSTextField(labelWithString: "")
     private let descLabel = NSTextField(wrappingLabelWithString: "")
 
-    init(mode: LekhoInputController.TypingMode, title: String, description: String, recommended: Bool) {
+    init(mode: BornoInputController.TypingMode, title: String, description: String, recommended: Bool) {
         self.mode = mode
         super.init(frame: .zero)
         wantsLayer = true
@@ -335,8 +335,8 @@ class SettingsView: NSView {
         cardStack.spacing = 14
         cardStack.translatesAutoresizingMaskIntoConstraints = false
 
-        let current = LekhoInputController.currentTypingMode()
-        let modes: [(LekhoInputController.TypingMode, String, String, Bool)] = [
+        let current = BornoInputController.currentTypingMode()
+        let modes: [(BornoInputController.TypingMode, String, String, Bool)] = [
             (.smart, "Smart suggestions",
              "Dictionary, autocorrect, and emoji choose the best-matching word when you press space. Press a number, the arrow keys, or click to pick another.",
              false),
@@ -384,10 +384,10 @@ class SettingsView: NSView {
         ])
     }
 
-    private func select(_ mode: LekhoInputController.TypingMode) {
+    private func select(_ mode: BornoInputController.TypingMode) {
         for card in cards { card.isSelected = (card.mode == mode) }
-        UserDefaults.standard.set(mode.rawValue, forKey: LekhoInputController.typingModeKey)
-        NotificationCenter.default.post(name: .lekhoTypingModeChanged, object: nil)
+        UserDefaults.standard.set(mode.rawValue, forKey: BornoInputController.typingModeKey)
+        NotificationCenter.default.post(name: .bornoTypingModeChanged, object: nil)
     }
 }
 
@@ -492,7 +492,7 @@ class GettingStartedView: NSView {
 
         // Tip
         let tip = NSTextField(wrappingLabelWithString:
-            "You can close this window — the keyboard keeps running in the background. Open Lekho "
+            "You can close this window — the keyboard keeps running in the background. Open Borno "
             + "anytime to see this guide, or check the Avro Layout tab for the full key mapping.")
         tip.font = NSFont.systemFont(ofSize: 12)
         tip.textColor = .secondaryLabelColor
@@ -635,7 +635,7 @@ class GettingStartedView: NSView {
         divider.boxType = .separator
         divider.translatesAutoresizingMaskIntoConstraints = false
 
-        let credit = NSTextField(labelWithString: "Maintained by Abdur Rahim")
+        let credit = NSTextField(labelWithString: "Developed & Maintained by Yahia Bin Zaman")
         credit.font = NSFont.systemFont(ofSize: 11)
         credit.textColor = .secondaryLabelColor
 
@@ -644,9 +644,9 @@ class GettingStartedView: NSView {
         dot.textColor = .tertiaryLabelColor
 
         let links = NSStackView(views: [
-            makeLinkButton("github.com/ARahim3", url: "https://github.com/ARahim3"),
+            makeLinkButton("github.com/yahiabinzaman", url: "https://github.com/yahiabinzaman"),
             dot,
-            makeLinkButton("arahim3.github.io", url: "https://arahim3.github.io"),
+            makeLinkButton("Borno macOS", url: "https://github.com/yahiabinzaman/macbangla"),
         ])
         links.orientation = .horizontal
         links.spacing = 8
