@@ -1,2374 +1,1053 @@
 <!doctype html>
 <html lang="bn">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- SEO: Bengali-first title mixing Bangla and English keywords -->
-        <title>Borno (বর্ণ) — ম্যাকের জন্য অভ্র ফোনেটিক বাংলা কিবোর্ড | Avro Keyboard for Mac</title>
-        <link rel="canonical" href="https://yahiabinzaman.github.io/macbangla/bn/" />
-        <link rel="alternate" hreflang="en" href="https://yahiabinzaman.github.io/macbangla/" />
-        <link rel="alternate" hreflang="bn" href="https://yahiabinzaman.github.io/macbangla/bn/" />
-        <link rel="alternate" hreflang="x-default" href="https://yahiabinzaman.github.io/macbangla/" />
-        <meta
-            name="description"
-            content="Borno — ম্যাকের জন্য ফ্রি অভ্র ফোনেটিক বাংলা কিবোর্ড। Apple Silicon (M1–M5) ম্যাকের জন্য নেটিভভাবে তৈরি, সব অ্যাপেই চলে। আধুনিক ম্যাকে iAvro-র নেটিভ বিকল্প।"
-        />
-        <!-- SEO: Bengali-heavy keywords with English crossover terms -->
-        <meta
-            name="keywords"
-            content="অভ্র কিবোর্ড ম্যাক, বাংলা কিবোর্ড ম্যাক, বাংলা টাইপিং ম্যাক, ম্যাকে বাংলা লেখা, ম্যাকে অভ্র, অভ্র ফোনেটিক ম্যাক, অভ্র এম১ ম্যাক, অভ্র এম২ ম্যাক, অভ্র এম৩ ম্যাক, অভ্র এম৪ ম্যাক, ম্যাকবুক বাংলা টাইপিং, অভ্র কিবোর্ড ম্যাকবুক, ম্যাকে বাংলা ইনপুট মেথড, borno, বর্ণ, avro keyboard mac, bangla keyboard mac, bengali typing mac, iAvro alternative, avro phonetic apple silicon"
-        />
-        <meta
-            property="og:title"
-            content="Borno — ম্যাকে অভ্র-স্টাইল বাংলা টাইপিং"
-        />
-        <meta
-            property="og:description"
-            content="নেটিভ Apple Silicon বাংলা কিবোর্ড। ফ্রি। ~২.৭MB। কেবল কাজ করে।"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="bn_BD" />
-        <meta property="og:locale:alternate" content="en_US" />
-        <meta
-            property="og:image"
-            content="https://yahiabinzaman.github.io/macbangla/og-image.png"
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://yahiabinzaman.github.io/macbangla/bn/" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            name="twitter:title"
-            content="Borno — ম্যাকে অভ্র-স্টাইল বাংলা টাইপিং"
-        />
-        <meta
-            name="twitter:description"
-            content="নেটিভ Apple Silicon বাংলা কিবোর্ড। ফ্রি। ~২.৭MB। কেবল কাজ করে।"
-        />
-        <meta
-            name="twitter:image"
-            content="https://yahiabinzaman.github.io/macbangla/og-image.png"
-        />
-        <!-- SEO: JSON-LD structured data for rich search results (Bengali variant) -->
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Borno",
-            "alternateName": ["বর্ণ", "Borno বাংলা কিবোর্ড", "ম্যাকের জন্য অভ্র কিবোর্ড", "Avro Keyboard for Mac"],
-            "description": "macOS-এর জন্য অভ্র ফোনেটিক বাংলা কিবোর্ড। Apple Silicon-এর জন্য নেটিভভাবে তৈরি, ফ্রি, ওপেন সোর্স। আধুনিক Apple Silicon ম্যাকে iAvro-র নেটিভ বিকল্প।",
-            "url": "https://yahiabinzaman.github.io/macbangla/bn/",
-            "downloadUrl": "https://github.com/yahiabinzaman/macbangla/releases/latest",
-            "operatingSystem": "macOS 13 (Ventura), macOS 14 (Sonoma), macOS 15 (Sequoia), macOS 16+",
-            "processorRequirements": "Apple Silicon (M1, M2, M3, M4, M5)",
-            "applicationCategory": "UtilitiesApplication",
-            "applicationSubCategory": "Input Method",
-            "fileSize": "2.7MB",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            },
-            "author": {
-                "@type": "Person",
-                "name": "Abdur Rahim",
-                "url": "https://github.com/ARahim3"
-            },
-            "softwareVersion": "0.2",
-            "license": "https://opensource.org/licenses/MPL-2.0",
-            "inLanguage": "bn",
-            "keywords": "অভ্র কিবোর্ড ম্যাক, বাংলা কিবোর্ড ম্যাক, বাংলা টাইপিং ম্যাক, avro keyboard mac, bangla typing macbook"
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>বর্ণ (Borno) — ম্যাকের জন্য নেটিভ অভ্র ফোনেটিক বাংলা কিবোর্ড | Apple Silicon Native</title>
+    <meta name="description" content="বর্ণ (Borno) হলো ম্যাকের জন্য তৈরি সম্পূর্ণ নতুন অভ্র ফোনেটিক কিবোর্ড। কোনো ভাসমান পপআপ প্রিভিউ ছাড়াই উইন্ডোজের মতো ডিরেক্ট টাইপিং। অ্যাডোবি ইলাস্ট্রেটর ও ডিজাইনারদের জন্য বিশেষভাবে অপ্টিমাইজড।" />
+    <meta name="keywords" content="বর্ণ, Borno, অভ্র কিবোর্ড ম্যাক, বাংলা কিবোর্ড ম্যাকোস, avro keyboard mac, bangla typing macbook m4, ইলাস্ট্রেটর বাংলা" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yahiabinzaman.github.io/macbangla/bn/" />
+    <meta property="og:title" content="বর্ণ (Borno) — ম্যাকের জন্য অভ্র কিবোর্ড" />
+    <meta property="og:description" content="কোনো প্রিভিউ পপআপ ছাড়া সরাসরি উইন্ডোজের মতো বাংলা টাইপ করুন ম্যাকে। ১০০% ফ্রি ও ওপেন সোর্স।" />
+    <meta property="og:image" content="../borno-hero-mockup.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../borno-icon.png" />
+    <link rel="apple-touch-icon" href="../borno-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-base: #0a0a0c;
+            --bg-card: rgba(22, 22, 26, 0.7);
+            --bg-card-hover: rgba(30, 30, 36, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(255, 255, 255, 0.16);
+            --accent-red: #ff3b30;
+            --accent-crimson: #e63946;
+            --accent-gold: #f59e0b;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --font-en: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --font-bn: 'Hind Siliguri', 'Anek Bangla', sans-serif;
         }
-        </script>
-        <!-- SEO: FAQPage structured data (Bengali) — enables rich snippets in Bengali search results -->
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "inLanguage": "bn",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "এটা কি 'Avro Keyboard for Mac'-এর মতোই?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Borno সেই একই ধারার উত্তরসূরি — Windows-এ Avro Keyboard আর macOS-এ iAvro যে অভ্র ফোনেটিক ট্রান্সলিটারেশনের নিয়মগুলো জনপ্রিয় করেছিল, Borno ঠিক সেই নিয়মেই চলে। iAvro এখনো কাজ করে, কিন্তু এটা Intel-only বিল্ড — Apple Silicon-এ Rosetta দিয়ে চালাতে হয়, আর Apple ঘোষণা করেছে Rosetta সাপোর্ট ধীরে ধীরে বন্ধ হবে। Borno তৈরিই হয়েছে Apple Silicon ম্যাকের (M1, M2, M3, M4, M5) জন্য, নেটিভভাবে — তাই macOS যত নতুন ভার্সনে যাবে, Borno সাবলীলভাবেই চলতে থাকবে।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "M4 বা M5-এর MacBook Air / MacBook Pro-তে কাজ করবে?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "হ্যাঁ। Borno সব Apple Silicon ম্যাকে নেটিভভাবে চলে — MacBook Air, MacBook Pro, iMac, Mac Mini, Mac Studio, Mac Pro — যেকোনো M-সিরিজ চিপে (M1, M2, M3, M4, M5 এবং ভবিষ্যতের চিপ)।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "macOS-এর বিল্ট-ইন বাংলা কিবোর্ডের সাথে এটার তফাত কী?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "macOS-এর বিল্ট-ইন বাংলা ইনপুট অ্যাপলের নিজস্ব লেআউট ব্যবহার করে, অভ্র ফোনেটিকের নিয়ম না। Windows-এ Avro Keyboard বা Linux-এ OpenBangla Keyboard দিয়ে অভ্র ফোনেটিকে যারা বাংলা টাইপ করতে অভ্যস্ত — Borno তাদের কাছে চেনা মনে হবে। সেই একই ট্রান্সলিটারেশন স্টাইল, সাথে ১৫০,০০০ শব্দের অভিধান ও স্মার্ট সাজেশন।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Borno কি ফ্রি? ওপেন সোর্স?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "হ্যাঁ, পুরোপুরি ফ্রি — কোনো বিজ্ঞাপন নেই, সাবস্ক্রিপশন নেই, সাইন-আপ নেই। Borno ওপেন সোর্স, MPL-2.0 লাইসেন্সে। ট্রান্সলিটারেশন ইঞ্জিন হলো OpenBangla-র riti — Linux-এর OpenBangla Keyboard-এর পেছনে যে প্রমাণিত ইঞ্জিনটা আছে।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "২০২৬ সালে ম্যাকের জন্য সেরা অভ্র কিবোর্ড কোনটি?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "নেটিভ Apple Silicon-এর কথা বললে, M-সিরিজের জন্য বিশেষভাবে তৈরি একমাত্র অভ্র ফোনেটিক কিবোর্ড এখন Borno। iAvro এখনো Rosetta-র মাধ্যমে চলে, কিন্তু Apple ঘোষণা করেছে Rosetta সাপোর্ট ধীরে ধীরে বন্ধ হবে — macOS 27-এ পূর্ণ সাপোর্ট, macOS 28 থেকে শুধু লেগ্যাসি গেমসে সীমাবদ্ধ। Borno ফ্রি, ওপেন সোর্স, এবং M1–M5 ম্যাকে নেটিভভাবে চলে।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Apple Silicon ম্যাকের জন্য iAvro-র কোনো বিকল্প আছে?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "হ্যাঁ — Borno হলো iAvro-র আধুনিক বিকল্প। এটা Apple Silicon-এর জন্য নেটিভভাবে তৈরি, সেই একই অভ্র ফোনেটিক ট্রান্সলিটারেশন নিয়ম ব্যবহার করে, এবং ১৫০,০০০ শব্দের বাংলা অভিধান ও স্মার্ট সাজেশন সঙ্গে আছে। Chrome, Safari, Notes, Mail সহ সব অ্যাপে কাজ করে।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "ম্যাকে কীভাবে বাংলা টাইপ করব?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Borno ইনস্টল করুন, তারপর System Settings → Keyboard → Input Sources-এ গিয়ে + ক্লিক করে 'Borno' খুঁজে যোগ করুন। Globe কী বা Ctrl+Space দিয়ে সুইচ করুন। তারপর English-এ টাইপ করুন, বাংলায় কনভার্ট হবে — যেমন 'ami' টাইপ করলে 'আমি' পাবেন।"
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Homebrew দিয়ে Borno ইনস্টল করতে পারি?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "হ্যাঁ। 'brew install --cask yahiabinzaman/macbangla/borno' রান করুন — এই full form-এ tap auto-set হয়, এক কমান্ডেই কাজ চলে। আপডেট: 'brew upgrade --cask borno'; uninstall: 'brew uninstall --cask borno'। Homebrew এবং GitHub Releases-এর DMG — দুটো পথেই Borno ইনস্টল করা যায়।"
-                    }
-                }
-            ]
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        </script>
-        <!-- FIX: favicon now specifies Noto Sans Bengali for reliable Bengali glyph rendering -->
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23C0392B'/%3E%3Ctext x='50' y='68' font-family='Noto Sans Bengali%2C Noto Sans%2C sans-serif' font-size='60' font-weight='700' fill='white' text-anchor='middle'%3Eব%3C/text%3E%3C/svg%3E"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            :root {
-                --bg: #fdfaf5;
-                --bg-warm: #f8f2e8;
-                --bg-card: #ffffff;
-                --bg-code: #f5efe5;
-                --border: #e8dfd0;
-                --border-light: #f0e8da;
-                --text-primary: #2c1810;
-                --text-body: #4a3728;
-                --text-secondary: #7a6b5d;
-                /* FIX: darkened from #a89888 to #72645a — passes WCAG AA (~5.3:1 on --bg) */
-                --text-dim: #72645a;
-                --vermillion: #c0392b;
-                --vermillion-soft: #c0392b15;
-                --vermillion-glow: #c0392b25;
-                --vermillion-deep: #922b21;
-                --olive: #5d7a3a;
-            }
 
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-bn);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(circle at 50% -10%, rgba(230, 57, 70, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 85% 25%, rgba(245, 158, 11, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
 
-            /* FIX: scroll-behavior only when user hasn't requested reduced motion */
-            @media (prefers-reduced-motion: no-preference) {
-                html {
-                    scroll-behavior: smooth;
-                }
-            }
+        .ambient-letters {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-            body {
-                font-family:
-                    "Source Sans 3",
-                    -apple-system,
-                    sans-serif;
-                background: var(--bg);
-                color: var(--text-body);
-                line-height: 1.75;
-                overflow-x: hidden;
-                -webkit-font-smoothing: antialiased;
-            }
+        .ambient-letter {
+            position: absolute;
+            font-family: var(--font-bn);
+            color: rgba(255, 255, 255, 0.025);
+            font-weight: 700;
+            user-select: none;
+            filter: blur(1px);
+            animation: floatSlow 20s ease-in-out infinite alternate;
+        }
 
-            /* FIX: skip navigation link for keyboard users */
-            .skip-link {
-                position: absolute;
-                top: -100%;
-                left: 1rem;
-                background: var(--vermillion);
-                color: #fff;
-                padding: 0.5rem 1rem;
-                border-radius: 0 0 8px 8px;
-                text-decoration: none;
-                font-size: 0.9rem;
-                font-weight: 500;
-                z-index: 999;
-                transition: top 0.2s;
-            }
-            .skip-link:focus {
-                top: 0;
-            }
+        @keyframes floatSlow {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(4deg); }
+        }
 
-            .bangla {
-                font-family: "Noto Sans Bengali", sans-serif;
-            }
-            .bangla-serif {
-                font-family: "Noto Serif Bengali", serif;
-            }
-            code,
-            .mono {
-                font-family: "JetBrains Mono", monospace;
-            }
+        /* Nav Glass Bar */
+        nav {
+            position: fixed;
+            top: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1140px, calc(100% - 2rem));
+            z-index: 1000;
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 9999px;
+            padding: 0.65rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
 
-            /* ========== NAV ========== */
-            nav {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
-                padding: 1rem 2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                backdrop-filter: blur(16px) saturate(1.4);
-                -webkit-backdrop-filter: blur(16px) saturate(1.4);
-                background: #fdfaf5dd;
-                border-bottom: 1px solid var(--border-light);
-                /* FIX: transition: all → specific properties */
-                transition: padding 0.3s ease, box-shadow 0.3s ease;
-            }
-            nav.scrolled {
-                padding: 0.65rem 2rem;
-                box-shadow: 0 1px 12px rgba(44, 24, 16, 0.06);
-            }
-            .nav-logo {
-                display: flex;
-                align-items: center;
-                gap: 0.6rem;
-                text-decoration: none;
-                color: var(--text-primary);
-            }
-            .nav-logo-icon {
-                width: 34px;
-                height: 34px;
-                background: var(--vermillion);
-                border-radius: 9px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: "Noto Serif Bengali", serif;
-                font-weight: 700;
-                font-size: 17px;
-                color: #fff;
-                box-shadow: 0 2px 8px rgba(192, 57, 43, 0.25);
-            }
-            .nav-logo-text {
-                font-family: "Playfair Display", serif;
-                font-size: 1.15rem;
-                font-weight: 600;
-                letter-spacing: -0.02em;
-                color: var(--text-primary);
-            }
-            .nav-links {
-                display: flex;
-                gap: 2rem;
-                align-items: center;
-            }
-            /* FIX: restructured to remove !important — split non-download and download into separate rules */
-            .nav-links a:not(.nav-download):not(.nav-lang) {
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-size: 0.88rem;
-                transition: color 0.2s;
-            }
-            .nav-links a:not(.nav-download):not(.nav-lang):hover {
-                color: var(--text-primary);
-            }
-            .nav-download {
-                background: var(--vermillion);
-                color: #fff;
-                padding: 0.5rem 1.2rem;
-                border-radius: 8px;
-                font-weight: 500;
-                text-decoration: none;
-                transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-                box-shadow: 0 2px 8px rgba(192, 57, 43, 0.2);
-            }
-            .nav-download:hover {
-                background: var(--vermillion-deep);
-                transform: translateY(-1px);
-                box-shadow: 0 4px 16px rgba(192, 57, 43, 0.25);
-            }
-            /* Language toggle — outlined pill with globe icon */
-            .nav-lang {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.4rem;
-                padding: 0.4rem 0.85rem;
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                font-size: 0.85rem;
-                color: var(--text-secondary);
-                background: transparent;
-                text-decoration: none;
-                transition: border-color 0.2s, color 0.2s, background 0.2s;
-            }
-            .nav-lang:hover {
-                border-color: var(--vermillion);
-                color: var(--vermillion);
-                background: var(--vermillion-soft);
-            }
-            .nav-lang-icon {
-                width: 14px;
-                height: 14px;
-                opacity: 0.85;
-                flex-shrink: 0;
-            }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
 
-            /* FIX: hamburger button — hidden on desktop, shown on mobile */
-            .nav-hamburger {
-                display: none;
-                flex-direction: column;
-                gap: 5px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 6px 4px;
-                order: 2;
-            }
-            .nav-hamburger span {
-                display: block;
-                width: 22px;
-                height: 2px;
-                background: var(--text-primary);
-                border-radius: 2px;
-                transition: transform 0.3s ease, opacity 0.3s ease;
-            }
-            .nav-hamburger.open span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .nav-hamburger.open span:nth-child(2) {
-                opacity: 0;
-                transform: scaleX(0);
-            }
-            .nav-hamburger.open span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
+        .nav-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            box-shadow: 0 2px 10px rgba(255, 59, 48, 0.3);
+            display: block;
+        }
 
-            /* FIX: mobile navigation menu (absolute, drops below nav bar) */
-            .nav-mobile {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-card);
-                border-bottom: 1px solid var(--border);
-                padding: 0.5rem 1.5rem 1.25rem;
-                flex-direction: column;
-                gap: 0;
-                box-shadow: 0 8px 24px rgba(44, 24, 16, 0.08);
-                display: none;
-            }
-            .nav-mobile.open {
-                display: flex;
-            }
-            .nav-mobile a {
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-size: 0.95rem;
-                padding: 0.7rem 0;
-                border-bottom: 1px solid var(--border-light);
-                transition: color 0.2s;
-            }
-            .nav-mobile a:last-child {
-                border-bottom: none;
-            }
-            .nav-mobile a:hover {
-                color: var(--text-primary);
-            }
+        .nav-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
 
-            /* ========== HERO ========== */
-            .hero {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                padding: 8rem 2rem 4rem;
-                position: relative;
-                overflow: hidden;
-            }
+        .nav-title .bn {
+            font-size: 1.15rem;
+            color: #ffffff;
+        }
 
-            /* Alpona-inspired decorative corners — intentionally opacity:0, reserved for future use */
-            .hero::before,
-            .hero::after {
-                content: "";
-                position: absolute;
-                width: 350px;
-                height: 350px;
-                opacity: 0;
-                pointer-events: none;
-                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23C0392B' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23C0392B' stroke-width='0.8'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23C0392B' stroke-width='0.6'/%3E%3Cpath d='M100 10 Q130 50 100 100 Q70 50 100 10' fill='none' stroke='%23C0392B' stroke-width='0.8'/%3E%3Cpath d='M190 100 Q150 130 100 100 Q150 70 190 100' fill='none' stroke='%23C0392B' stroke-width='0.8'/%3E%3Cpath d='M100 190 Q70 150 100 100 Q130 150 100 190' fill='none' stroke='%23C0392B' stroke-width='0.8'/%3E%3Cpath d='M10 100 Q50 70 100 100 Q50 130 10 100' fill='none' stroke='%23C0392B' stroke-width='0.8'/%3E%3C/svg%3E")
-                    no-repeat center/contain;
-            }
-            .hero::before {
-                top: 5%;
-                left: -5%;
-            }
-            .hero::after {
-                bottom: 5%;
-                right: -5%;
-                transform: rotate(45deg);
-            }
+        .nav-title .en {
+            font-family: var(--font-en);
+            font-size: 0.95rem;
+            color: var(--accent-gold);
+            opacity: 0.9;
+        }
 
-            .hero-bg-chars {
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-                z-index: 0;
-                overflow: hidden;
-            }
-            .hero-bg-char {
-                position: absolute;
-                font-family: "Noto Serif Bengali", serif;
-                color: var(--vermillion);
-                opacity: 0.07;
-                font-weight: 700;
-                animation: float-char 25s ease-in-out infinite;
-                /* FIX: promote to compositor layer for smooth GPU-accelerated animation */
-                will-change: transform;
-            }
-            @keyframes float-char {
-                0%,
-                100% {
-                    transform: translateY(0) rotate(0deg);
-                }
-                33% {
-                    transform: translateY(-12px) rotate(2deg);
-                }
-                66% {
-                    transform: translateY(6px) rotate(-1.5deg);
-                }
-            }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
 
-            .hero-content {
-                position: relative;
-                z-index: 1;
-                max-width: 700px;
-            }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
 
-            .hero-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.4rem 1rem;
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 100px;
-                font-size: 0.82rem;
-                color: var(--text-secondary);
-                margin-bottom: 2.5rem;
-                box-shadow: 0 1px 4px rgba(44, 24, 16, 0.04);
-                animation: fadeInUp 0.6s ease both;
-            }
-            .hero-badge-dot {
-                width: 6px;
-                height: 6px;
-                background: var(--olive);
-                border-radius: 50%;
-                animation: pulse-dot 2s ease infinite;
-            }
-            @keyframes pulse-dot {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.3;
-                }
-            }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
 
-            .hero h1 {
-                font-family: "Playfair Display", serif;
-                font-size: clamp(2.6rem, 5.5vw, 3.8rem);
-                line-height: 1.2;
-                letter-spacing: -0.03em;
-                color: var(--text-primary);
-                margin-bottom: 1.5rem;
-                animation: fadeInUp 0.6s 0.1s ease both;
-            }
-            .hero h1 .highlight {
-                color: var(--vermillion);
-                font-style: italic;
-            }
+        .nav-lang-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary) !important;
+            font-size: 0.82rem !important;
+            font-family: var(--font-en);
+            transition: all 0.2s;
+        }
 
-            .hero-sub {
-                font-size: 1.15rem;
-                color: var(--text-secondary);
-                max-width: 520px;
-                margin: 0 auto 2.5rem;
-                line-height: 1.85;
-                animation: fadeInUp 0.6s 0.2s ease both;
-            }
+        .nav-lang-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--glass-border-hover);
+        }
 
-            .hero-actions {
-                display: flex;
-                gap: 1rem;
-                justify-content: center;
-                flex-wrap: wrap;
-                animation: fadeInUp 0.6s 0.3s ease both;
-            }
+        .nav-cta {
+            background: linear-gradient(135deg, #ff3b30 0%, #e63946 100%);
+            color: #fff !important;
+            padding: 0.45rem 1.1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
 
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.6rem;
-                padding: 0.85rem 1.8rem;
-                border-radius: 10px;
-                font-size: 0.95rem;
-                font-weight: 500;
-                font-family: "Source Sans 3", sans-serif;
-                text-decoration: none;
-                /* FIX: transition: all → specific properties */
-                transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-                cursor: pointer;
-                border: none;
-            }
-            .btn-primary {
-                background: var(--vermillion);
-                color: #fff;
-                box-shadow:
-                    0 4px 20px rgba(192, 57, 43, 0.2),
-                    0 1px 3px rgba(0, 0, 0, 0.08);
-            }
-            .btn-primary:hover {
-                background: var(--vermillion-deep);
-                transform: translateY(-2px);
-                box-shadow:
-                    0 8px 30px rgba(192, 57, 43, 0.25),
-                    0 2px 6px rgba(0, 0, 0, 0.1);
-            }
-            .btn-secondary {
-                background: var(--bg-card);
-                color: var(--text-primary);
-                border: 1px solid var(--border);
-                box-shadow: 0 1px 4px rgba(44, 24, 16, 0.04);
-            }
-            .btn-secondary:hover {
-                border-color: var(--text-dim);
-                transform: translateY(-1px);
-                box-shadow: 0 4px 12px rgba(44, 24, 16, 0.08);
-            }
-            .btn-icon {
-                width: 18px;
-                height: 18px;
-            }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.5);
+        }
 
-            .hero-meta {
-                margin-top: 3rem;
-                display: flex;
-                justify-content: center;
-                gap: 2rem;
-                animation: fadeInUp 0.6s 0.4s ease both;
-            }
-            .hero-meta-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0.1rem;
-            }
-            .hero-meta-value {
-                font-family: "JetBrains Mono", monospace;
-                font-size: 0.88rem;
-                font-weight: 500;
-                color: var(--text-primary);
-            }
-            .hero-meta-label {
-                font-size: 0.72rem;
-                color: var(--text-dim);
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-            }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            z-index: 1;
+            padding: 9.5rem 1.5rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-            /* ========== DIVIDER ========== */
-            .section-divider {
-                max-width: 800px;
-                margin: 0 auto;
-                height: 1px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--border),
-                    transparent
-                );
-            }
+        .apple-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.4rem 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 9999px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #f4f4f5;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.3s;
+        }
 
-            /* ========== DEMO ========== */
-            .demo-section {
-                padding: 2rem 2rem 5rem;
-                display: flex;
-                justify-content: center;
-            }
-            .demo-container {
-                width: 100%;
-                max-width: 600px;
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 14px;
-                overflow: hidden;
-                box-shadow:
-                    0 8px 40px rgba(44, 24, 16, 0.06),
-                    0 1px 3px rgba(44, 24, 16, 0.04);
-            }
-            .demo-titlebar {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 12px 16px;
-                background: var(--bg-warm);
-                border-bottom: 1px solid var(--border-light);
-            }
-            .demo-dot {
-                width: 11px;
-                height: 11px;
-                border-radius: 50%;
-            }
-            .demo-dot.red {
-                background: #ff5f57;
-            }
-            .demo-dot.yellow {
-                background: #ffbd2e;
-            }
-            .demo-dot.green {
-                background: #28ca42;
-            }
-            .demo-titlebar-text {
-                flex: 1;
-                text-align: center;
-                font-size: 0.78rem;
-                color: var(--text-dim);
-            }
-            .demo-body {
-                padding: 1.75rem 2rem 2.25rem;
-            }
-            .demo-label {
-                font-size: 0.7rem;
-                color: var(--text-dim);
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                margin-bottom: 0.5rem;
-                display: block;
-            }
-            .demo-typed {
-                font-family: "JetBrains Mono", monospace;
-                font-size: 0.88rem;
-                color: var(--text-dim);
-                margin-bottom: 0.5rem;
-                min-height: 1.4em;
-            }
-            .demo-output {
-                font-family: "Noto Serif Bengali", serif;
-                font-size: 1.7rem;
-                font-weight: 600;
-                color: var(--text-primary);
-                min-height: 2.5em;
-                line-height: 1.55;
-            }
-            .demo-cursor {
-                display: inline-block;
-                width: 2px;
-                height: 1.7rem;
-                background: var(--vermillion);
-                margin-left: 2px;
-                vertical-align: text-bottom;
-                animation: blink 1s step-end infinite;
-            }
-            @keyframes blink {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0;
-                }
-            }
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
 
-            /* FIX: noscript fallback note styling */
-            .noscript-demo-note {
-                text-align: center;
-                padding: 0 2rem 3rem;
-                font-size: 0.88rem;
-                color: var(--text-secondary);
-            }
-            .noscript-demo-note code {
-                font-size: 0.82rem;
-                background: var(--bg-code);
-                padding: 0.15rem 0.45rem;
-                border-radius: 4px;
-                border: 1px solid var(--border-light);
-                color: var(--vermillion-deep);
-            }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
 
-            /* ========== SECTIONS COMMON ========== */
-            .section-label {
-                font-size: 0.75rem;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: var(--vermillion);
-                margin-bottom: 0.75rem;
-                font-weight: 500;
-            }
-            .section-title {
-                font-family: "Playfair Display", serif;
-                font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-                letter-spacing: -0.02em;
-                color: var(--text-primary);
-                margin-bottom: 3rem;
-            }
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 30%, #fca5a5 70%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-            /* ========== FEATURES ========== */
-            .features {
-                padding: 5rem 2rem;
-                max-width: 960px;
-                margin: 0 auto;
-            }
-            .feature-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-                gap: 1.25rem;
-            }
-            .feature-card {
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 1.6rem;
-                /* FIX: transition: all → specific properties */
-                transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .feature-card:hover {
-                border-color: var(--text-dim);
-                transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(44, 24, 16, 0.06);
-            }
-            .feature-icon {
-                width: 38px;
-                height: 38px;
-                background: var(--vermillion-soft);
-                border-radius: 9px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.1rem;
-                margin-bottom: 0.9rem;
-            }
-            .feature-card h3 {
-                font-size: 0.95rem;
-                font-weight: 600;
-                color: var(--text-primary);
-                margin-bottom: 0.4rem;
-            }
-            .feature-card p {
-                font-size: 0.88rem;
-                color: var(--text-secondary);
-                line-height: 1.7;
-            }
-            .feature-card a {
-                color: var(--vermillion);
-                text-decoration: underline;
-                text-underline-offset: 2px;
-            }
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            font-weight: 400;
+        }
 
-            /* ========== INSTALL ========== */
-            .install {
-                padding: 5rem 2rem;
-                max-width: 680px;
-                margin: 0 auto;
-            }
-            .install-steps {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            .install-step {
-                display: flex;
-                gap: 1.25rem;
-                align-items: flex-start;
-            }
-            .step-number {
-                width: 34px;
-                height: 34px;
-                min-width: 34px;
-                background: var(--vermillion-soft);
-                border: 1px solid var(--vermillion-glow);
-                border-radius: 9px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: "JetBrains Mono", monospace;
-                font-size: 0.82rem;
-                font-weight: 500;
-                color: var(--vermillion);
-            }
-            .step-content h3 {
-                font-size: 0.95rem;
-                font-weight: 600;
-                color: var(--text-primary);
-                margin-bottom: 0.25rem;
-            }
-            .step-content p {
-                font-size: 0.88rem;
-                color: var(--text-secondary);
-                line-height: 1.65;
-            }
-            .step-content a {
-                color: var(--vermillion);
-            }
-            .step-content code {
-                font-size: 0.82rem;
-                background: var(--bg-code);
-                padding: 0.15rem 0.45rem;
-                border-radius: 4px;
-                border: 1px solid var(--border-light);
-                color: var(--vermillion-deep);
-            }
-            .install-note {
-                margin-top: 2rem;
-                padding: 1.2rem 1.5rem;
-                background: var(--bg-warm);
-                border: 1px solid var(--border);
-                border-left: 3px solid var(--vermillion);
-                border-radius: 0 10px 10px 0;
-                font-size: 0.88rem;
-                color: var(--text-secondary);
-                line-height: 1.7;
-            }
-            .install-note strong {
-                color: var(--text-primary);
-            }
-            .install-note a {
-                color: var(--vermillion);
-            }
+        .hero-sub strong {
+            color: #fff;
+            font-weight: 600;
+        }
 
-            /* ========== TECH ========== */
-            .tech {
-                padding: 5rem 2rem;
-                max-width: 960px;
-                margin: 0 auto;
-            }
-            .tech-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-            .tech-card {
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 1.4rem 1.6rem;
-            }
-            .tech-card-label {
-                font-size: 0.7rem;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                color: var(--text-dim);
-                margin-bottom: 0.35rem;
-            }
-            .tech-card-value {
-                font-size: 1.05rem;
-                font-weight: 600;
-                color: var(--text-primary);
-            }
-            .tech-card-detail {
-                font-size: 0.82rem;
-                color: var(--text-secondary);
-                margin-top: 0.25rem;
-                line-height: 1.6;
-            }
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+        }
 
-            /* ========== CTA ========== */
-            .cta {
-                padding: 4rem 2rem 6rem;
-                text-align: center;
-            }
-            .cta-container {
-                max-width: 560px;
-                margin: 0 auto;
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 16px;
-                padding: 3rem 2.5rem;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(44, 24, 16, 0.04);
-            }
-            .cta-container::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--vermillion),
-                    transparent
-                );
-                opacity: 0.5;
-            }
-            .cta h2 {
-                font-family: "Playfair Display", serif;
-                font-size: 1.6rem;
-                letter-spacing: -0.02em;
-                color: var(--text-primary);
-                margin-bottom: 0.6rem;
-            }
-            .cta p {
-                color: var(--text-secondary);
-                margin-bottom: 1.75rem;
-                font-size: 0.95rem;
-            }
-            .cta-actions {
-                display: flex;
-                gap: 1rem;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
+        .btn-apple {
+            background: linear-gradient(180deg, #ff453a 0%, #d62828 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.85rem 1.8rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-            /* ========== FAQ (SEO) ========== */
-            .faq {
-                padding: 3rem 2rem 1rem;
-                max-width: 680px;
-                margin: 0 auto;
+        .btn-apple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+        }
+
+        .terminal-pill {
+            background: rgba(22, 22, 26, 0.8);
+            border: 1px solid var(--glass-border);
+            padding: 0.65rem 1.1rem;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .terminal-pill:hover {
+            border-color: var(--glass-border-hover);
+            color: #fff;
+            background: rgba(30, 30, 36, 0.9);
+        }
+
+        .showcase-container {
+            position: relative;
+            max-width: 1040px;
+            margin: 0 auto 5rem;
+            border-radius: 24px;
+            padding: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .showcase-inner {
+            background: #111114;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+
+        /* Interactive macOS Typing Playground */
+        .playground-section {
+            max-width: 960px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .mac-window {
+            background: rgba(20, 20, 24, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .window-titlebar {
+            background: rgba(30, 30, 36, 0.5);
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 7px;
+        }
+
+        .traffic-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f57; }
+        .dot-yellow { background: #febc2e; }
+        .dot-green { background: #28c840; }
+
+        .window-title {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .playground-body {
+            padding: 2.2rem 2.5rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .interactive-label {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .type-input-box {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.1rem 1.4rem;
+            color: #fff;
+            font-size: 1.15rem;
+            font-family: 'JetBrains Mono', monospace;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .type-input-box:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.15);
+        }
+
+        .live-output-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 1.5rem;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .live-output-text {
+            font-family: var(--font-bn);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .quick-chips {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .chip-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .chip-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-en);
+        }
+
+        .chip-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: var(--glass-border-hover);
+        }
+
+        /* Bento Grid Features */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-heading p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            max-width: 1140px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.2rem 2rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bento-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        .bento-card.col-2 {
+            grid-column: span 2;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 59, 48, 0.12);
+            border: 1px solid rgba(255, 59, 48, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--accent-red);
+        }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .bento-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: #fff;
+        }
+
+        .bento-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .keycap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem 0.6rem;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            border-bottom: 3px solid #18181b;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #f4f4f5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 3-Step Setup Section */
+        .steps-container {
+            max-width: 1040px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-box {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-family: var(--font-en);
+        }
+
+        .step-box h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .step-box p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Terminal Window Section */
+        .terminal-section {
+            max-width: 800px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .terminal-window {
+            background: #09090b;
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .terminal-header {
+            background: #18181b;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-code {
+            padding: 1.5rem 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #a1a1aa;
+        }
+
+        .terminal-code span.cmd {
+            color: #34d399;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 0.4rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 1.5rem 3rem;
+            background: rgba(10, 10, 12, 0.8);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .bento-grid, .steps-grid {
+                grid-template-columns: 1fr;
             }
-            .faq details {
-                margin-bottom: 0.75rem;
-                background: var(--bg-card);
-                border: 1px solid var(--border);
-                border-radius: 10px;
-                overflow: hidden;
+            .bento-card.col-2 {
+                grid-column: span 1;
             }
-            .faq summary {
-                padding: 1rem 1.4rem;
-                font-size: 0.92rem;
-                font-weight: 600;
-                color: var(--text-primary);
-                cursor: pointer;
-                list-style: none;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-            .faq summary::before {
-                content: "+";
-                font-family: "JetBrains Mono", monospace;
-                font-size: 1.1rem;
-                font-weight: 400;
-                color: var(--vermillion);
-                flex-shrink: 0;
-                width: 1.2em;
-                text-align: center;
-                transition: transform 0.2s;
-            }
-            .faq details[open] summary::before {
-                content: "\2212";
-            }
-            .faq summary::-webkit-details-marker {
+            .nav-links a:not(.nav-lang-btn):not(.nav-cta) {
                 display: none;
             }
-            .faq details p {
-                padding: 0 1.4rem 1.2rem 3.35rem;
-                font-size: 0.88rem;
-                color: var(--text-secondary);
-                line-height: 1.7;
-            }
+        }
+    </style>
+</head>
+<body>
 
-            /* ========== FOOTER ========== */
-            footer {
-                padding: 2.5rem 2rem;
-                border-top: 1px solid var(--border);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                max-width: 960px;
-                margin: 0 auto;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            footer p {
-                font-size: 0.8rem;
-                color: var(--text-dim);
-            }
-            footer a {
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-size: 0.8rem;
-                transition: color 0.2s;
-            }
-            footer a:hover {
-                color: var(--vermillion);
-            }
-            .footer-links {
-                display: flex;
-                gap: 1.5rem;
-            }
+    <!-- Ambient Bengali Glyphs -->
+    <div class="ambient-letters" aria-hidden="true">
+        <span class="ambient-letter" style="top: 12%; left: 6%; font-size: 8rem;">ব</span>
+        <span class="ambient-letter" style="top: 25%; right: 8%; font-size: 9rem; animation-delay: -3s;">র্ণ</span>
+        <span class="ambient-letter" style="top: 55%; left: 4%; font-size: 7rem; animation-delay: -7s;">অ</span>
+        <span class="ambient-letter" style="top: 70%; right: 5%; font-size: 8.5rem; animation-delay: -11s;">আ</span>
+        <span class="ambient-letter" style="top: 40%; right: 28%; font-size: 6rem; animation-delay: -5s;">ক</span>
+        <span class="ambient-letter" style="top: 85%; left: 35%; font-size: 7.5rem; animation-delay: -9s;">ম</span>
+    </div>
 
-            /* ========== ANIMATIONS ========== */
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            .animate-on-scroll {
-                opacity: 0;
-                transform: translateY(20px);
-                /* FIX: transition: all → specific properties */
-                transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            }
-            .animate-on-scroll.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            /* FIX: respect user's reduced-motion preference */
-            @media (prefers-reduced-motion: reduce) {
-                .hero-bg-char {
-                    animation: none;
-                }
-                .demo-cursor {
-                    animation: none;
-                    opacity: 1;
-                }
-                .hero-badge-dot {
-                    animation: none;
-                }
-                .hero-badge,
-                .hero h1,
-                .hero-sub,
-                .hero-actions,
-                .hero-meta {
-                    animation: none;
-                    opacity: 1;
-                    transform: none;
-                }
-                .animate-on-scroll {
-                    opacity: 1;
-                    transform: none;
-                    transition: none;
-                }
-                .btn,
-                .feature-card,
-                .nav-download,
-                .nav-hamburger span,
-                .skip-link {
-                    transition: none;
-                }
-            }
-
-            /* ========== RESPONSIVE ========== */
-            @media (max-width: 768px) {
-                /* FIX: show hamburger; reorder so layout is [logo] [hamburger] [download] */
-                .nav-hamburger {
-                    display: flex;
-                    order: 2;
-                }
-                .nav-links {
-                    order: 3;
-                }
-                .nav-links a:not(.nav-download) {
-                    display: none;
-                }
-                .hero {
-                    padding: 7rem 1.5rem 3rem;
-                    min-height: auto;
-                }
-                .hero::before,
-                .hero::after {
-                    display: none;
-                }
-                .hero-meta {
-                    gap: 1.25rem;
-                    flex-wrap: wrap;
-                }
-                .tech-grid {
-                    grid-template-columns: 1fr;
-                }
-                .feature-grid {
-                    grid-template-columns: 1fr;
-                }
-                .cta-container {
-                    padding: 2.5rem 1.5rem;
-                }
-                footer {
-                    flex-direction: column;
-                    text-align: center;
-                }
-            }
-            @media (max-width: 480px) {
-                .hero h1 {
-                    font-size: 2rem;
-                }
-                .hero-actions {
-                    flex-direction: column;
-                    align-items: center;
-                }
-                .btn {
-                    width: 100%;
-                    justify-content: center;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Skip navigation link for keyboard/screen reader users -->
-        <a href="#features" class="skip-link">মূল কনটেন্টে যান</a>
-
-        <nav id="nav">
-            <a href="#" class="nav-logo">
-                <div class="nav-logo-icon bangla-serif" lang="bn">ব</div>
-                <span class="nav-logo-text"
-                    >Borno
-                    <span
-                        class="bangla"
-                        lang="bn"
-                        style="
-                            font-family:
-                                &quot;Noto Sans Bengali&quot;, sans-serif;
-                            font-size: 0.85em;
-                            opacity: 0.7;
-                        "
-                        >(বর্ণ)</span
-                    ></span
-                >
+    <!-- Floating Glass Nav -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="../borno-icon.png" alt="বর্ণ লোগো" class="nav-icon" />
+            <span class="nav-title"><span class="bn">বর্ণ</span> <span class="en">(Borno)</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">বৈশিষ্ট্যসমূহ</a>
+            <a href="#playground">লাইভ টাইপিং</a>
+            <a href="#install">ইনস্টলেশন</a>
+            <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="../" class="nav-lang-btn">
+                <span>English</span>
             </a>
-            <div class="nav-links">
-                <a href="#features">ফিচার</a>
-                <a href="#install">ইনস্টল</a>
-                <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer"
-                    >GitHub</a
-                >
-                <a href="../" hreflang="en" class="nav-lang" aria-label="Switch to English">
-                    <svg class="nav-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="M3 12h18"/>
-                        <path d="M12 3a14 14 0 0 1 0 18"/>
-                        <path d="M12 3a14 14 0 0 0 0 18"/>
-                    </svg>
-                    <span>English</span>
-                </a>
-                <a
-                    href="https://github.com/yahiabinzaman/macbangla/releases/latest"
-                    class="nav-download"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ডাউনলোড</a
-                >
-            </div>
-            <button
-                class="nav-hamburger"
-                id="nav-hamburger"
-                aria-label="মেনু খুলুন"
-                aria-expanded="false"
-                aria-controls="nav-mobile"
-            >
-                <span></span><span></span><span></span>
-            </button>
-            <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Mobile navigation">
-                <a href="#features">ফিচার</a>
-                <a href="#install">ইনস্টল</a>
-                <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="../" hreflang="en">English</a>
-            </div>
-        </nav>
+            <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="nav-cta">
+                <span> ডাউনলোড</span>
+            </a>
+        </div>
+    </nav>
 
-        <!-- FIX: div → <main> for semantic landmark; footer is now outside <main> -->
-        <main style="position: relative">
-            <div class="hero-bg-chars" aria-hidden="true">
-                <!-- Row 1: hero area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 2%;
-                        left: 8%;
-                        font-size: 5rem;
-                        animation-delay: -2s;
-                    "
-                    >অ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 5%;
-                        right: 30%;
-                        font-size: 4.5rem;
-                        animation-delay: -17s;
-                    "
-                    >ঋ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 8%;
-                        left: 42%;
-                        font-size: 3rem;
-                        animation-delay: -4s;
-                    "
-                    >ঐ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 4%;
-                        right: 10%;
-                        font-size: 4rem;
-                        animation-delay: -5s;
-                    "
-                    >আ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 12%;
-                        left: 78%;
-                        font-size: 4rem;
-                        animation-delay: -3s;
-                    "
-                    >ব</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 15%;
-                        left: 92%;
-                        font-size: 3.5rem;
-                        animation-delay: -16s;
-                    "
-                    >ন</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 10%;
-                        left: 4%;
-                        font-size: 5.5rem;
-                        animation-delay: -8s;
-                    "
-                    >ক</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 14%;
-                        right: 7%;
-                        font-size: 3.5rem;
-                        animation-delay: -12s;
-                    "
-                    >ম</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 18%;
-                        left: 22%;
-                        font-size: 3rem;
-                        animation-delay: -7s;
-                    "
-                    >ল</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 9%;
-                        left: 50%;
-                        font-size: 6rem;
-                        animation-delay: -13s;
-                    "
-                    >ভ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 16%;
-                        left: 65%;
-                        font-size: 3rem;
-                        animation-delay: -9s;
-                    "
-                    >ধ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 20%;
-                        right: 4%;
-                        font-size: 5rem;
-                        animation-delay: -10s;
-                    "
-                    >ই</span
-                >
-                <!-- Row 2: demo / features area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 24%;
-                        left: 6%;
-                        font-size: 4.5rem;
-                        animation-delay: -6s;
-                    "
-                    >র</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 26%;
-                        left: 55%;
-                        font-size: 3.5rem;
-                        animation-delay: -15s;
-                    "
-                    >ত</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 22%;
-                        right: 15%;
-                        font-size: 4.5rem;
-                        animation-delay: -1s;
-                    "
-                    >প</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 28%;
-                        left: 35%;
-                        font-size: 4rem;
-                        animation-delay: -11s;
-                    "
-                    >শ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 30%;
-                        right: 25%;
-                        font-size: 3rem;
-                        animation-delay: -19s;
-                    "
-                    >চ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 25%;
-                        left: 85%;
-                        font-size: 3.5rem;
-                        animation-delay: -14s;
-                    "
-                    >গ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 32%;
-                        left: 12%;
-                        font-size: 4rem;
-                        animation-delay: -3s;
-                    "
-                    >হ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 34%;
-                        right: 8%;
-                        font-size: 5rem;
-                        animation-delay: -7s;
-                    "
-                    >দ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 33%;
-                        left: 70%;
-                        font-size: 3rem;
-                        animation-delay: -20s;
-                    "
-                    >ঞ</span
-                >
-                <!-- Row 3: install area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 38%;
-                        left: 3%;
-                        font-size: 3.5rem;
-                        animation-delay: -9s;
-                    "
-                    >ঘ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 40%;
-                        left: 45%;
-                        font-size: 5rem;
-                        animation-delay: -5s;
-                    "
-                    >য</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 42%;
-                        right: 5%;
-                        font-size: 4rem;
-                        animation-delay: -12s;
-                    "
-                    >ছ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 36%;
-                        left: 25%;
-                        font-size: 4.5rem;
-                        animation-delay: -2s;
-                    "
-                    >ণ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 44%;
-                        left: 80%;
-                        font-size: 3rem;
-                        animation-delay: -16s;
-                    "
-                    >ঠ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 41%;
-                        right: 30%;
-                        font-size: 3.5rem;
-                        animation-delay: -8s;
-                    "
-                    >ড</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 46%;
-                        left: 10%;
-                        font-size: 4.5rem;
-                        animation-delay: -14s;
-                    "
-                    >ফ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 48%;
-                        left: 60%;
-                        font-size: 5.5rem;
-                        animation-delay: -4s;
-                    "
-                    >স</span
-                >
-                <!-- Row 4: tech area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 52%;
-                        right: 12%;
-                        font-size: 4rem;
-                        animation-delay: -11s;
-                    "
-                    >থ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 54%;
-                        left: 5%;
-                        font-size: 3rem;
-                        animation-delay: -18s;
-                    "
-                    >উ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 50%;
-                        left: 35%;
-                        font-size: 4.5rem;
-                        animation-delay: -6s;
-                    "
-                    >জ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 56%;
-                        left: 75%;
-                        font-size: 3.5rem;
-                        animation-delay: -1s;
-                    "
-                    >ঢ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 58%;
-                        right: 22%;
-                        font-size: 5rem;
-                        animation-delay: -10s;
-                    "
-                    >অ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 53%;
-                        left: 90%;
-                        font-size: 3rem;
-                        animation-delay: -15s;
-                    "
-                    >এ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 57%;
-                        left: 18%;
-                        font-size: 4rem;
-                        animation-delay: -3s;
-                    "
-                    >খ</span
-                >
-                <!-- Row 5: ekushey / cta area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 62%;
-                        left: 8%;
-                        font-size: 5rem;
-                        animation-delay: -7s;
-                    "
-                    >ও</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 65%;
-                        left: 50%;
-                        font-size: 3.5rem;
-                        animation-delay: -13s;
-                    "
-                    >ঙ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 60%;
-                        right: 6%;
-                        font-size: 4.5rem;
-                        animation-delay: -2s;
-                    "
-                    >ঝ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 68%;
-                        left: 30%;
-                        font-size: 4rem;
-                        animation-delay: -9s;
-                    "
-                    >ট</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 64%;
-                        left: 72%;
-                        font-size: 3rem;
-                        animation-delay: -17s;
-                    "
-                    >ঈ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 70%;
-                        right: 18%;
-                        font-size: 5.5rem;
-                        animation-delay: -5s;
-                    "
-                    >আ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 66%;
-                        left: 88%;
-                        font-size: 3.5rem;
-                        animation-delay: -11s;
-                    "
-                    >ঔ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 72%;
-                        left: 15%;
-                        font-size: 4rem;
-                        animation-delay: -8s;
-                    "
-                    >ম</span
-                >
-                <!-- Row 6: footer area -->
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 76%;
-                        left: 55%;
-                        font-size: 4.5rem;
-                        animation-delay: -4s;
-                    "
-                    >ক</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 78%;
-                        right: 10%;
-                        font-size: 3rem;
-                        animation-delay: -14s;
-                    "
-                    >ল</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 74%;
-                        left: 4%;
-                        font-size: 3.5rem;
-                        animation-delay: -19s;
-                    "
-                    >ত</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 80%;
-                        left: 40%;
-                        font-size: 5rem;
-                        animation-delay: -6s;
-                    "
-                    >ব</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 82%;
-                        right: 25%;
-                        font-size: 4rem;
-                        animation-delay: -1s;
-                    "
-                    >র</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 84%;
-                        left: 70%;
-                        font-size: 3rem;
-                        animation-delay: -12s;
-                    "
-                    >প</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 78%;
-                        left: 20%;
-                        font-size: 4.5rem;
-                        animation-delay: -16s;
-                    "
-                    >ভ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 88%;
-                        left: 8%;
-                        font-size: 3.5rem;
-                        animation-delay: -10s;
-                    "
-                    >গ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 86%;
-                        left: 50%;
-                        font-size: 4rem;
-                        animation-delay: -3s;
-                    "
-                    >শ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 90%;
-                        right: 8%;
-                        font-size: 5rem;
-                        animation-delay: -8s;
-                    "
-                    >দ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 92%;
-                        left: 35%;
-                        font-size: 3rem;
-                        animation-delay: -15s;
-                    "
-                    >হ</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 94%;
-                        left: 75%;
-                        font-size: 4.5rem;
-                        animation-delay: -7s;
-                    "
-                    >স</span
-                >
-                <span
-                    class="hero-bg-char"
-                    style="
-                        top: 96%;
-                        left: 15%;
-                        font-size: 4rem;
-                        animation-delay: -13s;
-                    "
-                    >ন</span
-                >
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="apple-badge">
+            <span class="badge-dot"></span>
+            <span> অ্যাপল সিলিকন নেটিভ • M1, M2, M3, M4 এবং M5 এর জন্য নির্মিত</span>
+        </div>
+
+        <h1>
+            ম্যাকে বাংলা লেখার চিরচেনা আনন্দ।<br />
+            <span class="gradient-text">উইন্ডোজের মতোই ফাস্ট, কোনো প্রিভিউ ছাড়াই।</span>
+        </h1>
+
+        <p class="hero-sub">
+            ম্যাকের জন্য নিয়ে এলো সম্পূর্ণ নতুন <strong>বর্ণ (Borno)</strong>। কোনো বিরক্তিকর ভাসমান প্রিভিউ বক্স ছাড়াই সরাসরি টাইপিং — যা অ্যাডোবি ইলাস্ট্রেটর, ফটোশপ ও প্রতিদিনের কাজের জন্য বিশেষভাবে প্রস্তুত।
+        </p>
+
+        <div class="hero-actions">
+            <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="btn-apple">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                ম্যাকের জন্য ডাউনলোড করুন
+            </a>
+            <div class="terminal-pill" onclick="copyBrewCmd()" title="ক্লিক করে কপি করুন">
+                <span>brew install --cask borno</span>
+                <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </div>
+        </div>
+
+        <!-- Hero 3D Showcase Graphic -->
+        <div class="showcase-container">
+            <div class="showcase-inner">
+                <img src="../borno-hero-mockup.png" alt="বর্ণ কিবোর্ড ম্যাকবুক প্রো ডিসপ্লে" class="showcase-img" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Typing Playground -->
+    <section class="playground-section" id="playground">
+        <div class="mac-window">
+            <div class="window-titlebar">
+                <div class="traffic-lights">
+                    <span class="traffic-dot dot-red"></span>
+                    <span class="traffic-dot dot-yellow"></span>
+                    <span class="traffic-dot dot-green"></span>
+                </div>
+                <div class="window-title">বর্ণ ডিরেক্ট ফোনেটিক ইঞ্জিন — সরাসরি টাইপ করে পরখ করুন</div>
+                <div style="width: 48px;"></div>
             </div>
 
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        v0.2 — এখন সব অ্যাপেই চলে, আরও মসৃণ
-                    </div>
-                    <h1>
-                        অভ্র ফোনেটিকে বাংলা লেখা,<br /><span class="highlight"
-                            >আবার ম্যাকে।</span
-                        >
-                    </h1>
-                    <p class="hero-sub">
-                        <strong>iAvro</strong>-তে যেভাবে বাংলা লিখতেন, সেভাবেই —
-                        এবার সরাসরি Apple Silicon-এ, Rosetta ছাড়া।
-                        <strong style="color: var(--text-primary)"
-                            >বর্ণ</strong
-                        >
-                        ফ্রি, ওপেন সোর্স — চিরকাল।
-                    </p>
-                    <div class="hero-actions">
-                        <a
-                            href="https://github.com/yahiabinzaman/macbangla/releases/latest"
-                            class="btn btn-primary"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <svg
-                                class="btn-icon"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path
-                                    d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"
-                                />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            ম্যাকের জন্য ডাউনলোড
-                        </a>
-                        <a href="#install" class="btn btn-secondary">
-                            কীভাবে ইনস্টল করবেন
-                        </a>
-                    </div>
-                    <div class="hero-meta">
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-value">~২.৭ MB</span>
-                            <span class="hero-meta-label">ডাউনলোড সাইজ</span>
-                        </div>
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-value">Apple Silicon</span>
-                            <span class="hero-meta-label">নেটিভ</span>
-                        </div>
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-value">ফ্রি</span>
-                            <span class="hero-meta-label">চিরকাল</span>
-                        </div>
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-value">১৫০ হাজার</span>
-                            <span class="hero-meta-label">শব্দের অভিধান</span>
-                        </div>
-                    </div>
+            <div class="playground-body">
+                <div class="interactive-label">
+                    <span>⚡️ নিচে ইংরেজিতে লিখুন (অভ্র ফোনেটিক অনুযায়ী):</span>
                 </div>
-            </section>
 
-            <section class="demo-section">
-                <div class="demo-container animate-on-scroll">
-                    <div class="demo-titlebar">
-                        <div class="demo-dot red"></div>
-                        <div class="demo-dot yellow"></div>
-                        <div class="demo-dot green"></div>
-                        <span class="demo-titlebar-text"
-                            >বর্ণ — ফোনেটিক মোড</span
-                        >
-                    </div>
-                    <div class="demo-body">
-                        <span class="demo-label">আপনি লেখেন</span>
-                        <div class="demo-typed" id="demo-typed"></div>
-                        <span class="demo-label" style="margin-top: 0.75rem"
-                            >আপনি পান</span
-                        >
-                        <div class="demo-output">
-                            <span class="bangla-serif" lang="bn" id="demo-output"></span
-                            ><span class="demo-cursor"></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <noscript>
-                <p class="noscript-demo-note">
-                    লাইভ টাইপিং ডেমো দেখতে JavaScript অন করুন।
-                    উদাহরণ: <code>ami banglay gan gai</code> লিখলে → <span lang="bn">আমি বাংলায় গান গাই</span>
-                </p>
-            </noscript>
+                <input type="text" id="demoInput" class="type-input-box" placeholder="এখানে টাইপ করুন: যেমন ami banglay gan gai..." value="ami banglay gan gai" />
 
-            <div class="section-divider"></div>
+                <div class="live-output-card">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">সরাসরি বাংলা আউটপুট:</div>
+                    <div class="live-output-text" id="demoOutput">আমি বাংলায় গান গাই</div>
+                </div>
 
-            <section class="features" id="features">
-                <div class="animate-on-scroll">
-                    <div class="section-label">কেন বর্ণ</div>
-                    <h2 class="section-title">
-                        iAvro-তে যা পেতেন, সবই আছে — এবার সরাসরি Apple Silicon-এ।
-                    </h2>
+                <div class="quick-chips">
+                    <span class="chip-label">ক্লিক করে পরখ করুন:</span>
+                    <button class="chip-btn" onclick="setDemoText('shonar bangla ami tomay bhalobashi')">সোনার বাংলা</button>
+                    <button class="chip-btn" onclick="setDemoText('ekushey february amar vaiyer rokte rangano')">একুশে ফেব্রুয়ারি</button>
+                    <button class="chip-btn" onclick="setDemoText('bornomala font khub shundor')">বর্ণমালা ফন্ট</button>
+                    <button class="chip-btn" onclick="setDemoText('adobe illustrator e bangla lekha')">ইলাস্ট্রেটর বাংলা</button>
                 </div>
-                <div class="feature-grid">
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">⌨️</div>
-                        <h3>চেনা অভ্র ফোনেটিক</h3>
-                        <p>
-                            অভ্রে যেভাবে লিখতেন, সেভাবেই।
-                            <code class="mono" style="font-size: 0.78rem"
-                                >ami banglay gan gai</code
-                            > লিখলে পাবেন
-                            <span class="bangla" lang="bn" style="font-weight: 500"
-                                >আমি বাংলায় গান গাই</span
-                            >। যুক্তবর্ণ, রেফ, য-ফলা — সব সামলায়।
-                        </p>
-                    </div>
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">📖</div>
-                        <h3>দেড় লাখ শব্দ ও ইমোজি</h3>
-                        <p>
-                            দেড় লাখ শব্দের অভিধান, সাজেশন, অটোকারেক্ট।
-                            <span class="bangla" lang="bn">কান্না</span> লিখলে 😢 দেখাবে,
-                            <span class="bangla" lang="bn">বাংলাদেশ</span> লিখলে 🇧🇩।
-                            আপনি যেটা বেশি বাছেন, সেটা মনে রাখে।
-                            Settings থেকে বেছে নিন — <em>Phonetic-first</em> মোডে আপনার
-                            লেখা বানানই ডিফল্টে বসবে, তবু সাজেশন এক চাপ দূরে; আর
-                            <em>Phonetic-only</em> মোডে সাজেশন একদম বন্ধ।
-                        </p>
-                    </div>
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">🪶</div>
-                        <h3>~২.৭ MB। একদম হালকা।</h3>
-                        <p>
-                            Electron নেই, Java নেই, ব্যাকগ্রাউন্ডে কিছু ঘোরে না।
-                            সঙ্গে সঙ্গে চালু, কাজ না থাকলে CPU ছোঁয় না।
-                            কিবোর্ড সফটওয়্যার এমনই হওয়া উচিত।
-                        </p>
-                    </div>
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">🍎</div>
-                        <h3>macOS 13+ নেটিভ</h3>
-                        <p>
-                            Apple-র নিজস্ব InputMethodKit দিয়ে তৈরি।
-                            Safari, Chrome, VS Code, TextEdit, Spotlight —
-                            যেখানেই লিখুন, চলবে।
-                        </p>
-                    </div>
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">🔒</div>
-                        <h3>আপনার টাইপিং আপনারই</h3>
-                        <p>
-                            পুরোটাই চলে আপনার ম্যাকে — ইন্টারনেট লাগে না,
-                            কিছু পাঠানো হয় না, ট্র্যাকিং নেই। আপনি যা লেখেন
-                            তা আপনার ম্যাকের বাইরে যায় না, কখনো।
-                        </p>
-                    </div>
-                    <div class="feature-card animate-on-scroll">
-                        <div class="feature-icon">⚡</div>
-                        <h3>ভেতরে OpenBangla</h3>
-                        <p>
-                            Linux-এ OpenBangla Keyboard যে
-                            <a
-                                href="https://github.com/OpenBangla/riti"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >riti</a
-                            > ইঞ্জিনে চলে — সেটাই, এবার ম্যাকেও।
-                        </p>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <div class="section-divider"></div>
+    <!-- Bento Grid Features -->
+    <section class="features-section" id="features">
+        <div class="section-heading">
+            <h2>কেন ক্রিয়েটর ও ডিজাইনাররা <span class="gradient-text">বর্ণ</span> পছন্দ করেন</h2>
+            <p>ম্যাকের শক্তিশালী পারফরম্যান্সের সাথে নিখুঁত টাইপিংয়ের মেলবন্ধন।</p>
+        </div>
 
-            <section class="install" id="install">
-                <div class="animate-on-scroll">
-                    <div class="section-label">শুরু করুন</div>
-                    <h2 class="section-title">২ মিনিটে চালু হয়ে যাবেন।</h2>
+        <div class="bento-grid">
+            <!-- Feature 1 -->
+            <div class="bento-card col-2">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
-                <div class="install-steps">
-                    <div class="install-step animate-on-scroll">
-                        <div class="step-number">১</div>
-                        <div class="step-content">
-                            <h3>ইনস্টল করুন</h3>
-                            <p>
-                                <strong>Homebrew আছে?</strong> একটাই কমান্ড:
-                                <br>
-                                <code style="display:inline-block; margin-top:0.4rem">brew install --cask yahiabinzaman/macbangla/borno</code>
-                            </p>
-                            <p>
-                                অথবা
-                                <a
-                                    href="https://github.com/yahiabinzaman/macbangla/releases/latest"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    >GitHub Releases</a
-                                > থেকে লেটেস্ট <code>.dmg</code> ফাইলটি নামিয়ে নিন;
-                                ওপেন করে <strong>Install Borno.pkg</strong>-এ ডাবল-ক্লিক করুন —
-                                বাকিটা ইনস্টলার সামলাবে।
-                                macOS ইনস্টলার ব্লক করলে
-                                <strong>System Settings → Privacy &amp; Security</strong>-এ
-                                যান, নিচে স্ক্রল করে বর্ণ-র পাশের
-                                <strong>"Allow Anyway"</strong> চাপুন।
-                            </p>
-                        </div>
-                    </div>
-                    <div class="install-step animate-on-scroll">
-                        <div class="step-number">২</div>
-                        <div class="step-content">
-                            <h3>ইনপুট সোর্স যোগ করুন</h3>
-                            <p>
-                                <strong
-                                    >System Settings → Keyboard → Input Sources
-                                    → Edit</strong
-                                > খুলুন, <strong>+</strong> বাটনে ক্লিক করুন,
-                                <strong>English → Borno</strong> খুঁজে যোগ করে নিন।
-                                লিস্টে না দেখালে একবার লগ আউট করে লগ ইন করুন —
-                                নতুন কিবোর্ড চেনাতে macOS-এর মাঝে মাঝে এটুকু দরকার হয়।
-                            </p>
-                        </div>
-                    </div>
-                    <div class="install-step animate-on-scroll">
-                        <div class="step-number">৩</div>
-                        <div class="step-content">
-                            <h3>
-                                এবার লিখুন
-                                <span class="bangla" lang="bn" style="font-weight: 600"
-                                    >বাংলায়</span
-                                >
-                            </h3>
-                            <p>
-                                মেনু বার বা কিবোর্ড শর্টকাট দিয়ে বর্ণ-তে সুইচ করুন।
-                                ইংরেজিতে লিখুন, বাংলা পাবেন — এটুকুই।
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="install-note animate-on-scroll">
-                    <strong>v0.2:</strong> এখন সব অ্যাপেই চলে — Chrome, Notes, Mail, Obsidian, যেটাই বলুন।
-                    কোনো বাগ পেলেন?
-                    <a
-                        href="https://github.com/yahiabinzaman/macbangla/issues"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >GitHub-এ ইস্যু খুলুন</a
-                    >
-                    — প্রতিটা রিপোর্টই সাহায্য করে।
-                </div>
-            </section>
+                <h3>কোনো প্রিভিউ ছাড়া সরাসরি টাইপিং (উইন্ডোজের মতো ফিল)</h3>
+                <p>মাউস বা কার্সরের পিছু পিছু কোনো বিরক্তিকর সাজেশনের বক্স ঘুরবে না। আপনি যখন ফোনেটিক টাইপ করবেন, বর্ণ সরাসরি অক্ষরের জায়গায় নিখুঁত বাংলা বসিয়ে দেবে—ঠিক যেমন উইন্ডোজ অভ্রতে আপনি অভ্যস্ত ছিলেন।</p>
+            </div>
 
-            <div class="section-divider"></div>
-
-            <section class="tech" id="tech">
-                <div class="animate-on-scroll">
-                    <div class="section-label">ভেতরের কথা</div>
-                    <h2 class="section-title">কারিগরি তথ্য</h2>
+            <!-- Feature 2 -->
+            <div class="bento-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
                 </div>
-                <div class="tech-grid">
-                    <div class="tech-card animate-on-scroll">
-                        <div class="tech-card-label">ইঞ্জিন</div>
-                        <div class="tech-card-value">OpenBangla riti</div>
-                        <div class="tech-card-detail">
-                            Rust-এ লেখা বাংলা ইনপুট ইঞ্জিন,
-                            Swift ও InputMethodKit দিয়ে macOS-এ সংযুক্ত।
-                        </div>
-                    </div>
-                    <div class="tech-card animate-on-scroll">
-                        <div class="tech-card-label">আর্কিটেকচার</div>
-                        <div class="tech-card-value">Apple Silicon</div>
-                        <div class="tech-card-detail">
-                            নেটিভ arm64 — M1/M2/M3/M4/M5 ম্যাকের জন্য।
-                        </div>
-                    </div>
-                    <div class="tech-card animate-on-scroll">
-                        <div class="tech-card-label">দরকার</div>
-                        <div class="tech-card-value">macOS 13+</div>
-                        <div class="tech-card-detail">
-                            Ventura, Sonoma, Sequoia ও পরবর্তী।
-                        </div>
-                    </div>
-                    <div class="tech-card animate-on-scroll">
-                        <div class="tech-card-label">দাম</div>
-                        <div class="tech-card-value">ফ্রি</div>
-                        <div class="tech-card-detail">
-                            বিজ্ঞাপন নেই, সাবস্ক্রিপশন নেই, সাইন-আপ নেই।
-                            নামান, লিখতে শুরু করুন।
-                        </div>
-                    </div>
-                </div>
-            </section>
+                <h3>নেটিভ অ্যাপল সিলিকন (Apple Silicon)</h3>
+                <p>রোসেটা ইমুলেশনের প্রয়োজন নেই। M1, M2, M3, M4 ও M5 চিপের আর্কিটেকচারে সম্পূর্ণ সুইফট ও রাস্টে তৈরি। শূন্য ব্যাটারি অপচয় ও সেকেন্ডে রেসপন্স।</p>
+            </div>
 
-            <section class="cta">
-                <div class="cta-container animate-on-scroll">
-                    <h2>
-                        <span
-                            class="bangla-serif"
-                            lang="bn"
-                            style="color: var(--vermillion)"
-                            >বর্ণ</span
-                        >, আপনার ম্যাকেই।
-                    </h2>
-                    <p>
-                        নামিয়ে নিন, চালিয়ে দেখুন।
-                        কোনো সমস্যা পেলে জানান — প্রতিটা রিপোর্ট বর্ণ-কে আরও ভালো করে।
-                    </p>
-                    <div class="cta-actions">
-                        <a
-                            href="https://github.com/yahiabinzaman/macbangla/releases/latest"
-                            class="btn btn-primary"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <svg
-                                class="btn-icon"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path
-                                    d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"
-                                />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            ম্যাকের জন্য ডাউনলোড
-                        </a>
-                        <a
-                            href="https://github.com/yahiabinzaman/macbangla/issues"
-                            class="btn btn-secondary"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            বাগ রিপোর্ট
-                        </a>
-                    </div>
+            <!-- Feature 3 -->
+            <div class="bento-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
                 </div>
-            </section>
+                <h3>অ্যাডোবি ইলাস্ট্রেটর ও ডিজাইনার ফ্রেন্ডলি</h3>
+                <p>ইলাস্ট্রেটরে Bornomala, Kalpurush বা যেকোনো ইউনিকোড ফন্টে কার্সর হারিয়ে যাওয়া বা প্রিভিউ আটকে থাকার কোনো ঝামেলা নেই। স্মুথ ভেক্টর টেক্সট টাইপিং।</p>
+            </div>
 
-            <div class="section-divider"></div>
-
-            <!-- SEO: FAQ — captures Bengali long-tail searches -->
-            <section class="faq" id="faq">
-                <div class="animate-on-scroll">
-                    <div class="section-label">প্রশ্নোত্তর</div>
-                    <h2 class="section-title">জানতে চাওয়া কথা</h2>
+            <!-- Feature 4 -->
+            <div class="bento-card col-2">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
-                <details class="animate-on-scroll">
-                    <summary>এটা কি 'Avro Keyboard for Mac'-এর মতোই?</summary>
-                    <p>
-                        বর্ণ সেই একই ধারার উত্তরসূরি — Windows-এ Avro Keyboard আর macOS-এ iAvro
-                        যে অভ্র ফোনেটিক নিয়মগুলো জনপ্রিয় করেছিল, বর্ণ ঠিক
-                        সেই নিয়মেই চলে। iAvro এখনো কাজ করে, কিন্তু সেটা Intel-only —
-                        Apple Silicon-এ Rosetta দিয়ে চালাতে হয়, আর
-                        <a href="https://support.apple.com/en-us/102527" target="_blank" rel="noopener noreferrer">Apple ঘোষণা করেছে</a>
-                        Rosetta ধীরে ধীরে বন্ধ হবে। বর্ণ শুরু থেকেই Apple Silicon-এর
-                        (M1, M2, M3, M4, M5) জন্য তৈরি — macOS যত এগোবে,
-                        বর্ণ সাবলীলভাবেই চলতে থাকবে।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>M4 বা M5-এর MacBook Air / MacBook Pro-তে কাজ করবে?</summary>
-                    <p>
-                        হ্যাঁ। বর্ণ সব Apple Silicon ম্যাকে নেটিভভাবে চলে — MacBook Air, MacBook Pro,
-                        iMac, Mac Mini, Mac Studio, Mac Pro — যেকোনো M-সিরিজ চিপে
-                        (M1, M2, M3, M4, M5 ও ভবিষ্যতের চিপ)।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>macOS-এর বিল্ট-ইন বাংলা কিবোর্ডের সাথে এটার তফাত কী?</summary>
-                    <p>
-                        macOS-এর বিল্ট-ইন বাংলা ইনপুট অ্যাপলের নিজস্ব লেআউট — অভ্র ফোনেটিকের
-                        নিয়মে চলে না। Windows-এ Avro Keyboard বা Linux-এ OpenBangla দিয়ে
-                        যারা অভ্যস্ত — বর্ণ তাদের কাছে চেনা লাগবে।
-                        একই নিয়ম, সাথে দেড় লাখ শব্দের অভিধান ও সাজেশন।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>বর্ণ কি ফ্রি? ওপেন সোর্স?</summary>
-                    <p>
-                        হ্যাঁ, পুরোপুরি ফ্রি — বিজ্ঞাপন নেই, সাবস্ক্রিপশন নেই, সাইন-আপ নেই।
-                        ওপেন সোর্স, MPL-2.0 লাইসেন্সে। ভেতরের ইঞ্জিন হলো
-                        <a href="https://github.com/OpenBangla/riti" target="_blank" rel="noopener noreferrer">OpenBangla-র riti</a> —
-                        Linux-এর OpenBangla Keyboard যেটা দিয়ে চলে।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>২০২৬ সালে ম্যাকের জন্য সেরা অভ্র কিবোর্ড কোনটি?</summary>
-                    <p>
-                        Apple Silicon-এ নেটিভভাবে চলে এমন একমাত্র অভ্র ফোনেটিক কিবোর্ড এখন
-                        বর্ণ। iAvro এখনো Rosetta দিয়ে চলে, কিন্তু
-                        <a href="https://support.apple.com/en-us/102527" target="_blank" rel="noopener noreferrer">Apple ঘোষণা করেছে</a>
-                        Rosetta ধীরে ধীরে বন্ধ হবে — macOS 27 পর্যন্ত পূর্ণ সাপোর্ট,
-                        macOS 28 থেকে শুধু পুরোনো গেমসে। বর্ণ ফ্রি, ওপেন সোর্স,
-                        M1–M5 ম্যাকে সরাসরি চলে।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>Apple Silicon ম্যাকের জন্য iAvro-র কোনো বিকল্প আছে?</summary>
-                    <p>
-                        হ্যাঁ — বর্ণ হলো iAvro-র আধুনিক বিকল্প। Apple Silicon-এর জন্য নেটিভ,
-                        একই অভ্র ফোনেটিক নিয়ম, সাথে দেড় লাখ শব্দের অভিধান ও সাজেশন।
-                        Chrome, Safari, Notes, Mail — সব অ্যাপে চলে।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>ম্যাকে কীভাবে বাংলা টাইপ করব?</summary>
-                    <p>
-                        বর্ণ ইনস্টল করুন, তারপর System Settings → Keyboard → Input Sources-এ গিয়ে
-                        + চেপে "Borno" খুঁজে যোগ করুন। Globe কী বা Ctrl+Space দিয়ে সুইচ করুন।
-                        ইংরেজিতে লিখুন, বাংলা পাবেন — যেমন "ami" লিখলে "আমি"।
-                    </p>
-                </details>
-                <details class="animate-on-scroll">
-                    <summary>Homebrew দিয়ে বর্ণ ইনস্টল করা যায়?</summary>
-                    <p>
-                        হ্যাঁ। <code>brew install --cask yahiabinzaman/macbangla/borno</code> চালান —
-                        এক কমান্ডেই ইনস্টল হয়ে যাবে।
-                        আপডেট: <code>brew upgrade --cask borno</code>; মুছতে:
-                        <code>brew uninstall --cask borno</code>। Homebrew ছাড়াও
-                        GitHub Releases থেকে DMG নামিয়ে ইনস্টল করা যায়।
-                    </p>
-                </details>
-            </section>
-        </main>
-        <footer>
-            <p>
-                দেখাশোনা করছেন
-                <a href="https://github.com/ARahim3" target="_blank" rel="noopener noreferrer"
-                    >Abdur Rahim</a
-                >
-                · চলে
-                <a href="https://github.com/OpenBangla/riti" target="_blank" rel="noopener noreferrer"
-                    >OpenBangla-র riti ইঞ্জিনে</a
-                >
-                · OmicronLab-এর সাথে আনুষ্ঠানিক সম্পর্ক নেই
-            </p>
+                <h3>১০০% অফলাইন ও সম্পূর্ণ নিরাপদ</h3>
+                <p>বর্ণ কিবোর্ড আপনার কম্পিউটারের বাইরে ইন্টারনেটে কোনো ডেটা পাঠায় না। কোনো কি-লগিং বা ট্র্যাকিং নেই। আপনার ব্যক্তিগত লেখা ও ফাইল সম্পূর্ণ নিরাপদ।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Step Installation -->
+    <section class="steps-container" id="install">
+        <div class="section-heading">
+            <h2>ইনস্টল করার <span class="gradient-text">৩টি সহজ ধাপ</span></h2>
+            <p>মাত্র ১ মিনিটের মধ্যে আপনার ম্যাকে প্রস্তুত হয়ে যাবে।</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-box">
+                <div class="step-number">১</div>
+                <h4>ডাউনলোড ও ইনস্টল</h4>
+                <p>অফিশিয়াল বর্ণ ডিএমজি (DMG) ফাইল ডাউনলোড করুন অথবা টার্মিনালে Homebrew দিয়ে ইনস্টল করুন।</p>
+            </div>
+            <div class="step-box">
+                <div class="step-number">২</div>
+                <h4>ইনপুট সোর্সে যোগ করুন</h4>
+                <p><strong>System Settings → Keyboard → Input Sources</strong>-এ যান, <strong>+</strong> বাটনে ক্লিক করে <strong>Borno</strong> সিলেক্ট করুন।</p>
+            </div>
+            <div class="step-box">
+                <div class="step-number">৩</div>
+                <h4>সুইচ ও টাইপিং</h4>
+                <p><span class="keycap">⌃ Control</span> + <span class="keycap">␣ Space</span> অথবা কিবোর্ডের <span class="keycap">🌐 Globe</span> বাটন চেপে যখন খুশি বাংলা চালু করুন!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Box -->
+    <section class="terminal-section">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="traffic-lights">
+                    <span class="traffic-dot dot-red"></span>
+                    <span class="traffic-dot dot-yellow"></span>
+                    <span class="traffic-dot dot-green"></span>
+                </div>
+                <span style="font-size: 0.78rem; color: #71717a; font-family: 'JetBrains Mono', monospace;">terminal — zsh</span>
+                <button class="copy-btn" onclick="copyBrewCmd()">কমান্ড কপি করুন</button>
+            </div>
+            <div class="terminal-code">
+                <span>$ <span class="cmd">brew install --cask</span> yahiabinzaman/macbangla/borno</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="../borno-icon.png" width="28" height="28" style="border-radius: 7px;" alt="বর্ণ" />
+                <span>বর্ণ (Borno)</span>
+            </div>
             <div class="footer-links">
-                <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer"
-                    >GitHub</a
-                >
-                <a
-                    href="https://github.com/yahiabinzaman/macbangla/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >বাগ রিপোর্ট</a
-                >
-                <a href="../" hreflang="en">English</a>
-                <a href="https://yahiabinzaman.github.io" target="_blank" rel="noopener noreferrer"
-                    >yahiabinzaman.github.io</a
-                >
+                <a href="#features">বৈশিষ্ট্যসমূহ</a>
+                <a href="#playground">লাইভ টাইপিং</a>
+                <a href="#install">ইনস্টলেশন গাইড</a>
+                <a href="../">English</a>
+                <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
-        </footer>
+            <p class="footer-copy">
+                ম্যাক ব্যবহারকারী লেখক, ডিজাইনার ও ক্রিয়েটরদের জন্য ভালোবাসার সাথে তৈরি। ওপেন সোর্স ও সম্পূর্ণ ফ্রি (MPL-2.0)।
+            </p>
+        </div>
+    </footer>
 
-        <script>
-            /* Nav scroll shadow */
-            const nav = document.getElementById("nav");
-            window.addEventListener("scroll", () =>
-                nav.classList.toggle("scrolled", window.scrollY > 40),
-            );
+    <!-- Interactive Phonetic Logic Script -->
+    <script>
+        const input = document.getElementById('demoInput');
+        const output = document.getElementById('demoOutput');
 
-            /* Scroll-triggered animations */
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry, i) => {
-                        if (entry.isIntersecting) {
-                            setTimeout(
-                                () => entry.target.classList.add("visible"),
-                                i * 50,
-                            );
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                { threshold: 0.1, rootMargin: "0px 0px -30px 0px" },
-            );
-            document
-                .querySelectorAll(".animate-on-scroll")
-                .forEach((el) => observer.observe(el));
+        const phoneticRules = [
+            { en: /kkh/gi, bn: 'ক্ষ' },
+            { en: /ng/gi, bn: 'ং' },
+            { en: /OI/g, bn: 'ঐ' },
+            { en: /OU/g, bn: 'ঔ' },
+            { en: /bh/gi, bn: 'ভ' },
+            { en: /ch/gi, bn: 'চ' },
+            { en: /chh/gi, bn: 'ছ' },
+            { en: /dh/gi, bn: 'ধ' },
+            { en: /Dh/gi, bn: 'ঢ' },
+            { en: /gh/gi, bn: 'ঘ' },
+            { en: /jh/gi, bn: 'ঝ' },
+            { en: /kh/gi, bn: 'খ' },
+            { en: /ph/gi, bn: 'ফ' },
+            { en: /sh/gi, bn: 'শ' },
+            { en: /Sh/gi, bn: 'ষ' },
+            { en: /th/gi, bn: 'থ' },
+            { en: /Th/gi, bn: 'ঠ' },
+            { en: /aa|A/g, bn: 'া' },
+            { en: /ee|I/g, bn: 'ী' },
+            { en: /oo|U/g, bn: 'ূ' },
+            { en: /ou/gi, bn: 'ৌ' },
+            { en: /oi/gi, bn: 'ৈ' },
+            { en: /a/gi, bn: 'আ' },
+            { en: /i/gi, bn: 'ই' },
+            { en: /u/gi, bn: 'উ' },
+            { en: /e/gi, bn: 'এ' },
+            { en: /o/gi, bn: 'ও' },
+            { en: /b/gi, bn: 'ব' },
+            { en: /c/gi, bn: 'ক' },
+            { en: /d/g, bn: 'দ' },
+            { en: /D/g, bn: 'ড' },
+            { en: /g/gi, bn: 'গ' },
+            { en: /h/gi, bn: 'হ' },
+            { en: /j/gi, bn: 'জ' },
+            { en: /k/gi, bn: 'ক' },
+            { en: /l/gi, bn: 'ল' },
+            { en: /m/gi, bn: 'ম' },
+            { en: /n/gi, bn: 'ন' },
+            { en: /N/g, bn: 'ণ' },
+            { en: /p/gi, bn: 'প' },
+            { en: /r/gi, bn: 'র' },
+            { en: /s/gi, bn: 'স' },
+            { en: /t/g, bn: 'ত' },
+            { en: /T/g, bn: 'ট' },
+            { en: /y/gi, bn: 'য়' },
+            { en: /z/gi, bn: 'য' },
+            { en: /a/gi, bn: 'া' },
+            { en: /i/gi, bn: 'ি' },
+            { en: /u/gi, bn: 'ু' },
+            { en: /e/gi, bn: 'ে' },
+            { en: /o/gi, bn: 'ো' }
+        ];
 
-            /* FIX: hamburger menu toggle */
-            const hamburger = document.getElementById("nav-hamburger");
-            const mobileMenu = document.getElementById("nav-mobile");
-            hamburger.addEventListener("click", () => {
-                const isOpen = mobileMenu.classList.toggle("open");
-                hamburger.classList.toggle("open", isOpen);
-                hamburger.setAttribute("aria-expanded", String(isOpen));
-            });
-            /* Close mobile menu when a link is tapped */
-            mobileMenu.querySelectorAll("a").forEach((link) => {
-                link.addEventListener("click", () => {
-                    mobileMenu.classList.remove("open");
-                    hamburger.classList.remove("open");
-                    hamburger.setAttribute("aria-expanded", "false");
-                });
-            });
+        const phraseDict = {
+            'ami': 'আমি',
+            'banglay': 'বাংলায়',
+            'gan': 'গান',
+            'gai': 'গাই',
+            'ami banglay gan gai': 'আমি বাংলায় গান গাই',
+            'shonar bangla': 'সোনার বাংলা',
+            'shonar bangla ami tomay bhalobashi': 'সোনার বাংলা আমি তোমায় ভালোবাসি',
+            'ekushey february': 'একুশে ফেব্রুয়ারি',
+            'ekushey february amar vaiyer rokte rangano': 'একুশে ফেব্রুয়ারি আমার ভাইয়ের রক্তে রাঙানো',
+            'bornomala font': 'বর্ণমালা ফন্ট',
+            'bornomala font khub shundor': 'বর্ণমালা ফন্ট খুব সুন্দর',
+            'adobe illustrator e bangla lekha': 'অ্যাডোবি ইলাস্ট্রেটরে বাংলা লেখা',
+            'kemon': 'কেমন',
+            'acho': 'আছো',
+            'kemon acho': 'কেমন আছো',
+            'borno': 'বর্ণ'
+        };
 
-            /* FIX: demo uses word-boundary output mapping instead of raw character proportion.
-               Complete words snap to their full Bengali form; only the in-progress word
-               uses proportional interpolation — much closer to real IME behaviour. */
-            const demos = [
-                { typed: "ami banglay gan gai", output: "আমি বাংলায় গান গাই" },
-                { typed: "bangladesh amar desh", output: "বাংলাদেশ আমার দেশ" },
-                { typed: "tumi kemon acho?", output: "তুমি কেমন আছো?" },
-                { typed: "amar sonar bangla", output: "আমার সোনার বাংলা" },
-                { typed: "shubho noboborsho", output: "শুভ নববর্ষ" },
-            ];
+        function transliteratePhonetic(str) {
+            const trimmed = str.trim().toLowerCase();
+            if (phraseDict[trimmed]) return phraseDict[trimmed];
 
-            function getOutputForTyped(demo, charIndex) {
-                const engWords = demo.typed.split(" ");
-                const bnWords = demo.output.split(" ");
-                let result = "";
-                let pos = 0;
-                for (let i = 0; i < engWords.length; i++) {
-                    const wordEnd = pos + engWords[i].length;
-                    if (charIndex >= wordEnd) {
-                        // Word fully typed — show complete Bengali word
-                        result += bnWords[i];
-                        if (charIndex > wordEnd && i < engWords.length - 1) {
-                            result += " ";
-                        }
-                        pos = wordEnd + 1;
-                    } else if (charIndex > pos) {
-                        // Word in progress — proportionally reveal only this word
-                        const p = (charIndex - pos) / engWords[i].length;
-                        const bnWord = bnWords[i];
-                        result += bnWord.substring(
-                            0,
-                            Math.max(1, Math.round(p * bnWord.length)),
-                        );
-                        break;
-                    } else {
-                        break;
-                    }
+            const words = str.split(' ');
+            return words.map(word => {
+                const lower = word.toLowerCase();
+                if (phraseDict[lower]) return phraseDict[lower];
+                let res = word;
+                for (let rule of phoneticRules) {
+                    res = res.replace(rule.en, rule.bn);
                 }
-                return result;
-            }
+                return res;
+            }).join(' ');
+        }
 
-            let currentDemo = 0,
-                charIndex = 0,
-                isTyping = true;
-            const typedEl = document.getElementById("demo-typed");
-            const outputEl = document.getElementById("demo-output");
-
-            function typeNext() {
-                const demo = demos[currentDemo];
-                if (isTyping) {
-                    if (charIndex <= demo.typed.length) {
-                        typedEl.textContent = demo.typed.substring(0, charIndex);
-                        outputEl.textContent = getOutputForTyped(demo, charIndex);
-                        charIndex++;
-                        setTimeout(typeNext, 55 + Math.random() * 40);
-                    } else {
-                        setTimeout(() => {
-                            isTyping = false;
-                            typeNext();
-                        }, 2200);
-                    }
-                } else {
-                    if (charIndex > 0) {
-                        charIndex--;
-                        typedEl.textContent = demo.typed.substring(0, charIndex);
-                        outputEl.textContent = getOutputForTyped(demo, charIndex);
-                        setTimeout(typeNext, 18);
-                    } else {
-                        currentDemo = (currentDemo + 1) % demos.length;
-                        isTyping = true;
-                        setTimeout(typeNext, 500);
-                    }
-                }
+        input.addEventListener('input', () => {
+            if (!input.value.trim()) {
+                output.innerText = '...';
+                return;
             }
-            setTimeout(typeNext, 1000);
-        </script>
-    </body>
+            output.innerText = transliteratePhonetic(input.value);
+        });
+
+        function setDemoText(text) {
+            input.value = text;
+            output.innerText = transliteratePhonetic(text);
+            input.focus();
+        }
+
+        function copyBrewCmd() {
+            navigator.clipboard.writeText('brew install --cask yahiabinzaman/macbangla/borno');
+            alert('কমান্ড কপি করা হয়েছে: brew install --cask yahiabinzaman/macbangla/borno');
+        }
+    </script>
+</body>
 </html>
