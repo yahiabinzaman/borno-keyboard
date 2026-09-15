@@ -3,8 +3,8 @@ set -euo pipefail
 
 APP_NAME="Borno"
 INSTALL_DIR="$HOME/Library/Input Methods"
-REPO_URL="https://github.com/yahiabinzaman/macbangla"
-RAW_URL="https://raw.githubusercontent.com/yahiabinzaman/macbangla/main"
+REPO_URL="https://github.com/yahiabinzaman/borno-keyboard"
+RAW_URL="https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main"
 
 echo "======================================================"
 echo "    Installing Borno (বর্ণ) — Avro Keyboard for Mac    "
@@ -29,7 +29,7 @@ if [ -n "$LOCAL_APP" ] && [ -d "$LOCAL_APP" ]; then
     APP_SOURCE="$LOCAL_APP"
 else
     echo ">>> Downloading latest Borno for macOS from GitHub..."
-    DMG_DOWNLOAD_URL="https://raw.githubusercontent.com/yahiabinzaman/macbangla/main/docs/Borno.dmg"
+    DMG_DOWNLOAD_URL="https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/docs/Borno.dmg"
     curl -fSL --progress-bar "$DMG_DOWNLOAD_URL" -o "$TMP_WORK_DIR/Borno.dmg"
 
     echo ">>> Extracting installer package..."
@@ -96,5 +96,5 @@ echo " 3. Search for 'Borno' in the language list and click 'Add'"
 echo " 4. Switch anytime using Globe key or Ctrl + Space"
 echo ""
 echo "Developed & Maintained by Yahia Bin Zaman"
-echo "GitHub: https://github.com/yahiabinzaman/macbangla"
+echo "GitHub: https://github.com/yahiabinzaman/borno-keyboard"
 echo "======================================================"

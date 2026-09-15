@@ -1,7 +1,7 @@
 # বর্ণ (Borno) — Native Avro Phonetic Keyboard for macOS
 
-[![macOS](https://img.shields.io/badge/macOS-13.0%2B-black?logo=apple&logoColor=white)](https://github.com/yahiabinzaman/macbangla)
-[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-Native-blue)](https://github.com/yahiabinzaman/macbangla)
+[![macOS](https://img.shields.io/badge/macOS-13.0%2B-black?logo=apple&logoColor=white)](https://github.com/yahiabinzaman/borno-keyboard)
+[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-Native-blue)](https://github.com/yahiabinzaman/borno-keyboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Borno (বর্ণ)** is a clean, minimal, native Avro Phonetic Bengali keyboard for macOS. Designed for maximum typing speed, pure direct typing with zero floating popup disruption, and seamless compatibility across Adobe Illustrator, Photoshop, Figma, VS Code, and all macOS applications.
@@ -13,10 +13,10 @@
 Paste this into your macOS Terminal and press **Return**:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/macbangla/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.sh | bash
 ```
 
-Or download the pre-packaged **[Borno.dmg](https://raw.githubusercontent.com/yahiabinzaman/macbangla/main/docs/Borno.dmg)**.
+Or download the pre-packaged **[Borno.dmg](https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/docs/Borno.dmg)**.
 
 ---
 
@@ -43,7 +43,7 @@ After installation:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yahiabinzaman/macbangla.git
+git clone https://github.com/yahiabinzaman/borno-keyboard.git
 cd macbangla
 
 # Build Apple Silicon release

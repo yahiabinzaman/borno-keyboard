@@ -662,7 +662,7 @@ class GettingStartedView: NSView {
         let links = NSStackView(views: [
             makeLinkButton("github.com/yahiabinzaman", url: "https://github.com/yahiabinzaman"),
             dot,
-            makeLinkButton("Borno macOS", url: "https://github.com/yahiabinzaman/macbangla"),
+            makeLinkButton("Borno macOS", url: "https://github.com/yahiabinzaman/borno-keyboard"),
         ])
         links.orientation = .horizontal
         links.spacing = 8
@@ -730,7 +730,7 @@ class GettingStartedView: NSView {
 
     @objc private func checkForUpdate() {
         let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
-        let url = URL(string: "https://api.github.com/repos/yahiabinzaman/macbangla/releases/latest")!
+        let url = URL(string: "https://api.github.com/repos/yahiabinzaman/borno-keyboard/releases/latest")!
 
         var request = URLRequest(url: url)
         request.setValue("Borno/\(currentVersion)", forHTTPHeaderField: "User-Agent")
@@ -760,7 +760,7 @@ class GettingStartedView: NSView {
                 let latestVersion = tagName.hasPrefix("v") ? String(tagName.dropFirst()) : tagName
 
                 if self.isVersion(latestVersion, newerThan: currentVersion) {
-                    let htmlURL = json["html_url"] as? String ?? "https://github.com/yahiabinzaman/macbangla/releases/latest"
+                    let htmlURL = json["html_url"] as? String ?? "https://github.com/yahiabinzaman/borno-keyboard/releases/latest"
                     self.showUpdateAvailableAlert(latestVersion: latestVersion, downloadURL: htmlURL)
                 } else {
                     self.showUpdateAlert(
