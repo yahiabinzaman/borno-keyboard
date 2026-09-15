@@ -3,42 +3,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Borno (বর্ণ) — Avro Phonetic Bangla Keyboard for macOS | Native Apple Silicon</title>
-    <meta name="description" content="Borno (বর্ণ) is the modern, native Apple Silicon Avro Phonetic Bangla keyboard for macOS. Direct typing with zero preview popup, optimized for Adobe Illustrator and all Mac apps. Free & Open Source." />
-    <meta name="keywords" content="Borno, বর্ণ, avro keyboard mac, bangla keyboard macos, avro phonetic apple silicon, bangla typing illustrator, bangla typing macbook m4, borno keyboard" />
+    <title>Borno (বর্ণ) — Native Avro Phonetic Bangla Keyboard for macOS</title>
+    <meta name="description" content="Borno is a clean, minimal, native Apple Silicon Avro Phonetic Bangla keyboard for macOS. Direct typing with zero preview popups, optimized for Adobe Illustrator and all Mac apps." />
+    <meta name="keywords" content="Borno, বর্ণ, avro keyboard mac, bangla keyboard macos, avro phonetic mac, apple silicon avro, bangla typing illustrator, borno mac" />
 
-    <!-- Open Graph / Social -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yahiabinzaman.github.io/macbangla/" />
     <meta property="og:title" content="Borno (বর্ণ) — Avro Keyboard for Mac" />
-    <meta property="og:description" content="Native Apple Silicon Bangla keyboard with direct zero-preview typing. Perfect for Adobe Illustrator and daily typing on Mac." />
-    <meta property="og:image" content="borno-hero-mockup.png" />
+    <meta property="og:description" content="Native Apple Silicon Bangla keyboard with direct zero-preview typing. Clean, fast, and 100% offline." />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="borno-icon.png" />
-    <link rel="apple-touch-icon" href="borno-icon.png" />
+    <!-- Favicon: Clean Vector SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23111113'/%3E%3Ctext x='50' y='68' font-family='-apple-system%2C sans-serif' font-size='56' font-weight='700' fill='%23ffffff' text-anchor='middle'%3Eব%3C/text%3E%3C/svg%3E" />
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <style>
         :root {
-            --bg-base: #0a0a0c;
-            --bg-card: rgba(22, 22, 26, 0.7);
-            --bg-card-hover: rgba(30, 30, 36, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-border-hover: rgba(255, 255, 255, 0.16);
+            --bg: #000000;
+            --bg-subtle: #0a0a0c;
+            --card-bg: #111114;
+            --card-border: #222227;
+            --card-border-hover: #33333c;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --text-muted: #52525a;
+            --accent: #ffffff;
             --accent-red: #ff3b30;
-            --accent-crimson: #e63946;
-            --accent-gold: #f59e0b;
-            --accent-glow: rgba(230, 57, 70, 0.25);
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --font-en: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-            --font-bn: 'Hind Siliguri', 'Anek Bangla', sans-serif;
+            --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", sans-serif;
+            --font-bangla: "Hind Siliguri", -apple-system, sans-serif;
+            --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
         }
 
         * {
@@ -48,700 +45,547 @@
         }
 
         body {
-            background-color: var(--bg-base);
+            background-color: var(--bg);
             color: var(--text-primary);
-            font-family: var(--font-en);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: var(--font-system);
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
-            background-image: 
-                radial-gradient(circle at 50% -10%, rgba(230, 57, 70, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 85% 25%, rgba(245, 158, 11, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
-            background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        .bangla-text {
-            font-family: var(--font-bn);
-        }
-
-        /* Ambient background floating Bengali letters */
-        .ambient-letters {
+        /* Subtle grid lines */
+        .bg-grid {
             position: fixed;
             inset: 0;
+            background-size: 64px 64px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             pointer-events: none;
             z-index: 0;
-            overflow: hidden;
         }
 
-        .ambient-letter {
-            position: absolute;
-            font-family: var(--font-bn);
-            color: rgba(255, 255, 255, 0.025);
-            font-weight: 700;
-            user-select: none;
-            filter: blur(1px);
-            animation: floatSlow 20s ease-in-out infinite alternate;
+        /* Minimal Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        @keyframes floatSlow {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-30px) rotate(4deg); }
-        }
-
-        /* Nav Glass Bar */
-        nav {
-            position: fixed;
-            top: 1.25rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(1140px, calc(100% - 2rem));
-            z-index: 1000;
-            background: rgba(18, 18, 22, 0.75);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            border-radius: 9999px;
-            padding: 0.65rem 1.4rem;
+        .header-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
         }
 
-        .nav-brand {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.65rem;
             text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-icon {
+            width: 28px;
+            height: 28px;
+            background: #1c1c1f;
+            border: 1px solid #2c2c30;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-bangla);
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-name span {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-family: var(--font-bangla);
+            font-size: 0.95rem;
+            margin-left: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .nav-link:hover {
             color: var(--text-primary);
         }
 
-        .nav-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 9px;
-            box-shadow: 0 2px 10px rgba(255, 59, 48, 0.3);
-            display: block;
+        .lang-switch {
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid #27272a;
+            background: #141417;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-decoration: none;
+            font-family: var(--font-bangla);
+            transition: all 0.15s;
         }
 
-        .nav-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+        .lang-switch:hover {
+            color: #fff;
+            border-color: #3f3f46;
         }
 
-        .nav-title .bn {
-            font-family: var(--font-bn);
-            font-size: 0.95rem;
-            color: var(--accent-gold);
+        .btn-header {
+            background: #ffffff;
+            color: #000000;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+
+        .btn-header:hover {
             opacity: 0.9;
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1.75rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-lang-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary) !important;
-            font-size: 0.82rem !important;
-            font-family: var(--font-bn);
-            transition: all 0.2s;
-        }
-
-        .nav-lang-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--glass-border-hover);
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, #ff3b30 0%, #e63946 100%);
-            color: #fff !important;
-            padding: 0.45rem 1.1rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: 0 4px 14px rgba(255, 59, 48, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.5);
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             position: relative;
             z-index: 1;
-            padding: 9.5rem 1.5rem 4rem;
-            max-width: 1200px;
+            max-width: 860px;
             margin: 0 auto;
+            padding: 6.5rem 1.5rem 4rem;
             text-align: center;
         }
 
-        .apple-badge {
+        .badge-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.4rem 1.1rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            gap: 0.5rem;
+            padding: 0.3rem 0.85rem;
             border-radius: 9999px;
-            font-size: 0.82rem;
+            background: #121215;
+            border: 1px solid #242429;
+            font-size: 0.78rem;
             font-weight: 500;
-            color: #f4f4f5;
+            color: #a1a1aa;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: border-color 0.3s;
         }
 
-        .apple-badge:hover {
-            border-color: var(--glass-border-hover);
-        }
-
-        .apple-badge svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        .badge-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 8px #10b981;
+        .badge-pill svg {
+            width: 12px;
+            height: 12px;
+            fill: #fff;
         }
 
         .hero h1 {
-            font-size: clamp(2.4rem, 5.5vw, 4.4rem);
-            font-weight: 800;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
             letter-spacing: -0.035em;
-            line-height: 1.12;
-            margin-bottom: 1.5rem;
+            line-height: 1.1;
             color: #ffffff;
+            margin-bottom: 1.35rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 30%, #fca5a5 70%, #f59e0b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-sub {
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
+        .hero p {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
             color: var(--text-secondary);
-            max-width: 680px;
+            max-width: 640px;
             margin: 0 auto 2.5rem;
-            line-height: 1.65;
+            line-height: 1.6;
             font-weight: 400;
         }
 
-        .hero-sub strong {
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .hero-actions {
+        .hero-cta-group {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.85rem;
             flex-wrap: wrap;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4.5rem;
         }
 
-        .btn-apple {
-            background: linear-gradient(180deg, #ff453a 0%, #d62828 100%);
-            color: #fff;
-            text-decoration: none;
-            padding: 0.85rem 1.8rem;
-            border-radius: 14px;
+        .btn-primary-mac {
+            background: #ffffff;
+            color: #000000;
+            padding: 0.75rem 1.6rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 600;
-            font-size: 1rem;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            gap: 0.55rem;
+            transition: background 0.15s, transform 0.15s;
         }
 
-        .btn-apple:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+        .btn-primary-mac:hover {
+            background: #e5e5e7;
+            transform: translateY(-1px);
         }
 
-        .terminal-pill {
-            background: rgba(22, 22, 26, 0.8);
-            border: 1px solid var(--glass-border);
-            padding: 0.65rem 1.1rem;
-            border-radius: 14px;
+        .btn-primary-mac svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .terminal-chip {
+            background: #111114;
+            border: 1px solid #26262c;
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #a1a1aa;
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.15s, color 0.15s;
         }
 
-        .terminal-pill:hover {
-            border-color: var(--glass-border-hover);
-            color: #fff;
-            background: rgba(30, 30, 36, 0.9);
-        }
-
-        .terminal-pill .copy-icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.7;
-        }
-
-        /* Showcase Visual Grid */
-        .showcase-container {
-            position: relative;
-            max-width: 1040px;
-            margin: 0 auto 5rem;
-            border-radius: 24px;
-            padding: 8px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
-        }
-
-        .showcase-inner {
-            background: #111114;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .showcase-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 20px;
-        }
-
-        /* Interactive macOS Typing Playground */
-        .playground-section {
-            max-width: 960px;
-            margin: 0 auto 6rem;
-            padding: 0 1.5rem;
-        }
-
-        .mac-window {
-            background: rgba(20, 20, 24, 0.75);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255, 255, 255, 0.1);
-        }
-
-        .window-titlebar {
-            background: rgba(30, 30, 36, 0.5);
-            padding: 0.85rem 1.25rem;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .traffic-lights {
-            display: flex;
-            gap: 7px;
-        }
-
-        .traffic-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ff5f57; }
-        .dot-yellow { background: #febc2e; }
-        .dot-green { background: #28c840; }
-
-        .window-title {
-            flex: 1;
-            text-align: center;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .playground-body {
-            padding: 2.2rem 2.5rem;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .interactive-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent-gold);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .type-input-box {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.1rem 1.4rem;
-            color: #fff;
-            font-size: 1.15rem;
-            font-family: 'JetBrains Mono', monospace;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .type-input-box:focus {
-            border-color: var(--accent-red);
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.15);
-        }
-
-        .live-output-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 1.5rem;
-            min-height: 110px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .live-output-text {
-            font-family: var(--font-bn);
-            font-size: 2.1rem;
-            font-weight: 700;
+        .terminal-chip:hover {
+            border-color: #3f3f46;
             color: #ffffff;
-            line-height: 1.35;
         }
 
-        .quick-chips {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            align-items: center;
+        .terminal-chip .prefix {
+            color: #52525b;
         }
 
-        .chip-label {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        .chip-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            padding: 0.3rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .chip-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border-color: var(--glass-border-hover);
-        }
-
-        /* Bento Grid Features */
-        .section-heading {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-heading p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .bento-grid {
-            max-width: 1140px;
-            margin: 0 auto 6rem;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .bento-card {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.2rem 2rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Pure Native macOS Window Mockup (Vector CSS) */
+        .mac-preview {
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bento-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--glass-border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-        }
-
-        .bento-card.col-2 {
-            grid-column: span 2;
-        }
-
-        .bento-card.col-3 {
-            grid-column: span 3;
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(255, 59, 48, 0.12);
-            border: 1px solid rgba(255, 59, 48, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-            color: var(--accent-red);
-        }
-
-        .card-icon svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .bento-card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: #fff;
-        }
-
-        .bento-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Keycap Shortcut Visual */
-        .keycap {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.3rem 0.6rem;
-            background: #27272a;
-            border: 1px solid #3f3f46;
-            border-bottom: 3px solid #18181b;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: #f4f4f5;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* 3-Step Setup Section */
-        .steps-container {
-            max-width: 1040px;
+            z-index: 1;
+            max-width: 900px;
             margin: 0 auto 6rem;
             padding: 0 1.5rem;
         }
 
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .step-box {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--accent-red);
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-        }
-
-        .step-box h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-box p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.55;
-        }
-
-        /* Terminal Window Section */
-        .terminal-section {
-            max-width: 800px;
-            margin: 0 auto 6rem;
-            padding: 0 1.5rem;
-        }
-
-        .terminal-window {
-            background: #09090b;
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
+        .app-window {
+            background: #18181c;
+            border: 1px solid #2a2a32;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
 
-        .terminal-header {
-            background: #18181b;
+        .window-header {
+            background: #202026;
             padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid #272730;
         }
 
-        .terminal-code {
-            padding: 1.5rem 1.75rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
+        .traffic-lights {
+            display: flex;
+            gap: 6px;
+        }
+
+        .traffic-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .window-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            color: #a1a1aa;
+            gap: 0.4rem;
         }
 
-        .terminal-code span.cmd {
-            color: #34d399;
+        .window-title svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
         }
 
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--glass-border);
-            color: #fff;
-            padding: 0.4rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
+        .editor-container {
+            padding: 2.25rem 2.5rem;
+            background: #111114;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-prompt-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .interactive-input {
+            width: 100%;
+            background: #09090b;
+            border: 1px solid #27272e;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .interactive-input:focus {
+            border-color: #52525b;
+        }
+
+        .output-box {
+            background: #16161a;
+            border: 1px solid #24242b;
+            border-radius: 10px;
+            padding: 1.5rem 1.25rem;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+        }
+
+        .output-text {
+            font-family: var(--font-bangla);
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .chips-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chip-caption {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .chip-button {
+            background: #1a1a1f;
+            border: 1px solid #2a2a32;
+            color: var(--text-secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
 
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .chip-button:hover {
+            background: #24242b;
+            color: #fff;
+            border-color: #3f3f48;
+        }
+
+        /* Minimal Feature Grid */
+        .features {
+            position: relative;
+            z-index: 1;
+            max-width: 1080px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.85rem;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--card-border-hover);
+            background: #141418;
+        }
+
+        .card.span-2 {
+            grid-column: span 2;
+        }
+
+        .card-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Keycaps Visual */
+        .keycap {
+            display: inline-block;
+            background: #222227;
+            border: 1px solid #383842;
+            border-bottom: 2px solid #141417;
+            padding: 0.15rem 0.45rem;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #e4e4e7;
+        }
+
+        /* Step Section */
+        .install-section {
+            max-width: 860px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .steps-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .step-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .step-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--glass-border);
-            padding: 4rem 1.5rem 3rem;
-            background: rgba(10, 10, 12, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3.5rem 1.5rem 2.5rem;
+            background: #000000;
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 1040px;
+        .footer-inner {
+            max-width: 1080px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 1.2rem;
-            font-weight: 700;
+            gap: 1.25rem;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 0.85rem;
+            transition: color 0.15s;
         }
 
         .footer-links a:hover {
-            color: var(--text-primary);
+            color: #fff;
         }
 
         .footer-copy {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.85rem;
         }
 
-        @media (max-width: 860px) {
-            .bento-grid, .steps-grid {
+        @media (max-width: 768px) {
+            .grid-cards, .steps-wrapper {
                 grid-template-columns: 1fr;
             }
-            .bento-card.col-2, .bento-card.col-3 {
+            .card.span-2 {
                 grid-column: span 1;
             }
-            .nav-links a:not(.nav-lang-btn):not(.nav-cta) {
+            .nav-link {
                 display: none;
             }
         }
@@ -749,227 +593,173 @@
 </head>
 <body>
 
-    <!-- Ambient Bengali Glyphs -->
-    <div class="ambient-letters" aria-hidden="true">
-        <span class="ambient-letter" style="top: 12%; left: 6%; font-size: 8rem;">ব</span>
-        <span class="ambient-letter" style="top: 25%; right: 8%; font-size: 9rem; animation-delay: -3s;">র্ণ</span>
-        <span class="ambient-letter" style="top: 55%; left: 4%; font-size: 7rem; animation-delay: -7s;">অ</span>
-        <span class="ambient-letter" style="top: 70%; right: 5%; font-size: 8.5rem; animation-delay: -11s;">আ</span>
-        <span class="ambient-letter" style="top: 40%; right: 28%; font-size: 6rem; animation-delay: -5s;">ক</span>
-        <span class="ambient-letter" style="top: 85%; left: 35%; font-size: 7.5rem; animation-delay: -9s;">ম</span>
-    </div>
+    <div class="bg-grid"></div>
 
-    <!-- Floating Glass Nav -->
-    <nav>
-        <a href="#" class="nav-brand">
-            <img src="borno-icon.png" alt="Borno Logo" class="nav-icon" />
-            <span class="nav-title">Borno <span class="bn">(বর্ণ)</span></span>
-        </a>
-        <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#playground">Try Live</a>
-            <a href="#install">Install</a>
-            <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="bn/" class="nav-lang-btn">
-                <span>🌐 বাংলা সংস্করণ</span>
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="brand">
+                <div class="brand-icon">ব</div>
+                <div class="brand-name">Borno <span>(বর্ণ)</span></div>
             </a>
-            <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="nav-cta">
-                <span> Download</span>
-            </a>
+            <div class="nav-actions">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Live Test</a>
+                <a href="#install" class="nav-link">Install</a>
+                <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+                <a href="bn/" class="lang-switch">বাংলা</a>
+                <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="btn-header">Download</a>
+            </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="apple-badge">
-            <span class="badge-dot"></span>
+        <div class="badge-pill">
             <svg viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.69-7.76-11.97-14.15-5.96-8.9-10.74-19.14-14.34-30.73-3.6-11.58-5.4-22.63-5.4-33.15 0-16.14 4.31-29.47 12.93-40 8.62-10.53 19.34-15.9 32.18-16.13 5.41 0 11.19 1.34 17.33 4.02 6.14 2.68 10.36 4.08 12.65 4.2 1.9-.24 6.13-1.65 12.68-4.24 6.55-2.59 12.19-3.8 16.92-3.64 12.66.57 23.01 5.37 31.05 14.41-11.07 6.7-16.5 16.03-16.31 27.99.19 9.87 4.02 18.06 11.49 24.58 7.47 6.51 16.29 10.15 26.47 10.92-2.18 6.78-4.72 13.43-7.62 19.96zM119.22 31.84c0-7.72 2.76-14.88 8.28-21.49 5.53-6.61 12.44-10.35 20.73-11.23.18 1.05.27 2.05.27 3.01 0 7.74-2.88 15.06-8.64 21.96-5.76 6.9-12.77 10.66-21.03 11.28-.36-1.15-.54-2.33-.54-3.53z"/></svg>
-            <span>Apple Silicon Native • M1, M2, M3, M4 &amp; M5</span>
+            <span>macOS 13+ • Apple Silicon Native (M1–M5)</span>
         </div>
 
-        <h1>
-            Bangla Typing on Mac.<br />
-            <span class="gradient-text">Pure. Fast. Without Limits.</span>
-        </h1>
-
-        <p class="hero-sub">
-            Meet <strong>Borno (বর্ণ)</strong> — the ultimate Avro Phonetic keyboard designed specifically for macOS. Experience seamless, <strong>zero-preview direct typing</strong> without annoying popup windows, fully optimized for Adobe Illustrator and designers.
+        <h1>The modern Avro Phonetic keyboard for macOS.</h1>
+        
+        <p>
+            Pure direct typing. Zero floating candidate popups. Designed for speed, precision in Adobe Illustrator, and everyday writing on Mac.
         </p>
 
-        <div class="hero-actions">
-            <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="btn-apple">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Borno for Mac
+        <div class="hero-cta-group">
+            <a href="https://github.com/yahiabinzaman/macbangla/releases/latest" class="btn-primary-mac">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download for macOS (.dmg)
             </a>
-            <div class="terminal-pill" onclick="copyBrewCmd()" title="Click to copy">
+            <div class="terminal-chip" onclick="copyBrewCmd()" title="Click to copy">
+                <span class="prefix">$</span>
                 <span>brew install --cask borno</span>
-                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            </div>
-        </div>
-
-        <!-- Hero 3D Showcase Graphic -->
-        <div class="showcase-container">
-            <div class="showcase-inner">
-                <img src="borno-hero-mockup.png" alt="Borno Running on macOS Sequoia" class="showcase-img" />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Typing Playground -->
-    <section class="playground-section" id="playground">
-        <div class="mac-window">
-            <div class="window-titlebar">
+    <!-- Clean macOS UI Simulation (Vector / Live Test) -->
+    <section class="mac-preview" id="demo">
+        <div class="app-window">
+            <div class="window-header">
                 <div class="traffic-lights">
-                    <span class="traffic-dot dot-red"></span>
-                    <span class="traffic-dot dot-yellow"></span>
-                    <span class="traffic-dot dot-green"></span>
+                    <div class="traffic-dot dot-red"></div>
+                    <div class="traffic-dot dot-yellow"></div>
+                    <div class="traffic-dot dot-green"></div>
                 </div>
-                <div class="window-title">Borno Direct Phonetic Engine — Live Preview</div>
-                <div style="width: 48px;"></div>
+                <div class="window-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                    Borno Input Tester — TextEdit.app
+                </div>
+                <div style="width: 42px;"></div>
             </div>
 
-            <div class="playground-body">
-                <div class="interactive-label">
-                    <span>⚡️ Type in English (Avro Phonetic) below:</span>
+            <div class="editor-container">
+                <div class="input-prompt-label">Type English phonetically (Avro syntax):</div>
+                <input type="text" id="demoInput" class="interactive-input" value="ami banglay gan gai" placeholder="Type here: e.g. shonar bangla..." />
+
+                <div class="output-box">
+                    <div class="output-text" id="demoOutput">আমি বাংলায় গান গাই</div>
                 </div>
 
-                <input type="text" id="demoInput" class="type-input-box" placeholder="type here: e.g. ami banglay gan gai..." value="ami banglay gan gai" />
-
-                <div class="live-output-card">
-                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">Real-time Bangla Output:</div>
-                    <div class="live-output-text" id="demoOutput">আমি বাংলায় গান গাই</div>
-                </div>
-
-                <div class="quick-chips">
-                    <span class="chip-label">Try quick samples:</span>
-                    <button class="chip-btn" onclick="setDemoText('shonar bangla ami tomay bhalobashi')">shonar bangla</button>
-                    <button class="chip-btn" onclick="setDemoText('ekushey february amar vaiyer rokte rangano')">ekushey february</button>
-                    <button class="chip-btn" onclick="setDemoText('bornomala font khub shundor')">bornomala font</button>
-                    <button class="chip-btn" onclick="setDemoText('adobe illustrator e bangla lekha')">illustrator bangla</button>
+                <div class="chips-container">
+                    <span class="chip-caption">Quick test:</span>
+                    <button class="chip-button" onclick="setDemoText('shonar bangla ami tomay bhalobashi')">shonar bangla</button>
+                    <button class="chip-button" onclick="setDemoText('ekushey february')">ekushey february</button>
+                    <button class="chip-button" onclick="setDemoText('bornomala font khub shundor')">bornomala font</button>
+                    <button class="chip-button" onclick="setDemoText('adobe illustrator e bangla lekha')">illustrator bangla</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Bento Grid Features -->
-    <section class="features-section" id="features">
-        <div class="section-heading">
-            <h2>Why Creators Choose <span class="gradient-text">Borno</span></h2>
-            <p>Engineered from the ground up for Apple Silicon with uncompromised precision.</p>
+    <!-- Minimal Bento Cards -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Engineered for Focus</h2>
+            <p>Every keystroke converted seamlessly with zero distractions.</p>
         </div>
 
-        <div class="bento-grid">
-            <!-- Feature 1 -->
-            <div class="bento-card col-2">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                </div>
-                <h3>Zero-Preview Direct Typing (Windows Experience)</h3>
-                <p>No annoying floating candidate boxes blocking your artboard or following your cursor. When you type phonetically, Borno converts seamlessly right in your text field just like Avro on Windows.</p>
+        <div class="grid-cards">
+            <!-- 1 -->
+            <div class="card span-2">
+                <div class="card-tag">Direct Input Engine</div>
+                <h3>Zero-Preview Direct Typing</h3>
+                <p>Unlike standard macOS IMEs that open a floating candidate window following your cursor, Borno converts letters inline directly into your canvas. Exactly what Windows Avro users expect.</p>
             </div>
 
-            <!-- Feature 2 -->
-            <div class="bento-card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-                </div>
+            <!-- 2 -->
+            <div class="card">
+                <div class="card-tag">Architecture</div>
                 <h3>Apple Silicon Native</h3>
-                <p>Pure ARM64 code built for M1, M2, M3, M4, and M5 chips. No Rosetta translation, instant responsiveness, and zero battery drain.</p>
+                <p>Built purely for ARM64 (M1, M2, M3, M4, M5). No Rosetta emulation, zero battery overhead, and instant launch.</p>
             </div>
 
-            <!-- Feature 3 -->
-            <div class="bento-card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-                </div>
-                <h3>Adobe Illustrator &amp; Design Ready</h3>
-                <p>Flawlessly compatible with Bornomala, Kalpurush, and all Unicode Bengali fonts in Illustrator, Photoshop, Figma, and InDesign.</p>
+            <!-- 3 -->
+            <div class="card">
+                <div class="card-tag">Creative Suite</div>
+                <h3>Adobe Illustrator &amp; Photoshop</h3>
+                <p>Engineered to prevent cursor glitches, focus lost, and character dropped in Illustrator with Bornomala, Kalpurush, and all Unicode Bengali fonts.</p>
             </div>
 
-            <!-- Feature 4 -->
-            <div class="bento-card col-2">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                </div>
-                <h3>100% Offline &amp; Private by Design</h3>
-                <p>Borno operates entirely on your Mac. No analytics, no cloud connections, no keystroke tracking. Your thoughts and designs remain strictly private.</p>
+            <!-- 4 -->
+            <div class="card span-2">
+                <div class="card-tag">Security &amp; Privacy</div>
+                <h3>100% Offline &amp; Private</h3>
+                <p>Borno makes zero network requests. No background telemetry, no analytics, no keylogging. Fully open source under the MPL-2.0 license.</p>
             </div>
         </div>
     </section>
 
-    <!-- 3 Step Installation -->
-    <section class="steps-container" id="install">
-        <div class="section-heading">
-            <h2>Up &amp; Running in <span class="gradient-text">3 Easy Steps</span></h2>
-            <p>Setup takes less than 60 seconds.</p>
+    <!-- 3-Step Setup -->
+    <section class="install-section" id="install">
+        <div class="section-header">
+            <h2>Quick Installation</h2>
+            <p>Ready to write in less than a minute.</p>
         </div>
 
-        <div class="steps-grid">
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <h4>Download &amp; Install</h4>
-                <p>Download the official Borno DMG or install via Homebrew with a single command.</p>
+        <div class="steps-wrapper">
+            <div class="step-item">
+                <div class="step-num">STEP 01</div>
+                <h4>Install Borno</h4>
+                <p>Download the .dmg installer and run it, or install via Homebrew.</p>
             </div>
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <h4>Add to Input Sources</h4>
-                <p>Open <strong>System Settings → Keyboard → Input Sources</strong>, click <strong>+</strong>, search <strong>Borno</strong> and add it.</p>
+            <div class="step-item">
+                <div class="step-num">STEP 02</div>
+                <h4>Enable Input Source</h4>
+                <p>Go to <strong>System Settings → Keyboard → Input Sources</strong>, click <strong>+</strong> and add <strong>Borno</strong>.</p>
             </div>
-            <div class="step-box">
-                <div class="step-number">3</div>
+            <div class="step-item">
+                <div class="step-num">STEP 03</div>
                 <h4>Switch &amp; Type</h4>
-                <p>Press <span class="keycap">⌃ Control</span> + <span class="keycap">␣ Space</span> (or the <span class="keycap">🌐 Globe</span> key) anytime to switch to Borno and write Bangla!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Terminal Box -->
-    <section class="terminal-section">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="traffic-lights">
-                    <span class="traffic-dot dot-red"></span>
-                    <span class="traffic-dot dot-yellow"></span>
-                    <span class="traffic-dot dot-green"></span>
-                </div>
-                <span style="font-size: 0.78rem; color: #71717a; font-family: 'JetBrains Mono', monospace;">terminal — zsh</span>
-                <button class="copy-btn" onclick="copyBrewCmd()">Copy Command</button>
-            </div>
-            <div class="terminal-code">
-                <span>$ <span class="cmd">brew install --cask</span> yahiabinzaman/macbangla/borno</span>
+                <p>Toggle language anytime using <span class="keycap">⌃ Control</span> + <span class="keycap">␣ Space</span> or <span class="keycap">🌐 Globe</span>.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="borno-icon.png" width="28" height="28" style="border-radius: 7px;" alt="Borno" />
-                <span>Borno (বর্ণ)</span>
-            </div>
+        <div class="footer-inner">
             <div class="footer-links">
                 <a href="#features">Features</a>
-                <a href="#playground">Live Demo</a>
-                <a href="#install">Install Guide</a>
-                <a href="bn/">বাংলা</a>
+                <a href="#demo">Live Test</a>
+                <a href="#install">Install</a>
+                <a href="bn/">বাংলা সংস্করণ</a>
                 <a href="https://github.com/yahiabinzaman/macbangla" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
-            <p class="footer-copy">
-                Crafted with love for Bengali creators, writers, and designers on macOS. Licensed under MPL-2.0.
-            </p>
+            <div class="footer-copy">
+                Borno (বর্ণ) — Open Source Avro Phonetic Keyboard for macOS. Licensed under MPL-2.0.
+            </div>
         </div>
     </footer>
 
-    <!-- Interactive Phonetic Logic Script -->
+    <!-- Phonetic Transliteration Script -->
     <script>
         const input = document.getElementById('demoInput');
         const output = document.getElementById('demoOutput');
 
-        // Fast phonetic mapping rules for demonstration
         const phoneticRules = [
-            // conjuncts & special
-            { en: /kkh/gi, bn: 'ক্ষ' },
             { en: /kkh/gi, bn: 'ক্ষ' },
             { en: /ng/gi, bn: 'ং' },
             { en: /OI/g, bn: 'ঐ' },
@@ -992,15 +782,11 @@
             { en: /oo|U/g, bn: 'ূ' },
             { en: /ou/gi, bn: 'ৌ' },
             { en: /oi/gi, bn: 'ৈ' },
-            
-            // basic vowels
             { en: /a/gi, bn: 'আ' },
             { en: /i/gi, bn: 'ই' },
             { en: /u/gi, bn: 'উ' },
             { en: /e/gi, bn: 'এ' },
             { en: /o/gi, bn: 'ও' },
-
-            // consonants
             { en: /b/gi, bn: 'ব' },
             { en: /c/gi, bn: 'ক' },
             { en: /d/g, bn: 'দ' },
@@ -1020,16 +806,13 @@
             { en: /T/g, bn: 'ট' },
             { en: /y/gi, bn: 'য়' },
             { en: /z/gi, bn: 'য' },
-
-            // vowel signs (kar)
             { en: /a/gi, bn: 'া' },
             { en: /i/gi, bn: 'ি' },
             { en: /u/gi, bn: 'ু' },
             { en: /e/gi, bn: 'ে' },
-            { en: /o/gi, bn: 'ো' },
+            { en: /o/gi, bn: 'ো' }
         ];
 
-        // Dictionary of common phrases for flawless instant demo typing
         const phraseDict = {
             'ami': 'আমি',
             'banglay': 'বাংলায়',
@@ -1039,7 +822,6 @@
             'shonar bangla': 'সোনার বাংলা',
             'shonar bangla ami tomay bhalobashi': 'সোনার বাংলা আমি তোমায় ভালোবাসি',
             'ekushey february': 'একুশে ফেব্রুয়ারি',
-            'ekushey february amar vaiyer rokte rangano': 'একুশে ফেব্রুয়ারি আমার ভাইয়ের রক্তে রাঙানো',
             'bornomala font': 'বর্ণমালা ফন্ট',
             'bornomala font khub shundor': 'বর্ণমালা ফন্ট খুব সুন্দর',
             'adobe illustrator e bangla lekha': 'অ্যাডোবি ইলাস্ট্রেটরে বাংলা লেখা',
@@ -1053,7 +835,6 @@
             const trimmed = str.trim().toLowerCase();
             if (phraseDict[trimmed]) return phraseDict[trimmed];
 
-            // word by word
             const words = str.split(' ');
             return words.map(word => {
                 const lower = word.toLowerCase();
@@ -1082,7 +863,7 @@
 
         function copyBrewCmd() {
             navigator.clipboard.writeText('brew install --cask yahiabinzaman/macbangla/borno');
-            alert('Copied to clipboard: brew install --cask yahiabinzaman/macbangla/borno');
+            alert('Copied command: brew install --cask yahiabinzaman/macbangla/borno');
         }
     </script>
 </body>
