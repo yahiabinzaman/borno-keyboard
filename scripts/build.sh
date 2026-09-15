@@ -3,7 +3,7 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 ENGINE_DIR="$PROJECT_ROOT/engine"
-SWIFT_DIR="$PROJECT_ROOT/Lekho"
+SWIFT_DIR="$PROJECT_ROOT/Borno"
 BUILD_DIR="$PROJECT_ROOT/build"
 APP_NAME="Borno"
 APP_BUNDLE="$BUILD_DIR/$APP_NAME.app"
@@ -133,7 +133,7 @@ fi
 # Step 4: Sign the app (ad-hoc)
 echo ">>> Signing app bundle..."
 codesign --force --sign - \
-    --entitlements "$SWIFT_DIR/Resources/Lekho.entitlements" \
+    --entitlements "$SWIFT_DIR/Resources/Borno.entitlements" \
     "$APP_BUNDLE"
 
 echo ""
