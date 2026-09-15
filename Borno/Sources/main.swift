@@ -61,12 +61,21 @@ func installMainMenu() {
 
 installMainMenu()
 
-// Register menu bar icon as template BEFORE IMKServer loads it —
-// PDF template icon: macOS auto-inverts for dark menu bars + Globe key overlay
-if let iconPath = Bundle.main.path(forResource: "iconTemplate", ofType: "pdf"),
-   let icon = NSImage(contentsOfFile: iconPath) {
-    icon.isTemplate = true
-    icon.setName("iconTemplate")
+// Register menu bar icons as template BEFORE IMKServer loads them —
+// macOS auto-inverts template icons for dark/light menu bars & status menus
+for name in ["iconTemplate", "icon", "iconTemplate.pdf", "iconTemplate.tiff", "iconTemplate.png"] {
+    let base = (name as NSString).deletingPathExtension
+    let ext = (name as NSString).pathExtension.isEmpty ? nil : (name as NSString).pathExtension
+    if let iconPath = Bundle.main.path(forResource: base, ofType: ext),
+       let icon = NSImage(contentsOfFile: iconPath) {
+        icon.isTemplate = true
+        icon.setName(name)
+        if ext == nil {
+            icon.setName("\(base).pdf")
+            icon.setName("\(base).tiff")
+            icon.setName("\(base).png")
+        }
+    }
 }
 
 autoreleasepool {

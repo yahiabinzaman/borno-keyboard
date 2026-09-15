@@ -38,7 +38,7 @@
 		<string>bn</string>
 	</array>
 	<key>tsInputMethodIconFileKey</key>
-	<string>iconTemplate</string>
+	<string>iconTemplate.pdf</string>
 	<key>ComponentInputModeDict</key>
 	<dict>
 		<key>tsInputModeListKey</key>
@@ -50,6 +50,18 @@
 					<string>Beng</string>
 					<string>bn</string>
 				</array>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeKeyEquivalentModifiersKey</key>
+				<integer>0</integer>
+				<key>tsInputModeKeyEquivalentKey</key>
+				<string></string>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>iconTemplate.pdf</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>iconTemplate.pdf</string>
 				<key>tsInputModePrimaryInScriptKey</key>
 				<true/>
 				<key>tsInputModeScriptKey</key>
