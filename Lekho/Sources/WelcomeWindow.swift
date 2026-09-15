@@ -124,19 +124,20 @@ enum WelcomeUI {
     /// A monospace "key" chip used in the shortcut/layout lists.
     static func keyChip(_ text: String) -> NSView {
         let chip = RoundedTintView(
-            cornerRadius: 5,
-            fill: { NSColor.labelColor.withAlphaComponent(0.07) },
-            border: { NSColor.separatorColor })
+            cornerRadius: 6,
+            borderWidth: 1,
+            fill: { NSColor(white: 0.16, alpha: 0.8) },
+            border: { NSColor(white: 1.0, alpha: 0.15) })
         let label = NSTextField(labelWithString: text)
-        label.font = NSFont.monospacedSystemFont(ofSize: 11.5, weight: .medium)
+        label.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .semibold)
         label.textColor = .labelColor
         label.translatesAutoresizingMaskIntoConstraints = false
         chip.addSubview(label)
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: chip.leadingAnchor, constant: 7),
-            label.trailingAnchor.constraint(equalTo: chip.trailingAnchor, constant: -7),
-            label.topAnchor.constraint(equalTo: chip.topAnchor, constant: 2),
-            label.bottomAnchor.constraint(equalTo: chip.bottomAnchor, constant: -2),
+            label.leadingAnchor.constraint(equalTo: chip.leadingAnchor, constant: 9),
+            label.trailingAnchor.constraint(equalTo: chip.trailingAnchor, constant: -9),
+            label.topAnchor.constraint(equalTo: chip.topAnchor, constant: 3),
+            label.bottomAnchor.constraint(equalTo: chip.bottomAnchor, constant: -3),
         ])
         return chip
     }
@@ -513,30 +514,60 @@ class GettingStartedView: NSView {
         let row = NSStackView()
         row.orientation = .horizontal
         row.alignment = .centerY
-        row.spacing = 16
+        row.spacing = 20
         row.translatesAutoresizingMaskIntoConstraints = false
 
-        let icon = NSImageView(image: NSApp.applicationIconImage)
-        icon.imageScaling = .scaleProportionallyUpOrDown
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.setContentHuggingPriority(.required, for: .horizontal)
+        // Logo Container with large crisp user logo
+        let logoContainer = NSView()
+        logoContainer.wantsLayer = true
+        logoContainer.layer?.cornerRadius = 18
+        logoContainer.layer?.masksToBounds = true
+        logoContainer.layer?.borderWidth = 1
+        logoContainer.layer?.borderColor = NSColor(white: 1.0, alpha: 0.15).cgColor
+        logoContainer.layer?.backgroundColor = NSColor(white: 0.08, alpha: 0.9).cgColor
+        logoContainer.translatesAutoresizingMaskIntoConstraints = false
+
+        let logoImageView = NSImageView()
+        logoImageView.imageScaling = .scaleProportionallyUpOrDown
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Load bundled BornoLogo or glyph
+        if let logoPath = Bundle.main.path(forResource: "BornoGlyph", ofType: "png"),
+           let img = NSImage(contentsOfFile: logoPath) {
+            logoImageView.image = img
+        } else if let logoPath = Bundle.main.path(forResource: "BornoLogo", ofType: "png"),
+                  let img = NSImage(contentsOfFile: logoPath) {
+            logoImageView.image = img
+        } else {
+            logoImageView.image = NSApp.applicationIconImage
+        }
+
+        logoContainer.addSubview(logoImageView)
         NSLayoutConstraint.activate([
-            icon.widthAnchor.constraint(equalToConstant: 60),
-            icon.heightAnchor.constraint(equalToConstant: 60),
+            logoContainer.widthAnchor.constraint(equalToConstant: 80),
+            logoContainer.heightAnchor.constraint(equalToConstant: 80),
+            logoImageView.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: 68),
+            logoImageView.heightAnchor.constraint(equalToConstant: 68),
         ])
 
         let title = NSTextField(labelWithString: "Welcome to Borno (বর্ণ)")
-        title.font = NSFont.systemFont(ofSize: 24, weight: .bold)
-        let subtitle = NSTextField(labelWithString: "Avro Phonetic Bangla keyboard for macOS")
-        subtitle.font = NSFont.systemFont(ofSize: 13)
+        title.font = NSFont.systemFont(ofSize: 26, weight: .bold)
+        title.textColor = .labelColor
+
+        let subtitle = NSTextField(labelWithString: "Fast, minimal Avro Phonetic keyboard for macOS")
+        subtitle.font = NSFont.systemFont(ofSize: 13.5, weight: .regular)
         subtitle.textColor = .secondaryLabelColor
 
-        let textCol = NSStackView(views: [title, subtitle])
+        let versionBadge = PillBadge(text: "v0.2.5 · Apple Silicon Native")
+
+        let textCol = NSStackView(views: [title, subtitle, versionBadge])
         textCol.orientation = .vertical
         textCol.alignment = .leading
-        textCol.spacing = 2
+        textCol.spacing = 6
 
-        row.addArrangedSubview(icon)
+        row.addArrangedSubview(logoContainer)
         row.addArrangedSubview(textCol)
         return row
     }
