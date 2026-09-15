@@ -684,7 +684,7 @@ class GettingStartedView: NSView {
         links.alignment = .centerY
 
         let powered = NSTextField(wrappingLabelWithString:
-            "Powered by OpenBangla\u{2019}s riti engine. Built for the Bengali community on macOS.")
+            "Built with ❤️ for the Bengali community on macOS.")
         powered.font = NSFont.systemFont(ofSize: 10)
         powered.textColor = .tertiaryLabelColor
         powered.alignment = .center

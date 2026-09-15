@@ -35,7 +35,7 @@ After installation:
 - **Creative Cloud Ready**: Perfectly tuned for Adobe Illustrator, Photoshop, InDesign & Figma.
 - **Apple Silicon Native**: High performance Rust core + native Swift UI.
 - **100% Offline & Private**: Zero network telemetry.
-- **Full Avro Rules**: Transliteration powered by OpenBangla's Riti engine.
+- **Full Avro Rules**: Supports all standard Avro phonetic mappings and complex Bengali conjuncts.
 
 ---
 
@@ -61,5 +61,4 @@ bash scripts/create_dmg.sh
 ## 👤 Credits & Author
 
 - **Developer & Maintainer**: [Yahia Bin Zaman (ইয়াহিয়া বিন জামান)](https://github.com/yahiabinzaman)
-- **Engine**: Powered by OpenBangla's [riti](https://github.com/OpenBangla/riti) transliteration engine.
 - **License**: [MIT License](LICENSE)
