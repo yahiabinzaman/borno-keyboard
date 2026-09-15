@@ -839,6 +839,7 @@ class LayoutWebView: NSView {
     private func setupWebView() {
         let config = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: config)
+        webView.setValue(false, forKey: "drawsBackground")
         webView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(webView)
 
@@ -861,28 +862,19 @@ class LayoutWebView: NSView {
             <style>
                 * { margin: 0; padding: 0; box-sizing: border-box; }
                 :root {
-                    --accent: #007aff;
-                    --text: #1d1d1f;
-                    --text-secondary: #8a8a8e;
-                    --card-bg: rgba(0, 0, 0, 0.025);
-                    --card-border: rgba(0, 0, 0, 0.10);
-                    --row-border: rgba(0, 0, 0, 0.06);
-                }
-                @media (prefers-color-scheme: dark) {
-                    :root {
-                        --accent: #6cb4ee;
-                        --text: #f2f2f7;
-                        --text-secondary: #98989d;
-                        --card-bg: rgba(255, 255, 255, 0.05);
-                        --card-border: rgba(255, 255, 255, 0.12);
-                        --row-border: rgba(255, 255, 255, 0.07);
-                    }
+                    color-scheme: dark;
+                    --accent: #38bdf8;
+                    --text: #f4f4f5;
+                    --text-secondary: #a1a1aa;
+                    --card-bg: rgba(255, 255, 255, 0.04);
+                    --card-border: rgba(255, 255, 255, 0.09);
+                    --row-border: rgba(255, 255, 255, 0.04);
                 }
                 body {
-                    font-family: -apple-system, "Helvetica Neue", sans-serif;
-                    padding: 16px 18px;
-                    background: transparent;
-                    color-scheme: light dark;
+                    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+                    padding: 20px 24px;
+                    background: #111114;
+                    color-scheme: dark;
                     color: var(--text);
                 }
                 .section-title {
@@ -922,7 +914,7 @@ class LayoutWebView: NSView {
                 .key {
                     font-size: 11px;
                     font-weight: 600;
-                    color: var(--accent);
+                    color: #38bdf8; background: rgba(56, 189, 248, 0.08); padding: 2px 6px; border-radius: 4px;
                     font-family: "SF Mono", Menlo, monospace;
                 }
                 .pair { width: 25%; }
