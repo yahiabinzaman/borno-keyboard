@@ -517,39 +517,24 @@ class GettingStartedView: NSView {
         row.spacing = 20
         row.translatesAutoresizingMaskIntoConstraints = false
 
-        // Logo Container with large crisp user logo
-        let logoContainer = NSView()
-        logoContainer.wantsLayer = true
-        logoContainer.layer?.cornerRadius = 18
-        logoContainer.layer?.masksToBounds = true
-        logoContainer.layer?.borderWidth = 1
-        logoContainer.layer?.borderColor = NSColor(white: 1.0, alpha: 0.15).cgColor
-        logoContainer.layer?.backgroundColor = NSColor(white: 0.08, alpha: 0.9).cgColor
-        logoContainer.translatesAutoresizingMaskIntoConstraints = false
-
+        // Logo Container with green squircle app icon
         let logoImageView = NSImageView()
         logoImageView.imageScaling = .scaleProportionallyUpOrDown
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.wantsLayer = true
+        logoImageView.layer?.cornerRadius = 18
+        logoImageView.layer?.masksToBounds = true
 
-        // Load bundled BornoLogo or glyph
-        if let logoPath = Bundle.main.path(forResource: "BornoGlyph", ofType: "png"),
+        if let logoPath = Bundle.main.path(forResource: "BornoLogo", ofType: "png"),
            let img = NSImage(contentsOfFile: logoPath) {
-            logoImageView.image = img
-        } else if let logoPath = Bundle.main.path(forResource: "BornoLogo", ofType: "png"),
-                  let img = NSImage(contentsOfFile: logoPath) {
             logoImageView.image = img
         } else {
             logoImageView.image = NSApp.applicationIconImage
         }
 
-        logoContainer.addSubview(logoImageView)
         NSLayoutConstraint.activate([
-            logoContainer.widthAnchor.constraint(equalToConstant: 80),
-            logoContainer.heightAnchor.constraint(equalToConstant: 80),
-            logoImageView.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: 68),
-            logoImageView.heightAnchor.constraint(equalToConstant: 68),
+            logoImageView.widthAnchor.constraint(equalToConstant: 78),
+            logoImageView.heightAnchor.constraint(equalToConstant: 78),
         ])
 
         let title = NSTextField(labelWithString: "Welcome to Borno (বর্ণ)")
@@ -567,7 +552,7 @@ class GettingStartedView: NSView {
         textCol.alignment = .leading
         textCol.spacing = 6
 
-        row.addArrangedSubview(logoContainer)
+        row.addArrangedSubview(logoImageView)
         row.addArrangedSubview(textCol)
         return row
     }
