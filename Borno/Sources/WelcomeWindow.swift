@@ -6,42 +6,38 @@ class WelcomeWindowController: NSObject, NSWindowDelegate {
     static let shared = WelcomeWindowController()
 
     private var window: NSWindow?
-    private var mainSplitView: ModernSplitContainerView?
 
     func showWindow() {
         DispatchQueue.main.async {
             NSApp.setActivationPolicy(.regular)
-            if let window = self.window {
-                window.makeKeyAndOrderFront(nil)
-                window.orderFrontRegardless()
-                NSApp.activate(ignoringOtherApps: true)
-                return
+            
+            if self.window == nil {
+                let win = NSWindow(
+                    contentRect: NSRect(x: 0, y: 0, width: 880, height: 620),
+                    styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                    backing: .buffered,
+                    defer: false
+                )
+                win.title = "Borno (বর্ণ) — Preferences & Guide"
+                win.isReleasedWhenClosed = false
+                win.isRestorable = false
+                win.minSize = NSSize(width: 800, height: 540)
+                win.backgroundColor = .windowBackgroundColor
+
+                let container = ModernSplitContainerView()
+                win.contentView = container
+                win.setContentSize(NSSize(width: 880, height: 620))
+                win.center()
+                win.delegate = self
+                self.window = win
             }
 
-            let win = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 900, height: 640),
-                styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
-                backing: .buffered,
-                defer: false
-            )
-            win.title = "Borno (বর্ণ)"
-            win.titlebarAppearsTransparent = true
-            win.titleVisibility = .hidden
-            win.isMovableByWindowBackground = true
-            win.isReleasedWhenClosed = false
-            win.isRestorable = false
-            win.minSize = NSSize(width: 820, height: 560)
-
-            let container = ModernSplitContainerView()
-            self.mainSplitView = container
-            win.contentView = container
+            guard let win = self.window else { return }
             win.center()
-            win.delegate = self
-
-            self.window = win
             win.makeKeyAndOrderFront(nil)
             win.orderFrontRegardless()
             NSApp.activate(ignoringOtherApps: true)
+            NSRunningApplication.current.activate(options: [.activateIgnoringOtherApps, .activateAllWindows])
         }
     }
 
@@ -63,8 +59,16 @@ class ModernSplitContainerView: NSView {
 
     private var currentDetailView: NSView?
 
+    override var intrinsicContentSize: NSSize {
+        return NSSize(width: 880, height: 620)
+    }
+
+    override var fittingSize: NSSize {
+        return NSSize(width: 880, height: 620)
+    }
+
     override init(frame: NSRect) {
-        super.init(frame: frame)
+        super.init(frame: NSRect(x: 0, y: 0, width: 880, height: 620))
         setupLayout()
     }
 
@@ -73,62 +77,38 @@ class ModernSplitContainerView: NSView {
     private func setupLayout() {
         wantsLayer = true
 
-        // Background visual effect (Glassmorphic Vibrancy)
-        let bgBlur = NSVisualEffectView()
-        bgBlur.material = .sidebar
-        bgBlur.blendingMode = .behindWindow
-        bgBlur.state = .active
-        bgBlur.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(bgBlur)
-
         sidebarView.translatesAutoresizingMaskIntoConstraints = false
         sidebarView.onSelectTab = { [weak self] tabIndex in
             self?.switchTab(index: tabIndex)
         }
         addSubview(sidebarView)
 
-        // Separator line
         let separator = NSBox()
         separator.boxType = .separator
         separator.translatesAutoresizingMaskIntoConstraints = false
         addSubview(separator)
 
-        // Detail Container with slightly softer background
-        let detailBg = NSVisualEffectView()
-        detailBg.material = .contentBackground
-        detailBg.blendingMode = .withinWindow
-        detailBg.state = .active
-        detailBg.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(detailBg)
-
         detailContainer.translatesAutoresizingMaskIntoConstraints = false
-        detailBg.addSubview(detailContainer)
+        addSubview(detailContainer)
 
         NSLayoutConstraint.activate([
-            bgBlur.topAnchor.constraint(equalTo: topAnchor),
-            bgBlur.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bgBlur.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bgBlur.bottomAnchor.constraint(equalTo: bottomAnchor),
-
             sidebarView.topAnchor.constraint(equalTo: topAnchor),
             sidebarView.leadingAnchor.constraint(equalTo: leadingAnchor),
             sidebarView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            sidebarView.widthAnchor.constraint(equalToConstant: 230),
+            sidebarView.widthAnchor.constraint(equalToConstant: 220),
 
             separator.topAnchor.constraint(equalTo: topAnchor),
             separator.bottomAnchor.constraint(equalTo: bottomAnchor),
             separator.leadingAnchor.constraint(equalTo: sidebarView.trailingAnchor),
             separator.widthAnchor.constraint(equalToConstant: 1),
 
-            detailBg.topAnchor.constraint(equalTo: topAnchor),
-            detailBg.leadingAnchor.constraint(equalTo: separator.trailingAnchor),
-            detailBg.trailingAnchor.constraint(equalTo: trailingAnchor),
-            detailBg.bottomAnchor.constraint(equalTo: bottomAnchor),
+            detailContainer.topAnchor.constraint(equalTo: topAnchor),
+            detailContainer.leadingAnchor.constraint(equalTo: separator.trailingAnchor),
+            detailContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            detailContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            detailContainer.topAnchor.constraint(equalTo: detailBg.topAnchor),
-            detailContainer.leadingAnchor.constraint(equalTo: detailBg.leadingAnchor),
-            detailContainer.trailingAnchor.constraint(equalTo: detailBg.trailingAnchor),
-            detailContainer.bottomAnchor.constraint(equalTo: detailBg.bottomAnchor),
+            self.widthAnchor.constraint(greaterThanOrEqualToConstant: 860),
+            self.heightAnchor.constraint(greaterThanOrEqualToConstant: 600),
         ])
 
         switchTab(index: 0)
@@ -464,11 +444,12 @@ class ModernGettingStartedView: NSView {
             doc.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             doc.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
             doc.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
+            doc.widthAnchor.constraint(equalTo: scrollView.contentView.widthAnchor),
             doc.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 36),
 
-            stack.topAnchor.constraint(equalTo: doc.topAnchor, constant: 40),
-            stack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 32),
-            stack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -32),
+            stack.topAnchor.constraint(equalTo: doc.topAnchor, constant: 28),
+            stack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 28),
+            stack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -28),
         ])
 
         // Section Title
@@ -717,11 +698,12 @@ class ModernAvroLayoutView: NSView {
             doc.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             doc.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
             doc.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
+            doc.widthAnchor.constraint(equalTo: scrollView.contentView.widthAnchor),
             doc.bottomAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 36),
 
             contentStack.topAnchor.constraint(equalTo: doc.topAnchor),
-            contentStack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 32),
-            contentStack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -32),
+            contentStack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 28),
+            contentStack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -28),
         ])
 
         buildLayoutSections()
