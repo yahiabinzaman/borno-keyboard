@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>বর্ণ</string>
+	<string>Borno</string>
 	<key>CFBundleExecutable</key>
 	<string>Borno</string>
 	<key>CFBundleIconFile</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>বর্ণ</string>
+	<string>Borno</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,6 +32,8 @@
 	<true/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>TISIntendedLanguage</key>
+	<string>bn</string>
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Beng</string>
