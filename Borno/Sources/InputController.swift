@@ -775,6 +775,41 @@ class BornoInputController: IMKInputController {
         }
         return result
     }
+
+    // MARK: - Input Method Menu
+
+    override func menu() -> NSMenu! {
+        let menu = NSMenu(title: "Borno")
+
+        let titleItem = NSMenuItem(title: "Borno (বর্ণ) v0.2.5", action: nil, keyEquivalent: "")
+        titleItem.isEnabled = false
+        menu.addItem(titleItem)
+        menu.addItem(NSMenuItem.separator())
+
+        let startItem = NSMenuItem(title: "Getting Started...", action: #selector(openWelcomeWindow), keyEquivalent: "")
+        startItem.target = self
+        menu.addItem(startItem)
+
+        let layoutItem = NSMenuItem(title: "Avro Layout Reference...", action: #selector(openWelcomeWindow), keyEquivalent: "")
+        layoutItem.target = self
+        menu.addItem(layoutItem)
+
+        let settingsItem = NSMenuItem(title: "Settings & Preferences...", action: #selector(openWelcomeWindow), keyEquivalent: "")
+        settingsItem.target = self
+        menu.addItem(settingsItem)
+
+        menu.addItem(NSMenuItem.separator())
+
+        let aboutItem = NSMenuItem(title: "About Borno", action: #selector(openWelcomeWindow), keyEquivalent: "")
+        aboutItem.target = self
+        menu.addItem(aboutItem)
+
+        return menu
+    }
+
+    @objc private func openWelcomeWindow() {
+        WelcomeWindowController.shared.showWindow()
+    }
 }
 
 extension Notification.Name {

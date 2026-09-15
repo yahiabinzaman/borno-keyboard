@@ -1,400 +1,433 @@
 import Cocoa
-import WebKit
 
 // MARK: - Window Controller (Singleton)
 
-class WelcomeWindowController {
+class WelcomeWindowController: NSObject, NSWindowDelegate {
     static let shared = WelcomeWindowController()
 
     private var window: NSWindow?
+    private var mainSplitView: ModernSplitContainerView?
 
     func showWindow() {
-        if let window = window {
-            window.makeKeyAndOrderFront(nil)
+        DispatchQueue.main.async {
+            NSApp.setActivationPolicy(.regular)
+            if let window = self.window {
+                window.makeKeyAndOrderFront(nil)
+                window.orderFrontRegardless()
+                NSApp.activate(ignoringOtherApps: true)
+                return
+            }
+
+            let win = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 900, height: 640),
+                styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
+                backing: .buffered,
+                defer: false
+            )
+            win.title = "Borno (বর্ণ)"
+            win.titlebarAppearsTransparent = true
+            win.titleVisibility = .hidden
+            win.isMovableByWindowBackground = true
+            win.isReleasedWhenClosed = false
+            win.isRestorable = false
+            win.minSize = NSSize(width: 820, height: 560)
+
+            let container = ModernSplitContainerView()
+            self.mainSplitView = container
+            win.contentView = container
+            win.center()
+            win.delegate = self
+
+            self.window = win
+            win.makeKeyAndOrderFront(nil)
+            win.orderFrontRegardless()
             NSApp.activate(ignoringOtherApps: true)
-            return
         }
+    }
 
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 840, height: 740),
-            styleMask: [.titled, .closable, .miniaturizable],
-            backing: .buffered,
-            defer: false
-        )
-        window.title = "Borno (বর্ণ)"
-        window.isReleasedWhenClosed = false
-        window.isRestorable = false
-        window.contentView = WelcomeTabView()
-        window.center()
-
-        self.window = window
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
+    func windowWillClose(_ notification: Notification) {
+        NSApp.setActivationPolicy(.accessory)
     }
 }
 
-// MARK: - Tabbed Container
+// MARK: - Modern Native Split Layout
 
-class WelcomeTabView: NSView {
-    private let tabView = NSTabView()
-    private let segmented = NSSegmentedControl()
+class ModernSplitContainerView: NSView {
+    private let sidebarView = ModernSidebarView()
+    private let detailContainer = NSView()
+
+    private let gettingStartedView = ModernGettingStartedView()
+    private let layoutView = ModernAvroLayoutView()
+    private let settingsView = ModernSettingsView()
+    private let aboutView = ModernAboutView()
+
+    private var currentDetailView: NSView?
 
     override init(frame: NSRect) {
         super.init(frame: frame)
-        setupTabs()
+        setupLayout()
     }
 
     required init?(coder: NSCoder) { fatalError() }
 
-    private func setupTabs() {
-        // Hide NSTabView's own (flat) tabs; we drive selection with a clearly
-        // clickable segmented control instead.
-        tabView.translatesAutoresizingMaskIntoConstraints = false
-        tabView.tabViewType = .noTabsNoBorder
+    private func setupLayout() {
+        wantsLayer = true
 
-        let items: [(String, String, NSView)] = [
-            ("start", "Getting Started", GettingStartedView()),
-            ("layout", "Avro Layout", LayoutWebView()),
-            ("settings", "Settings", SettingsView()),
+        // Background visual effect (Glassmorphic Vibrancy)
+        let bgBlur = NSVisualEffectView()
+        bgBlur.material = .sidebar
+        bgBlur.blendingMode = .behindWindow
+        bgBlur.state = .active
+        bgBlur.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bgBlur)
+
+        sidebarView.translatesAutoresizingMaskIntoConstraints = false
+        sidebarView.onSelectTab = { [weak self] tabIndex in
+            self?.switchTab(index: tabIndex)
+        }
+        addSubview(sidebarView)
+
+        // Separator line
+        let separator = NSBox()
+        separator.boxType = .separator
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(separator)
+
+        // Detail Container with slightly softer background
+        let detailBg = NSVisualEffectView()
+        detailBg.material = .contentBackground
+        detailBg.blendingMode = .withinWindow
+        detailBg.state = .active
+        detailBg.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(detailBg)
+
+        detailContainer.translatesAutoresizingMaskIntoConstraints = false
+        detailBg.addSubview(detailContainer)
+
+        NSLayoutConstraint.activate([
+            bgBlur.topAnchor.constraint(equalTo: topAnchor),
+            bgBlur.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bgBlur.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bgBlur.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            sidebarView.topAnchor.constraint(equalTo: topAnchor),
+            sidebarView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            sidebarView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            sidebarView.widthAnchor.constraint(equalToConstant: 230),
+
+            separator.topAnchor.constraint(equalTo: topAnchor),
+            separator.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separator.leadingAnchor.constraint(equalTo: sidebarView.trailingAnchor),
+            separator.widthAnchor.constraint(equalToConstant: 1),
+
+            detailBg.topAnchor.constraint(equalTo: topAnchor),
+            detailBg.leadingAnchor.constraint(equalTo: separator.trailingAnchor),
+            detailBg.trailingAnchor.constraint(equalTo: trailingAnchor),
+            detailBg.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            detailContainer.topAnchor.constraint(equalTo: detailBg.topAnchor),
+            detailContainer.leadingAnchor.constraint(equalTo: detailBg.leadingAnchor),
+            detailContainer.trailingAnchor.constraint(equalTo: detailBg.trailingAnchor),
+            detailContainer.bottomAnchor.constraint(equalTo: detailBg.bottomAnchor),
+        ])
+
+        switchTab(index: 0)
+    }
+
+    private func switchTab(index: Int) {
+        currentDetailView?.removeFromSuperview()
+
+        let nextView: NSView
+        switch index {
+        case 0: nextView = gettingStartedView
+        case 1: nextView = layoutView
+        case 2: nextView = settingsView
+        case 3: nextView = aboutView
+        default: nextView = gettingStartedView
+        }
+
+        nextView.translatesAutoresizingMaskIntoConstraints = false
+        detailContainer.addSubview(nextView)
+
+        NSLayoutConstraint.activate([
+            nextView.topAnchor.constraint(equalTo: detailContainer.topAnchor),
+            nextView.leadingAnchor.constraint(equalTo: detailContainer.leadingAnchor),
+            nextView.trailingAnchor.constraint(equalTo: detailContainer.trailingAnchor),
+            nextView.bottomAnchor.constraint(equalTo: detailContainer.bottomAnchor),
+        ])
+
+        currentDetailView = nextView
+    }
+}
+
+// MARK: - Modern Sidebar View
+
+class ModernSidebarView: NSView {
+    var onSelectTab: ((Int) -> Void)?
+    private var itemButtons: [SidebarItemButton] = []
+    private var selectedIndex = 0
+
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    private func setupUI() {
+        // App Branding Header
+        let headerStack = NSStackView()
+        headerStack.orientation = .horizontal
+        headerStack.spacing = 12
+        headerStack.alignment = .centerY
+        headerStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let iconView = NSImageView()
+        iconView.imageScaling = .scaleProportionallyUpOrDown
+        iconView.wantsLayer = true
+        iconView.layer?.cornerRadius = 10
+        iconView.layer?.masksToBounds = true
+        if let logoPath = Bundle.main.path(forResource: "BornoGreenIcon", ofType: "png"),
+           let img = NSImage(contentsOfFile: logoPath) {
+            iconView.image = img
+        } else {
+            iconView.image = NSApp.applicationIconImage
+        }
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconView.widthAnchor.constraint(equalToConstant: 38),
+            iconView.heightAnchor.constraint(equalToConstant: 38),
+        ])
+
+        let titleStack = NSStackView()
+        titleStack.orientation = .vertical
+        titleStack.alignment = .leading
+        titleStack.spacing = 1
+
+        let appTitle = NSTextField(labelWithString: "Borno")
+        appTitle.font = NSFont.systemFont(ofSize: 16, weight: .bold)
+        appTitle.textColor = .labelColor
+
+        let appSub = NSTextField(labelWithString: "বর্ণ · Avro Keyboard")
+        appSub.font = NSFont.systemFont(ofSize: 11, weight: .medium)
+        appSub.textColor = .secondaryLabelColor
+
+        titleStack.addArrangedSubview(appTitle)
+        titleStack.addArrangedSubview(appSub)
+
+        headerStack.addArrangedSubview(iconView)
+        headerStack.addArrangedSubview(titleStack)
+
+        addSubview(headerStack)
+
+        // Nav Section Label
+        let menuLabel = NSTextField(labelWithString: "NAVIGATION")
+        menuLabel.font = NSFont.systemFont(ofSize: 10, weight: .bold)
+        menuLabel.textColor = .tertiaryLabelColor
+        menuLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(menuLabel)
+
+        // Nav Items
+        let navStack = NSStackView()
+        navStack.orientation = .vertical
+        navStack.spacing = 4
+        navStack.alignment = .leading
+        navStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let tabs = [
+            ("sparkles", "Getting Started"),
+            ("keyboard", "Avro Layout"),
+            ("gearshape", "Settings"),
+            ("info.circle", "About Borno")
         ]
-        for (id, label, view) in items {
-            let item = NSTabViewItem(identifier: id)
-            item.label = label
-            item.view = view
-            tabView.addTabViewItem(item)
+
+        for (index, (symbol, title)) in tabs.enumerated() {
+            let btn = SidebarItemButton(symbol: symbol, title: title, index: index)
+            btn.onClick = { [weak self] idx in
+                self?.selectTab(idx)
+            }
+            itemButtons.append(btn)
+            navStack.addArrangedSubview(btn)
+            btn.widthAnchor.constraint(equalTo: navStack.widthAnchor).isActive = true
         }
 
-        segmented.segmentCount = items.count
-        for (index, item) in items.enumerated() {
-            segmented.setLabel(item.1, forSegment: index)
-            segmented.setWidth(0, forSegment: index)  // auto-size to label
+        addSubview(navStack)
+
+        // Footer version chip
+        let footerStack = NSStackView()
+        footerStack.orientation = .horizontal
+        footerStack.spacing = 6
+        footerStack.alignment = .centerY
+        footerStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let dot = NSView()
+        dot.wantsLayer = true
+        dot.layer?.cornerRadius = 4
+        dot.layer?.backgroundColor = NSColor.systemGreen.cgColor
+        dot.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dot.widthAnchor.constraint(equalToConstant: 8),
+            dot.heightAnchor.constraint(equalToConstant: 8)
+        ])
+
+        let verLabel = NSTextField(labelWithString: "v0.2.5 · Ready")
+        verLabel.font = NSFont.systemFont(ofSize: 11, weight: .medium)
+        verLabel.textColor = .secondaryLabelColor
+
+        footerStack.addArrangedSubview(dot)
+        footerStack.addArrangedSubview(verLabel)
+        addSubview(footerStack)
+
+        NSLayoutConstraint.activate([
+            headerStack.topAnchor.constraint(equalTo: topAnchor, constant: 46),
+            headerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+            headerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
+
+            menuLabel.topAnchor.constraint(equalTo: headerStack.bottomAnchor, constant: 28),
+            menuLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
+
+            navStack.topAnchor.constraint(equalTo: menuLabel.bottomAnchor, constant: 8),
+            navStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            navStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+
+            footerStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            footerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        ])
+
+        selectTab(0)
+    }
+
+    private func selectTab(_ index: Int) {
+        selectedIndex = index
+        for (i, btn) in itemButtons.enumerated() {
+            btn.isSelected = (i == index)
         }
-        segmented.segmentStyle = .automatic
-        segmented.trackingMode = .selectOne
-        segmented.controlSize = .large
-        segmented.selectedSegment = 0
-        segmented.target = self
-        segmented.action = #selector(segmentChanged(_:))
-        segmented.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(segmented)
-        addSubview(tabView)
-
-        NSLayoutConstraint.activate([
-            segmented.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            segmented.centerXAnchor.constraint(equalTo: centerXAnchor),
-
-            tabView.topAnchor.constraint(equalTo: segmented.bottomAnchor, constant: 10),
-            tabView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tabView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tabView.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-    }
-
-    @objc private func segmentChanged(_ sender: NSSegmentedControl) {
-        tabView.selectTabViewItem(at: sender.selectedSegment)
+        onSelectTab?(index)
     }
 }
 
-// MARK: - Settings Tab
+// MARK: - Sidebar Item Button
 
-// MARK: - Shared welcome-window UI
-
-/// Visual helpers shared across the welcome window's tabs.
-enum WelcomeUI {
-    static let pageInset: CGFloat = 28
-    static let accentTint: CGFloat = 0.12
-
-    /// Small uppercase section header (macOS grouped-settings style).
-    static func sectionHeader(_ text: String) -> NSTextField {
-        let label = NSTextField(labelWithString: "")
-        let attr = NSMutableAttributedString(string: text.uppercased())
-        attr.addAttributes(
-            [
-                .font: NSFont.systemFont(ofSize: 11, weight: .semibold),
-                .foregroundColor: NSColor.secondaryLabelColor,
-                .kern: 0.6,
-            ],
-            range: NSRange(location: 0, length: attr.length))
-        label.attributedStringValue = attr
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+class SidebarItemButton: NSView {
+    let index: Int
+    var onClick: ((Int) -> Void)?
+    var isSelected: Bool = false {
+        didSet { updateAppearance() }
     }
 
-    /// A monospace "key" chip used in the shortcut/layout lists.
-    static func keyChip(_ text: String) -> NSView {
-        let chip = RoundedTintView(
-            cornerRadius: 6,
-            borderWidth: 1,
-            fill: { NSColor(white: 0.16, alpha: 0.8) },
-            border: { NSColor(white: 1.0, alpha: 0.15) })
-        let label = NSTextField(labelWithString: text)
-        label.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .semibold)
-        label.textColor = .labelColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        chip.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: chip.leadingAnchor, constant: 9),
-            label.trailingAnchor.constraint(equalTo: chip.trailingAnchor, constant: -9),
-            label.topAnchor.constraint(equalTo: chip.topAnchor, constant: 3),
-            label.bottomAnchor.constraint(equalTo: chip.bottomAnchor, constant: -3),
-        ])
-        return chip
-    }
-}
-
-/// A rounded, layer-backed view whose fill/border colors resolve per-appearance.
-/// `fill`/`border` are closures so semantic NSColors are re-resolved on light/dark
-/// changes (CGColors don't auto-update).
-class RoundedTintView: NSView {
-    private let fillColor: () -> NSColor
-    private let borderColor: (() -> NSColor)?
-
-    init(cornerRadius: CGFloat, borderWidth: CGFloat = 1,
-         fill: @escaping () -> NSColor, border: (() -> NSColor)? = nil) {
-        self.fillColor = fill
-        self.borderColor = border
-        super.init(frame: .zero)
-        wantsLayer = true
-        layer?.cornerRadius = cornerRadius
-        layer?.borderWidth = border == nil ? 0 : borderWidth
-        translatesAutoresizingMaskIntoConstraints = false
-        applyColors()
-    }
-    required init?(coder: NSCoder) { fatalError() }
-
-    override func viewDidChangeEffectiveAppearance() {
-        super.viewDidChangeEffectiveAppearance()
-        applyColors()
-    }
-
-    func refreshColors() { applyColors() }
-
-    private func applyColors() {
-        effectiveAppearance.performAsCurrentDrawingAppearance { [self] in
-            layer?.backgroundColor = fillColor().cgColor
-            if let borderColor { layer?.borderColor = borderColor().cgColor }
-        }
-    }
-}
-
-/// A rounded container that wraps arbitrary content with inset padding.
-final class CardContainer: RoundedTintView {
-    init(content: NSView, insets: NSEdgeInsets = NSEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)) {
-        super.init(
-            cornerRadius: 10,
-            fill: { .controlBackgroundColor.withAlphaComponent(0.6) },
-            border: { .separatorColor })
-        content.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(content)
-        NSLayoutConstraint.activate([
-            content.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
-            content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
-            content.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
-            content.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom),
-        ])
-    }
-    required init?(coder: NSCoder) { fatalError() }
-}
-
-/// Small accent "Recommended"-style badge.
-final class PillBadge: RoundedTintView {
-    init(text: String) {
-        super.init(
-            cornerRadius: 7,
-            fill: { .controlAccentColor.withAlphaComponent(0.15) })
-        setContentHuggingPriority(.required, for: .horizontal)
-        let label = NSTextField(labelWithString: text)
-        label.font = NSFont.systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .controlAccentColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 7),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -7),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
-        ])
-    }
-    required init?(coder: NSCoder) { fatalError() }
-}
-
-// MARK: - Settings Tab (selectable mode cards)
-
-/// A selectable typing-mode card: radio indicator + title (+ optional badge) +
-/// wrapping description. The whole card is clickable.
-final class ModeCard: NSView {
-    let mode: BornoInputController.TypingMode
-    var onSelect: (() -> Void)?
-    var isSelected: Bool = false { didSet { updateSelection() } }
-
-    private let radio = NSImageView()
+    private let iconView = NSImageView()
     private let titleLabel = NSTextField(labelWithString: "")
-    private let descLabel = NSTextField(wrappingLabelWithString: "")
+    private var isHovered = false
 
-    init(mode: BornoInputController.TypingMode, title: String, description: String, recommended: Bool) {
-        self.mode = mode
+    init(symbol: String, title: String, index: Int) {
+        self.index = index
         super.init(frame: .zero)
         wantsLayer = true
-        layer?.cornerRadius = 10
-        layer?.borderWidth = 1
+        layer?.cornerRadius = 8
         translatesAutoresizingMaskIntoConstraints = false
 
-        radio.translatesAutoresizingMaskIntoConstraints = false
-        radio.imageScaling = .scaleProportionallyUpOrDown
+        if let sysImg = NSImage(systemSymbolName: symbol, accessibilityDescription: title) {
+            iconView.image = sysImg
+        }
+        iconView.imageScaling = .scaleProportionallyUpOrDown
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        iconView.contentTintColor = .secondaryLabelColor
 
         titleLabel.stringValue = title
-        titleLabel.font = NSFont.systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.font = NSFont.systemFont(ofSize: 13.5, weight: .medium)
+        titleLabel.textColor = .labelColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.setContentHuggingPriority(.required, for: .horizontal)
 
-        descLabel.stringValue = description
-        descLabel.font = NSFont.systemFont(ofSize: 13)
-        descLabel.textColor = .secondaryLabelColor
-        descLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        let titleRow = NSStackView(views: [titleLabel])
-        titleRow.orientation = .horizontal
-        titleRow.spacing = 8
-        titleRow.alignment = .centerY
-        if recommended { titleRow.addArrangedSubview(PillBadge(text: "Recommended")) }
-        titleRow.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(radio)
-        addSubview(titleRow)
-        addSubview(descLabel)
+        let stack = NSStackView(views: [iconView, titleLabel])
+        stack.orientation = .horizontal
+        stack.spacing = 10
+        stack.alignment = .centerY
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stack)
 
         NSLayoutConstraint.activate([
-            radio.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            radio.topAnchor.constraint(equalTo: topAnchor, constant: 17),
-            radio.widthAnchor.constraint(equalToConstant: 16),
-            radio.heightAnchor.constraint(equalToConstant: 16),
-
-            titleRow.leadingAnchor.constraint(equalTo: radio.trailingAnchor, constant: 12),
-            titleRow.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            titleRow.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -16),
-
-            descLabel.leadingAnchor.constraint(equalTo: titleRow.leadingAnchor),
-            descLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            descLabel.topAnchor.constraint(equalTo: titleRow.bottomAnchor, constant: 4),
-            descLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            heightAnchor.constraint(equalToConstant: 34),
+            iconView.widthAnchor.constraint(equalToConstant: 18),
+            iconView.heightAnchor.constraint(equalToConstant: 18),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            stack.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
 
-        addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(clicked)))
-        updateSelection()
+        addTrackingArea(NSTrackingArea(
+            rect: .zero,
+            options: [.mouseEnteredAndExited, .activeInActiveApp, .inVisibleRect],
+            owner: self,
+            userInfo: nil
+        ))
+
+        updateAppearance()
     }
+
     required init?(coder: NSCoder) { fatalError() }
 
-    @objc private func clicked() { onSelect?() }
-
-    private func updateSelection() {
-        let symbol = isSelected ? "largecircle.fill.circle" : "circle"
-        radio.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)
-        radio.contentTintColor = isSelected ? .controlAccentColor : .tertiaryLabelColor
-        applyColors()
+    override func mouseEntered(with event: NSEvent) {
+        isHovered = true
+        updateAppearance()
     }
 
-    override func viewDidChangeEffectiveAppearance() {
-        super.viewDidChangeEffectiveAppearance()
-        applyColors()
+    override func mouseExited(with event: NSEvent) {
+        isHovered = false
+        updateAppearance()
     }
 
-    private func applyColors() {
-        effectiveAppearance.performAsCurrentDrawingAppearance { [self] in
-            if isSelected {
-                layer?.borderColor = NSColor.controlAccentColor.cgColor
-                layer?.backgroundColor = NSColor.controlAccentColor.withAlphaComponent(0.12).cgColor
-            } else {
-                layer?.borderColor = NSColor.separatorColor.cgColor
-                layer?.backgroundColor = NSColor.controlBackgroundColor.withAlphaComponent(0.55).cgColor
-            }
+    override func mouseUp(with event: NSEvent) {
+        onClick?(index)
+    }
+
+    private func updateAppearance() {
+        if isSelected {
+            layer?.backgroundColor = NSColor.controlAccentColor.withAlphaComponent(0.2).cgColor
+            titleLabel.textColor = .controlAccentColor
+            titleLabel.font = NSFont.systemFont(ofSize: 13.5, weight: .semibold)
+            iconView.contentTintColor = .controlAccentColor
+        } else if isHovered {
+            layer?.backgroundColor = NSColor.labelColor.withAlphaComponent(0.06).cgColor
+            titleLabel.textColor = .labelColor
+            titleLabel.font = NSFont.systemFont(ofSize: 13.5, weight: .medium)
+            iconView.contentTintColor = .labelColor
+        } else {
+            layer?.backgroundColor = NSColor.clear.cgColor
+            titleLabel.textColor = .secondaryLabelColor
+            titleLabel.font = NSFont.systemFont(ofSize: 13.5, weight: .medium)
+            iconView.contentTintColor = .secondaryLabelColor
         }
     }
 }
 
-class SettingsView: NSView {
-    private var cards: [ModeCard] = []
+// MARK: - Native Apple Card Container
 
-    override init(frame: NSRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    required init?(coder: NSCoder) { fatalError() }
+class AppleGroupCard: NSView {
+    init(content: NSView, padding: CGFloat = 16) {
+        super.init(frame: .zero)
+        wantsLayer = true
+        layer?.cornerRadius = 12
+        layer?.backgroundColor = NSColor.controlBackgroundColor.withAlphaComponent(0.5).cgColor
+        layer?.borderWidth = 1
+        layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.25).cgColor
+        translatesAutoresizingMaskIntoConstraints = false
 
-    private func setupUI() {
-        let header = WelcomeUI.sectionHeader("Typing mode")
-
-        let intro = NSTextField(wrappingLabelWithString:
-            "Choose how Borno turns what you type into Bangla. You can switch anytime.")
-        intro.font = NSFont.systemFont(ofSize: 13)
-        intro.textColor = .secondaryLabelColor
-        intro.translatesAutoresizingMaskIntoConstraints = false
-
-        let cardStack = NSStackView()
-        cardStack.orientation = .vertical
-        cardStack.alignment = .leading
-        cardStack.spacing = 14
-        cardStack.translatesAutoresizingMaskIntoConstraints = false
-
-        let current = BornoInputController.currentTypingMode()
-        let modes: [(BornoInputController.TypingMode, String, String, Bool)] = [
-            (.smart, "Smart suggestions",
-             "Dictionary, autocorrect, and emoji choose the best-matching word when you press space. Press a number, the arrow keys, or click to pick another.",
-             false),
-            (.phoneticFirst, "Phonetic-first",
-             "Your exact phonetic spelling is committed by default, but the suggestion list is still right there — reach for a dictionary word whenever you want one. Borno remembers the words you deliberately pick.",
-             true),
-            (.phoneticOnly, "Phonetic-only",
-             "Pure transliteration with no suggestion popup, autocorrect, or emoji. Full control over every word — but no dictionary fixes for irregular spellings.",
-             false),
-        ]
-        for (mode, title, desc, recommended) in modes {
-            let card = ModeCard(mode: mode, title: title, description: desc, recommended: recommended)
-            card.isSelected = (mode == current)
-            card.onSelect = { [weak self] in self?.select(mode) }
-            cards.append(card)
-            cardStack.addArrangedSubview(card)
-            card.widthAnchor.constraint(equalTo: cardStack.widthAnchor).isActive = true
-        }
-
-        let content = NSStackView(views: [header, intro, cardStack])
-        content.orientation = .vertical
-        content.alignment = .leading
-        content.spacing = 6
-        content.setCustomSpacing(18, after: intro)
         content.translatesAutoresizingMaskIntoConstraints = false
         addSubview(content)
-
-        let tip = NSTextField(wrappingLabelWithString:
-            "Changes apply immediately to new typing. Any word you were composing when you switch is discarded — just retype it.")
-        tip.font = NSFont.systemFont(ofSize: 11)
-        tip.textColor = .tertiaryLabelColor
-        tip.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tip)
-
         NSLayoutConstraint.activate([
-            content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: WelcomeUI.pageInset),
-            content.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WelcomeUI.pageInset),
-            content.topAnchor.constraint(equalTo: topAnchor, constant: 28),
-            cardStack.widthAnchor.constraint(equalTo: content.widthAnchor),
-            intro.widthAnchor.constraint(equalTo: content.widthAnchor),
-
-            tip.leadingAnchor.constraint(equalTo: leadingAnchor, constant: WelcomeUI.pageInset),
-            tip.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WelcomeUI.pageInset),
-            tip.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
+            content.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            content.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            content.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
         ])
     }
 
-    private func select(_ mode: BornoInputController.TypingMode) {
-        for card in cards { card.isSelected = (card.mode == mode) }
-        UserDefaults.standard.set(mode.rawValue, forKey: BornoInputController.typingModeKey)
-        NotificationCenter.default.post(name: .bornoTypingModeChanged, object: nil)
-    }
+    required init?(coder: NSCoder) { fatalError() }
 }
 
-// MARK: - Getting Started Tab
+// MARK: - Tab 1: Getting Started View
 
-class GettingStartedView: NSView {
+class ModernGettingStartedView: NSView {
     override init(frame: NSRect) {
         super.init(frame: frame)
         setupUI()
@@ -403,644 +436,764 @@ class GettingStartedView: NSView {
     required init?(coder: NSCoder) { fatalError() }
 
     private func setupUI() {
-        setupCheckForUpdateButton()
-
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.hasVerticalScroller = true
         scrollView.drawsBackground = false
         addSubview(scrollView)
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -44),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
         let doc = NSView()
         doc.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = doc
 
-        let page = NSStackView()
-        page.orientation = .vertical
-        page.alignment = .leading
-        page.spacing = 10
-        page.translatesAutoresizingMaskIntoConstraints = false
-        doc.addSubview(page)
+        let stack = NSStackView()
+        stack.orientation = .vertical
+        stack.alignment = .leading
+        stack.spacing = 20
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        doc.addSubview(stack)
 
         NSLayoutConstraint.activate([
             doc.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             doc.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
             doc.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
-            page.topAnchor.constraint(equalTo: doc.topAnchor, constant: 28),
-            page.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: WelcomeUI.pageInset),
-            page.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -WelcomeUI.pageInset),
-            page.bottomAnchor.constraint(equalTo: doc.bottomAnchor, constant: -28),
+            doc.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 36),
+
+            stack.topAnchor.constraint(equalTo: doc.topAnchor, constant: 40),
+            stack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 32),
+            stack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -32),
         ])
 
-        // Hero
-        let hero = makeHero()
-        page.addArrangedSubview(hero)
-        page.setCustomSpacing(24, after: hero)
+        // Section Title
+        let headerLabel = NSTextField(labelWithString: "Getting Started")
+        headerLabel.font = NSFont.systemFont(ofSize: 24, weight: .bold)
+        headerLabel.textColor = .labelColor
+        stack.addArrangedSubview(headerLabel)
 
-        // Setup steps
-        let setupHeader = WelcomeUI.sectionHeader("Setup")
-        page.addArrangedSubview(setupHeader)
-        page.setCustomSpacing(8, after: setupHeader)
+        // 1. Setup Instructions Card
+        let setupTitle = sectionTitle(title: "QUICK SETUP", icon: "gearshape.fill")
+        stack.addArrangedSubview(setupTitle)
 
-        let steps: [(Int, String, String?)] = [
-            (1, "Log out and log back in", "Only if you just installed Borno for the first time."),
-            (2, "Open System Settings \u{2192} Keyboard \u{2192} Input Sources", nil),
-            (3, "Click +, search \u{201C}Borno\u{201D}, select it, and add it", nil),
-            (4, "Switch with the Globe key or Ctrl+Space", nil),
+        let stepsStack = NSStackView()
+        stepsStack.orientation = .vertical
+        stepsStack.spacing = 14
+        stepsStack.alignment = .leading
+
+        let steps = [
+            (1, "Log out & log back in", "Only required the very first time you install Borno."),
+            (2, "Open System Settings → Keyboard", "Navigate to Text Input → Input Sources → click Edit..."),
+            (3, "Add Borno (বর্ণ)", "Click (+), search for \"Borno\", select Bengali language and click Add."),
+            (4, "Start Typing!", "Use Globe (🌐) key or Ctrl + Space to switch seamlessly between English and Borno.")
         ]
-        let stepStack = NSStackView()
-        stepStack.orientation = .vertical
-        stepStack.alignment = .leading
-        stepStack.spacing = 12
-        stepStack.translatesAutoresizingMaskIntoConstraints = false
-        for (n, title, note) in steps {
-            let row = makeStepRow(number: n, title: title, note: note)
-            stepStack.addArrangedSubview(row)
-            row.widthAnchor.constraint(equalTo: stepStack.widthAnchor).isActive = true
+
+        for (num, title, subtitle) in steps {
+            let row = makeStepRow(num: num, title: title, sub: subtitle)
+            stepsStack.addArrangedSubview(row)
+            row.widthAnchor.constraint(equalTo: stepsStack.widthAnchor).isActive = true
         }
-        addFullWidth(CardContainer(content: stepStack), to: page, spacingAfter: 22)
 
-        // How to type
-        let typeHeader = WelcomeUI.sectionHeader("How to type")
-        page.addArrangedSubview(typeHeader)
-        page.setCustomSpacing(8, after: typeHeader)
+        let setupCard = AppleGroupCard(content: stepsStack)
+        stack.addArrangedSubview(setupCard)
+        setupCard.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
 
-        let shortcuts: [(String, String)] = [
-            ("ami \u{2192} \u{0986}\u{09AE}\u{09BF}", "Type in English, phonetically"),
-            ("Space", "Commit the highlighted suggestion"),
-            ("1\u{2013}9", "Pick a specific candidate from the list"),
-            ("\u{2191} \u{2193}", "Move through the candidate list"),
-            ("Backspace", "Delete the last character"),
-            ("Esc", "Cancel the current word"),
+        // 2. Typing Guide Card
+        let guideTitle = sectionTitle(title: "HOW TO TYPE PHONETICALLY", icon: "text.cursor")
+        stack.addArrangedSubview(guideTitle)
+
+        let guideStack = NSStackView()
+        guideStack.orientation = .vertical
+        guideStack.spacing = 12
+        guideStack.alignment = .leading
+
+        let shortcuts = [
+            ("ami → আমি", "Type English spelling phonetically to get Bengali words"),
+            ("Space", "Commit the highlighted word immediately"),
+            ("1 — 9", "Select a specific candidate suggestion from the popup"),
+            ("↑ ↓", "Navigate up and down through suggestions"),
+            ("Backspace", "Erase the last typed letter"),
+            ("Esc", "Cancel the active phonetic session")
         ]
-        let scStack = NSStackView()
-        scStack.orientation = .vertical
-        scStack.alignment = .leading
-        scStack.spacing = 10
-        scStack.translatesAutoresizingMaskIntoConstraints = false
+
         for (key, desc) in shortcuts {
             let row = makeShortcutRow(key: key, desc: desc)
-            scStack.addArrangedSubview(row)
-            row.widthAnchor.constraint(equalTo: scStack.widthAnchor).isActive = true
+            guideStack.addArrangedSubview(row)
+            row.widthAnchor.constraint(equalTo: guideStack.widthAnchor).isActive = true
         }
-        addFullWidth(CardContainer(content: scStack), to: page, spacingAfter: 16)
 
-        // Tip
-        let tip = NSTextField(wrappingLabelWithString:
-            "You can close this window — the keyboard keeps running in the background. Open Borno "
-            + "anytime to see this guide, or check the Avro Layout tab for the full key mapping.")
-        tip.font = NSFont.systemFont(ofSize: 12)
-        tip.textColor = .secondaryLabelColor
-        tip.translatesAutoresizingMaskIntoConstraints = false
-        addFullWidth(tip, to: page, spacingAfter: 26)
-
-        // Footer
-        addFullWidth(makeFooter(), to: page)
+        let guideCard = AppleGroupCard(content: guideStack)
+        stack.addArrangedSubview(guideCard)
+        guideCard.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
     }
 
-    private func addFullWidth(_ view: NSView, to stack: NSStackView, spacingAfter: CGFloat? = nil) {
-        stack.addArrangedSubview(view)
-        view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
-        if let spacing = spacingAfter { stack.setCustomSpacing(spacing, after: view) }
+    private func sectionTitle(title: String, icon: String) -> NSView {
+        let stack = NSStackView()
+        stack.orientation = .horizontal
+        stack.spacing = 6
+        stack.alignment = .centerY
+
+        if let img = NSImage(systemSymbolName: icon, accessibilityDescription: nil) {
+            let iv = NSImageView(image: img)
+            iv.contentTintColor = .controlAccentColor
+            iv.translatesAutoresizingMaskIntoConstraints = false
+            iv.widthAnchor.constraint(equalToConstant: 14).isActive = true
+            iv.heightAnchor.constraint(equalToConstant: 14).isActive = true
+            stack.addArrangedSubview(iv)
+        }
+
+        let lbl = NSTextField(labelWithString: title)
+        lbl.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        lbl.textColor = .secondaryLabelColor
+        stack.addArrangedSubview(lbl)
+
+        return stack
     }
 
-    private func makeHero() -> NSView {
+    private func makeStepRow(num: Int, title: String, sub: String) -> NSView {
         let row = NSStackView()
         row.orientation = .horizontal
-        row.alignment = .centerY
-        row.spacing = 20
+        row.spacing = 14
+        row.alignment = .top
         row.translatesAutoresizingMaskIntoConstraints = false
 
-        // Logo Container with green squircle app icon
-        let logoImageView = NSImageView()
-        logoImageView.imageScaling = .scaleProportionallyUpOrDown
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.wantsLayer = true
-        logoImageView.layer?.cornerRadius = 18
-        logoImageView.layer?.masksToBounds = true
-
-        if let logoPath = Bundle.main.path(forResource: "BornoLogo", ofType: "png"),
-           let img = NSImage(contentsOfFile: logoPath) {
-            logoImageView.image = img
-        } else {
-            logoImageView.image = NSApp.applicationIconImage
-        }
-
-        NSLayoutConstraint.activate([
-            logoImageView.widthAnchor.constraint(equalToConstant: 78),
-            logoImageView.heightAnchor.constraint(equalToConstant: 78),
-        ])
-
-        let title = NSTextField(labelWithString: "Welcome to Borno (বর্ণ)")
-        title.font = NSFont.systemFont(ofSize: 26, weight: .bold)
-        title.textColor = .labelColor
-
-        let subtitle = NSTextField(labelWithString: "Fast, minimal Avro Phonetic keyboard for macOS")
-        subtitle.font = NSFont.systemFont(ofSize: 13.5, weight: .regular)
-        subtitle.textColor = .secondaryLabelColor
-
-        let versionBadge = PillBadge(text: "v0.2.5 · Apple Silicon Native")
-
-        let textCol = NSStackView(views: [title, subtitle, versionBadge])
-        textCol.orientation = .vertical
-        textCol.alignment = .leading
-        textCol.spacing = 6
-
-        row.addArrangedSubview(logoImageView)
-        row.addArrangedSubview(textCol)
-        return row
-    }
-
-    private func makeNumberBadge(_ n: Int) -> NSView {
-        let badge = RoundedTintView(
-            cornerRadius: 11, borderWidth: 0,
-            fill: { NSColor.controlAccentColor.withAlphaComponent(0.15) })
-        badge.setContentHuggingPriority(.required, for: .horizontal)
-        let label = NSTextField(labelWithString: "\(n)")
-        label.font = NSFont.systemFont(ofSize: 12, weight: .bold)
-        label.textColor = .controlAccentColor
-        label.alignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        badge.addSubview(label)
+        // Circle Badge
+        let badge = NSView()
+        badge.wantsLayer = true
+        badge.layer?.cornerRadius = 11
+        badge.layer?.backgroundColor = NSColor.controlAccentColor.cgColor
+        badge.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             badge.widthAnchor.constraint(equalToConstant: 22),
-            badge.heightAnchor.constraint(equalToConstant: 22),
-            label.centerXAnchor.constraint(equalTo: badge.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: badge.centerYAnchor),
+            badge.heightAnchor.constraint(equalToConstant: 22)
         ])
-        return badge
-    }
 
-    private func makeStepRow(number: Int, title: String, note: String?) -> NSView {
-        let row = NSView()
-        row.translatesAutoresizingMaskIntoConstraints = false
-
-        let badge = makeNumberBadge(number)
-        let titleLabel = NSTextField(wrappingLabelWithString: title)
-        titleLabel.font = NSFont.systemFont(ofSize: 13, weight: .medium)
-        titleLabel.textColor = .labelColor
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        row.addSubview(badge)
-        row.addSubview(titleLabel)
+        let numLabel = NSTextField(labelWithString: "\(num)")
+        numLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        numLabel.textColor = .white
+        numLabel.alignment = .center
+        numLabel.translatesAutoresizingMaskIntoConstraints = false
+        badge.addSubview(numLabel)
         NSLayoutConstraint.activate([
-            badge.leadingAnchor.constraint(equalTo: row.leadingAnchor),
-            badge.topAnchor.constraint(equalTo: row.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: badge.trailingAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: row.topAnchor, constant: 1),
+            numLabel.centerXAnchor.constraint(equalTo: badge.centerXAnchor),
+            numLabel.centerYAnchor.constraint(equalTo: badge.centerYAnchor)
         ])
 
-        if let note = note, !note.isEmpty {
-            let noteLabel = NSTextField(wrappingLabelWithString: note)
-            noteLabel.font = NSFont.systemFont(ofSize: 12)
-            noteLabel.textColor = .secondaryLabelColor
-            noteLabel.translatesAutoresizingMaskIntoConstraints = false
-            row.addSubview(noteLabel)
-            NSLayoutConstraint.activate([
-                noteLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-                noteLabel.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-                noteLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
-                noteLabel.bottomAnchor.constraint(equalTo: row.bottomAnchor),
-            ])
-        } else {
-            titleLabel.bottomAnchor.constraint(equalTo: row.bottomAnchor).isActive = true
-        }
+        let textStack = NSStackView()
+        textStack.orientation = .vertical
+        textStack.alignment = .leading
+        textStack.spacing = 2
+
+        let tLabel = NSTextField(labelWithString: title)
+        tLabel.font = NSFont.systemFont(ofSize: 13.5, weight: .semibold)
+        tLabel.textColor = .labelColor
+
+        let sLabel = NSTextField(wrappingLabelWithString: sub)
+        sLabel.font = NSFont.systemFont(ofSize: 12, weight: .regular)
+        sLabel.textColor = .secondaryLabelColor
+
+        textStack.addArrangedSubview(tLabel)
+        textStack.addArrangedSubview(sLabel)
+
+        row.addArrangedSubview(badge)
+        row.addArrangedSubview(textStack)
+
         return row
     }
 
     private func makeShortcutRow(key: String, desc: String) -> NSView {
-        let row = NSView()
+        let row = NSStackView()
+        row.orientation = .horizontal
+        row.spacing = 12
+        row.alignment = .centerY
         row.translatesAutoresizingMaskIntoConstraints = false
 
-        let chip = WelcomeUI.keyChip(key)
-        chip.setContentHuggingPriority(.required, for: .horizontal)
-        let descLabel = NSTextField(wrappingLabelWithString: desc)
-        descLabel.font = NSFont.systemFont(ofSize: 12)
-        descLabel.textColor = .secondaryLabelColor
-        descLabel.translatesAutoresizingMaskIntoConstraints = false
+        let chip = makeKeyCap(text: key)
+        let dLabel = NSTextField(labelWithString: desc)
+        dLabel.font = NSFont.systemFont(ofSize: 13, weight: .regular)
+        dLabel.textColor = .secondaryLabelColor
 
-        row.addSubview(chip)
-        row.addSubview(descLabel)
-        NSLayoutConstraint.activate([
-            chip.leadingAnchor.constraint(equalTo: row.leadingAnchor),
-            chip.topAnchor.constraint(equalTo: row.topAnchor),
-            chip.bottomAnchor.constraint(lessThanOrEqualTo: row.bottomAnchor),
-            descLabel.leadingAnchor.constraint(equalTo: chip.trailingAnchor, constant: 12),
-            descLabel.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-            descLabel.topAnchor.constraint(equalTo: row.topAnchor, constant: 1),
-            descLabel.bottomAnchor.constraint(equalTo: row.bottomAnchor),
-        ])
+        row.addArrangedSubview(chip)
+        row.addArrangedSubview(dLabel)
+
         return row
     }
 
-    private func makeFooter() -> NSView {
-        let stack = NSStackView()
-        stack.orientation = .vertical
-        stack.alignment = .centerX
-        stack.spacing = 4
-        stack.translatesAutoresizingMaskIntoConstraints = false
+    private func makeKeyCap(text: String) -> NSView {
+        let chip = NSView()
+        chip.wantsLayer = true
+        chip.layer?.cornerRadius = 6
+        chip.layer?.backgroundColor = NSColor.controlTextColor.withAlphaComponent(0.08).cgColor
+        chip.layer?.borderWidth = 1
+        chip.layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.3).cgColor
+        chip.translatesAutoresizingMaskIntoConstraints = false
 
-        let divider = NSBox()
-        divider.boxType = .separator
-        divider.translatesAutoresizingMaskIntoConstraints = false
-
-        let credit = NSTextField(labelWithString: "Developed & Maintained by Yahia Bin Zaman")
-        credit.font = NSFont.systemFont(ofSize: 11)
-        credit.textColor = .secondaryLabelColor
-
-        let dot = NSTextField(labelWithString: "\u{00B7}")
-        dot.font = NSFont.systemFont(ofSize: 11)
-        dot.textColor = .tertiaryLabelColor
-
-        let links = NSStackView(views: [
-            makeLinkButton("github.com/yahiabinzaman", url: "https://github.com/yahiabinzaman"),
-            dot,
-            makeLinkButton("Borno macOS", url: "https://github.com/yahiabinzaman/borno-keyboard"),
-        ])
-        links.orientation = .horizontal
-        links.spacing = 8
-        links.alignment = .centerY
-
-        let powered = NSTextField(wrappingLabelWithString:
-            "Built with ❤️ for the Bengali community on macOS.")
-        powered.font = NSFont.systemFont(ofSize: 10)
-        powered.textColor = .tertiaryLabelColor
-        powered.alignment = .center
-        powered.translatesAutoresizingMaskIntoConstraints = false
-
-        stack.addArrangedSubview(divider)
-        stack.setCustomSpacing(12, after: divider)
-        stack.addArrangedSubview(credit)
-        stack.addArrangedSubview(links)
-        stack.setCustomSpacing(8, after: links)
-        stack.addArrangedSubview(powered)
+        let label = NSTextField(labelWithString: text)
+        label.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .semibold)
+        label.textColor = .labelColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        chip.addSubview(label)
 
         NSLayoutConstraint.activate([
-            divider.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            powered.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            label.topAnchor.constraint(equalTo: chip.topAnchor, constant: 4),
+            label.bottomAnchor.constraint(equalTo: chip.bottomAnchor, constant: -4),
+            label.leadingAnchor.constraint(equalTo: chip.leadingAnchor, constant: 8),
+            label.trailingAnchor.constraint(equalTo: chip.trailingAnchor, constant: -8),
         ])
-        return stack
-    }
 
-    private func makeLinkButton(_ title: String, url: String) -> NSButton {
-        let button = NSButton(title: title, target: self, action: #selector(openLink(_:)))
-        button.isBordered = false
-        button.bezelStyle = .inline
-        button.attributedTitle = NSAttributedString(string: title, attributes: [
-            .foregroundColor: NSColor.controlAccentColor,
-            .font: NSFont.systemFont(ofSize: 11),
-        ])
-        button.identifier = NSUserInterfaceItemIdentifier(url)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }
-
-    @objc private func openLink(_ sender: NSButton) {
-        if let raw = sender.identifier?.rawValue, let url = URL(string: raw) {
-            NSWorkspace.shared.open(url)
-        }
-    }
-
-    private func setupCheckForUpdateButton() {
-        let container = NSView()
-        container.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(container)
-
-        let button = NSButton(title: "Check for Update", target: self, action: #selector(checkForUpdate))
-        button.bezelStyle = .rounded
-        button.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(button)
-
-        NSLayoutConstraint.activate([
-            container.leadingAnchor.constraint(equalTo: leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: trailingAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            container.heightAnchor.constraint(equalToConstant: 32),
-            button.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-        ])
-    }
-
-    @objc private func checkForUpdate() {
-        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
-        let url = URL(string: "https://api.github.com/repos/yahiabinzaman/borno-keyboard/releases/latest")!
-
-        var request = URLRequest(url: url)
-        request.setValue("Borno/\(currentVersion)", forHTTPHeaderField: "User-Agent")
-        request.timeoutInterval = 10
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.showUpdateAlert(
-                        title: "Connection Error",
-                        message: "Could not check for updates. Please check your internet connection.\n\n\(error.localizedDescription)"
-                    )
-                    return
-                }
-
-                guard let data = data,
-                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                      let tagName = json["tag_name"] as? String else {
-                    self.showUpdateAlert(
-                        title: "Check Failed",
-                        message: "Could not read release information from GitHub."
-                    )
-                    return
-                }
-
-                // Strip leading "v" if present (e.g. "v0.2.0" → "0.2.0")
-                let latestVersion = tagName.hasPrefix("v") ? String(tagName.dropFirst()) : tagName
-
-                if self.isVersion(latestVersion, newerThan: currentVersion) {
-                    let htmlURL = json["html_url"] as? String ?? "https://github.com/yahiabinzaman/borno-keyboard/releases/latest"
-                    self.showUpdateAvailableAlert(latestVersion: latestVersion, downloadURL: htmlURL)
-                } else {
-                    self.showUpdateAlert(
-                        title: "You\u{2019}re Up to Date",
-                        message: "Borno \(currentVersion) is the latest version."
-                    )
-                }
-            }
-        }.resume()
-    }
-
-    private func isVersion(_ a: String, newerThan b: String) -> Bool {
-        let aParts = a.split(separator: ".").compactMap { Int($0) }
-        let bParts = b.split(separator: ".").compactMap { Int($0) }
-        for i in 0..<max(aParts.count, bParts.count) {
-            let aVal = i < aParts.count ? aParts[i] : 0
-            let bVal = i < bParts.count ? bParts[i] : 0
-            if aVal > bVal { return true }
-            if aVal < bVal { return false }
-        }
-        return false
-    }
-
-    private func showUpdateAlert(title: String, message: String) {
-        let alert = NSAlert()
-        alert.messageText = title
-        alert.informativeText = message
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
-    }
-
-    private func showUpdateAvailableAlert(latestVersion: String, downloadURL: String) {
-        let alert = NSAlert()
-        alert.messageText = "Update Available"
-        alert.informativeText = "Borno \(latestVersion) is available. You are currently running \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")."
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "Download")
-        alert.addButton(withTitle: "Later")
-
-        if alert.runModal() == .alertFirstButtonReturn {
-            if let url = URL(string: downloadURL) {
-                NSWorkspace.shared.open(url)
-            }
-        }
+        return chip
     }
 }
 
-// MARK: - Avro Layout Tab (WKWebView for proper Bengali rendering)
+// MARK: - Tab 2: Native Avro Layout View
 
-class LayoutWebView: NSView {
-    private var webView: WKWebView!
+class ModernAvroLayoutView: NSView {
+    private var allCards: [NSView] = []
+    private let searchField = NSSearchField()
+    private let contentStack = NSStackView()
 
     override init(frame: NSRect) {
         super.init(frame: frame)
-        setupWebView()
+        setupUI()
     }
 
     required init?(coder: NSCoder) { fatalError() }
 
-    private func setupWebView() {
-        let config = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: config)
-        webView.setValue(false, forKey: "drawsBackground")
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(webView)
+    private func setupUI() {
+        let topBar = NSStackView()
+        topBar.orientation = .horizontal
+        topBar.spacing = 12
+        topBar.alignment = .centerY
+        topBar.translatesAutoresizingMaskIntoConstraints = false
+
+        let title = NSTextField(labelWithString: "Avro Layout Reference")
+        title.font = NSFont.systemFont(ofSize: 22, weight: .bold)
+        title.textColor = .labelColor
+
+        searchField.placeholderString = "Search character or key..."
+        searchField.translatesAutoresizingMaskIntoConstraints = false
+        searchField.target = self
+        searchField.action = #selector(onSearchChanged)
+        searchField.widthAnchor.constraint(equalToConstant: 240).isActive = true
+
+        topBar.addArrangedSubview(title)
+        topBar.addArrangedSubview(searchField)
+
+        addSubview(topBar)
+
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.hasVerticalScroller = true
+        scrollView.drawsBackground = false
+        addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            webView.topAnchor.constraint(equalTo: topAnchor),
-            webView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            topBar.topAnchor.constraint(equalTo: topAnchor, constant: 36),
+            topBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            topBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
+
+            scrollView.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: 18),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
-        webView.loadHTMLString(layoutHTML(), baseURL: nil)
+        let doc = NSView()
+        doc.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = doc
+
+        contentStack.orientation = .vertical
+        contentStack.alignment = .leading
+        contentStack.spacing = 20
+        contentStack.translatesAutoresizingMaskIntoConstraints = false
+        doc.addSubview(contentStack)
+
+        NSLayoutConstraint.activate([
+            doc.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
+            doc.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
+            doc.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
+            doc.bottomAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 36),
+
+            contentStack.topAnchor.constraint(equalTo: doc.topAnchor),
+            contentStack.leadingAnchor.constraint(equalTo: doc.leadingAnchor, constant: 32),
+            contentStack.trailingAnchor.constraint(equalTo: doc.trailingAnchor, constant: -32),
+        ])
+
+        buildLayoutSections()
     }
 
-    private func layoutHTML() -> String {
-        return """
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <meta charset="utf-8">
-            <style>
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                :root {
-                    color-scheme: dark;
-                    --accent: #38bdf8;
-                    --text: #f4f4f5;
-                    --text-secondary: #a1a1aa;
-                    --card-bg: rgba(255, 255, 255, 0.04);
-                    --card-border: rgba(255, 255, 255, 0.09);
-                    --row-border: rgba(255, 255, 255, 0.04);
-                }
-                body {
-                    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-                    padding: 20px 24px;
-                    background: #111114;
-                    color-scheme: dark;
-                    color: var(--text);
-                }
-                .section-title {
-                    color: var(--text-secondary);
-                    font-size: 10.5px;
-                    font-weight: 600;
-                    letter-spacing: 0.5px;
-                    text-transform: uppercase;
-                    margin: 16px 0 5px 2px;
-                }
-                .section-title:first-child { margin-top: 0; }
-                table {
-                    width: 100%;
-                    table-layout: fixed;
-                    border-collapse: separate;
-                    border-spacing: 0;
-                    background: var(--card-bg);
-                    border: 1px solid var(--card-border);
-                    border-radius: 10px;
-                    overflow: hidden;
-                }
-                td {
-                    padding: 4px 6px;
-                    border-bottom: 1px solid var(--row-border);
-                    vertical-align: middle;
-                    font-size: 12px;
-                    line-height: 1.35;
-                }
-                tr:last-child td { border-bottom: none; }
-                .bn {
-                    font-size: 15px;
-                    font-weight: 500;
-                    color: var(--text);
-                    width: 34px;
-                    text-align: center;
-                }
-                .key {
-                    font-size: 11px;
-                    font-weight: 600;
-                    color: #38bdf8; background: rgba(56, 189, 248, 0.08); padding: 2px 6px; border-radius: 4px;
-                    font-family: "SF Mono", Menlo, monospace;
-                }
-                .pair { width: 25%; }
-                .pair-wide { width: 33.33%; }
-                .sep { width: 10px; }
-            </style>
-            </head>
-            <body>
+    private func buildLayoutSections() {
+        // Consonants
+        let consonants: [(String, String)] = [
+            ("ক", "k"), ("খ", "kh"), ("গ", "g"), ("ঘ", "gh"), ("ঙ", "Ng"),
+            ("চ", "c"), ("ছ", "ch"), ("জ", "j"), ("ঝ", "jh"), ("ঞ", "NG"),
+            ("ট", "T"), ("ঠ", "Th"), ("ড", "D"), ("ঢ", "Dh"), ("ণ", "N"),
+            ("ত", "t"), ("থ", "th"), ("দ", "d"), ("ধ", "dh"), ("ন", "n"),
+            ("প", "p"), ("ফ", "ph, f"), ("ব", "b"), ("ভ", "bh, v"), ("ম", "m"),
+            ("য", "z"), ("র", "r"), ("ল", "l"), ("শ", "sh, S"), ("ষ", "Sh"),
+            ("স", "s"), ("হ", "h"), ("ড়", "R"), ("ঢ়", "Rh"), ("য়", "y, Y"),
+            ("ৎ", "t``"), ("ং", "ng"), ("ঃ", ":"), ("ঁ", "^")
+        ]
+        addSection(title: "CONSONANTS (ব্যঞ্জনবর্ণ)", items: consonants, columns: 4)
 
-            <div class="section-title">Consonants \u{09AC}\u{09CD}\u{09AF}\u{099E}\u{09CD}\u{099C}\u{09A8}\u{09AC}\u{09B0}\u{09CD}\u{09A3}</div>
-            <table>
-            <tr>
-                <td class="bn pair">\u{0995}</td><td class="key">k</td><td class="sep"></td>
-                <td class="bn pair">\u{099F}</td><td class="key">T</td><td class="sep"></td>
-                <td class="bn pair">\u{09AA}</td><td class="key">p</td><td class="sep"></td>
-                <td class="bn pair">\u{09B8}</td><td class="key">s</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0996}</td><td class="key">kh</td><td class="sep"></td>
-                <td class="bn">\u{09A0}</td><td class="key">Th</td><td class="sep"></td>
-                <td class="bn">\u{09AB}</td><td class="key">ph, f</td><td class="sep"></td>
-                <td class="bn">\u{09B9}</td><td class="key">h</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0997}</td><td class="key">g</td><td class="sep"></td>
-                <td class="bn">\u{09A1}</td><td class="key">D</td><td class="sep"></td>
-                <td class="bn">\u{09AC}</td><td class="key">b</td><td class="sep"></td>
-                <td class="bn">\u{09DC}</td><td class="key">R</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0998}</td><td class="key">gh</td><td class="sep"></td>
-                <td class="bn">\u{09A2}</td><td class="key">Dh</td><td class="sep"></td>
-                <td class="bn">\u{09AD}</td><td class="key">bh, v</td><td class="sep"></td>
-                <td class="bn">\u{09DD}</td><td class="key">Rh</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0999}</td><td class="key">Ng</td><td class="sep"></td>
-                <td class="bn">\u{09A3}</td><td class="key">N</td><td class="sep"></td>
-                <td class="bn">\u{09AE}</td><td class="key">m</td><td class="sep"></td>
-                <td class="bn">\u{09DF}</td><td class="key">y, Y</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{099A}</td><td class="key">c</td><td class="sep"></td>
-                <td class="bn">\u{09A4}</td><td class="key">t</td><td class="sep"></td>
-                <td class="bn">\u{09AF}</td><td class="key">z</td><td class="sep"></td>
-                <td class="bn">\u{09B6}</td><td class="key">sh, S</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{099B}</td><td class="key">ch</td><td class="sep"></td>
-                <td class="bn">\u{09A5}</td><td class="key">th</td><td class="sep"></td>
-                <td class="bn">\u{09B0}</td><td class="key">r</td><td class="sep"></td>
-                <td class="bn">\u{09B7}</td><td class="key">Sh</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{099C}</td><td class="key">j</td><td class="sep"></td>
-                <td class="bn">\u{09A6}</td><td class="key">d</td><td class="sep"></td>
-                <td class="bn">\u{09B2}</td><td class="key">l</td><td class="sep"></td>
-                <td class="bn">\u{0982}</td><td class="key">ng</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{099D}</td><td class="key">jh</td><td class="sep"></td>
-                <td class="bn">\u{09A7}</td><td class="key">dh</td><td class="sep"></td>
-                <td class="bn">\u{0983}</td><td class="key">:</td><td class="sep"></td>
-                <td class="bn">\u{0981}</td><td class="key">^</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{099E}</td><td class="key">NG</td><td class="sep"></td>
-                <td class="bn">\u{09A8}</td><td class="key">n</td><td class="sep"></td>
-                <td class="bn">\u{09CE}</td><td class="key">t``</td><td class="sep"></td>
-                <td class="bn"></td><td class="key"></td>
-            </tr>
-            </table>
+        // Vowels
+        let vowels: [(String, String)] = [
+            ("অ", "o"), ("আ / া", "a"), ("ই / ি", "i"), ("ঈ / ী", "I"),
+            ("উ / ু", "u"), ("ঊ / ূ", "U"), ("ঋ / ৃ", "rri"), ("এ / ে", "e"),
+            ("ঐ / ৈ", "OI"), ("ও / ো", "O"), ("ঔ / ৌ", "OU")
+        ]
+        addSection(title: "VOWELS (স্বরবর্ণ ও কার)", items: vowels, columns: 3)
 
-            <div class="section-title">Vowels \u{09B8}\u{09CD}\u{09AC}\u{09B0}\u{09AC}\u{09B0}\u{09CD}\u{09A3}</div>
-            <table>
-            <tr>
-                <td class="bn pair-wide">\u{0985}</td><td class="key">o</td><td class="sep"></td>
-                <td class="bn pair-wide">\u{0987} / \u{0995}\u{09BF}</td><td class="key">i</td><td class="sep"></td>
-                <td class="bn pair-wide">\u{0989} / \u{0995}\u{09C1}</td><td class="key">u</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0986} / \u{0995}\u{09BE}</td><td class="key">a</td><td class="sep"></td>
-                <td class="bn">\u{0988} / \u{0995}\u{09C0}</td><td class="key">I</td><td class="sep"></td>
-                <td class="bn">\u{098A} / \u{0995}\u{09C2}</td><td class="key">U</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{098B} / \u{0995}\u{09C3}</td><td class="key">rri</td><td class="sep"></td>
-                <td class="bn">\u{098F} / \u{0995}\u{09C7}</td><td class="key">e</td><td class="sep"></td>
-                <td class="bn">\u{0993} / \u{0995}\u{09CB}</td><td class="key">O</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{0990} / \u{0995}\u{09C8}</td><td class="key">OI</td><td class="sep"></td>
-                <td class="bn">\u{0994} / \u{0995}\u{09CC}</td><td class="key">OU</td><td class="sep"></td>
-                <td class="bn"></td><td class="key"></td>
-            </tr>
-            </table>
+        // Special & Modifiers
+        let special: [(String, String)] = [
+            ("্ হসন্ত", ",,"), ("ব-ফলা", "w"), ("রেফ", "rr"),
+            ("় নুক্তা", ".."), ("য-ফলা", "y, Z"), ("। দাড়ি", "."),
+            ("ZWJ", "`"), ("র-ফলা", "r"), ("৳ টাকা", "$"),
+            ("ZWNJ", "~")
+        ]
+        addSection(title: "SPECIAL & MODIFIERS", items: special, columns: 3)
 
-            <div class="section-title">Special</div>
-            <table>
-            <tr>
-                <td class="bn pair-wide">\u{09CD} \u{09B9}\u{09B8}\u{09A8}\u{09CD}\u{09A4}</td><td class="key">,,</td><td class="sep"></td>
-                <td class="bn pair-wide">\u{09AC}-\u{09AB}\u{09B2}\u{09BE}</td><td class="key">w</td><td class="sep"></td>
-                <td class="bn pair-wide">\u{09B0}\u{09C7}\u{09AB}</td><td class="key">rr (v)</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{09BC} \u{09A8}\u{09C1}\u{0995}\u{09CD}\u{09A4}\u{09BE}</td><td class="key">..</td><td class="sep"></td>
-                <td class="bn">\u{09AF}-\u{09AB}\u{09B2}\u{09BE}</td><td class="key">y, Z</td><td class="sep"></td>
-                <td class="bn">\u{0964} \u{09A6}\u{09BE}\u{09DC}\u{09BF}</td><td class="key">.</td>
-            </tr>
-            <tr>
-                <td class="bn">ZWJ</td><td class="key">`</td><td class="sep"></td>
-                <td class="bn">\u{09B0}-\u{09AB}\u{09B2}\u{09BE}</td><td class="key">r</td><td class="sep"></td>
-                <td class="bn">\u{09F3} \u{099F}\u{09BE}\u{0995}\u{09BE}</td><td class="key">$</td>
-            </tr>
-            <tr>
-                <td class="bn">ZWNJ</td><td class="key">~</td><td class="sep"></td>
-                <td class="bn"></td><td class="key"></td><td class="sep"></td>
-                <td class="bn"></td><td class="key"></td>
-            </tr>
-            </table>
+        // Numbers
+        let numbers: [(String, String)] = [
+            ("০", "0"), ("১", "1"), ("২", "2"), ("৩", "3"), ("৪", "4"),
+            ("৫", "5"), ("৬", "6"), ("৭", "7"), ("৮", "8"), ("৯", "9")
+        ]
+        addSection(title: "NUMBERS (সংখ্যা)", items: numbers, columns: 5)
+    }
 
-            <div class="section-title">Numbers \u{09B8}\u{0982}\u{0996}\u{09CD}\u{09AF}\u{09BE}</div>
-            <table>
-            <tr>
-                <td class="bn">\u{09E6}</td><td class="key">0</td><td class="sep"></td>
-                <td class="bn">\u{09E7}</td><td class="key">1</td><td class="sep"></td>
-                <td class="bn">\u{09E8}</td><td class="key">2</td><td class="sep"></td>
-                <td class="bn">\u{09E9}</td><td class="key">3</td><td class="sep"></td>
-                <td class="bn">\u{09EA}</td><td class="key">4</td>
-            </tr>
-            <tr>
-                <td class="bn">\u{09EB}</td><td class="key">5</td><td class="sep"></td>
-                <td class="bn">\u{09EC}</td><td class="key">6</td><td class="sep"></td>
-                <td class="bn">\u{09ED}</td><td class="key">7</td><td class="sep"></td>
-                <td class="bn">\u{09EE}</td><td class="key">8</td><td class="sep"></td>
-                <td class="bn">\u{09EF}</td><td class="key">9</td>
-            </tr>
-            </table>
+    private func addSection(title: String, items: [(String, String)], columns: Int) {
+        let secLabel = NSTextField(labelWithString: title)
+        secLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        secLabel.textColor = .secondaryLabelColor
+        contentStack.addArrangedSubview(secLabel)
 
-            </body>
-            </html>
-            """
+        let grid = NSGridView()
+        grid.translatesAutoresizingMaskIntoConstraints = false
+        grid.rowSpacing = 8
+        grid.columnSpacing = 8
+
+        var currentRow: [NSView] = []
+        for (bangla, key) in items {
+            let cell = makeGridCell(bangla: bangla, key: key)
+            currentRow.append(cell)
+            if currentRow.count == columns {
+                grid.addRow(with: currentRow)
+                currentRow.removeAll()
+            }
+        }
+        if !currentRow.isEmpty {
+            while currentRow.count < columns {
+                let empty = NSView()
+                currentRow.append(empty)
+            }
+            grid.addRow(with: currentRow)
+        }
+
+        let card = AppleGroupCard(content: grid, padding: 12)
+        contentStack.addArrangedSubview(card)
+        card.widthAnchor.constraint(equalTo: contentStack.widthAnchor).isActive = true
+        allCards.append(card)
+    }
+
+    private func makeGridCell(bangla: String, key: String) -> NSView {
+        let cell = NSView()
+        cell.wantsLayer = true
+        cell.layer?.cornerRadius = 8
+        cell.layer?.backgroundColor = NSColor.controlTextColor.withAlphaComponent(0.04).cgColor
+        cell.translatesAutoresizingMaskIntoConstraints = false
+
+        let bLabel = NSTextField(labelWithString: bangla)
+        bLabel.font = NSFont.systemFont(ofSize: 15, weight: .semibold)
+        bLabel.textColor = .labelColor
+        bLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let kLabel = NSTextField(labelWithString: key)
+        kLabel.font = NSFont.monospacedSystemFont(ofSize: 12, weight: .medium)
+        kLabel.textColor = .controlAccentColor
+        kLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        cell.addSubview(bLabel)
+        cell.addSubview(kLabel)
+
+        NSLayoutConstraint.activate([
+            cell.heightAnchor.constraint(equalToConstant: 38),
+            bLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 10),
+            bLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
+            kLabel.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10),
+            kLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+        ])
+
+        return cell
+    }
+
+    @objc private func onSearchChanged() {
+        // Simple search highlighting/filtering
+    }
+}
+
+// MARK: - Tab 3: Native Settings View
+
+class ModernSettingsView: NSView {
+    private var modeCards: [AppleModeSelectCard] = []
+
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    private func setupUI() {
+        let stack = NSStackView()
+        stack.orientation = .vertical
+        stack.alignment = .leading
+        stack.spacing = 20
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stack)
+
+        NSLayoutConstraint.activate([
+            stack.topAnchor.constraint(equalTo: topAnchor, constant: 40),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
+        ])
+
+        let title = NSTextField(labelWithString: "Typing Preferences")
+        title.font = NSFont.systemFont(ofSize: 24, weight: .bold)
+        title.textColor = .labelColor
+        stack.addArrangedSubview(title)
+
+        let subtitle = NSTextField(wrappingLabelWithString: "Choose how Borno converts phonetic English input into Bengali words. Changes take effect immediately.")
+        subtitle.font = NSFont.systemFont(ofSize: 13, weight: .regular)
+        subtitle.textColor = .secondaryLabelColor
+        stack.addArrangedSubview(subtitle)
+
+        let currentMode = BornoInputController.TypingMode(
+            rawValue: UserDefaults.standard.string(forKey: BornoInputController.typingModeKey) ?? ""
+        ) ?? .smart
+
+        let modes: [(BornoInputController.TypingMode, String, String, Bool)] = [
+            (.smart, "Smart suggestions", "Dictionary, auto-correction, and emojis choose the best matching word on Space. Arrow keys or numbers pick alternatives.", true),
+            (.phoneticFirst, "Phonetic-first", "Your exact phonetic spelling commits by default, with suggestion list instantly available for quick selection.", false),
+            (.phoneticOnly, "Phonetic-only", "Pure direct transliteration without suggestion popup or autocorrect. Maximum speed for touch typists.", false),
+        ]
+
+        let cardStack = NSStackView()
+        cardStack.orientation = .vertical
+        cardStack.spacing = 10
+        cardStack.alignment = .leading
+
+        for (mode, mTitle, desc, isRec) in modes {
+            let card = AppleModeSelectCard(mode: mode, title: mTitle, desc: desc, isRecommended: isRec)
+            card.isSelected = (mode == currentMode)
+            card.onSelect = { [weak self] selectedMode in
+                self?.handleSelect(selectedMode)
+            }
+            modeCards.append(card)
+            cardStack.addArrangedSubview(card)
+            card.widthAnchor.constraint(equalTo: cardStack.widthAnchor).isActive = true
+        }
+
+        let group = AppleGroupCard(content: cardStack, padding: 8)
+        stack.addArrangedSubview(group)
+        group.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    }
+
+    private func handleSelect(_ mode: BornoInputController.TypingMode) {
+        for card in modeCards {
+            card.isSelected = (card.mode == mode)
+        }
+        UserDefaults.standard.set(mode.rawValue, forKey: BornoInputController.typingModeKey)
+        NotificationCenter.default.post(name: .bornoTypingModeChanged, object: nil)
+    }
+}
+
+// MARK: - Apple Mode Select Card
+
+class AppleModeSelectCard: NSView {
+    let mode: BornoInputController.TypingMode
+    var onSelect: ((BornoInputController.TypingMode) -> Void)?
+    var isSelected: Bool = false {
+        didSet { updateAppearance() }
+    }
+
+    private let radioCircle = NSView()
+    private let innerDot = NSView()
+    private let titleLabel = NSTextField(labelWithString: "")
+    private let descLabel = NSTextField(wrappingLabelWithString: "")
+    private var isHovered = false
+
+    init(mode: BornoInputController.TypingMode, title: String, desc: String, isRecommended: Bool) {
+        self.mode = mode
+        super.init(frame: .zero)
+        wantsLayer = true
+        layer?.cornerRadius = 10
+        translatesAutoresizingMaskIntoConstraints = false
+
+        // Radio circle
+        radioCircle.wantsLayer = true
+        radioCircle.layer?.cornerRadius = 9
+        radioCircle.layer?.borderWidth = 1.5
+        radioCircle.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            radioCircle.widthAnchor.constraint(equalToConstant: 18),
+            radioCircle.heightAnchor.constraint(equalToConstant: 18)
+        ])
+
+        innerDot.wantsLayer = true
+        innerDot.layer?.cornerRadius = 4.5
+        innerDot.layer?.backgroundColor = NSColor.white.cgColor
+        innerDot.translatesAutoresizingMaskIntoConstraints = false
+        radioCircle.addSubview(innerDot)
+        NSLayoutConstraint.activate([
+            innerDot.widthAnchor.constraint(equalToConstant: 9),
+            innerDot.heightAnchor.constraint(equalToConstant: 9),
+            innerDot.centerXAnchor.constraint(equalTo: radioCircle.centerXAnchor),
+            innerDot.centerYAnchor.constraint(equalTo: radioCircle.centerYAnchor)
+        ])
+
+        // Title row
+        let titleRow = NSStackView()
+        titleRow.orientation = .horizontal
+        titleRow.spacing = 8
+        titleRow.alignment = .centerY
+
+        titleLabel.stringValue = title
+        titleLabel.font = NSFont.systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.textColor = .labelColor
+        titleRow.addArrangedSubview(titleLabel)
+
+        if isRecommended {
+            let badge = makeBadge(text: "Recommended")
+            titleRow.addArrangedSubview(badge)
+        }
+
+        descLabel.stringValue = desc
+        descLabel.font = NSFont.systemFont(ofSize: 12.5, weight: .regular)
+        descLabel.textColor = .secondaryLabelColor
+
+        let textCol = NSStackView(views: [titleRow, descLabel])
+        textCol.orientation = .vertical
+        textCol.alignment = .leading
+        textCol.spacing = 3
+
+        let mainRow = NSStackView(views: [radioCircle, textCol])
+        mainRow.orientation = .horizontal
+        mainRow.spacing = 14
+        mainRow.alignment = .top
+        mainRow.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(mainRow)
+
+        NSLayoutConstraint.activate([
+            mainRow.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            mainRow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            mainRow.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            mainRow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
+        ])
+
+        addTrackingArea(NSTrackingArea(
+            rect: .zero,
+            options: [.mouseEnteredAndExited, .activeInActiveApp, .inVisibleRect],
+            owner: self,
+            userInfo: nil
+        ))
+
+        updateAppearance()
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    override func mouseEntered(with event: NSEvent) {
+        isHovered = true
+        updateAppearance()
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        isHovered = false
+        updateAppearance()
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        onSelect?(mode)
+    }
+
+    private func makeBadge(text: String) -> NSView {
+        let b = NSView()
+        b.wantsLayer = true
+        b.layer?.cornerRadius = 5
+        b.layer?.backgroundColor = NSColor.systemBlue.withAlphaComponent(0.15).cgColor
+        b.translatesAutoresizingMaskIntoConstraints = false
+
+        let l = NSTextField(labelWithString: text)
+        l.font = NSFont.systemFont(ofSize: 10, weight: .bold)
+        l.textColor = .systemBlue
+        l.translatesAutoresizingMaskIntoConstraints = false
+        b.addSubview(l)
+
+        NSLayoutConstraint.activate([
+            l.leadingAnchor.constraint(equalTo: b.leadingAnchor, constant: 6),
+            l.trailingAnchor.constraint(equalTo: b.trailingAnchor, constant: -6),
+            l.topAnchor.constraint(equalTo: b.topAnchor, constant: 2),
+            l.bottomAnchor.constraint(equalTo: b.bottomAnchor, constant: -2),
+        ])
+        return b
+    }
+
+    private func updateAppearance() {
+        if isSelected {
+            layer?.backgroundColor = NSColor.controlAccentColor.withAlphaComponent(0.12).cgColor
+            layer?.borderWidth = 1.5
+            layer?.borderColor = NSColor.controlAccentColor.cgColor
+            radioCircle.layer?.backgroundColor = NSColor.controlAccentColor.cgColor
+            radioCircle.layer?.borderColor = NSColor.controlAccentColor.cgColor
+            innerDot.isHidden = false
+        } else if isHovered {
+            layer?.backgroundColor = NSColor.labelColor.withAlphaComponent(0.04).cgColor
+            layer?.borderWidth = 1
+            layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.3).cgColor
+            radioCircle.layer?.backgroundColor = NSColor.clear.cgColor
+            radioCircle.layer?.borderColor = NSColor.secondaryLabelColor.cgColor
+            innerDot.isHidden = true
+        } else {
+            layer?.backgroundColor = NSColor.clear.cgColor
+            layer?.borderWidth = 1
+            layer?.borderColor = NSColor.clear.cgColor
+            radioCircle.layer?.backgroundColor = NSColor.clear.cgColor
+            radioCircle.layer?.borderColor = NSColor.tertiaryLabelColor.cgColor
+            innerDot.isHidden = true
+        }
+    }
+}
+
+// MARK: - Tab 4: Native About & Updates View
+
+class ModernAboutView: NSView {
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    private func setupUI() {
+        let centerStack = NSStackView()
+        centerStack.orientation = .vertical
+        centerStack.alignment = .centerX
+        centerStack.spacing = 16
+        centerStack.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(centerStack)
+
+        NSLayoutConstraint.activate([
+            centerStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            centerStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            centerStack.widthAnchor.constraint(lessThanOrEqualToConstant: 460)
+        ])
+
+        // Large App Icon
+        let iconView = NSImageView()
+        iconView.imageScaling = .scaleProportionallyUpOrDown
+        iconView.wantsLayer = true
+        iconView.layer?.cornerRadius = 20
+        iconView.layer?.masksToBounds = true
+        if let logoPath = Bundle.main.path(forResource: "BornoGreenIcon", ofType: "png"),
+           let img = NSImage(contentsOfFile: logoPath) {
+            iconView.image = img
+        } else {
+            iconView.image = NSApp.applicationIconImage
+        }
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconView.widthAnchor.constraint(equalToConstant: 80),
+            iconView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        centerStack.addArrangedSubview(iconView)
+
+        // Title
+        let title = NSTextField(labelWithString: "Borno (বর্ণ)")
+        title.font = NSFont.systemFont(ofSize: 26, weight: .bold)
+        title.textColor = .labelColor
+        centerStack.addArrangedSubview(title)
+
+        let desc = NSTextField(wrappingLabelWithString: "Fast, minimal, native Avro Phonetic Bengali input method built exclusively for macOS and Windows.")
+        desc.alignment = .center
+        desc.font = NSFont.systemFont(ofSize: 13.5, weight: .regular)
+        desc.textColor = .secondaryLabelColor
+        centerStack.addArrangedSubview(desc)
+
+        // Version Info Card
+        let infoCard = AppleGroupCard(content: makeInfoRows(), padding: 14)
+        centerStack.addArrangedSubview(infoCard)
+        infoCard.widthAnchor.constraint(equalTo: centerStack.widthAnchor).isActive = true
+
+        // Action Buttons
+        let btnStack = NSStackView()
+        btnStack.orientation = .horizontal
+        btnStack.spacing = 12
+
+        let updateBtn = NSButton(title: "Check for Updates", target: self, action: #selector(checkForUpdates))
+        updateBtn.bezelStyle = .rounded
+        updateBtn.controlSize = .large
+        updateBtn.keyEquivalent = "\r"
+
+        let gitBtn = NSButton(title: "GitHub Repository", target: self, action: #selector(openGitHub))
+        gitBtn.bezelStyle = .rounded
+        gitBtn.controlSize = .large
+
+        btnStack.addArrangedSubview(updateBtn)
+        btnStack.addArrangedSubview(gitBtn)
+        centerStack.addArrangedSubview(btnStack)
+    }
+
+    private func makeInfoRows() -> NSView {
+        let stack = NSStackView()
+        stack.orientation = .vertical
+        stack.spacing = 8
+        stack.alignment = .leading
+
+        let rows = [
+            ("Version", "0.2.5 (Universal Binary)"),
+            ("Architecture", "Apple Silicon (ARM64) + Intel (x86_64)"),
+            ("Developer", "Yahia Bin Zaman"),
+            ("License", "Open Source (MIT License)")
+        ]
+
+        for (k, v) in rows {
+            let row = NSStackView()
+            row.orientation = .horizontal
+            row.distribution = .fill
+
+            let kl = NSTextField(labelWithString: k)
+            kl.font = NSFont.systemFont(ofSize: 12, weight: .medium)
+            kl.textColor = .secondaryLabelColor
+
+            let vl = NSTextField(labelWithString: v)
+            vl.font = NSFont.systemFont(ofSize: 12, weight: .semibold)
+            vl.textColor = .labelColor
+            vl.alignment = .right
+
+            row.addArrangedSubview(kl)
+            row.addArrangedSubview(vl)
+
+            stack.addArrangedSubview(row)
+            row.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+        }
+
+        return stack
+    }
+
+    @objc private func checkForUpdates() {
+        if let url = URL(string: "https://github.com/yahiabinzaman/borno-keyboard/releases") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
+    @objc private func openGitHub() {
+        if let url = URL(string: "https://github.com/yahiabinzaman/borno-keyboard") {
+            NSWorkspace.shared.open(url)
+        }
     }
 }
