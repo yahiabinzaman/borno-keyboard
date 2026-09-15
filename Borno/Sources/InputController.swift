@@ -21,11 +21,11 @@ class BornoInputController: IMKInputController {
     }
 
     /// UserDefaults key holding the raw value of the current `TypingMode`.
-    static let typingModeKey = "LekhoTypingMode"
+    static let typingModeKey = "BornoTypingMode"
 
     /// Legacy bool key (pre-multi-mode). Read only for one-time migration into
     /// `typingModeKey`: true → `.phoneticOnly`, false → `.smart`.
-    static let phoneticOnlyModeKey = "LekhoPhoneticOnlyMode"
+    static let phoneticOnlyModeKey = "BornoPhoneticOnlyMode"
 
     /// Resolve the current typing mode, migrating from the legacy bool when the
     /// new key hasn't been written yet. Default (and recommended) is `.phoneticFirst`.
@@ -778,5 +778,5 @@ class BornoInputController: IMKInputController {
 }
 
 extension Notification.Name {
-    static let bornoTypingModeChanged = Notification.Name("LekhoTypingModeChanged")
+    static let bornoTypingModeChanged = Notification.Name("BornoTypingModeChanged")
 }

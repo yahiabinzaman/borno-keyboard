@@ -7,7 +7,7 @@ let kConnectionName = "com.borno.inputmethod.Borno_Connection"
 // IMKServer must be a global to stay alive for the process lifetime
 var server: IMKServer!
 
-// Build identifier — check Console.app for "Lekho" to verify which build is running
+// Build identifier — check Console.app for "Borno" to verify which build is running
 let lekhoBuildId = "borno-v0.2.5"
 NSLog("Borno: starting %@", lekhoBuildId)
 
