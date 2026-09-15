@@ -1,11 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-APP_NAME="Lekho"
+APP_NAME="Borno"
 INSTALL_DIR="$HOME/Library/Input Methods"
-USER_DATA_DIR="$HOME/Library/Application Support/Lekho"
-PREFS_FILE="$HOME/Library/Preferences/com.lekho.inputmethod.Lekho.plist"
-SAVED_STATE_DIR="$HOME/Library/Saved Application State/com.lekho.inputmethod.Lekho.savedState"
+USER_DATA_DIR="$HOME/Library/Application Support/Borno"
+PREFS_FILE="$HOME/Library/Preferences/com.lekho.inputmethod.Borno.plist"
+SAVED_STATE_DIR="$HOME/Library/Saved Application State/com.lekho.inputmethod.Borno.savedState"
 
 echo "=== Uninstalling $APP_NAME ==="
 

@@ -2,13 +2,13 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_BUNDLE="$PROJECT_ROOT/build/Lekho.app"
+APP_BUNDLE="$PROJECT_ROOT/build/Borno.app"
 PKG_DIR="$PROJECT_ROOT/build/pkg_staging"
 DMG_DIR="$PROJECT_ROOT/build/dmg_staging"
 VERSION="0.2.5"
-PKG_OUTPUT="$PROJECT_ROOT/build/Lekho.pkg"
-DMG_OUTPUT="$PROJECT_ROOT/build/Lekho-${VERSION}.dmg"
-VOLUME_NAME="Lekho"
+PKG_OUTPUT="$PROJECT_ROOT/build/Borno.pkg"
+DMG_OUTPUT="$PROJECT_ROOT/build/Borno-${VERSION}.dmg"
+VOLUME_NAME="Borno"
 
 if [ ! -d "$APP_BUNDLE" ]; then
     echo "Error: $APP_BUNDLE not found. Run 'make build' first."
@@ -29,7 +29,7 @@ rm -f "$DMG_OUTPUT"
 mkdir -p "$PKG_DIR/scripts"
 
 # Bundle the app inside the scripts dir (pkg scripts can access this)
-cp -R "$APP_BUNDLE" "$PKG_DIR/scripts/Lekho.app"
+cp -R "$APP_BUNDLE" "$PKG_DIR/scripts/Borno.app"
 
 # Preinstall: kill the running instance
 cat > "$PKG_DIR/scripts/preinstall" << 'SCRIPT'
@@ -38,16 +38,16 @@ cat > "$PKG_DIR/scripts/preinstall" << 'SCRIPT'
 REAL_USER=$(stat -f "%Su" /dev/console 2>/dev/null || echo "$USER")
 REAL_HOME=$(eval echo "~$REAL_USER")
 
-# Kill running Lekho so the old .app can be replaced
-killall Lekho 2>/dev/null || true
+# Kill running Borno so the old .app can be replaced
+killall Borno 2>/dev/null || true
 # Also kill old AvroBangla instances (from before rename)
 killall AvroBangla 2>/dev/null || true
 sleep 1
 
 # Remove old installations
-rm -rf "$REAL_HOME/Library/Input Methods/Lekho.app" 2>/dev/null || true
+rm -rf "$REAL_HOME/Library/Input Methods/Borno.app" 2>/dev/null || true
 rm -rf "$REAL_HOME/Library/Input Methods/AvroBangla.app" 2>/dev/null || true
-rm -rf "/Library/Input Methods/Lekho.app" 2>/dev/null || true
+rm -rf "/Library/Input Methods/Borno.app" 2>/dev/null || true
 rm -rf "/Library/Input Methods/AvroBangla.app" 2>/dev/null || true
 
 exit 0
@@ -68,18 +68,18 @@ SCRIPT_DIR="$(dirname "$0")"
 mkdir -p "$INSTALL_DIR"
 
 # Copy the app from the scripts directory
-cp -R "$SCRIPT_DIR/Lekho.app" "$INSTALL_DIR/"
+cp -R "$SCRIPT_DIR/Borno.app" "$INSTALL_DIR/"
 
 # Fix ownership (pkg runs as root, so files would be owned by root)
-chown -R "$REAL_USER" "$INSTALL_DIR/Lekho.app"
+chown -R "$REAL_USER" "$INSTALL_DIR/Borno.app"
 
 # Clear quarantine flag
-xattr -cr "$INSTALL_DIR/Lekho.app" 2>/dev/null || true
+xattr -cr "$INSTALL_DIR/Borno.app" 2>/dev/null || true
 
 # Place a symlink in /Applications/ so the app shows in Launchpad/Spotlight
-rm -f "/Applications/Lekho.app" 2>/dev/null || true
-rm -rf "/Applications/Lekho.app" 2>/dev/null || true
-ln -sf "$INSTALL_DIR/Lekho.app" "/Applications/Lekho.app"
+rm -f "/Applications/Borno.app" 2>/dev/null || true
+rm -rf "/Applications/Borno.app" 2>/dev/null || true
+ln -sf "$INSTALL_DIR/Borno.app" "/Applications/Borno.app"
 
 # Clean up old AvroBangla symlink/app from /Applications/
 rm -f "/Applications/AvroBangla.app" 2>/dev/null || true
@@ -88,11 +88,11 @@ rm -rf "/Applications/AvroBangla.app" 2>/dev/null || true
 # Kill any auto-relaunched old instance (macOS may relaunch the IME
 # between preinstall kill and postinstall copy — the old binary runs
 # from cache, showing the wrong version)
-killall Lekho 2>/dev/null || true
+killall Borno 2>/dev/null || true
 sleep 0.5
 
 # Launch the NEW binary as the real user
-su "$REAL_USER" -c "open '$INSTALL_DIR/Lekho.app'" 2>/dev/null || true
+su "$REAL_USER" -c "open '$INSTALL_DIR/Borno.app'" 2>/dev/null || true
 
 exit 0
 SCRIPT
@@ -103,25 +103,25 @@ echo ">>> Building package..."
 pkgbuild \
     --nopayload \
     --scripts "$PKG_DIR/scripts" \
-    --identifier "com.lekho.inputmethod.Lekho" \
+    --identifier "com.lekho.inputmethod.Borno" \
     --version "0.2.5" \
-    "$PKG_DIR/Lekho-component.pkg"
+    "$PKG_DIR/Borno-component.pkg"
 
 # Create a distribution XML for a nicer installer UI
 cat > "$PKG_DIR/distribution.xml" << 'DISTXML'
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-    <title>Lekho</title>
+    <title>Borno</title>
     <allowed-os-versions><os-version min="13.0"/></allowed-os-versions>
     <options hostArchitectures="arm64" customize="never" require-scripts="false"/>
     <welcome mime-type="text/plain"><![CDATA[
-Welcome to Lekho — Avro Phonetic Bengali Keyboard for macOS.
+Welcome to Borno — Avro Phonetic Bengali Keyboard for macOS.
 
 This will install the Avro Phonetic Bengali keyboard to your Mac.
 
 After installation:
   1. Open System Settings → Keyboard → Input Sources
-  2. Click + → search "Lekho" → select Lekho → Add
+  2. Click + → search "Borno" → select Borno → Add
   3. Use Globe key or Ctrl+Space to switch input methods
 
 Note: If this is a fresh install, you may need to log out
@@ -129,16 +129,16 @@ and log back in for the keyboard to appear.
     ]]></welcome>
     <choices-outline>
         <line choice="default">
-            <line choice="com.lekho.inputmethod.Lekho"/>
+            <line choice="com.lekho.inputmethod.Borno"/>
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="com.lekho.inputmethod.Lekho" visible="false">
-        <pkg-ref id="com.lekho.inputmethod.Lekho"/>
+    <choice id="com.lekho.inputmethod.Borno" visible="false">
+        <pkg-ref id="com.lekho.inputmethod.Borno"/>
     </choice>
-    <pkg-ref id="com.lekho.inputmethod.Lekho"
+    <pkg-ref id="com.lekho.inputmethod.Borno"
              version="0.2.5"
-             onConclusion="none">Lekho-component.pkg</pkg-ref>
+             onConclusion="none">Borno-component.pkg</pkg-ref>
 </installer-gui-script>
 DISTXML
 
@@ -156,7 +156,7 @@ echo ""
 echo "=== Creating DMG ==="
 
 mkdir -p "$DMG_DIR"
-cp "$PKG_OUTPUT" "$DMG_DIR/Install Lekho.pkg"
+cp "$PKG_OUTPUT" "$DMG_DIR/Install Borno.pkg"
 
 # Create the DMG
 hdiutil create \
@@ -174,4 +174,4 @@ echo "=== Done ==="
 echo "DMG: $DMG_OUTPUT ($(du -h "$DMG_OUTPUT" | cut -f1))"
 echo "PKG: $PKG_OUTPUT ($(du -h "$PKG_OUTPUT" | cut -f1))"
 echo ""
-echo "Users just: open DMG → double-click 'Install Lekho.pkg' → done"
+echo "Users just: open DMG → double-click 'Install Borno.pkg' → done"

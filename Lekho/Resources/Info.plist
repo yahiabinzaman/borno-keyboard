@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Lekho</string>
+	<string>Borno</string>
 	<key>CFBundleExecutable</key>
-	<string>Lekho</string>
+	<string>Borno</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.lekho.inputmethod.Lekho</string>
+	<string>com.borno.inputmethod.Borno</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Lekho</string>
+	<string>Borno</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -23,9 +23,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>InputMethodConnectionName</key>
-	<string>com.lekho.inputmethod.Lekho_Connection</string>
+	<string>com.borno.inputmethod.Borno_Connection</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>Lekho.LekhoInputController</string>
+	<string>Borno.BornoInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>LSUIElement</key>

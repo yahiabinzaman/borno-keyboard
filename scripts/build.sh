@@ -3,16 +3,16 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 ENGINE_DIR="$PROJECT_ROOT/engine"
-SWIFT_DIR="$PROJECT_ROOT/Lekho"
+SWIFT_DIR="$PROJECT_ROOT/Borno"
 BUILD_DIR="$PROJECT_ROOT/build"
-APP_NAME="Lekho"
+APP_NAME="Borno"
 APP_BUNDLE="$BUILD_DIR/$APP_NAME.app"
 
 # Parse arguments
 BUILD_TYPE="${1:-release}"
 BUILD_UNIVERSAL="${2:-false}"
 
-echo "=== Lekho Build ==="
+echo "=== Borno Build ==="
 echo "Build type: $BUILD_TYPE"
 echo "Universal binary: $BUILD_UNIVERSAL"
 echo ""
@@ -132,7 +132,7 @@ fi
 # Step 4: Sign the app (ad-hoc)
 echo ">>> Signing app bundle..."
 codesign --force --sign - \
-    --entitlements "$SWIFT_DIR/Resources/Lekho.entitlements" \
+    --entitlements "$SWIFT_DIR/Resources/Borno.entitlements" \
     "$APP_BUNDLE"
 
 echo ""

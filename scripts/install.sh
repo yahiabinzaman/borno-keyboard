@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="Lekho"
+APP_NAME="Borno"
 APP_BUNDLE="$PROJECT_ROOT/build/$APP_NAME.app"
 INSTALL_DIR="$HOME/Library/Input Methods"
 
@@ -48,5 +48,5 @@ echo ""
 echo "If this is a first-time install:"
 echo "  1. Log out and log back in"
 echo "  2. Go to System Settings → Keyboard → Input Sources"
-echo "  3. Click '+' → search for 'Lekho' → select 'Lekho'"
+echo "  3. Click '+' → search for 'Borno' → select 'Borno'"
 echo "  4. Use Ctrl+Space (or Globe key) to switch between input methods"

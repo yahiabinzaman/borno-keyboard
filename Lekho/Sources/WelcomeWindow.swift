@@ -21,7 +21,7 @@ class WelcomeWindowController {
             backing: .buffered,
             defer: false
         )
-        window.title = "Lekho"
+        window.title = "Borno (বর্ণ)"
         window.isReleasedWhenClosed = false
         window.isRestorable = false
         window.contentView = WelcomeTabView()
@@ -324,7 +324,7 @@ class SettingsView: NSView {
         let header = WelcomeUI.sectionHeader("Typing mode")
 
         let intro = NSTextField(wrappingLabelWithString:
-            "Choose how Lekho turns what you type into Bangla. You can switch anytime.")
+            "Choose how Borno turns what you type into Bangla. You can switch anytime.")
         intro.font = NSFont.systemFont(ofSize: 13)
         intro.textColor = .secondaryLabelColor
         intro.translatesAutoresizingMaskIntoConstraints = false
@@ -341,7 +341,7 @@ class SettingsView: NSView {
              "Dictionary, autocorrect, and emoji choose the best-matching word when you press space. Press a number, the arrow keys, or click to pick another.",
              false),
             (.phoneticFirst, "Phonetic-first",
-             "Your exact phonetic spelling is committed by default, but the suggestion list is still right there — reach for a dictionary word whenever you want one. Lekho remembers the words you deliberately pick.",
+             "Your exact phonetic spelling is committed by default, but the suggestion list is still right there — reach for a dictionary word whenever you want one. Borno remembers the words you deliberately pick.",
              true),
             (.phoneticOnly, "Phonetic-only",
              "Pure transliteration with no suggestion popup, autocorrect, or emoji. Full control over every word — but no dictionary fixes for irregular spellings.",
@@ -448,9 +448,9 @@ class GettingStartedView: NSView {
         page.setCustomSpacing(8, after: setupHeader)
 
         let steps: [(Int, String, String?)] = [
-            (1, "Log out and log back in", "Only if you just installed Lekho for the first time."),
+            (1, "Log out and log back in", "Only if you just installed Borno for the first time."),
             (2, "Open System Settings \u{2192} Keyboard \u{2192} Input Sources", nil),
-            (3, "Click +, search \u{201C}Lekho\u{201D}, select it, and add it", nil),
+            (3, "Click +, search \u{201C}Borno\u{201D}, select it, and add it", nil),
             (4, "Switch with the Globe key or Ctrl+Space", nil),
         ]
         let stepStack = NSStackView()
@@ -525,7 +525,7 @@ class GettingStartedView: NSView {
             icon.heightAnchor.constraint(equalToConstant: 60),
         ])
 
-        let title = NSTextField(labelWithString: "Welcome to Lekho")
+        let title = NSTextField(labelWithString: "Welcome to Borno (বর্ণ)")
         title.font = NSFont.systemFont(ofSize: 24, weight: .bold)
         let subtitle = NSTextField(labelWithString: "Avro Phonetic Bangla keyboard for macOS")
         subtitle.font = NSFont.systemFont(ofSize: 13)
@@ -714,10 +714,10 @@ class GettingStartedView: NSView {
 
     @objc private func checkForUpdate() {
         let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
-        let url = URL(string: "https://api.github.com/repos/ARahim3/Lekho/releases/latest")!
+        let url = URL(string: "https://api.github.com/repos/yahiabinzaman/macbangla/releases/latest")!
 
         var request = URLRequest(url: url)
-        request.setValue("Lekho/\(currentVersion)", forHTTPHeaderField: "User-Agent")
+        request.setValue("Borno/\(currentVersion)", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 10
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -744,12 +744,12 @@ class GettingStartedView: NSView {
                 let latestVersion = tagName.hasPrefix("v") ? String(tagName.dropFirst()) : tagName
 
                 if self.isVersion(latestVersion, newerThan: currentVersion) {
-                    let htmlURL = json["html_url"] as? String ?? "https://github.com/ARahim3/Lekho/releases/latest"
+                    let htmlURL = json["html_url"] as? String ?? "https://github.com/yahiabinzaman/macbangla/releases/latest"
                     self.showUpdateAvailableAlert(latestVersion: latestVersion, downloadURL: htmlURL)
                 } else {
                     self.showUpdateAlert(
                         title: "You\u{2019}re Up to Date",
-                        message: "Lekho \(currentVersion) is the latest version."
+                        message: "Borno \(currentVersion) is the latest version."
                     )
                 }
             }
@@ -780,7 +780,7 @@ class GettingStartedView: NSView {
     private func showUpdateAvailableAlert(latestVersion: String, downloadURL: String) {
         let alert = NSAlert()
         alert.messageText = "Update Available"
-        alert.informativeText = "Lekho \(latestVersion) is available. You are currently running \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")."
+        alert.informativeText = "Borno \(latestVersion) is available. You are currently running \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")."
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Download")
         alert.addButton(withTitle: "Later")
