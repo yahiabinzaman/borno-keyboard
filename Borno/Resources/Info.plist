@@ -25,7 +25,7 @@
 	<key>InputMethodConnectionName</key>
 	<string>com.borno.inputmethod.Borno_Connection</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>Borno.BornoInputController</string>
+	<string>BornoInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>LSUIElement</key>
@@ -35,8 +35,31 @@
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Beng</string>
+		<string>bn</string>
 	</array>
 	<key>tsInputMethodIconFileKey</key>
 	<string>iconTemplate</string>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>com.borno.inputmethod.Borno</key>
+			<dict>
+				<key>tsInputModeCharacterRepertoireKey</key>
+				<array>
+					<string>Beng</string>
+					<string>bn</string>
+				</array>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeScriptKey</key>
+				<string>smBengali</string>
+			</dict>
+		</dict>
+		<key>tsVisibleInputModeOrderedArrayKey</key>
+		<array>
+			<string>com.borno.inputmethod.Borno</string>
+		</array>
+	</dict>
 </dict>
 </plist>
