@@ -21,7 +21,18 @@ class BornoInputController: IMKInputController {
     }
 
     /// UserDefaults key holding the raw value of the current `TypingMode`.
+    enum OutputEncoding: String {
+        case unicode = "Unicode"
+        case ansi = "ANSI"
+    }
+
     static let typingModeKey = "BornoTypingMode"
+    static let outputEncodingKey = "BornoOutputEncoding"
+
+    static func currentOutputEncoding() -> OutputEncoding {
+        let raw = UserDefaults.standard.string(forKey: outputEncodingKey) ?? "Unicode"
+        return OutputEncoding(rawValue: raw) ?? .unicode
+    }
 
     /// Legacy bool key (pre-multi-mode). Read only for one-time migration into
     /// `typingModeKey`: true → `.phoneticOnly`, false → `.smart`.
@@ -392,10 +403,10 @@ class BornoInputController: IMKInputController {
            let chars = event.characters,
            let digit = chars.first,
            digit >= "0" && digit <= "9" {
-            let digitValue = Int(String(digit))!
-            let bengaliDigit = String(BornoInputController.bengaliDigits[digitValue])
+            let isANSI = (BornoInputController.currentOutputEncoding() == .ansi)
+            let digitString = isANSI ? String(digit) : String(BornoInputController.bengaliDigits[Int(String(digit))!])
             client.insertText(
-                bengaliDigit as NSString,
+                digitString as NSString,
                 replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
             )
             return true
@@ -589,8 +600,12 @@ class BornoInputController: IMKInputController {
             riti_context_candidate_committed(engineCtx, safeIndex)
         }
 
+        var finalText = text
+        if BornoInputController.currentOutputEncoding() == .ansi {
+            finalText = UnicodeToBijoy.convert(text)
+        }
         client.insertText(
-            text as NSString,
+            finalText as NSString,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
 
@@ -687,10 +702,13 @@ class BornoInputController: IMKInputController {
 
         let length = riti_suggestion_get_length(suggestion)
         var candidates: [String] = []
+        let isANSI = (BornoInputController.currentOutputEncoding() == .ansi)
         for i in 0..<length {
             let ptr = riti_suggestion_get_suggestion(suggestion, i)
             if let ptr = ptr {
-                candidates.append(String(cString: ptr))
+                let unicodeWord = String(cString: ptr)
+                let displayWord = isANSI ? UnicodeToBijoy.convert(unicodeWord) : unicodeWord
+                candidates.append(displayWord)
                 riti_string_free(ptr)
             }
         }
@@ -786,11 +804,24 @@ class BornoInputController: IMKInputController {
         menu.addItem(titleItem)
         menu.addItem(NSMenuItem.separator())
 
+        let isANSI = (BornoInputController.currentOutputEncoding() == .ansi)
+        let unicodeItem = NSMenuItem(title: "Unicode", action: #selector(setOutputUnicode), keyEquivalent: "")
+        unicodeItem.target = self
+        unicodeItem.state = isANSI ? .off : .on
+        menu.addItem(unicodeItem)
+
+        let ansiItem = NSMenuItem(title: "ANSI", action: #selector(setOutputANSI), keyEquivalent: "")
+        ansiItem.target = self
+        ansiItem.state = isANSI ? .on : .off
+        menu.addItem(ansiItem)
+
+        menu.addItem(NSMenuItem.separator())
+
         let startItem = NSMenuItem(title: "Getting Started...", action: #selector(openWelcomeWindow), keyEquivalent: "")
         startItem.target = self
         menu.addItem(startItem)
 
-        let layoutItem = NSMenuItem(title: "Avro Layout Reference...", action: #selector(openWelcomeWindow), keyEquivalent: "")
+        let layoutItem = NSMenuItem(title: "Borno Keyboard Layout...", action: #selector(openWelcomeWindow), keyEquivalent: "")
         layoutItem.target = self
         menu.addItem(layoutItem)
 
@@ -807,6 +838,16 @@ class BornoInputController: IMKInputController {
         return menu
     }
 
+    @objc private func setOutputUnicode() {
+        UserDefaults.standard.set("Unicode", forKey: BornoInputController.outputEncodingKey)
+        NotificationCenter.default.post(name: .bornoEncodingChanged, object: nil)
+    }
+
+    @objc private func setOutputANSI() {
+        UserDefaults.standard.set("ANSI", forKey: BornoInputController.outputEncodingKey)
+        NotificationCenter.default.post(name: .bornoEncodingChanged, object: nil)
+    }
+
     @objc private func openWelcomeWindow() {
         WelcomeWindowController.shared.showWindow()
     }
@@ -814,4 +855,5 @@ class BornoInputController: IMKInputController {
 
 extension Notification.Name {
     static let bornoTypingModeChanged = Notification.Name("BornoTypingModeChanged")
+    static let bornoEncodingChanged = Notification.Name("BornoEncodingChanged")
 }

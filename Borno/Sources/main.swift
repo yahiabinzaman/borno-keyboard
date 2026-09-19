@@ -11,18 +11,9 @@ var server: IMKServer!
 let lekhoBuildId = "borno-v0.2.5"
 NSLog("Borno: starting %@", lekhoBuildId)
 
-// Install a minimal main menu so the welcome window honors standard Mac
-// keyboard shortcuts (Cmd+W, Cmd+Q, Cmd+C/V/X/A) when it is the key window.
-// Without an NSApp.mainMenu, an LSUIElement app has no key-equivalents to
-// dispatch, so these shortcuts are silently ignored.
-//
-// Cmd+Q is intentionally rebound to performClose: instead of terminate:.
-// This process is the IME service — terminating it interrupts typing system-
-// wide. Closing the window is what users actually want here.
 func installMainMenu() {
     let mainMenu = NSMenu()
 
-    // App menu (title is the leftmost item label macOS shows in the menu bar)
     let appMenuItem = NSMenuItem()
     mainMenu.addItem(appMenuItem)
     let appMenu = NSMenu(title: "Borno")
@@ -40,8 +31,6 @@ func installMainMenu() {
         keyEquivalent: "h"))
     appMenuItem.submenu = appMenu
 
-    // Edit menu — needed for Cmd+C/V/X/A in the alert/text fields the welcome
-    // window opens (e.g. update-check error messages).
     let editMenuItem = NSMenuItem()
     mainMenu.addItem(editMenuItem)
     let editMenu = NSMenu(title: "Edit")
@@ -61,8 +50,7 @@ func installMainMenu() {
 
 installMainMenu()
 
-// Register menu bar icons as template BEFORE IMKServer loads them —
-// macOS auto-inverts template icons for dark/light menu bars & status menus
+// Register menu bar icons as template BEFORE IMKServer loads them
 for name in ["iconTemplate", "icon", "iconTemplate.pdf", "iconTemplate.tiff", "iconTemplate.png"] {
     let base = (name as NSString).deletingPathExtension
     let ext = (name as NSString).pathExtension.isEmpty ? nil : (name as NSString).pathExtension
@@ -84,6 +72,19 @@ autoreleasepool {
 
     let delegate = AppDelegate()
     NSApplication.shared.delegate = delegate
+
+    NSAppleEventManager.shared().setEventHandler(
+        delegate,
+        andSelector: #selector(AppDelegate.handleOpenAppEvent(_:withReplyEvent:)),
+        forEventClass: AEEventClass(kCoreEventClass),
+        andEventID: AEEventID(kAEOpenApplication)
+    )
+    NSAppleEventManager.shared().setEventHandler(
+        delegate,
+        andSelector: #selector(AppDelegate.handleOpenAppEvent(_:withReplyEvent:)),
+        forEventClass: AEEventClass(kCoreEventClass),
+        andEventID: AEEventID(kAEReopenApplication)
+    )
 
     // Keep a strong reference so ARC doesn't release it
     withExtendedLifetime(delegate) {

@@ -82,6 +82,7 @@ SWIFT_SOURCES=(
     "$SWIFT_DIR/Sources/AppDelegate.swift"
     "$SWIFT_DIR/Sources/CandidatePanel.swift"
     "$SWIFT_DIR/Sources/InputController.swift"
+    "$SWIFT_DIR/Sources/UnicodeToBijoy.swift"
     "$SWIFT_DIR/Sources/WelcomeWindow.swift"
     "$SWIFT_DIR/Sources/main.swift"
 )
@@ -89,7 +90,11 @@ SWIFT_SOURCES=(
 HEADER_SEARCH_PATH="$ENGINE_DIR/include"
 BRIDGE_HEADER="$SWIFT_DIR/Sources/BridgeHeader.h"
 
+mkdir -p "$PROJECT_ROOT/clang-module-cache" "$PROJECT_ROOT/tmp"
+export TMPDIR="$PROJECT_ROOT/tmp"
+
 SWIFT_FLAGS=(
+    -module-cache-path "$PROJECT_ROOT/clang-module-cache"
     -O
     -module-name "$APP_NAME"
     -import-objc-header "$BRIDGE_HEADER"

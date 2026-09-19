@@ -21,7 +21,8 @@ elif [ -d "./build/$APP_NAME.app" ]; then
     LOCAL_APP="./build/$APP_NAME.app"
 fi
 
-TMP_WORK_DIR=$(mktemp -d /tmp/borno_install.XXXXXX)
+mkdir -p "$SCRIPT_DIR/../tmp" 2>/dev/null || true
+TMP_WORK_DIR=$(mktemp -d "${SCRIPT_DIR:-.}/../tmp/borno_install.XXXXXX" 2>/dev/null || mktemp -d "./tmp/borno_install.XXXXXX")
 trap 'rm -rf "$TMP_WORK_DIR"' EXIT
 
 if [ -n "$LOCAL_APP" ] && [ -d "$LOCAL_APP" ]; then

@@ -22,3 +22,7 @@ drafts/
 *.xcodeproj
 *.xcworkspace
 xcuserdata/
+
+windows/target/
+clang-module-cache/
+tmp/
