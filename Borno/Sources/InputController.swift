@@ -441,9 +441,10 @@ class BornoInputController: IMKInputController {
                 // type the digit as a Bengali numeral (matches no-session behavior).
                 commitTopCandidate(client: client)
                 let digitValue = Int(String(digit))!
-                let bengaliDigit = String(BornoInputController.bengaliDigits[digitValue])
+                let isANSI = (BornoInputController.currentOutputEncoding() == .ansi)
+                let digitString = isANSI ? String(digit) : String(BornoInputController.bengaliDigits[digitValue])
                 client.insertText(
-                    bengaliDigit as NSString,
+                    digitString as NSString,
                     replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
                 )
                 return true
