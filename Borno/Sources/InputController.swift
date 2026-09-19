@@ -561,10 +561,9 @@ class BornoInputController: IMKInputController {
             displayMarkedText = UnicodeToBijoy.convert(preEditText)
         }
 
-        // Set as marked (underlined) text
+        // Set as marked (underlined) text without forcing any font attribute
         let attrs: [NSAttributedString.Key: Any] = [
-            .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)
+            .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         let attrStr = NSAttributedString(string: displayMarkedText, attributes: attrs)
 
