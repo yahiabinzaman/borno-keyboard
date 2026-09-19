@@ -28,10 +28,15 @@ class BornoInputController: IMKInputController {
 
     static let typingModeKey = "BornoTypingMode"
     static let outputEncodingKey = "BornoOutputEncoding"
+    static let keyboardLayoutKey = "BornoKeyboardLayout"
 
     static func currentOutputEncoding() -> OutputEncoding {
         let raw = UserDefaults.standard.string(forKey: outputEncodingKey) ?? "Unicode"
         return OutputEncoding(rawValue: raw) ?? .unicode
+    }
+
+    static func currentKeyboardLayout() -> String {
+        return UserDefaults.standard.string(forKey: keyboardLayoutKey) ?? "avro_phonetic"
     }
 
     /// Legacy bool key (pre-multi-mode). Read only for one-time migration into
@@ -87,6 +92,12 @@ class BornoInputController: IMKInputController {
             name: .bornoTypingModeChanged,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(layoutChanged),
+            name: .bornoLayoutChanged,
+            object: nil
+        )
     }
 
     private func initializeEngine() {
@@ -101,7 +112,7 @@ class BornoInputController: IMKInputController {
         // Phonetic-first runs a second, phonetic-only context in lockstep. Its
         // lonely output gives us the literal transliteration of the current buffer,
         // which we locate in the main suggestion list to select it by default.
-        if typingMode == .phoneticFirst {
+        if typingMode == .phoneticFirst && Self.currentKeyboardLayout() == "avro_phonetic" {
             phoneticConfig = makeConfig(phoneticSuggestion: false)
             phoneticCtx = riti_context_new_with_config(phoneticConfig)
         }
@@ -112,13 +123,21 @@ class BornoInputController: IMKInputController {
     private func makeConfig(phoneticSuggestion: Bool) -> OpaquePointer? {
         let config = riti_config_new()
 
-        // Set layout to Avro Phonetic
-        "avro_phonetic".withCString { ptr in
-            _ = riti_config_set_layout_file(config, ptr)
+        let selectedLayout = BornoInputController.currentKeyboardLayout()
+        let dataDir = Bundle.main.resourcePath! + "/data"
+
+        if selectedLayout == "avro_phonetic" {
+            "avro_phonetic".withCString { ptr in
+                _ = riti_config_set_layout_file(config, ptr)
+            }
+        } else {
+            let layoutPath = dataDir + "/" + selectedLayout + ".json"
+            layoutPath.withCString { ptr in
+                _ = riti_config_set_layout_file(config, ptr)
+            }
         }
 
         // Set database directory to app bundle's Resources/data
-        let dataDir = Bundle.main.resourcePath! + "/data"
         dataDir.withCString { ptr in
             _ = riti_config_set_database_dir(config, ptr)
         }
@@ -812,6 +831,27 @@ class BornoInputController: IMKInputController {
         menu.addItem(titleItem)
         menu.addItem(NSMenuItem.separator())
 
+        // Layouts section
+        let currentLayout = BornoInputController.currentKeyboardLayout()
+
+        let phoneticItem = NSMenuItem(title: "Borno (Phonetic)", action: #selector(setLayoutPhonetic), keyEquivalent: "")
+        phoneticItem.target = self
+        phoneticItem.state = (currentLayout == "avro_phonetic") ? .on : .off
+        menu.addItem(phoneticItem)
+
+        let nationalItem = NSMenuItem(title: "National / Bijoy (জাতীয়)", action: #selector(setLayoutNational), keyEquivalent: "")
+        nationalItem.target = self
+        nationalItem.state = (currentLayout == "National") ? .on : .off
+        menu.addItem(nationalItem)
+
+        let probhatItem = NSMenuItem(title: "Probhat (প্রভাত)", action: #selector(setLayoutProbhat), keyEquivalent: "")
+        probhatItem.target = self
+        probhatItem.state = (currentLayout == "Probhat") ? .on : .off
+        menu.addItem(probhatItem)
+
+        menu.addItem(NSMenuItem.separator())
+
+        // Encodings section
         let isANSI = (BornoInputController.currentOutputEncoding() == .ansi)
         let unicodeItem = NSMenuItem(title: "Unicode", action: #selector(setOutputUnicode), keyEquivalent: "")
         unicodeItem.target = self
@@ -846,6 +886,25 @@ class BornoInputController: IMKInputController {
         return menu
     }
 
+    @objc private func setLayoutPhonetic() {
+        UserDefaults.standard.set("avro_phonetic", forKey: BornoInputController.keyboardLayoutKey)
+        NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
+    }
+
+    @objc private func setLayoutNational() {
+        UserDefaults.standard.set("National", forKey: BornoInputController.keyboardLayoutKey)
+        NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
+    }
+
+    @objc private func setLayoutProbhat() {
+        UserDefaults.standard.set("Probhat", forKey: BornoInputController.keyboardLayoutKey)
+        NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
+    }
+
+    @objc private func layoutChanged() {
+        rebuildEngine()
+    }
+
     @objc private func setOutputUnicode() {
         UserDefaults.standard.set("Unicode", forKey: BornoInputController.outputEncodingKey)
         NotificationCenter.default.post(name: .bornoEncodingChanged, object: nil)
@@ -864,4 +923,5 @@ class BornoInputController: IMKInputController {
 extension Notification.Name {
     static let bornoTypingModeChanged = Notification.Name("BornoTypingModeChanged")
     static let bornoEncodingChanged = Notification.Name("BornoEncodingChanged")
+    static let bornoLayoutChanged = Notification.Name("BornoLayoutChanged")
 }

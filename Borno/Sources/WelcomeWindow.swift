@@ -884,6 +884,7 @@ class ModernAvroLayoutView: NSView {
 // MARK: - Tab 3: Native Settings View (Typing Preferences & Font Encoding)
 
 class ModernSettingsView: NSView {
+    private var layoutCards: [ModernModeCard] = []
     private var encodingCards: [ModernModeCard] = []
     private var modeCards: [ModernModeCard] = []
 
@@ -908,13 +909,52 @@ class ModernSettingsView: NSView {
         header.textColor = .labelColor
         content.addArrangedSubview(header)
 
-        let subtitle = NSTextField(wrappingLabelWithString: "Configure output font encoding (Unicode vs ANSI SutonnyMJ) and conversion modes.")
+        let subtitle = NSTextField(wrappingLabelWithString: "Configure keyboard layout, output font encoding (Unicode vs ANSI SutonnyMJ) and conversion modes.")
         subtitle.font = NSFont.systemFont(ofSize: 13, weight: .regular)
         subtitle.textColor = .secondaryLabelColor
         content.addArrangedSubview(subtitle)
         subtitle.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
 
-        // Section 1: Output Encoding (Unicode vs ANSI SutonnyMJ)
+        // Section 1: Keyboard Layout
+        let layoutSectionLabel = NSTextField(labelWithString: "KEYBOARD LAYOUT / কীবোর্ড লেআউট")
+        layoutSectionLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        layoutSectionLabel.textColor = .secondaryLabelColor
+        content.addArrangedSubview(layoutSectionLabel)
+
+        let currentLayout = UserDefaults.standard.string(forKey: "BornoKeyboardLayout") ?? "avro_phonetic"
+
+        let layoutOptions: [(id: String, title: String, badge: String?, desc: String)] = [
+            ("avro_phonetic", "Borno (Phonetic)", "Default", "Avro-style phonetic transliteration (type 'amar' → 'আমার')."),
+            ("National", "National / Bijoy (জাতীয়)", "Bijoy Standard", "Bangladesh National / Bijoy layout standard (type 'Av' → 'আ', 'g' → 'ম')."),
+            ("Probhat", "Probhat (প্রভাত)", nil, "Standard Probhat fixed keyboard layout.")
+        ]
+
+        let layoutStack = NSStackView()
+        layoutStack.orientation = .vertical
+        layoutStack.spacing = 6
+        layoutStack.translatesAutoresizingMaskIntoConstraints = false
+
+        for opt in layoutOptions {
+            let card = ModernModeCard(
+                modeId: opt.id,
+                title: opt.title,
+                badgeText: opt.badge,
+                description: opt.desc,
+                isSelected: (currentLayout == opt.id)
+            )
+            card.onSelect = { [weak self] selectedId in
+                self?.selectLayout(selectedId)
+            }
+            layoutCards.append(card)
+            layoutStack.addArrangedSubview(card)
+            card.widthAnchor.constraint(equalTo: layoutStack.widthAnchor).isActive = true
+        }
+
+        let layoutGroupCard = ModernGroupCard(content: layoutStack, padding: 10)
+        content.addArrangedSubview(layoutGroupCard)
+        layoutGroupCard.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
+
+        // Section 2: Output Encoding (Unicode vs ANSI SutonnyMJ)
         let encSectionLabel = NSTextField(labelWithString: "OUTPUT ENCODING")
         encSectionLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
         encSectionLabel.textColor = .secondaryLabelColor
@@ -952,7 +992,7 @@ class ModernSettingsView: NSView {
         content.addArrangedSubview(encGroupCard)
         encGroupCard.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
 
-        // Section 2: Conversion Mode
+        // Section 3: Conversion Mode
         let modeSectionLabel = NSTextField(labelWithString: "CONVERSION BEHAVIOR / টাইপিং মোড")
         modeSectionLabel.font = NSFont.systemFont(ofSize: 11, weight: .bold)
         modeSectionLabel.textColor = .secondaryLabelColor
@@ -1001,6 +1041,15 @@ class ModernSettingsView: NSView {
             content.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             content.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
+    }
+
+    private func selectLayout(_ layoutId: String) {
+        UserDefaults.standard.set(layoutId, forKey: "BornoKeyboardLayout")
+        NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
+
+        for card in layoutCards {
+            card.isSelected = (card.modeId == layoutId)
+        }
     }
 
     private func selectEncoding(_ encodingId: String) {
