@@ -511,8 +511,12 @@ class BornoInputController: IMKInputController {
                     let textPtr = riti_suggestion_get_lonely_suggestion(suggestion)
                     if let textPtr = textPtr {
                         let text = String(cString: textPtr)
+                        var finalText = text
+                        if BornoInputController.currentOutputEncoding() == .ansi {
+                            finalText = UnicodeToBijoy.convert(text)
+                        }
                         client.insertText(
-                            text as NSString,
+                            finalText as NSString,
                             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
                         )
                         riti_string_free(textPtr)
@@ -552,16 +556,21 @@ class BornoInputController: IMKInputController {
         let preEditText = String(cString: preEditPtr)
         riti_string_free(preEditPtr)
 
+        var displayMarkedText = preEditText
+        if BornoInputController.currentOutputEncoding() == .ansi {
+            displayMarkedText = UnicodeToBijoy.convert(preEditText)
+        }
+
         // Set as marked (underlined) text
         let attrs: [NSAttributedString.Key: Any] = [
             .underlineStyle: NSUnderlineStyle.single.rawValue,
             .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)
         ]
-        let attrStr = NSAttributedString(string: preEditText, attributes: attrs)
+        let attrStr = NSAttributedString(string: displayMarkedText, attributes: attrs)
 
         client.setMarkedText(
             attrStr,
-            selectionRange: NSRange(location: preEditText.utf16.count, length: 0),
+            selectionRange: NSRange(location: displayMarkedText.utf16.count, length: 0),
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
     }
