@@ -98,6 +98,12 @@ class BornoInputController: IMKInputController {
             name: .bornoLayoutChanged,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(layoutChanged),
+            name: .bornoEncodingChanged,
+            object: nil
+        )
     }
 
     private func initializeEngine() {
