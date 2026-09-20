@@ -41,6 +41,13 @@ try {
     Write-Host "[-] Downloading Borno ($DownloadUrl)..." -ForegroundColor Yellow
     Invoke-WebRequest -Uri $DownloadUrl -OutFile $BornoExe -UseBasicParsing
 
+    # Unblock the downloaded executable to remove Windows SmartScreen Mark-of-the-Web
+    try {
+        Unblock-File -Path $BornoExe -ErrorAction SilentlyContinue
+    } catch {
+        # Fallback
+    }
+
     # Create Desktop and Startup shortcuts
     $WshShell = New-Object -ComObject WScript.Shell
     
