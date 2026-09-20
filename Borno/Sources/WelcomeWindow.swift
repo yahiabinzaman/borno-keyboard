@@ -492,7 +492,7 @@ class ModernGettingStartedView: NSView {
         let step1 = makeStepCard(
             stepNumber: "1",
             title: "Switching to Borno Keyboard",
-            desc: "Press Control + Space or tap the Globe key (🌐) anytime to switch between English and Borno.",
+            desc: "Press Control + Space or tap the Globe key (🌐) anytime to toggle between English and Borno.",
             badgeText: "⌃ Space  /  🌐 Globe"
         )
         content.addArrangedSubview(step1)
@@ -500,18 +500,18 @@ class ModernGettingStartedView: NSView {
 
         let step2 = makeStepCard(
             stepNumber: "2",
-            title: "Phonetic Avro Typing",
-            desc: "Type Bengali words phonetically in English. For example, typing 'ami' produces 'আমি', 'bangla' produces 'বাংলা'.",
-            badgeText: "ami → আমি"
+            title: "Phonetic & National Layouts",
+            desc: "Type phonetically (e.g. 'ami' → 'আমি', 'bangla' → 'বাংলা') or switch to National / Bijoy layout in Settings.",
+            badgeText: "Phonetic & National / Bijoy"
         )
         content.addArrangedSubview(step2)
         step2.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
 
         let step3 = makeStepCard(
             stepNumber: "3",
-            title: "Candidate & Autocorrect Selection",
-            desc: "When suggestions appear, press Space to accept the top word, or use Up/Down arrow keys or numbers to pick alternatives.",
-            badgeText: "Space to Commit"
+            title: "Unicode & ANSI (SutonnyMJ) for Adobe Apps",
+            desc: "Select ANSI mode from Settings or the Menu Bar to type directly in Adobe Illustrator and Photoshop using SutonnyMJ font without glitches.",
+            badgeText: "Unicode & ANSI (SutonnyMJ)"
         )
         content.addArrangedSubview(step3)
         step3.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
@@ -1243,7 +1243,7 @@ class ModernAboutView: NSView {
         let centerStack = NSStackView()
         centerStack.orientation = .vertical
         centerStack.alignment = .centerX
-        centerStack.spacing = 16
+        centerStack.spacing = 14
         centerStack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(centerStack)
 
@@ -1251,7 +1251,7 @@ class ModernAboutView: NSView {
         let iconView = NSImageView()
         iconView.imageScaling = .scaleProportionallyUpOrDown
         iconView.wantsLayer = true
-        iconView.layer?.cornerRadius = 22
+        iconView.layer?.cornerRadius = 20
         iconView.layer?.masksToBounds = true
         if let logoPath = Bundle.main.path(forResource: "BornoGreenIcon", ofType: "png"),
            let img = NSImage(contentsOfFile: logoPath) {
@@ -1261,25 +1261,37 @@ class ModernAboutView: NSView {
         }
         iconView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            iconView.widthAnchor.constraint(equalToConstant: 84),
-            iconView.heightAnchor.constraint(equalToConstant: 84)
+            iconView.widthAnchor.constraint(equalToConstant: 76),
+            iconView.heightAnchor.constraint(equalToConstant: 76)
         ])
         centerStack.addArrangedSubview(iconView)
 
         // Title
         let title = NSTextField(labelWithString: "Borno (বর্ণ)")
-        title.font = NSFont.systemFont(ofSize: 26, weight: .bold)
+        title.font = NSFont.systemFont(ofSize: 24, weight: .bold)
         title.textColor = .labelColor
         centerStack.addArrangedSubview(title)
 
-        let desc = NSTextField(wrappingLabelWithString: "Fast, minimal, native Bengali input method built exclusively for macOS and Windows.")
+        let desc = NSTextField(wrappingLabelWithString: "Modern, native Bengali input method for macOS and Windows.\nFeaturing pure direct typing, multiple layouts, and complete Unicode + ANSI SutonnyMJ support.")
         desc.alignment = .center
-        desc.font = NSFont.systemFont(ofSize: 13, weight: .regular)
+        desc.font = NSFont.systemFont(ofSize: 12.5, weight: .regular)
         desc.textColor = .secondaryLabelColor
         centerStack.addArrangedSubview(desc)
 
+        // Feature Highlight Badges
+        let badgeRow = NSStackView()
+        badgeRow.orientation = .horizontal
+        badgeRow.spacing = 8
+        badgeRow.alignment = .centerY
+
+        badgeRow.addArrangedSubview(makePillBadge(text: "⚡️ Sub-ms Latency", color: .systemBlue))
+        badgeRow.addArrangedSubview(makePillBadge(text: "🎨 SutonnyMJ ANSI", color: .systemPurple))
+        badgeRow.addArrangedSubview(makePillBadge(text: "🔒 100% Offline", color: .systemGreen))
+
+        centerStack.addArrangedSubview(badgeRow)
+
         // Info Card
-        let infoCard = ModernGroupCard(content: makeInfoRows(), padding: 14)
+        let infoCard = ModernGroupCard(content: makeInfoRows(), padding: 12)
         centerStack.addArrangedSubview(infoCard)
         infoCard.widthAnchor.constraint(equalTo: centerStack.widthAnchor).isActive = true
 
@@ -1290,11 +1302,11 @@ class ModernAboutView: NSView {
 
         let updateBtn = NSButton(title: "Check for Updates", target: self, action: #selector(checkForUpdates))
         updateBtn.bezelStyle = .rounded
-        updateBtn.controlSize = .large
+        updateBtn.controlSize = .regular
 
         let gitBtn = NSButton(title: "GitHub Repository", target: self, action: #selector(openGitHub))
         gitBtn.bezelStyle = .rounded
-        gitBtn.controlSize = .large
+        gitBtn.controlSize = .regular
 
         btnStack.addArrangedSubview(updateBtn)
         btnStack.addArrangedSubview(gitBtn)
@@ -1305,26 +1317,52 @@ class ModernAboutView: NSView {
         centerStack.addArrangedSubview(bottomSpacer)
 
         NSLayoutConstraint.activate([
-            centerStack.topAnchor.constraint(equalTo: topAnchor, constant: 52),
+            centerStack.topAnchor.constraint(equalTo: topAnchor, constant: 36),
             centerStack.centerXAnchor.constraint(equalTo: centerXAnchor),
-            centerStack.widthAnchor.constraint(lessThanOrEqualToConstant: 480),
-            centerStack.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 40),
-            centerStack.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -40),
-            centerStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
+            centerStack.widthAnchor.constraint(lessThanOrEqualToConstant: 520),
+            centerStack.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 30),
+            centerStack.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -30),
+            centerStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
+    }
+
+    private func makePillBadge(text: String, color: NSColor) -> NSView {
+        let pill = NSView()
+        pill.wantsLayer = true
+        pill.layer?.cornerRadius = 10
+        pill.layer?.backgroundColor = color.withAlphaComponent(0.12).cgColor
+        pill.translatesAutoresizingMaskIntoConstraints = false
+
+        let lbl = NSTextField(labelWithString: text)
+        lbl.font = NSFont.systemFont(ofSize: 11, weight: .semibold)
+        lbl.textColor = color
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        pill.addSubview(lbl)
+
+        NSLayoutConstraint.activate([
+            lbl.leadingAnchor.constraint(equalTo: pill.leadingAnchor, constant: 8),
+            lbl.trailingAnchor.constraint(equalTo: pill.trailingAnchor, constant: -8),
+            lbl.topAnchor.constraint(equalTo: pill.topAnchor, constant: 3),
+            lbl.bottomAnchor.constraint(equalTo: pill.bottomAnchor, constant: -3)
+        ])
+        return pill
     }
 
     private func makeInfoRows() -> NSView {
         let stack = NSStackView()
         stack.orientation = .vertical
-        stack.spacing = 8
+        stack.spacing = 7
         stack.alignment = .leading
 
         let rows = [
             ("Version", "0.2.5 (Universal Binary)"),
-            ("Engine", "Rust (riti) Native Core"),
+            ("Encodings", "Unicode & ANSI (SutonnyMJ / Bijoy)"),
+            ("Layouts", "Borno (Phonetic) · National (জাতীয়) · Probhat"),
+            ("Engine", "Rust (riti) Native Core + Swift IME"),
             ("Architecture", "Apple Silicon (ARM64) + Intel (x86_64)"),
-            ("Developer", "Yahia Bin Zaman"),
+            ("Compatibility", "macOS 13.0+ & Windows 10/11"),
+            ("Privacy", "100% Offline (No Telemetry / Analytics)"),
+            ("Developer", "Yahia Bin Zaman (ইয়াহিয়া বিন জামান)"),
             ("License", "Open Source (MIT License)")
         ]
 
@@ -1334,11 +1372,11 @@ class ModernAboutView: NSView {
             row.distribution = .fill
 
             let kl = NSTextField(labelWithString: k)
-            kl.font = NSFont.systemFont(ofSize: 12, weight: .medium)
+            kl.font = NSFont.systemFont(ofSize: 11.5, weight: .medium)
             kl.textColor = .secondaryLabelColor
 
             let vl = NSTextField(labelWithString: v)
-            vl.font = NSFont.systemFont(ofSize: 12, weight: .semibold)
+            vl.font = NSFont.systemFont(ofSize: 11.5, weight: .semibold)
             vl.textColor = .labelColor
             vl.alignment = .right
 

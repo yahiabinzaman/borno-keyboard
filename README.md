@@ -1,18 +1,35 @@
-# বর্ণ (Borno) — Native Avro Phonetic Keyboard for macOS & Windows
+# বর্ণ (Borno) — Modern Native Bengali Keyboard for macOS & Windows
 
 [![macOS](https://img.shields.io/badge/macOS-13.0%2B-black?logo=apple&logoColor=white)](https://github.com/yahiabinzaman/borno-keyboard)
 [![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows&logoColor=white)](https://github.com/yahiabinzaman/borno-keyboard)
-[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-Native-blue)](https://github.com/yahiabinzaman/borno-keyboard)
+[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-Universal%20Binary-blue)](https://github.com/yahiabinzaman/borno-keyboard)
+[![Output](https://img.shields.io/badge/Encoding-Unicode%20%2B%20ANSI%20SutonnyMJ-purple)](https://github.com/yahiabinzaman/borno-keyboard)
+[![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline-success)](https://github.com/yahiabinzaman/borno-keyboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Borno (বর্ণ)** is a clean, minimal, native Avro Phonetic Bengali keyboard for **macOS** and **Windows**. Designed for maximum typing speed, pure direct typing with zero floating popup disruption, and seamless compatibility across Adobe Illustrator, Photoshop, Figma, VS Code, MS Office, and all applications.
+**Borno (বর্ণ)** is a fast, minimal, native Bengali input method built for **macOS** and **Windows**. Designed for maximum typing speed, pure direct typing with zero floating popup disruption, and seamless dual-encoding support across **Unicode** and **ANSI (Bijoy SutonnyMJ)** for professional graphic design in Adobe Illustrator, Photoshop, InDesign, Figma, MS Office, and all modern applications.
+
+---
+
+## ✨ Key Features
+
+- 🚀 **Pure Direct Typing**: Characters stream directly into your active cursor without flickering popup overlays or lag.
+- 🎨 **Dual Encoding Engine**:
+  - **Unicode Mode**: Standard Bengali for Web, Chrome, Word, Notes, Messenger, Figma, and modern Unicode fonts (*Kalpurush, SolaimanLipi, Bornomala, Noto Sans*).
+  - **ANSI Mode (SutonnyMJ / Bijoy)**: Real-time conversion to ASCII SutonnyMJ glyphs for **Adobe Illustrator, Photoshop, InDesign, and print publishing**. Automatically reorders pre-vowel signs (`ে`, `ি`, `ৈ`, `ো`, `ৌ`), Reph (`র্`), and complex Bengali conjuncts (যুক্তবর্ণ).
+- ⌨️ **Multiple Keyboard Layouts**:
+  - **Borno (Phonetic)**: Intuitive Avro-compatible phonetic transliteration (`ami` → `আমি`, `bangla` → `বাংলা`).
+  - **National / Bijoy (জাতীয়)**: Standard Bangladesh National (Bijoy) layout (`Av` → `আ`, `g` → `ম`, `h` → `ব`, `j` → `ক`).
+  - **Probhat (প্রভাত)**: Classic Probhat fixed keyboard layout.
+- ⚡️ **Native Performance**: Powered by a sub-millisecond Rust engine core (`riti`) paired with native macOS Swift IME and Windows Win32 integration.
+- 🔒 **100% Offline & Private**: Zero network calls, zero telemetry or analytics. All processing occurs strictly on your device.
 
 ---
 
 ## ⚡️ Quick Install (1-Line Terminal Commands)
 
-### 🍎 For macOS (Terminal):
-Paste this into your macOS **Terminal** and press **Return**:
+### 🍎 For macOS:
+Open **Terminal** (`Command + Space` → search `Terminal`), paste this command and press **Return**:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.sh | bash
 ```
@@ -20,7 +37,7 @@ curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/s
 
 ---
 
-### 🪟 For Windows (PowerShell):
+### 🪟 For Windows:
 Open **PowerShell** or **Windows Terminal**, paste this command and press **Enter**:
 ```powershell
 irm https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.ps1 | iex
@@ -29,27 +46,49 @@ irm https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/
 
 ---
 
-## 🖥️ First-Time Configuration
+## 🖥️ First-Time Setup
 
 ### 🍎 macOS:
 1. Open **System Settings** → **Keyboard** → **Input Sources** (Click *Edit...*).
-2. Click **`+`** (Add), search for **`Borno`**, and select it.
-3. Use the **Globe (🌐)** key or **`Ctrl + Space`** to toggle between English and Borno.
+2. Click **`+`** (Add), search for **`Borno`**, select it and click **Add**.
+3. Toggle between English and Borno using **`Control + Space`** or the **Globe (🌐)** key.
 
 ### 🪟 Windows:
-1. After installation, Borno automatically runs in the **System Tray** (near the taskbar clock).
+1. Borno runs automatically in the **System Tray** (near the taskbar clock).
 2. Press **`F12`** anytime to toggle between **English ⇋ Bengali** mode.
-3. Type in phonetic Avro (e.g. `ami` = `আমি`, `bangla` = `বাংলা`) in MS Word, Chrome, Notepad, etc.
+3. Type in phonetic Avro or your selected layout across any Windows application.
 
 ---
 
-## 🌟 Highlights
+## 🎨 How to Use ANSI (SutonnyMJ) in Adobe Illustrator & Photoshop
 
-- **Pure Direct Typing**: Bengali characters stream directly into your active cursor without popup flicker.
-- **Creative Cloud & Office Ready**: Perfectly tuned for Adobe Illustrator, Photoshop, InDesign, Figma & MS Office.
-- **Native Performance**: Ultra-fast Rust engine core (`riti`) with native macOS Swift UI and Windows Win32 integration.
-- **100% Offline & Private**: Zero network telemetry, fully open-source.
-- **Full Avro Rules**: Supports all standard Avro phonetic mappings and complex Bengali conjuncts.
+Borno allows you to type directly in **SutonnyMJ** without needing third-party converters or external copy-pasting:
+
+1. **Switch Output Encoding to ANSI**:
+   - In the macOS Menu Bar (or Borno Settings), switch **Output Encoding** to **ANSI (SutonnyMJ)**.
+2. **Select SutonnyMJ Font**:
+   - In Adobe Illustrator, Photoshop, or InDesign, select **SutonnyMJ** (or any standard Bijoy ANSI font) in your Character panel.
+3. **Type Naturally**:
+   - Type using your preferred layout (Phonetic or National / Bijoy).
+   - Borno automatically handles all vowel sign reordering (আ-কার, ই-কার, এ-কার, ও-কার), Reph (`র্`), and conjuncts (যেমন: ক্ষ, জ্ঞ, ষ্ণ, ক্ত, ন্ত) in real-time.
+
+---
+
+## ⌨️ Typing Cheat-Sheet & Special Keys
+
+| Key / Sequence | Bengali Output | Note |
+| :--- | :---: | :--- |
+| `a` / `i` / `u` / `e` / `o` | আ / ই / উ / এ / ও | Primary Vowels |
+| `kkh` | ক্ষ | ক + ষ |
+| `jng` | জ্ঞ | জ + ঞ |
+| `..` | । | Bengali Dari (দাঁড়ি) |
+| `$$` | ৳ | Taka Symbol |
+| `,,` | ্ | Explicit Hasanta |
+| `k-s` | কস্ | Joiner Break (`-`) |
+| `w` or `v` | ব-ফলা | যেমন: `kw` → `ক্ব` |
+| `y` or `Z` | য-ফলা | যেমন: `ky` → `ক্য` |
+| `r` | র-ফলা | যেমন: `kr` → `ক্র` |
+| `rr` | রেফ | যেমন: `rrk` → `র্ক` |
 
 ---
 
@@ -75,4 +114,5 @@ cargo build --release
 ## 👤 Credits & Author
 
 - **Developer & Maintainer**: [Yahia Bin Zaman (ইয়াহিয়া বিন জামান)](https://github.com/yahiabinzaman)
+- **Repository**: [https://github.com/yahiabinzaman/borno-keyboard](https://github.com/yahiabinzaman/borno-keyboard)
 - **License**: [MIT License](LICENSE)
