@@ -210,10 +210,10 @@ public class UnicodeToBijoy {
         ("ু", "y"),
         ("ূ", "~"),
         ("ৃ", "\u{2026}"),
-        ("ে", "e"),
+        ("ে", "\u{2020}"),
         ("ৈ", "\u{2030}"),
-        ("ো", "ev"),
-        ("ৌ", "e\u{0160}"),
+        ("ো", "\u{2020}v"),
+        ("ৌ", "\u{2020}\u{0160}"),
         ("ৗ", "\u{0160}"),
         ("্", "&"),
         ("।", "."),
@@ -231,18 +231,14 @@ public class UnicodeToBijoy {
         var text = input
 
         // Step 1: Pre-kar Reordering (E-kar, Oi-kar, Hroshwo-I kar)
-        // In Unicode: [Consonant/Cluster] + [Kar]
-        // In Bijoy:   [Kar-Glyph] + [Consonant/Cluster]
         text = reorderPreKars(text)
 
         // Step 2: Reorder Ref (র্ = র + ্)
-        // In Unicode: র + ্ + Consonant
-        // In Bijoy:   Consonant + © (Ref glyph at end of cluster)
         text = reorderRef(text)
 
-        // Step 3: Replace compound and single glyph mappings
+        // Step 3: Replace compound and single glyph mappings using literal code-point matching
         for (from, to) in conversionMap {
-            text = text.replacingOccurrences(of: from, with: to)
+            text = text.replacingOccurrences(of: from, with: to, options: .literal)
         }
 
         return text
@@ -250,7 +246,7 @@ public class UnicodeToBijoy {
 
     /// Reorders Pre-kars (ি, ে, ৈ, ো, ৌ) before the consonant cluster
     private static func reorderPreKars(_ input: String) -> String {
-        var chars = Array(input)
+        var chars = Array(input.unicodeScalars).map { String($0) }
         var i = 0
 
         while i < chars.count {
@@ -279,16 +275,16 @@ public class UnicodeToBijoy {
                         preKarGlyph = "w"
                         postKarGlyph = nil
                     case "ে":
-                        preKarGlyph = "e"
+                        preKarGlyph = "\u{2020}" // †
                         postKarGlyph = nil
                     case "ৈ":
                         preKarGlyph = "\u{2030}" // ‰
                         postKarGlyph = nil
                     case "ো": // E-kar + Aa-kar (v)
-                        preKarGlyph = "e"
+                        preKarGlyph = "\u{2020}" // †
                         postKarGlyph = "v"
                     case "ৌ": // E-kar + Ou-kar sign (Š)
-                        preKarGlyph = "e"
+                        preKarGlyph = "\u{2020}" // †
                         postKarGlyph = "\u{0160}"
                     default:
                         preKarGlyph = ""
@@ -299,19 +295,19 @@ public class UnicodeToBijoy {
                     chars.remove(at: i)
 
                     if let post = postKarGlyph {
-                        chars.insert(contentsOf: post, at: i)
+                        chars.insert(post, at: i)
                     }
 
                     // Insert the pre-kar glyph before the cluster start
-                    chars.insert(contentsOf: preKarGlyph, at: clusterStart)
-                    i += preKarGlyph.count
+                    chars.insert(preKarGlyph, at: clusterStart)
+                    i += 1
                 }
             }
 
             i += 1
         }
 
-        return String(chars)
+        return chars.joined()
     }
 
     /// Reorders Ref (র্ = র + ্) after the consonant cluster
@@ -319,11 +315,11 @@ public class UnicodeToBijoy {
         var text = input
         let refSeq = "র" + "্"
 
-        while let refRange = text.range(of: refSeq) {
+        while let refRange = text.range(of: refSeq, options: .literal) {
             let afterRef = text[refRange.upperBound...]
             if afterRef.isEmpty { break }
 
-            let charsAfter = Array(afterRef)
+            let charsAfter = Array(afterRef.unicodeScalars).map { String($0) }
             var offset = 0
 
             // Consume the following consonant and conjunct chain
@@ -342,10 +338,10 @@ public class UnicodeToBijoy {
                 }
             }
 
-            let clusterSub = String(charsAfter.prefix(offset))
+            let clusterSub = charsAfter.prefix(offset).joined()
             let refReplacement = clusterSub + "\u{00A9}" // © Ref glyph
 
-            let fullReplaceRange = refRange.lowerBound..<text.index(refRange.upperBound, offsetBy: offset)
+            let fullReplaceRange = refRange.lowerBound..<text.index(refRange.upperBound, offsetBy: clusterSub.count)
             text.replaceSubrange(fullReplaceRange, with: refReplacement)
         }
 
