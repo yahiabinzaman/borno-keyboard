@@ -3,11 +3,11 @@
 [![macOS](https://img.shields.io/badge/macOS-13.0%2B-black?logo=apple&logoColor=white)](https://github.com/yahiabinzaman/borno-keyboard)
 [![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows&logoColor=white)](https://github.com/yahiabinzaman/borno-keyboard)
 [![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-Universal%20Binary-blue)](https://github.com/yahiabinzaman/borno-keyboard)
-[![Output](https://img.shields.io/badge/Encoding-Unicode%20%2B%20ANSI%20SutonnyMJ-purple)](https://github.com/yahiabinzaman/borno-keyboard)
+[![Output](https://img.shields.io/badge/Encoding-Unicode%20%2B%20ANSI-purple)](https://github.com/yahiabinzaman/borno-keyboard)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline-success)](https://github.com/yahiabinzaman/borno-keyboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Borno (বর্ণ)** is a fast, minimal, native Bengali input method built for **macOS** and **Windows**. Designed for maximum typing speed, pure direct typing with zero floating popup disruption, and seamless dual-encoding support across **Unicode** and **ANSI (Bijoy SutonnyMJ)** for professional graphic design in Adobe Illustrator, Photoshop, InDesign, Figma, MS Office, and all modern applications.
+**Borno (বর্ণ)** is a fast, minimal, native Bengali input method built for **macOS** and **Windows**. Designed for maximum typing speed, pure direct typing with zero floating popup disruption, and seamless dual-encoding support across **Unicode** and **ANSI** for professional graphic design in Adobe Illustrator, Photoshop, InDesign, Figma, MS Office, and all modern applications.
 
 ---
 
@@ -16,7 +16,7 @@
 - 🚀 **Pure Direct Typing**: Characters stream directly into your active cursor without flickering popup overlays or lag.
 - 🎨 **Dual Encoding Engine**:
   - **Unicode Mode**: Standard Bengali for Web, Chrome, Word, Notes, Messenger, Figma, and modern Unicode fonts (*Kalpurush, SolaimanLipi, Bornomala, Noto Sans*).
-  - **ANSI Mode (SutonnyMJ / Bijoy)**: Real-time conversion to ASCII SutonnyMJ glyphs for **Adobe Illustrator, Photoshop, InDesign, and print publishing**. Automatically reorders pre-vowel signs (`ে`, `ি`, `ৈ`, `ো`, `ৌ`), Reph (`র্`), and complex Bengali conjuncts (যুক্তবর্ণ).
+  - **ANSI Mode**: Real-time conversion to ANSI characters for **Adobe Illustrator, Photoshop, InDesign, and print publishing**. Automatically reorders pre-vowel signs (`ে`, `ি`, `ৈ`, `ো`, `ৌ`), Reph (`র্`), and complex Bengali conjuncts (যুক্তবর্ণ).
 - ⌨️ **Multiple Keyboard Layouts**:
   - **Borno (Phonetic)**: Intuitive Avro-compatible phonetic transliteration (`ami` → `আমি`, `bangla` → `বাংলা`).
   - **National / Bijoy (জাতীয়)**: Standard Bangladesh National (Bijoy) layout (`Av` → `আ`, `g` → `ম`, `h` → `ব`, `j` → `ক`).
@@ -60,14 +60,14 @@ irm https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/
 
 ---
 
-## 🎨 How to Use ANSI (SutonnyMJ) in Adobe Illustrator & Photoshop
+## 🎨 How to Use ANSI Mode in Adobe Illustrator & Photoshop
 
-Borno allows you to type directly in **SutonnyMJ** without needing third-party converters or external copy-pasting:
+Borno allows you to type directly in ANSI without needing third-party converters or external copy-pasting:
 
 1. **Switch Output Encoding to ANSI**:
-   - In the macOS Menu Bar (or Borno Settings), switch **Output Encoding** to **ANSI (SutonnyMJ)**.
-2. **Select SutonnyMJ Font**:
-   - In Adobe Illustrator, Photoshop, or InDesign, select **SutonnyMJ** (or any standard Bijoy ANSI font) in your Character panel.
+   - In the macOS Menu Bar (or Borno Settings), switch **Output Encoding** to **ANSI**.
+2. **Select ANSI Font**:
+   - In Adobe Illustrator, Photoshop, or InDesign, select your ANSI font in the Character panel.
 3. **Type Naturally**:
    - Type using your preferred layout (Phonetic or National / Bijoy).
    - Borno automatically handles all vowel sign reordering (আ-কার, ই-কার, এ-কার, ও-কার), Reph (`র্`), and conjuncts (যেমন: ক্ষ, জ্ঞ, ষ্ণ, ক্ত, ন্ত) in real-time.
@@ -113,6 +113,6 @@ cargo build --release
 
 ## 👤 Credits & Author
 
-- **Developer & Maintainer**: [Yahia Bin Zaman (ইয়াহিয়া বিন জামান)](https://github.com/yahiabinzaman)
+- **Developer & Maintainer**: [Yahia Bin Zaman](https://github.com/yahiabinzaman)
 - **Repository**: [https://github.com/yahiabinzaman/borno-keyboard](https://github.com/yahiabinzaman/borno-keyboard)
 - **License**: [MIT License](LICENSE)

@@ -509,9 +509,9 @@ class ModernGettingStartedView: NSView {
 
         let step3 = makeStepCard(
             stepNumber: "3",
-            title: "Unicode & ANSI (SutonnyMJ) for Adobe Apps",
-            desc: "Select ANSI mode from Settings or the Menu Bar to type directly in Adobe Illustrator and Photoshop using SutonnyMJ font without glitches.",
-            badgeText: "Unicode & ANSI (SutonnyMJ)"
+            title: "Unicode & ANSI for Design Apps",
+            desc: "Select ANSI mode from Settings or the Menu Bar to type directly in Adobe Illustrator, Photoshop, and legacy design tools.",
+            badgeText: "Unicode & ANSI"
         )
         content.addArrangedSubview(step3)
         step3.widthAnchor.constraint(equalTo: content.widthAnchor).isActive = true
@@ -964,7 +964,7 @@ class ModernSettingsView: NSView {
 
         let encOptions: [(id: String, title: String, badge: String?, desc: String)] = [
             ("Unicode", "Unicode", "Default", "For Web, MS Word, Notes, Messenger, Figma & standard Unicode Bengali fonts (Kalpurush, Bornomala, SolaimanLipi)."),
-            ("ANSI", "ANSI", "SutonnyMJ", "Outputs direct SutonnyMJ ASCII glyphs for Adobe Illustrator, Photoshop, InDesign, and print publishing.")
+            ("ANSI", "ANSI", nil, "Outputs direct ANSI characters for Adobe Illustrator, Photoshop, InDesign, and print publishing.")
         ]
 
         let encStack = NSStackView()
@@ -1272,7 +1272,7 @@ class ModernAboutView: NSView {
         title.textColor = .labelColor
         centerStack.addArrangedSubview(title)
 
-        let desc = NSTextField(wrappingLabelWithString: "Modern, native Bengali input method for macOS and Windows.\nFeaturing pure direct typing, multiple layouts, and complete Unicode + ANSI SutonnyMJ support.")
+        let desc = NSTextField(wrappingLabelWithString: "Modern, native Bengali input method for macOS and Windows.\nFeaturing pure direct typing, multiple layouts, and complete Unicode + ANSI support.")
         desc.alignment = .center
         desc.font = NSFont.systemFont(ofSize: 12.5, weight: .regular)
         desc.textColor = .secondaryLabelColor
@@ -1285,7 +1285,7 @@ class ModernAboutView: NSView {
         badgeRow.alignment = .centerY
 
         badgeRow.addArrangedSubview(makePillBadge(text: "⚡️ Sub-ms Latency", color: .systemBlue))
-        badgeRow.addArrangedSubview(makePillBadge(text: "🎨 SutonnyMJ ANSI", color: .systemPurple))
+        badgeRow.addArrangedSubview(makePillBadge(text: "🎨 ANSI Support", color: .systemPurple))
         badgeRow.addArrangedSubview(makePillBadge(text: "🔒 100% Offline", color: .systemGreen))
 
         centerStack.addArrangedSubview(badgeRow)
@@ -1356,13 +1356,13 @@ class ModernAboutView: NSView {
 
         let rows = [
             ("Version", "0.2.5 (Universal Binary)"),
-            ("Encodings", "Unicode & ANSI (SutonnyMJ / Bijoy)"),
+            ("Encodings", "Unicode & ANSI"),
             ("Layouts", "Borno (Phonetic) · National (জাতীয়) · Probhat"),
             ("Engine", "Rust (riti) Native Core + Swift IME"),
             ("Architecture", "Apple Silicon (ARM64) + Intel (x86_64)"),
             ("Compatibility", "macOS 13.0+ & Windows 10/11"),
             ("Privacy", "100% Offline (No Telemetry / Analytics)"),
-            ("Developer", "Yahia Bin Zaman (ইয়াহিয়া বিন জামান)"),
+            ("Developer", "Yahia Bin Zaman"),
             ("License", "Open Source (MIT License)")
         ]
 
