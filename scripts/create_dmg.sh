@@ -85,6 +85,36 @@ ln -sf "$INSTALL_DIR/Borno.app" "/Applications/Borno.app"
 rm -f "/Applications/AvroBangla.app" 2>/dev/null || true
 rm -rf "/Applications/AvroBangla.app" 2>/dev/null || true
 
+# Register user LaunchAgent for automatic startup & background keepalive
+LAUNCH_AGENT_DIR="$REAL_HOME/Library/LaunchAgents"
+LAUNCH_AGENT_PLIST="$LAUNCH_AGENT_DIR/com.borno.inputmethod.Borno.plist"
+mkdir -p "$LAUNCH_AGENT_DIR"
+chown "$REAL_USER" "$LAUNCH_AGENT_DIR" 2>/dev/null || true
+
+cat <<EOF > "$LAUNCH_AGENT_PLIST"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.borno.inputmethod.Borno</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>$INSTALL_DIR/Borno.app/Contents/MacOS/Borno</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Interactive</string>
+</dict>
+</plist>
+EOF
+chown "$REAL_USER" "$LAUNCH_AGENT_PLIST" 2>/dev/null || true
+
+su "$REAL_USER" -c "launchctl load '$LAUNCH_AGENT_PLIST'" 2>/dev/null || true
+
 # Kill any auto-relaunched old instance (macOS may relaunch the IME
 # between preinstall kill and postinstall copy — the old binary runs
 # from cache, showing the wrong version)

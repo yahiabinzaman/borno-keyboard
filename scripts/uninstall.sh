@@ -9,7 +9,11 @@ SAVED_STATE_DIR="$HOME/Library/Saved Application State/com.lekho.inputmethod.Bor
 
 echo "=== Uninstalling $APP_NAME ==="
 
-# Kill running instance
+# Kill running instance & unload LaunchAgent
+LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.borno.inputmethod.Borno.plist"
+launchctl unload "$LAUNCH_AGENT_PLIST" 2>/dev/null || true
+rm -f "$LAUNCH_AGENT_PLIST" 2>/dev/null || true
+
 killall "$APP_NAME" 2>/dev/null || true
 killall "AvroBangla" 2>/dev/null || true  # old name
 sleep 1

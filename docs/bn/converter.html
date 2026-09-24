@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Converter by Yaza — সার্বজনীন বাংলা ইউনিকোড ও অ্যানসি (বিজয়) কনভার্টার</title>
+    <meta name="description" content="বিনামূল্যে, ১০০% অফলাইন ও নিরাপদ বাংলা স্ক্রিপ্ট কনভার্টার। ইউনিকোড ও অ্যানসি (বিজয় / সুতন্নিএমজে V1, V2, V3) এর মাঝে রিয়েল-টাইম উভয়মুখী রূপান্তর।" />
+    <meta name="keywords" content="unicode to bijoy converter, bijoy to unicode, converter by yaza, sutonnymj converter, ansi to unicode, illustrator bangla converter, বাংলা কনভার্টার, ইউনিকোড টু বিজয়" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yahiabinzaman.github.io/borno-keyboard/bn/converter.html" />
+    <meta property="og:title" content="Converter by Yaza — সার্বজনীন বাংলা ইউনিকোড ও অ্যানসি কনভার্টার" />
+    <meta property="og:description" content="অ্যাডোবি ইলাস্ট্রেটর, ফটোশপ ও ওয়েবের জন্য ৩টি ভিন্ন অ্যানসি ভার্সন সম্বলিত রিয়েল-টাইম বাংলা কনভার্টার।" />
+    <meta property="og:image" content="https://yahiabinzaman.github.io/borno-keyboard/borno-icon.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../borno-logo-transparent.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+        @font-face {
+            font-family: 'BornomalaUnicode';
+            src: url('../fonts/NahidaBornomala.woff2') format('woff2'),
+                 url('../fonts/NahidaBornomala.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BornomalaANSI';
+            src: url('../fonts/BornomalaANSI.ttf') format('truetype'),
+                 url('../fonts/SutonnyMJ-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'SutonnyMJ';
+            src: url('../fonts/SutonnyMJ-Regular.ttf') format('truetype'),
+                 url('../fonts/SutonnyMJ.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #030305;
+            --bg-subtle: #08080c;
+            --card-bg: rgba(18, 18, 24, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-hover: rgba(255, 255, 255, 0.22);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-heading: "Anek Bangla", "Hind Siliguri", -apple-system, sans-serif;
+            --font-main: "Hind Siliguri", "Anek Bangla", "Plus Jakarta Sans", -apple-system, sans-serif;
+            --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Horizon Lighting */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            max-width: 1400px;
+            height: 500px;
+            background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 75%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ambient-beam {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+            box-shadow: 0 0 25px 1px rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(4, 4, 6, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: var(--font-heading);
+        }
+
+        .brand-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.1rem 0.45rem;
+            border-radius: 999px;
+            color: #cbd5e1;
+            letter-spacing: normal;
+            font-family: var(--font-main);
+        }
+
+        .brand-sub {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.15s ease;
+        }
+
+        .btn-nav-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .lang-switch {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.35rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .lang-switch:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.32rem 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            font-family: var(--font-main);
+            margin-bottom: 0.85rem;
+        }
+
+        .hero-banner h1 {
+            font-size: clamp(2.1rem, 5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-heading);
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-banner p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Version Tab Bar */
+        .versions-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .ver-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.55rem 1.25rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: var(--font-main);
+        }
+
+        .ver-tab:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .ver-tab.active {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 18px rgba(255, 255, 255, 0.16);
+        }
+
+        /* Workspace Grid */
+        .converter-workspace {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.25rem;
+            align-items: stretch;
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-card {
+            background: rgba(14, 14, 20, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .editor-card:focus-within {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08), 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+        }
+
+        .editor-topbar {
+            padding: 0.8rem 1.1rem;
+            background: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .editor-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .editor-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .editor-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-act {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--font-main);
+        }
+
+        .btn-act:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-act.copied {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
+            font-weight: 700;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 380px;
+            padding: 1.25rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            font-size: 1.25rem;
+            line-height: 1.65;
+            resize: vertical;
+            font-family: 'BornomalaUnicode', 'Hind Siliguri', 'Anek Bangla', sans-serif;
+        }
+
+        .editor-textarea.ansi-box {
+            font-family: 'BornomalaANSI', 'SutonnyMJ', sans-serif;
+            font-size: 1.25rem;
+            line-height: 1.65;
+            color: #f8fafc;
+            letter-spacing: normal;
+        }
+
+        .editor-textarea.ansi-box.raw-mode {
+            font-family: var(--font-mono) !important;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .editor-footer {
+            padding: 0.6rem 1.1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-main);
+            background: rgba(6, 6, 9, 0.5);
+        }
+
+        .sync-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sync-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1f5f9;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        /* Preset Chips */
+        .preset-strip {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 3.5rem;
+        }
+
+        .chip-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            font-family: var(--font-main);
+            font-size: 0.84rem;
+            padding: 0.28rem 0.65rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .chip-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Features Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .feature-card {
+            background: rgba(14, 14, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .feature-icon {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.35rem;
+            font-family: var(--font-heading);
+        }
+
+        .feature-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 2.5rem 1.5rem;
+            background: #020204;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: auto;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .converter-workspace {
+                grid-template-columns: 1fr;
+            }
+            .sync-divider {
+                padding: 0.4rem 0;
+                transform: rotate(90deg);
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .editor-textarea {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    <div class="ambient-beam"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="brand">
+                <img src="../borno-logo-transparent.png" alt="Borno Logo" class="brand-logo-img" />
+                <div class="brand-text">
+                    <div class="brand-title">
+                        কনভার্টার <span class="brand-badge">বাই ইয়াজা</span>
+                    </div>
+                    <div class="brand-sub">Universal Script Engine</div>
+                </div>
+            </a>
+
+            <div class="nav-actions">
+                <a href="index.html" class="btn-nav-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>বর্ণ কীবোর্ড</span>
+                </a>
+                <a href="../converter.html" class="lang-switch">English</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-container">
+        <div class="hero-banner">
+            <div class="pill-tag">
+                <span>⚡</span>
+                <span>কনভার্টার বাই ইয়াজা ইঞ্জিন</span>
+            </div>
+            <h1>সার্বজনীন বাংলা বর্ণমালা কনভার্টার</h1>
+            <p>
+                আধুনিক <strong>ইউনিকোড</strong> এবং অ্যাডোবি ইলাস্ট্রেটর/ফটোশপের জন্য ৩টি ভিন্ন <strong>অ্যানসি (বিজয় / সুতন্নিএমজে)</strong> ভার্সনের মাঝে তাৎক্ষণিক উভয়মুখী রূপান্তর।
+            </p>
+        </div>
+
+        <!-- Version Selector Tabs -->
+        <div class="versions-bar">
+            <button class="ver-tab active" id="tab-v1" onclick="setVersion('v1')">
+                <span>ইউনিকোড</span> <span style="opacity: 0.5;">⟷</span> <span>অ্যানসি V1 (বিজয় / সুতন্নিএমজে)</span>
+            </button>
+            <button class="ver-tab" id="tab-v2" onclick="setVersion('v2')">
+                <span>ইউনিকোড</span> <span style="opacity: 0.5;">⟷</span> <span>অ্যানসি V2 (স্ট্যান্ডার্ড অ্যানসি)</span>
+            </button>
+            <button class="ver-tab" id="tab-v3" onclick="setVersion('v3')">
+                <span>ইউনিকোড</span> <span style="opacity: 0.5;">⟷</span> <span>অ্যানসি V3 (মডার্ন ডিজাইন গ্লিফ)</span>
+            </button>
+        </div>
+
+        <!-- Dual Editors Workspace -->
+        <div class="converter-workspace">
+            <!-- Left: Unicode Panel -->
+            <div class="editor-card">
+                <div class="editor-topbar">
+                    <div class="editor-title">
+                        <span>ইউনিকোড</span>
+                        <span class="editor-tag">UTF-8 Standard</span>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn-act" id="btn-copy-uni" onclick="copyText('uni')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span id="lbl-copy-uni">কপি</span>
+                        </button>
+                        <button class="btn-act" onclick="pasteText('uni')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                            <span>পেস্ট</span>
+                        </button>
+                        <button class="btn-act" onclick="downloadFile('uni')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                            <span>সেভ .txt</span>
+                        </button>
+                        <button class="btn-act" onclick="clearAll()">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            <span>ক্লিয়ার</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="uni-input" class="editor-textarea" placeholder="এখানে ইউনিকোড বাংলা লিখুন বা পেস্ট করুন..." oninput="onUnicodeInput()"></textarea>
+                <div class="editor-footer">
+                    <span id="uni-counts">০ অক্ষর · ০ শব্দ</span>
+                    <span>স্ট্যান্ডার্ড বাংলা ফন্ট সমর্থিত</span>
+                </div>
+            </div>
+
+            <!-- Middle: Sync Divider -->
+            <div class="sync-divider">
+                <div class="sync-badge">
+                    <span>⇄</span>
+                </div>
+            </div>
+
+            <!-- Right: ANSI Panel -->
+            <div class="editor-card">
+                <div class="editor-topbar">
+                    <div class="editor-title">
+                        <span id="ansi-panel-title">অ্যানসি V1</span>
+                        <span class="editor-tag" id="ansi-panel-tag">বিজয় / সুতন্নিএমজে</span>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn-act" id="btn-font-mode" onclick="toggleFontMode()" title="বাংলা ফন্ট প্রিভিউ এবং র অ্যানসি কোডের মধ্যে পরিবর্তন করুন">
+                            <span id="lbl-font-mode">👁️ র কোড</span>
+                        </button>
+                        <button class="btn-act" id="btn-copy-ansi" onclick="copyText('ansi')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span id="lbl-copy-ansi">কপি</span>
+                        </button>
+                        <button class="btn-act" onclick="pasteText('ansi')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                            <span>পেস্ট</span>
+                        </button>
+                        <button class="btn-act" onclick="downloadFile('ansi')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                            <span>সেভ .txt</span>
+                        </button>
+                        <button class="btn-act" onclick="clearAll()">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            <span>ক্লিয়ার</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="ansi-input" class="editor-textarea ansi-box" placeholder="এখানে অ্যানসি (বিজয় / সুতন্নিএমজে) লিখুন বা পেস্ট করুন..." oninput="onAnsiInput()"></textarea>
+                <div class="editor-footer">
+                    <span id="ansi-counts">০ অক্ষর · ০ শব্দ</span>
+                    <span id="ansi-footer-note">বাংলা ফন্ট প্রিভিউ (ইলাস্ট্রেটর উপযুক্ত)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="preset-strip">
+            <span>দ্রুত পরীক্ষা:</span>
+            <button class="chip-btn" onclick="setPreset('আমার সোনার বাংলা, আমি তোমায় ভালোবাসি।')">আমার সোনার বাংলা</button>
+            <button class="chip-btn" onclick="setPreset('বাংলা বর্ণমালা ও আধুনিক ইউনিকোড রূপান্তর।')">বর্ণমালা রূপান্তর</button>
+            <button class="chip-btn" onclick="setPreset('যুক্তবর্ণ পরীক্ষা: ক্ষ, জ্ঞ, ষ্ণ, ঙ্ক, ঙ্গ, ঞ্ছ, ঞ্জ, ণ্ট, ণ্ঠ, ণ্ড, ণ্ণ, ত্থ, ত্র, ্ত্ব, দ্ব, দ্ধ, দ্ব, ধ্ব, ন্ন, ম্প, ম্ফ, ল্ক, ল্প, ষ্ক, ষ্ট, ষ্ঠ, স্ন, স্প, স্ফ, হ্ন, হ্ম, হ্ল।')">যুক্তবর্ণ পরীক্ষা</button>
+            <button class="chip-btn" onclick="setPreset('বিজ্ঞাপন ও প্রিন্ট ডিজাইনের জন্য নির্ভুল বাংলা রূপান্তর।')">ডিজাইন টেক্সট</button>
+        </div>
+
+        <!-- Features Matrix -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>উভয়মুখী রূপান্তর ইঞ্জিন</h3>
+                <p>প্রিন্ট ও ডিজাইনের জন্য ইউনিকোড থেকে সরাসরি অ্যানসি অথবা পুরনো বিজয় ফাইল এক ক্লিকেই আধুনিক ইউনিকোডে রূপান্তর করুন।</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>১০০% অফলাইন ও সম্পূর্ণ নিরাপদ</h3>
+                <p>আপনার ব্রাউজারের মেমোরিতেই ক্লায়েন্ট-সাইড জাভাস্ক্রিপ্টে কাজ করে। কোনো টেক্সট কোথাও আপলোড বা ইন্টারনেটে পাঠানো হয় না।</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>অ্যাডোবি স্যুটের সাথে সামঞ্জস্যপূর্ণ</h3>
+                <p>Adobe Illustrator, Photoshop, InDesign ও Premiere Pro-তে ভাঙা কার (ি, ী, ো) বা ভুল রেফ অবস্থানের সমস্যা সম্পূর্ণ দূর করে।</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <strong>কনভার্টার বাই ইয়াজা</strong> · মূল নির্মাতা: ইয়াহিয়া বিন জামান
+            </div>
+            <div class="footer-links">
+                <a href="index.html">বর্ণ কীবোর্ড</a>
+                <a href="index.html#encoding">ডুয়াল আর্কিটেকচার</a>
+                <a href="https://github.com/yahiabinzaman/borno-keyboard" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../converter-engine.js"></script>
+    <script>
+        let currentVersion = 'v1';
+        let isSyncing = false;
+        let isRawMode = false;
+
+        const versionMeta = {
+            'v1': { name: 'অ্যানসি V1', tag: 'বিজয় / সুতন্নিএমজে' },
+            'v2': { name: 'অ্যানসি V2', tag: 'স্ট্যান্ডার্ড অ্যানসি' },
+            'v3': { name: 'অ্যানসি V3', tag: 'মডার্ন ডিজাইন গ্লিফ' }
+        };
+
+        function setVersion(ver) {
+            currentVersion = ver;
+            ['v1', 'v2', 'v3'].forEach(v => {
+                const tab = document.getElementById(`tab-${v}`);
+                if (tab) tab.classList.toggle('active', v === ver);
+            });
+            const meta = versionMeta[ver] || versionMeta['v1'];
+            document.getElementById('ansi-panel-title').innerText = meta.name;
+            document.getElementById('ansi-panel-tag').innerText = meta.tag;
+
+            applyAnsiFont();
+            onUnicodeInput();
+        }
+
+        function toggleFontMode() {
+            isRawMode = !isRawMode;
+            const ansiBox = document.getElementById('ansi-input');
+            const lbl = document.getElementById('lbl-font-mode');
+            const footerNote = document.getElementById('ansi-footer-note');
+            ansiBox.classList.toggle('raw-mode', isRawMode);
+            if (isRawMode) {
+                lbl.innerText = '👁️ বাংলা ফন্ট প্রিভিউ';
+                footerNote.innerText = 'র অ্যানসি কোড (ইলাস্ট্রেটর উপযুক্ত)';
+            } else {
+                lbl.innerText = '👁️ র কোড';
+                footerNote.innerText = 'বাংলা ফন্ট প্রিভিউ (ইলাস্ট্রেটর উপযুক্ত)';
+                applyAnsiFont();
+            }
+        }
+
+        function applyAnsiFont() {
+            if (isRawMode) return;
+            const ansiBox = document.getElementById('ansi-input');
+            ansiBox.style.fontFamily = "'BornomalaANSI', 'SutonnyMJ', sans-serif";
+        }
+
+        const toBnDigits = (n) => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+        function updateCounts() {
+            const uniVal = document.getElementById('uni-input').value;
+            const ansiVal = document.getElementById('ansi-input').value;
+
+            const uniWords = uniVal.trim() ? uniVal.trim().split(/\s+/).length : 0;
+            const ansiWords = ansiVal.trim() ? ansiVal.trim().split(/\s+/).length : 0;
+
+            document.getElementById('uni-counts').innerText = `${toBnDigits(uniVal.length)} অক্ষর · ${toBnDigits(uniWords)} শব্দ`;
+            document.getElementById('ansi-counts').innerText = `${toBnDigits(ansiVal.length)} অক্ষর · ${toBnDigits(ansiWords)} শব্দ`;
+        }
+
+        function onUnicodeInput() {
+            if (isSyncing) return;
+            isSyncing = true;
+            try {
+                const uniText = document.getElementById('uni-input').value;
+                if (!window.YazaConverter) return;
+                const converted = window.YazaConverter.unicodeToAnsi(uniText, currentVersion);
+                document.getElementById('ansi-input').value = converted;
+                updateCounts();
+            } finally {
+                isSyncing = false;
+            }
+        }
+
+        function onAnsiInput() {
+            if (isSyncing) return;
+            isSyncing = true;
+            try {
+                const ansiText = document.getElementById('ansi-input').value;
+                if (!window.YazaConverter) return;
+                const converted = window.YazaConverter.ansiToUnicode(ansiText, currentVersion);
+                document.getElementById('uni-input').value = converted;
+                updateCounts();
+            } finally {
+                isSyncing = false;
+            }
+        }
+
+        function copyText(type) {
+            const targetId = type === 'uni' ? 'uni-input' : 'ansi-input';
+            const btnId = type === 'uni' ? 'btn-copy-uni' : 'btn-copy-ansi';
+            const lblId = type === 'uni' ? 'lbl-copy-uni' : 'lbl-copy-ansi';
+            const text = document.getElementById(targetId).value;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                const lbl = document.getElementById(lblId);
+                if (btn) btn.classList.add('copied');
+                if (lbl) lbl.innerText = 'কপি হয়েছে!';
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('copied');
+                    if (lbl) lbl.innerText = 'কপি';
+                }, 2000);
+            });
+        }
+
+        async function pasteText(type) {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (type === 'uni') {
+                    document.getElementById('uni-input').value = text;
+                    onUnicodeInput();
+                } else {
+                    document.getElementById('ansi-input').value = text;
+                    onAnsiInput();
+                }
+            } catch (err) {
+                console.warn('Clipboard read error:', err);
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('uni-input').value = '';
+            document.getElementById('ansi-input').value = '';
+            updateCounts();
+        }
+
+        function setPreset(text) {
+            document.getElementById('uni-input').value = text;
+            onUnicodeInput();
+        }
+
+        function downloadFile(type) {
+            const isUni = type === 'uni';
+            const content = document.getElementById(isUni ? 'uni-input' : 'ansi-input').value;
+            if (!content) return;
+            const filename = isUni ? 'converted_unicode.txt' : `converted_ansi_${currentVersion}.txt`;
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+</body>
+</html>

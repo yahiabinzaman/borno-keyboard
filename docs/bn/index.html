@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>বর্ণ (Borno) — ম্যাক এবং উইন্ডোজের জন্য আধুনিক নেটিভ বাংলা কীবোর্ড</title>
-    <meta name="description" content="বর্ণ (Borno) হলো ম্যাকওএস এবং উইন্ডোজের জন্য একটি প্রিমিয়াম ও দ্রুতগতির নেটিভ বাংলা কীবোর্ড। সরাসরি টাইপিং, ইউনিকোড ও ANSI ডুয়াল মোড এবং অ্যাডোবি ইলাস্ট্রেটর, ফটোশপ ও সব অ্যাপে নিখুঁত পারফরম্যান্স।" />
-    <meta name="keywords" content="বর্ণ, Borno, avro keyboard mac, bangla keyboard macos, avro phonetic mac, apple silicon avro, bangla typing illustrator, borno mac, bangla keyboard windows, bijoy keyboard mac, sutonnymj ansi keyboard" />
+    <title>Borno (বর্ণ) — ম্যাক ও উইন্ডোজের জন্য আধুনিক বাংলা কীবোর্ড</title>
+    <meta name="description" content="ম্যাক ও উইন্ডোজের জন্য দ্রুত, মিনিমাল এবং নেটিভ বাংলা কীবোর্ড। ইউনিকোড ও অ্যাডোবি ইলাস্ট্রেটর/ফটোশপ অ্যানসি (ANSI) উভয় মোডে সরাসরি টাইপিং সুবিধা।" />
+    <meta name="keywords" content="Borno, বর্ণ, avro keyboard mac, bangla keyboard macos, avro phonetic mac, apple silicon avro, bangla typing illustrator, borno mac, bangla keyboard windows, bijoy keyboard mac, sutonnymj ansi keyboard" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yahiabinzaman.github.io/borno-keyboard/bn/" />
-    <meta property="og:title" content="বর্ণ (Borno) — ম্যাক এবং উইন্ডোজের জন্য আধুনিক নেটিভ বাংলা কীবোর্ড" />
-    <meta property="og:description" content="অ্যাপল সিলিকন ও উইন্ডোজের জন্য নেটিভ বাংলা কীবোর্ড। সরাসরি লিখুন ইউনিকোড এবং ANSI মোডে কোনো ঝামেলা ছাড়াই।" />
+    <meta property="og:title" content="Borno (বর্ণ) — ম্যাক ও উইন্ডোজের জন্য আধুনিক বাংলা কীবোর্ড" />
+    <meta property="og:description" content="অ্যাপল সিলিকন ও উইন্ডোজের জন্য সরাসরি ইন-মেমরি বাংলা কীবোর্ড। ইউনিকোড ও অ্যানসি সমর্থন এবং ১০০% অফলাইন নিরাপত্তা।" />
     <meta property="og:image" content="https://yahiabinzaman.github.io/borno-keyboard/borno-icon.png" />
 
     <!-- Favicon -->
@@ -20,22 +20,21 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <style>
         :root {
-            --bg: #05080c;
-            --bg-subtle: #090e15;
-            --card-bg: rgba(13, 20, 30, 0.7);
+            --bg: #030305;
+            --bg-subtle: #08080c;
+            --card-bg: rgba(18, 18, 24, 0.7);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(56, 189, 248, 0.3);
+            --card-border-hover: rgba(255, 255, 255, 0.22);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
-            --accent-primary: #10b981;
-            --accent-cyan: #06b6d4;
-            --accent-purple: #8b5cf6;
-            --font-main: "Hind Siliguri", "Plus Jakarta Sans", -apple-system, sans-serif;
+            --accent-glow: rgba(255, 255, 255, 0.06);
+            --font-heading: "Anek Bangla", "Hind Siliguri", -apple-system, sans-serif;
+            --font-main: "Hind Siliguri", "Anek Bangla", "Plus Jakarta Sans", -apple-system, sans-serif;
             --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
         }
 
@@ -45,6 +44,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text-primary);
@@ -52,31 +55,44 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 85% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 15% 40%, rgba(139, 92, 246, 0.06) 0%, transparent 40%);
-            background-attachment: fixed;
+            position: relative;
         }
 
-        .bg-grid {
+        /* Pure Dark Stealth Horizon Lighting */
+        .ambient-glow {
             position: fixed;
-            inset: 0;
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            max-width: 1400px;
+            height: 600px;
+            background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 75%);
             pointer-events: none;
             z-index: 0;
         }
 
+        .ambient-beam {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            box-shadow: 0 0 25px 1px rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        /* Header */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(5, 8, 12, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(4, 4, 6, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
@@ -98,9 +114,9 @@
         }
 
         .brand-logo-img {
-            height: 36px;
+            height: 32px;
             width: auto;
-            filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.3));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
         }
 
         .brand-name {
@@ -109,17 +125,18 @@
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
         }
 
         .brand-version {
-            font-size: 0.72rem;
-            padding: 0.15rem 0.45rem;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
+            font-size: 0.7rem;
+            padding: 0.12rem 0.45rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
             border-radius: 999px;
             font-weight: 600;
+            font-family: var(--font-mono);
         }
 
         nav {
@@ -131,14 +148,14 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.4rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 500;
             transition: color 0.15s ease;
         }
@@ -158,12 +175,13 @@
             align-items: center;
             padding: 0.3rem 0.75rem;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             transition: all 0.2s;
         }
 
@@ -173,25 +191,27 @@
         }
 
         .nav-btn-download {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
+            background: #ffffff;
+            color: #030305;
             text-decoration: none;
-            padding: 0.45rem 1.1rem;
+            padding: 0.42rem 1.05rem;
             border-radius: 999px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
             transition: all 0.2s;
         }
 
         .nav-btn-download:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+            background: #f1f5f9;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
         }
 
+        /* Container */
         .container {
             position: relative;
             z-index: 1;
@@ -200,120 +220,144 @@
             padding: 0 1.5rem;
         }
 
+        /* Hero */
         .hero {
-            padding: 5.5rem 0 3.5rem;
+            padding: 4.8rem 0 3rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .pill-badge {
+        .status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.35rem 0.95rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.25);
+            gap: 0.55rem;
+            padding: 0.32rem 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 999px;
-            font-size: 0.9rem;
-            color: #34d399;
-            margin-bottom: 1.8rem;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            margin-bottom: 1.6rem;
             font-weight: 500;
         }
 
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
         .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 4.3rem);
+            font-family: var(--font-heading);
+            font-size: clamp(2.4rem, 5.8vw, 4.4rem);
             font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            max-width: 920px;
-            margin-bottom: 1.3rem;
-            background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            max-width: 900px;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(180deg, #ffffff 30%, #888899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-wrap: balance;
+            hyphens: none;
+            -webkit-hyphens: none;
+            word-break: normal;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            max-width: 720px;
-            margin-bottom: 2.4rem;
+            max-width: 680px;
+            margin-bottom: 2.2rem;
             line-height: 1.6;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.9rem;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
         }
 
         .btn-main {
-            padding: 0.85rem 1.7rem;
+            padding: 0.8rem 1.6rem;
             border-radius: 999px;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 0.96rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.55rem;
             text-decoration: none;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .btn-mac {
             background: #ffffff;
-            color: #000000;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+            color: #030305;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 20px rgba(255, 255, 255, 0.1);
         }
 
         .btn-mac:hover {
             transform: translateY(-2px);
             background: #f1f5f9;
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 8px 25px rgba(255, 255, 255, 0.18);
         }
 
         .btn-win {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #ffffff;
+            backdrop-filter: blur(12px);
         }
 
         .btn-win:hover {
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
         }
 
+        /* 1-Line Terminal Commands */
         .terminal-container {
             width: 100%;
-            max-width: 640px;
-            background: rgba(13, 20, 30, 0.85);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 0.5rem 0.6rem 0.5rem 1rem;
+            max-width: 620px;
+            background: rgba(14, 14, 18, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 0.45rem 0.5rem 0.45rem 0.9rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 0.75rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(16px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
         }
 
         .terminal-tabs {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
 
         .term-tab {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.76rem;
             font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
+            padding: 0.2rem 0.45rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -325,8 +369,8 @@
 
         .term-code {
             font-family: var(--font-mono);
-            font-size: 0.84rem;
-            color: #38bdf8;
+            font-size: 0.8rem;
+            color: #f1f5f9;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -335,13 +379,13 @@
         }
 
         .btn-copy-term {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
-            padding: 0.35rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 600;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.15s;
             display: inline-flex;
@@ -350,32 +394,69 @@
         }
 
         .btn-copy-term:hover {
-            background: rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.14);
         }
 
         .btn-copy-term.copied {
-            background: #10b981;
+            background: #ffffff;
             color: #000;
             font-weight: 700;
-            border-color: #10b981;
+            border-color: #ffffff;
         }
 
+        /* Pro Telemetry Spec Bar */
+        .spec-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto 3rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+        }
+
+        .spec-item {
+            background: rgba(10, 10, 14, 0.9);
+            padding: 0.9rem 1rem;
+            text-align: center;
+        }
+
+        .spec-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: var(--font-mono);
+        }
+
+        .spec-label {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+            font-weight: 600;
+        }
+
+        /* Interactive Live Studio Playground */
         .studio-card {
             width: 100%;
-            max-width: 760px;
-            margin: 1.5rem auto 4rem;
-            background: rgba(13, 20, 30, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            max-width: 780px;
+            margin: 0 auto 4rem;
+            background: rgba(14, 14, 18, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(16, 185, 129, 0.08);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
             text-align: left;
+            backdrop-filter: blur(20px);
         }
 
         .studio-topbar {
-            padding: 0.85rem 1.2rem;
-            background: rgba(9, 14, 21, 0.9);
-            border-bottom: 1px solid var(--card-border);
+            padding: 0.75rem 1.1rem;
+            background: rgba(8, 8, 11, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -383,119 +464,126 @@
 
         .studio-dots {
             display: flex;
-            gap: 6px;
+            gap: 7px;
+            align-items: center;
         }
 
         .dot {
             width: 11px;
             height: 11px;
             border-radius: 50%;
+            transition: all 0.15s ease;
         }
-        .dot-r { background: #ef4444; }
-        .dot-y { background: #eab308; }
-        .dot-g { background: #22c55e; }
+        .dot-r {
+            background: #ff5f56;
+            box-shadow: inset 0 0 0 1px rgba(224, 68, 62, 0.3);
+        }
+        .dot-y {
+            background: #ffbd2e;
+            box-shadow: inset 0 0 0 1px rgba(222, 161, 35, 0.3);
+        }
+        .dot-g {
+            background: #27c93f;
+            box-shadow: inset 0 0 0 1px rgba(26, 171, 41, 0.3);
+        }
 
         .studio-title {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
         }
 
         .studio-controls {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             align-items: center;
         }
 
         .studio-pill-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            padding: 0.25rem 0.6rem;
+            padding: 0.22rem 0.55rem;
             border-radius: 999px;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .studio-pill-btn.active {
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .studio-body {
-            padding: 1.5rem;
+            padding: 1.4rem;
         }
 
         .studio-input-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
         }
 
         .studio-input {
             width: 100%;
-            background: #06090e;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.9rem 1.1rem;
-            color: #f8fafc;
+            background: rgba(8, 8, 11, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.2s;
-            margin-bottom: 1.2rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 1.1rem;
         }
 
         .studio-input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
         }
 
         .studio-output-box {
-            background: #06090e;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 1.2rem 1.1rem;
-            min-height: 80px;
+            background: rgba(8, 8, 11, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
             font-family: var(--font-main);
-            font-size: 1.85rem;
+            font-size: 1.55rem;
             font-weight: 600;
-            color: #ffffff;
+            color: #f8fafc;
+            min-height: 60px;
             display: flex;
             align-items: center;
+            margin-bottom: 1.1rem;
             word-break: break-word;
         }
 
         .studio-chips {
-            margin-top: 1rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
             align-items: center;
-        }
-
-        .studio-chips span {
-            font-size: 0.85rem;
+            gap: 0.45rem;
+            margin-bottom: 1.1rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-weight: 500;
         }
 
         .chip-btn {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             color: var(--text-secondary);
-            padding: 0.25rem 0.65rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
             font-family: var(--font-mono);
+            font-size: 0.74rem;
+            padding: 0.22rem 0.5rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -503,219 +591,259 @@
         .chip-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .studio-footer-status {
-            margin-top: 1.2rem;
-            padding-top: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 0.75rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
+        /* Section Headings */
         .section-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            max-width: 680px;
+            margin: 0 auto 3rem;
         }
 
         .section-tag {
-            font-size: 0.85rem;
+            font-size: 0.74rem;
             font-weight: 700;
-            color: #38bdf8;
-            text-transform: uppercase;
+            color: var(--text-muted);
             letter-spacing: 0.08em;
-            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.8rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(180deg, #ffffff 40%, #9999aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-desc {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(16px);
-            transition: all 0.25s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--card-border-hover);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .feature-card h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-
-        .feature-card p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        .encoding-box {
-            background: linear-gradient(180deg, rgba(13, 20, 30, 0.9) 0%, rgba(9, 14, 21, 0.95) 100%);
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
+        }
+
+        .bento-card {
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 6rem;
+            border-radius: 14px;
+            padding: 1.75rem;
             position: relative;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(16px);
+        }
+
+        .bento-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .bento-span-2 {
+            grid-column: span 2;
+        }
+
+        .bento-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1f5f9;
+            margin-bottom: 1.1rem;
+        }
+
+        .bento-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .bento-card p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Dual Encoding Showcase */
+        .encoding-box {
+            background: linear-gradient(180deg, rgba(16, 16, 22, 0.8) 0%, rgba(8, 8, 12, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.75rem 2rem;
+            margin-bottom: 5.5rem;
+            backdrop-filter: blur(20px);
+            text-align: center;
         }
 
         .encoding-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
+            text-align: left;
         }
 
         .encoding-col {
-            background: rgba(6, 9, 14, 0.7);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
+            background: rgba(8, 8, 12, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             padding: 1.6rem;
+            transition: all 0.2s;
         }
 
         .encoding-col.highlight {
-            border-color: rgba(139, 92, 246, 0.35);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .encoding-badge {
             display: inline-block;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            margin-bottom: 0.8rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            font-family: var(--font-mono);
         }
 
         .badge-uni {
-            background: rgba(56, 189, 248, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .badge-ansi {
-            background: rgba(168, 85, 247, 0.15);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.22);
         }
 
         .encoding-col h4 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: #fff;
         }
 
         .encoding-col ul {
             list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.9rem;
         }
 
-        .encoding-col ul li {
-            font-size: 0.95rem;
+        .encoding-col li {
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .encoding-col ul li::before {
+        .encoding-col li::before {
             content: "✓";
-            color: #10b981;
+            color: #ffffff;
             font-weight: bold;
+            font-size: 0.75rem;
         }
 
+        /* Layouts Showcase */
+        .layouts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
+        }
+
+        /* Interactive Cheatsheet Search (Compact & Minimal) */
         .cheatsheet-section {
-            margin-bottom: 6rem;
+            margin-bottom: 5.5rem;
         }
 
         .cheat-search-bar {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto 2rem;
+            max-width: 360px;
+            margin: 0 auto 1.25rem;
             position: relative;
         }
 
         .cheat-input {
             width: 100%;
-            background: rgba(13, 20, 30, 0.8);
+            background: rgba(14, 14, 18, 0.85);
             border: 1px solid var(--card-border);
             border-radius: 999px;
-            padding: 0.75rem 1.25rem 0.75rem 2.8rem;
+            padding: 0.48rem 0.9rem 0.48rem 2.3rem;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.2s;
         }
 
         .cheat-input:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
         }
 
         .cheat-icon {
             position: absolute;
-            left: 1.1rem;
+            left: 0.85rem;
             top: 50%;
             transform: translateY(-50%);
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
         .table-wrap {
-            background: var(--card-bg);
+            max-width: 740px;
+            margin: 0 auto;
+            max-height: 310px;
+            overflow-y: auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            background: rgba(14, 14, 18, 0.8);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        .table-wrap::-webkit-scrollbar {
+            width: 5px;
+        }
+        .table-wrap::-webkit-scrollbar-track {
+            background: rgba(10, 10, 14, 0.5);
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
         }
 
         table {
@@ -725,9 +853,13 @@
         }
 
         th {
-            background: rgba(9, 14, 21, 0.9);
-            padding: 1rem 1.5rem;
-            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: rgba(10, 10, 14, 0.98);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -736,9 +868,9 @@
         }
 
         td {
-            padding: 0.9rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.95rem;
+            padding: 0.45rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.86rem;
         }
 
         tr:last-child td {
@@ -748,54 +880,282 @@
         .key-badge {
             display: inline-block;
             font-family: var(--font-mono);
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 0.2rem 0.55rem;
-            border-radius: 6px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.12rem 0.42rem;
+            border-radius: 4px;
             color: #f8fafc;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
 
         .bng-out {
             font-family: var(--font-main);
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: #38bdf8;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f8fafc;
         }
 
+        /* Converter by Yaza Section */
+        .converter-section {
+            margin-bottom: 5.5rem;
+        }
+
+        .converter-card {
+            background: linear-gradient(180deg, rgba(16, 16, 22, 0.85) 0%, rgba(8, 8, 12, 0.95) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .converter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .converter-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            font-family: var(--font-mono);
+            margin-bottom: 0.8rem;
+        }
+
+        .converter-versions-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .conv-ver-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.5rem 1.15rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: var(--font-main);
+        }
+
+        .conv-ver-tab:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .conv-ver-tab.active {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .converter-workspace {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .conv-panel {
+            background: rgba(10, 10, 14, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .conv-panel:focus-within {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
+        }
+
+        .conv-topbar {
+            padding: 0.75rem 1rem;
+            background: rgba(14, 14, 18, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .conv-label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .conv-label-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.45rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .conv-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-conv-action {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 0.28rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: var(--font-main);
+        }
+
+        .btn-conv-action:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-conv-action.copied {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
+            font-weight: 700;
+        }
+
+        .conv-textarea {
+            width: 100%;
+            height: 240px;
+            padding: 1rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            resize: vertical;
+            font-family: var(--font-main);
+        }
+
+        .conv-textarea.ansi-box {
+            font-family: var(--font-mono);
+            font-size: 0.92rem;
+            color: #cbd5e1;
+        }
+
+        .conv-footer-bar {
+            padding: 0.45rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-main);
+            background: rgba(6, 6, 9, 0.4);
+        }
+
+        .conv-sync-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .conv-sync-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1f5f9;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .conv-presets {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Step by Step Install */
+        .install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
+        }
+
+        /* FAQ Section */
         .faq-wrap {
-            max-width: 800px;
+            max-width: 740px;
             margin: 0 auto 6rem;
         }
 
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
             overflow: hidden;
             transition: all 0.2s;
+            backdrop-filter: blur(12px);
         }
 
         .faq-question {
-            padding: 1.25rem 1.5rem;
-            cursor: pointer;
+            padding: 1.1rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.98rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .faq-question:hover {
-            color: #38bdf8;
+            cursor: pointer;
+            user-select: none;
         }
 
         .faq-answer {
-            padding: 0 1.5rem 1.25rem;
+            padding: 0 1.25rem 1.1rem;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.92rem;
             line-height: 1.6;
             display: none;
         }
@@ -810,64 +1170,481 @@
 
         .faq-arrow {
             transition: transform 0.2s;
-        }
-
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 3.5rem 0 2.5rem;
-            background: #030508;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
         }
 
-        .footer-inner {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        /* Modern Professional Multi-Column Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5rem 0 3rem;
+            background: #020204;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .footer-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-brand-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-telemetry {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.65rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            width: fit-content;
+        }
+
+        .footer-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-col h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.25rem;
+            font-family: var(--font-mono);
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.15s ease;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1.5rem;
+            font-size: 0.86rem;
         }
 
-        .footer-left {
+        .footer-bottom-links {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .footer-links a {
+        .btn-back-to-top {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-secondary);
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
             text-decoration: none;
-            transition: color 0.15s;
+            font-size: 0.82rem;
+            transition: all 0.15s;
         }
 
-        .footer-links a:hover {
+        .btn-back-to-top:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
 
-        @media (max-width: 768px) {
-            .encoding-grid {
+        /* Complete Mobile Optimization & Responsive Engine */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem;
+            }
+            .bento-grid {
                 grid-template-columns: 1fr;
             }
-            .grid-2 {
+            .bento-span-2 {
+                grid-column: span 1;
+            }
+            .encoding-grid, .layouts-grid, .install-grid {
                 grid-template-columns: 1fr;
+            }
+            .converter-workspace {
+                grid-template-columns: 1fr;
+            }
+            .conv-sync-divider {
+                padding: 0.4rem 0;
+                transform: rotate(90deg);
+            }
+            .spec-strip {
+                grid-template-columns: repeat(2, 1fr);
             }
             .nav-links {
                 display: none;
             }
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.15rem;
+            }
+            .hero {
+                padding: 3.2rem 0 2rem;
+            }
+            .hero h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+                margin-bottom: 1rem;
+            }
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.8rem;
+            }
+            .encoding-box {
+                padding: 2rem 1.25rem;
+            }
+            .section-title {
+                font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+            }
+            .section-header {
+                margin-bottom: 2rem;
+            }
+            .bento-grid, .layouts-grid, .install-grid, .cheatsheet-section {
+                margin-bottom: 3.8rem;
+            }
+            .faq-wrap {
+                margin-bottom: 4rem;
+            }
+        }
+
+        @media (max-width: 580px) {
+            header {
+                padding: 0;
+            }
+            .header-inner {
+                padding: 0.65rem 1rem;
+            }
+            .brand {
+                gap: 0.55rem;
+            }
+            .brand-logo-img {
+                height: 28px;
+            }
+            .brand-name {
+                font-size: 0.98rem;
+            }
+            .brand-version {
+                font-size: 0.65rem;
+                padding: 0.08rem 0.35rem;
+            }
+            .nav-actions {
+                gap: 0.45rem;
+            }
+            .lang-switch {
+                padding: 0.28rem 0.6rem;
+                font-size: 0.76rem;
+            }
+            .nav-btn-download {
+                padding: 0.32rem 0.8rem;
+                font-size: 0.78rem;
+            }
+
+            .hero {
+                padding: 2.2rem 0 1.5rem;
+            }
+            .status-pill {
+                font-size: 0.72rem;
+                padding: 0.28rem 0.75rem;
+                margin-bottom: 1.2rem;
+                text-align: center;
+                line-height: 1.35;
+            }
+            .hero h1 {
+                font-size: 1.85rem;
+                letter-spacing: -0.035em;
+                line-height: 1.15;
+            }
+            .hero p {
+                font-size: 0.92rem;
+                line-height: 1.55;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.65rem;
+                margin-bottom: 1.6rem;
+            }
+            .btn-main {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            /* Terminal responsive */
+            .terminal-container {
+                flex-wrap: wrap;
+                padding: 0.6rem 0.75rem;
+                gap: 0.5rem;
+                border-radius: 8px;
+                margin-bottom: 1.6rem;
+            }
+            .terminal-tabs {
+                width: auto;
+            }
+            .term-code {
+                order: 3;
+                width: 100%;
+                font-size: 0.72rem;
+                padding: 0.45rem 0.6rem;
+                background: rgba(0, 0, 0, 0.4);
+                border-radius: 6px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .term-code::-webkit-scrollbar {
+                display: none;
+            }
+            .btn-copy-term {
+                margin-left: auto;
+                padding: 0.25rem 0.6rem;
+                font-size: 0.72rem;
+            }
+
+            /* Spec Strip 2-col */
+            .spec-strip {
+                grid-template-columns: repeat(2, 1fr);
+                margin-bottom: 2.2rem;
+                border-radius: 10px;
+            }
+            .spec-item {
+                padding: 0.75rem 0.6rem;
+            }
+            .spec-value {
+                font-size: 1rem;
+            }
+            .spec-label {
+                font-size: 0.66rem;
+            }
+
+            /* Studio Card */
+            .studio-card {
+                margin-bottom: 3rem;
+                border-radius: 12px;
+            }
+            .studio-topbar {
+                padding: 0.6rem 0.8rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .studio-title {
+                font-size: 0.75rem;
+            }
+            .studio-controls {
+                gap: 0.3rem;
+            }
+            .studio-pill-btn {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.68rem;
+            }
+            .studio-body {
+                padding: 1rem;
+            }
+            .studio-input {
+                font-size: 0.88rem;
+                padding: 0.65rem 0.8rem;
+                margin-bottom: 0.85rem;
+            }
+            .studio-output-box {
+                font-size: 1.25rem;
+                min-height: 52px;
+                padding: 0.75rem 0.85rem;
+                margin-bottom: 0.85rem;
+            }
+            .studio-chips {
+                gap: 0.35rem;
+                font-size: 0.7rem;
+                margin-bottom: 0.85rem;
+            }
+            .chip-btn {
+                padding: 0.2rem 0.45rem;
+                font-size: 0.68rem;
+            }
+            .studio-footer-status {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+                font-size: 0.68rem;
+            }
+
+            /* Bento Cards */
+            .bento-card {
+                padding: 1.35rem 1.15rem;
+                border-radius: 12px;
+            }
+            .bento-icon {
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0.85rem;
+            }
+            .bento-card h3 {
+                font-size: 1.05rem;
+            }
+            .bento-card p {
+                font-size: 0.84rem;
+            }
+
+            /* Encoding Box */
+            .encoding-box {
+                padding: 1.75rem 1rem;
+                border-radius: 14px;
+            }
+            .encoding-col {
+                padding: 1.25rem 1rem;
+                border-radius: 10px;
+            }
+            .encoding-col h4 {
+                font-size: 1rem;
+            }
+            .encoding-col li {
+                font-size: 0.8rem;
+            }
+
+            /* Cheatsheet Table */
+            .cheat-search-bar {
+                max-width: 100%;
+            }
+            .table-wrap {
+                border-radius: 8px;
+                max-height: 280px;
+            }
+            th, td {
+                padding: 0.45rem 0.65rem;
+                font-size: 0.78rem;
+            }
+            .key-badge {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.35rem;
+            }
+            .bng-out {
+                font-size: 0.95rem;
+            }
+
+            /* FAQ */
+            .faq-question {
+                padding: 0.9rem 1rem;
+                font-size: 0.88rem;
+            }
+            .faq-answer {
+                padding: 0 1rem 0.9rem;
+                font-size: 0.82rem;
+            }
+
+            /* Footer */
+            footer {
+                padding: 3.5rem 0 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2.5rem;
+            }
+            .footer-brand-title {
+                font-size: 1.05rem;
+            }
+            .footer-desc {
+                font-size: 0.82rem;
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.2rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                width: 100%;
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-inner {
+                padding: 0.6rem 0.75rem;
+            }
+            .brand-name {
+                font-size: 0.9rem;
+            }
+            .brand-version {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 1.65rem;
+            }
+            .spec-strip {
+                grid-template-columns: 1fr;
+            }
+            .studio-topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
+    <div class="ambient-glow"></div>
+    <div class="ambient-beam"></div>
 
     <!-- Header -->
     <header>
@@ -875,16 +1652,17 @@
             <a href="#" class="brand">
                 <img src="../borno-logo-transparent.png" alt="Borno Logo" class="brand-logo-img" />
                 <div class="brand-name">
-                    বর্ণ (Borno) <span class="brand-version">v0.2.5</span>
+                    Borno <span class="brand-version">v0.2.5</span>
                 </div>
             </a>
 
             <nav>
                 <ul class="nav-links">
                     <li><a href="#features">বৈশিষ্ট্যসমূহ</a></li>
-                    <li><a href="#encoding">ইউনিকোড ও ANSI</a></li>
+                    <li><a href="#encoding">ইউনিকোড ও অ্যানসি</a></li>
+                    <li><a href="converter.html">কনভার্টার</a></li>
                     <li><a href="#layouts">লেআউট</a></li>
-                    <li><a href="#playground">প্লে-গ্রাউন্ড</a></li>
+                    <li><a href="#playground">লাইভ স্টুডিও</a></li>
                     <li><a href="#install">ইনস্টলেশন</a></li>
                     <li><a href="#cheatsheet">চিট-শিট</a></li>
                     <li><a href="#faq">প্রশ্নোত্তর</a></li>
@@ -902,26 +1680,27 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <div class="pill-badge">
-                ⚡️ নেক্সট-জেন বাংলা ইনপুট ইঞ্জিন · ইউনিভার্সাল বাইনারি (Apple Silicon & Intel) + উইন্ডোজ
+            <div class="status-pill">
+                <span class="live-dot"></span>
+                <span>সম্পূর্ণ নতুন বর্ণ কীবোর্ড · ম্যাক ও উইন্ডোজের জন্য</span>
             </div>
 
-            <h1>স্মার্ট ও দ্রুতগতির নেটিভ বাংলা টাইপিং</h1>
+            <h1>বাংলা টাইপিংয়ের এক নতুন যুগ।</h1>
 
             <p>
-                বর্ণ (Borno) হলো <strong>ম্যাকওএস</strong> এবং <strong>উইন্ডোজের</strong> জন্য নিখুঁত নেটিভ বাংলা কীবোর্ড।
-                কোনো বিরক্তিকর পপআপ প্রিভিউ ছাড়াই সরাসরি টাইপিং, ফোনেটিক ও জাতীয় লেআউট এবং <strong>ইউনিকোড ও ANSI</strong> ডুয়াল মোড সাপোর্ট।
+                বর্ণ (Borno) ম্যাক ও উইন্ডোজের জন্য তৈরি একটি নতুন প্রজন্মের গতিশীল বাংলা কীবোর্ড।
+                সরাসরি টাইপিং, ব্যাকগ্রাউন্ড ব্যাটারি ড্রেন মুক্ত গতি এবং সাধারণ লেখার পাশাপাশি ফটোশপ ও ইলাস্ট্রেটরে <strong>ইউনিকোড ও অ্যানসি (ANSI)</strong> উভয় মোডে লেখার স্বাধীনতা।
             </p>
 
             <div class="hero-actions">
                 <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.06.62-2.73 1.39-.58.67-1.09 1.74-.96 2.77 1.03.08 2.16-.54 2.77-1.31z"/></svg>
-                    ম্যাকের জন্য ডাউনলোড (.dmg)
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.06.62-2.73 1.39-.58.67-1.09 1.74-.96 2.77 1.03.08 2.16-.54 2.77-1.31z"/></svg>
+                    macOS-এর জন্য ডাউনলোড (.dmg)
                 </a>
 
                 <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
-                    উইন্ডোজের জন্য ডাউনলোড (.exe)
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+                    Windows-এর জন্য ডাউনলোড (.exe)
                 </a>
             </div>
 
@@ -933,8 +1712,28 @@
                 </div>
                 <div class="term-code" id="term-text">curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.sh | bash</div>
                 <button class="btn-copy-term" id="copy-btn" onclick="copyTermCommand()">
-                    <span id="copy-label">Copy</span>
+                    <span id="copy-label">কপি করুন</span>
                 </button>
+            </div>
+
+            <!-- Pro Spec Strip -->
+            <div class="spec-strip">
+                <div class="spec-item">
+                    <div class="spec-value">&lt; 0.2ms</div>
+                    <div class="spec-label">ইনপুট ল্যাটেন্সি</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">0% CPU</div>
+                    <div class="spec-label">জিরো ব্যাকগ্রাউন্ড প্রসেস</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">ডুয়াল ইঞ্জিন</div>
+                    <div class="spec-label">ইউনিকোড ও অ্যানসি</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">১০০% অফলাইন</div>
+                    <div class="spec-label">সম্পূর্ণ ব্যক্তিগত ও নিরাপদ</div>
+                </div>
             </div>
 
             <!-- Interactive Live Testing Studio -->
@@ -946,22 +1745,22 @@
                         <div class="dot dot-g"></div>
                     </div>
                     <div class="studio-title">
-                        <span>⌨️ লাইভ ফোনেটিক ও ANSI টেস্ট স্টুডিও</span>
+                        <span>লাইভ ফোনেটিক ও অ্যানসি স্টুডিও</span>
                     </div>
                     <div class="studio-controls">
                         <button class="studio-pill-btn active" id="enc-uni-btn" onclick="setPlaygroundEnc('unicode')">ইউনিকোড</button>
-                        <button class="studio-pill-btn" id="enc-ansi-btn" onclick="setPlaygroundEnc('ansi')">ANSI (ইলাস্ট্রেটর)</button>
+                        <button class="studio-pill-btn" id="enc-ansi-btn" onclick="setPlaygroundEnc('ansi')">অ্যানসি (ইলাস্ট্রেটর)</button>
                     </div>
                 </div>
                 <div class="studio-body">
-                    <div class="studio-input-label">নিচে ফোনেটিক ইংরেজিতে টাইপ করুন:</div>
+                    <div class="studio-input-label">ইংরেজিতে ফোনেটিক লিখুন:</div>
                     <input type="text" class="studio-input" id="demo-input" placeholder="যেমন: amar sonar bangla..." value="amar sonar bangla" autocomplete="off" autocorrect="off" spellcheck="false" />
                     
-                    <div class="studio-input-label">বাংলা লাইভ আউটপুট:</div>
+                    <div class="studio-input-label">লাইভ বাংলা আউটপুট:</div>
                     <div class="studio-output-box" id="demo-output">আমার সোনার বাংলা</div>
 
                     <div class="studio-chips">
-                        <span>ক্লিক করে দেখুন:</span>
+                        <span>উদাহরণ ট্রাই করুন:</span>
                         <button class="chip-btn" onclick="setDemoText('amar sonar bangla')">amar sonar bangla</button>
                         <button class="chip-btn" onclick="setDemoText('kkhoma o shanti')">kkhoma o shanti</button>
                         <button class="chip-btn" onclick="setDemoText('projukti o shrishti')">projukti o shrishti</button>
@@ -969,56 +1768,52 @@
                     </div>
 
                     <div class="studio-footer-status">
-                        <span>⚡️ ইঞ্জিন: নেটিভ রাস্ট (riti) ট্রান্সলিটারেশন</span>
-                        <span id="stats-latency">লেটেন্সি: ~০.২ms · ডিরেক্ট স্ট্রিমিং</span>
+                        <span>ইঞ্জিন: Native Rust (riti) Transliteration</span>
+                        <span id="stats-latency">ল্যাটেন্সি: ~0.2ms · ডিরেক্ট স্ট্রিম</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Grid -->
-        <section id="features" style="padding-top: 2rem;">
+        <!-- Bento Grid Features -->
+        <section id="features">
             <div class="section-header">
-                <div class="section-tag">মূল বৈশিষ্ট্যসমূহ</div>
-                <h2 class="section-title">দ্রুততম গতি ও শতভাগ অফলাইন প্রাইভেসি</h2>
-                <p class="section-desc">কোনো পপআপ উইন্ডো বা লেটেন্সি ছাড়া সরাসরি কার্সরে বাংলা টাইপ করার আধুনিক সমাধান।</p>
+                <div class="section-tag">ইঞ্জিনিয়ারিং হাইলাইটস</div>
+                <h2 class="section-title">গতি, নির্ভুলতা ও সর্বোচ্চ গোপনীয়তা</h2>
+                <p class="section-desc">কোনো ভাসমান ওভারলে উইন্ডো নেই, সরাসরি কার্সরে টাইপ এবং শতভাগ অফলাইন ও নিরাপদ।</p>
             </div>
 
-            <div class="grid-3">
-                <div class="feature-card">
-                    <div class="card-icon">🚀</div>
-                    <h3>সরাসরি ও নিখুঁত টাইপিং</h3>
-                    <p>ফ্লোটিং পপআপ বা কোনো ল্যাগ ছাড়াই কার্সরে সরাসরি বাংলা অক্ষর স্ট্রিম হয়।</p>
+            <div class="bento-grid">
+                <div class="bento-card bento-span-2">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>সরাসরি ইন-মেমরি টাইপিং</h3>
+                    <p>কোনো প্রকার স্ক্রিন উইন্ডো ফ্লিকার বা ক্যান্ডিডেট পপআপ ছাড়াই প্রতিটি বাংলা অক্ষর সরাসরি আপনার কার্সরে চলে আসে। ব্যাকগ্রাউন্ডে কোনো প্রসেস ব্যাটারি নষ্ট করে না।</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🎨</div>
-                    <h3>ডুয়াল এনকোডিং ইঞ্জিন</h3>
-                    <p>সাধারণ ব্যবহারের জন্য <strong>ইউনিকোড</strong> এবং ইলাস্ট্রেটর/ফটোশপের জন্য <strong>ANSI</strong> মোডে এক ক্লিকে সুইচ করুন।</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="card-icon">⚡️</div>
-                    <h3>সাব-মিলিমিটার সুপারস্পিড</h3>
-                    <p>রাস্ট (Rust) ইঞ্জিন কোরের সাহায্যে বিদ্যুতের মতো দ্রুত পারফরম্যান্স ও নগণ্য র‍্যাম ব্যবহার।</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="card-icon">🔒</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
                     <h3>১০০% অফলাইন ও নিরাপদ</h3>
-                    <p>কোনো নেটওয়ার্ক কল বা ডাটা ট্র্যাকিং নেই। আপনার সমস্ত টাইপিং পুরোপুরি আপনার ডিভাইসে সীমাবদ্ধ।</p>
+                    <p>কোনো প্রকার ইন্টারনেট কানেকশন বা টেলিমেট্রি নেই। আপনার টাইপ করা প্রতিটি শব্দ সম্পূর্ণ নিরাপদ এবং ডিভাইসেই সংরক্ষিত থাকে।</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">⌨️</div>
-                    <h3>একাধিক কীবোর্ড লেআউট</h3>
-                    <p><strong>বর্ণ (ফোনেটিক)</strong>, <strong>জাতীয় (বিজয়)</strong> এবং <strong>প্রভাত</strong> লেআউটের পূর্ণাঙ্গ সমর্থন।</p>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+                    </div>
+                    <h3>নেটিভ রাস্ট কোর (riti)</h3>
+                    <p>অতি দ্রুতগতির রাস্ট ট্রান্সলিটারেশন কোর দ্বারা চালিত, যা সাব-মিলিমেকেন্ডে প্রতিটি কী-স্ট্রোক প্রসেস করে।</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🍎</div>
-                    <h3>ম্যাক ও উইন্ডোজ উভয়ের জন্য</h3>
-                    <p>অ্যাপল সিলিকন (M1/M2/M3/M4) ও ইন্টেল ম্যাকের জন্য ইউনিভার্সাল বাইনারি এবং উইন্ডোজ ১০/১১ এর জন্য নেটিভ অ্যাপ।</p>
+                <div class="bento-card bento-span-2">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                    </div>
+                    <h3>ডুয়াল আউটপুট ইঞ্জিন (ইউনিকোড ও অ্যানসি)</h3>
+                    <p>সাধারণ ব্রাউজার ও অ্যাপের জন্য স্ট্যান্ডার্ড ইউনিকোড এবং অ্যাডোবি ইলাস্ট্রেটর/ফটোশপের জন্য স্বয়ংক্রিয় কার-পজিশনিং সহ অ্যানসি (ANSI) আউটপুট।</p>
                 </div>
             </div>
         </section>
@@ -1027,41 +1822,48 @@
         <section id="encoding">
             <div class="encoding-box">
                 <div class="section-tag">ডুয়াল এনকোডিং আর্কিটেকচার</div>
-                <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.6rem;">
-                    গ্রাফিক্স অ্যাপে ভাঙা কার বা বক্স সমস্যার চিরতরে অবসান
+                <h2 style="font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.6rem;">
+                    ডিজাইন সফটওয়্যারে ভাঙা কার ও যুক্তাক্ষরের স্থায়ী অবসান
                 </h2>
-                <p style="color: var(--text-secondary); max-width: 700px; font-size: 1.1rem;">
-                    অ্যাডোবি ইলাস্ট্রেটর ও ফটোশপের মতো প্রফেশনাল অ্যাপে টাইপ করার সময় আ-কার, ই-কার বা যুক্তবর্ণ ভাঙার ঝামেলা দূর করতে বর্ণ নিয়ে এসেছে রিয়েল-টাইম ANSI কনভার্সন।
+                <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: 0.98rem;">
+                    ইলাস্ট্রেটর ও ফটোশপের মতো প্রফেশনাল ডিজাইন অ্যাপগুলোতে সহজে বাংলা টাইপ করতে বর্ণতে রয়েছে রিয়েল-টাইম ইউনিকোড ও অ্যানসি রূপান্তর ব্যবস্থা।
                 </p>
 
                 <div class="encoding-grid">
                     <div class="encoding-col">
                         <span class="encoding-badge badge-uni">ইউনিকোড মোড</span>
-                        <h4>আধুনিক ওয়েব ও অ্যাপসের জন্য</h4>
-                        <p style="font-size: 0.95rem; color: var(--text-secondary);">
-                            স্ট্যান্ডার্ড UTF-8 বাংলা ক্যারেক্টার আউটপুট। ব্রাউজার, মাইক্রোসফট ওয়ার্ড, ফিগমা ও মেসেঞ্জারে টাইপ করার জন্য।
+                        <h4>আধুনিক ওয়েব ও দৈনন্দিন ব্যবহারের জন্য</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            স্ট্যান্ডার্ড UTF-8 বাংলা অক্ষর আউটপুট দেয়। সকল আধুনিক ব্রাউজার ও অফিস অ্যাপ্লিকেশনের জন্য উপযুক্ত।
                         </p>
                         <ul>
                             <li>Chrome, Safari, Firefox, Edge</li>
-                            <li>Microsoft Word, Apple Pages & Notes</li>
+                            <li>Microsoft Word, Apple Pages ও Notes</li>
                             <li>Figma, VS Code, Slack, WhatsApp</li>
-                            <li>কালপুরুষ, সোলায়মানলিপি, বর্ণমালার মতো ফন্ট সাপোর্টেড</li>
+                            <li>কালপুরুষ, সোলাইমানলিপি ও বর্ণমালার সাথে সম্পূর্ণ সমর্থিত</li>
                         </ul>
                     </div>
 
                     <div class="encoding-col highlight">
-                        <span class="encoding-badge badge-ansi">ANSI মোড</span>
-                        <h4>অ্যাডোবি ক্রিয়েটিভ ক্লাউডের জন্য</h4>
-                        <p style="font-size: 0.95rem; color: var(--text-secondary);">
-                            সরাসরি ANSI ক্যারেক্টার আউটপুট। প্রিন্ট ও পাবলিশিং ডিজাইনে যুক্তবর্ণ বা কার চিহ্ন নিখুঁতভাবে রেন্ডার হয়।
+                        <span class="encoding-badge badge-ansi">অ্যানসি মোড</span>
+                        <h4>অ্যাডোবি ক্রিয়েটিভ ক্লাউডের জন্য</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            সরাসরি অ্যানসি গ্লিফে কনভার্ট করে দেয়। প্রিন্ট ও পাবলিশিং ডিজাইনে ই-কার, এ-কার বা র্ব ভাঙবে না।
                         </p>
                         <ul>
                             <li>Adobe Illustrator ও Photoshop</li>
                             <li>Adobe InDesign ও Premiere Pro</li>
-                            <li>এ-কার, ই-কার, ও-কার এবং রেফ (র্) স্বয়ংক্রিয় রি-অর্ডার</li>
-                            <li>আলাদা কোনো কনভার্টারের প্রয়োজন নেই</li>
+                            <li>স্বয়ংক্রিয় প্রি-কার ও রেফ (র্) রি-অর্ডারিং</li>
+                            <li>বাহ্যিক কনভার্টার সফটওয়্যার ছাড়াই সরাসরি টাইপিং</li>
                         </ul>
                     </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="converter.html" class="btn-copy-term" style="padding: 0.55rem 1.35rem; font-size: 0.88rem; text-decoration: none; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.18); font-family: var(--font-main);">
+                        <span>⚡ সার্বজনীন বাংলা স্ক্রিপ্ট কনভার্টার পেজ খুলুন</span>
+                        <span style="opacity: 0.7;">→</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1070,37 +1872,43 @@
         <section id="layouts">
             <div class="section-header">
                 <div class="section-tag">কীবোর্ড লেআউটসমূহ</div>
-                <h2 class="section-title">আপনার পছন্দের লেআউটে সহজে টাইপ করুন</h2>
-                <p class="section-desc">মেনুবার অথবা সেটিংস থেকে যেকোনো সময় আপনার পছন্দের লেআউট নির্বাচন করুন।</p>
+                <h2 class="section-title">আপনার পছন্দের লেআউটে টাইপ করুন</h2>
+                <p class="section-desc">মেনু বার বা সেটিংস থেকে সহজেই ফোনেটিক ও ফিক্সড লেআউট পরিবর্তন করা যায়।</p>
             </div>
 
-            <div class="grid-3">
-                <div class="feature-card">
-                    <div class="card-icon">🗣️</div>
-                    <h3>বর্ণ (ফোনেটিক)</h3>
-                    <p>স্ট্যান্ডার্ড অভ্র-কম্প্যাটিবল ফোনেটিক লেআউট। ইংরেজি অক্ষরে বাংলায় টাইপ করুন (যেমন: <code>ami</code> → <code>আমি</code>)।</p>
+            <div class="layouts-grid">
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/></svg>
+                    </div>
+                    <h3>বর্ণ (Phonetic)</h3>
+                    <p>সহজ ও সাবলীল ফোনেটিক টাইপিং (যেমন: <code>amar</code> → <code>আমার</code>)। ফুল যুক্তাক্ষর ও স্মার্ট কার লজিক সাপোর্ট।</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🇧🇩</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+                    </div>
                     <h3>জাতীয় / বিজয় (National)</h3>
-                    <p>বাংলাদেশ জাতীয় প্রমিত লেআউট। প্রফেশনাল টাইপিস্ট, সাংবাদিক ও ডিজাইনারদের জন্য আদর্শ (যেমন: <code>Av</code> → <code>আ</code>, <code>g</code> → <code>ম</code>)।</p>
+                    <p>বাংলাদেশ সরকারের স্ট্যান্ডার্ড জাতীয় লেআউট। প্রফেশনাল টাইপিস্ট, সংবাদমাধ্যম ও প্রকাশনা শিল্পের জন্য উপযুক্ত।</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🌅</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </div>
                     <h3>প্রভাত (Probhat)</h3>
-                    <p>জনপ্রিয় প্রভাত লেআউটের পূর্ণাঙ্গ মডার্ন সংস্করণ।</p>
+                    <p>জনপ্রিয় প্রভাত ফিক্সড লেআউট ম্যাপিং, আধুনিক মডিফায়ার ও দ্রুতগতির টাইপিং সমর্থন করে।</p>
                 </div>
             </div>
         </section>
 
         <!-- Cheatsheet Section -->
         <section id="cheatsheet" class="cheatsheet-section">
-            <div class="section-header">
-                <div class="section-tag">সহজ রেফারেন্স</div>
-                <h2 class="section-title">ফোনেটিক ম্যাপিং চিট-শিট</h2>
-                <p class="section-desc">যেকোনো বর্ণ, যুক্তবর্ণ বা যতিচিহ্ন খুঁজতে সার্চ করুন।</p>
+            <div class="section-header" style="margin-bottom: 1.5rem;">
+                <div class="section-tag">কুইক রেফারেন্স</div>
+                <h2 class="section-title">ফোনেটিক টাইপিং চিট-শিট</h2>
+                <p class="section-desc">যেকোনো অক্ষর বা যুক্তাক্ষর খুঁজতে সার্চ করুন।</p>
             </div>
 
             <div class="cheat-search-bar">
@@ -1112,28 +1920,28 @@
                 <table id="cheat-table">
                     <thead>
                         <tr>
-                            <th>কী-বোর্ড সিকোয়েন্স</th>
-                            <th>বাংলা বর্ণ / চিহ্ন</th>
+                            <th>কী-কম্বিনেশন</th>
+                            <th>বাংলা অক্ষর</th>
                             <th>বিবরণ ও উদাহরণ</th>
                         </tr>
                     </thead>
                     <tbody id="cheat-tbody">
-                        <tr><td><span class="key-badge">a</span></td><td class="bng-out">আ / া</td><td>আ-কার</td></tr>
-                        <tr><td><span class="key-badge">i</span></td><td class="bng-out">ই / ি</td><td>হ্রস্ব ই-কার</td></tr>
-                        <tr><td><span class="key-badge">I</span></td><td class="bng-out">ঈ / ী</td><td>দীর্ঘ ঈ-কার</td></tr>
-                        <tr><td><span class="key-badge">u</span></td><td class="bng-out">উ / ু</td><td>হ্রস্ব উ-কার</td></tr>
-                        <tr><td><span class="key-badge">U</span></td><td class="bng-out">ঊ / ূ</td><td>দীর্ঘ ঊ-কার</td></tr>
-                        <tr><td><span class="key-badge">rri</span></td><td class="bng-out">ঋ / ৃ</td><td>ঋ-কার</td></tr>
-                        <tr><td><span class="key-badge">e</span></td><td class="bng-out">এ / ে</td><td>এ-কার</td></tr>
-                        <tr><td><span class="key-badge">OI</span></td><td class="bng-out">ঐ / ৈ</td><td>ঐ-কার</td></tr>
-                        <tr><td><span class="key-badge">O</span></td><td class="bng-out">ও / ো</td><td>ও-কার</td></tr>
-                        <tr><td><span class="key-badge">OU</span></td><td class="bng-out">ঔ / ৌ</td><td>ঔ-কার</td></tr>
+                        <tr><td><span class="key-badge">a</span></td><td class="bng-out">আ / া</td><td>আ / আকার</td></tr>
+                        <tr><td><span class="key-badge">i</span></td><td class="bng-out">ই / ি</td><td>হ্রস্ব ই / ই-কার</td></tr>
+                        <tr><td><span class="key-badge">I</span></td><td class="bng-out">ঈ / ী</td><td>দীর্ঘ ঈ / ঈ-কার</td></tr>
+                        <tr><td><span class="key-badge">u</span></td><td class="bng-out">উ / ু</td><td>হ্রস্ব উ / উ-কার</td></tr>
+                        <tr><td><span class="key-badge">U</span></td><td class="bng-out">ঊ / ূ</td><td>দীর্ঘ ঊ / ঊ-কার</td></tr>
+                        <tr><td><span class="key-badge">rri</span></td><td class="bng-out">ঋ / ৃ</td><td>ঋ / ঋ-কার</td></tr>
+                        <tr><td><span class="key-badge">e</span></td><td class="bng-out">এ / ে</td><td>এ / এ-কার</td></tr>
+                        <tr><td><span class="key-badge">OI</span></td><td class="bng-out">ঐ / ৈ</td><td>ঐ / ঐ-কার</td></tr>
+                        <tr><td><span class="key-badge">O</span></td><td class="bng-out">ও / ো</td><td>ও / ও-কার</td></tr>
+                        <tr><td><span class="key-badge">OU</span></td><td class="bng-out">ঔ / ৌ</td><td>ঔ / ঔ-কার</td></tr>
                         <tr><td><span class="key-badge">kkh</span></td><td class="bng-out">ক্ষ</td><td>ক + ষ (যেমন: kkhoma → ক্ষমা)</td></tr>
                         <tr><td><span class="key-badge">jng</span></td><td class="bng-out">জ্ঞ</td><td>জ + ঞ (যেমন: gyan → জ্ঞান)</td></tr>
                         <tr><td><span class="key-badge">..</span></td><td class="bng-out">।</td><td>বাংলা দাঁড়ি</td></tr>
                         <tr><td><span class="key-badge">$$</span></td><td class="bng-out">৳</td><td>টাকার প্রতীক</td></tr>
                         <tr><td><span class="key-badge">,,</span></td><td class="bng-out">্</td><td>হসন্ত</td></tr>
-                        <tr><td><span class="key-badge">k-s</span></td><td class="bng-out">কস্</td><td>জয়েনার ব্রেক (-)</td></tr>
+                        <tr><td><span class="key-badge">k-s</span></td><td class="bng-out">কস্</td><td>যুক্তাক্ষর ব্রেক (-)</td></tr>
                         <tr><td><span class="key-badge">rr</span></td><td class="bng-out">র্</td><td>রেফ (যেমন: rrk → র্ক)</td></tr>
                         <tr><td><span class="key-badge">w / v</span></td><td class="bng-out">্ব</td><td>ব-ফলা (যেমন: kw → ক্ব)</td></tr>
                         <tr><td><span class="key-badge">y / Z</span></td><td class="bng-out">্য</td><td>য-ফলা (যেমন: ky → ক্য)</td></tr>
@@ -1145,30 +1953,30 @@
         <!-- Installation Guide -->
         <section id="install">
             <div class="section-header">
-                <div class="section-tag">সহজ ইনস্টলেশন</div>
+                <div class="section-tag">সহজ ইনস্টলেশন গাইড</div>
                 <h2 class="section-title">৩টি সহজ ধাপে শুরু করুন</h2>
             </div>
 
-            <div class="grid-2">
-                <div class="feature-card">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">🍎 ম্যাকওএস ইনস্টলেশন</div>
+            <div class="install-grid">
+                <div class="bento-card">
+                    <div style="font-size: 0.78rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.4rem; font-family: var(--font-mono);">macOS ইনস্টলেশন</div>
                     <h3>macOS (Ventura, Sonoma, Sequoia)</h3>
-                    <p style="margin-bottom: 0.8rem;">১. টার্মিনালে ১-লাইনের কমান্ডটি চালান অথবা <strong>Borno.dmg</strong> ডাউনলোড করুন।</p>
-                    <p style="margin-bottom: 0.8rem;">২. <strong>System Settings → Keyboard → Input Sources</strong> এ যান (Edit ক্লিক করুন)। <strong>+</strong> চেপে <strong>Borno</strong> সিলেক্ট করে যুক্ত করুন।</p>
-                    <p style="margin-bottom: 1.2rem;">৩. কীবোর্ডের <strong>Control + Space</strong> অথবা <strong>Globe (🌐)</strong> কী চেপে যেকোনো সময় ইংলিশ ও বাংলায় সুইচ করুন।</p>
-                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac" style="padding: 0.6rem 1.2rem; font-size: 0.95rem;">
-                        ডাউনলোড Borno.dmg
+                    <p style="margin-bottom: 0.6rem; font-size: 0.88rem;">১. টার্মিনালে ১-লাইনের কমান্ডটি চালান অথবা <strong>Borno.dmg</strong> ডাউনলোড করুন।</p>
+                    <p style="margin-bottom: 0.6rem; font-size: 0.88rem;">২. <strong>System Settings → Keyboard → Input Sources</strong> এ গিয়ে <strong>+</strong> বাটনে ক্লিক করে <strong>Borno</strong> যুক্ত করুন।</p>
+                    <p style="margin-bottom: 1.1rem; font-size: 0.88rem;">৩. <strong>Control + Space</strong> অথবা <strong>Globe (🌐)</strong> কী চেপে সরাসরি টাইপ করা শুরু করুন।</p>
+                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac" style="padding: 0.55rem 1.15rem; font-size: 0.88rem;">
+                        Borno.dmg ডাউনলোড করুন
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">🪟 উইন্ডোজ ইনস্টলেশন</div>
+                <div class="bento-card">
+                    <div style="font-size: 0.78rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.4rem; font-family: var(--font-mono);">WINDOWS ইনস্টলেশন</div>
                     <h3>Windows 10 / 11</h3>
-                    <p style="margin-bottom: 0.8rem;">১. ১-লাইনের PowerShell স্ক্রিপ্ট চালান অথবা <strong>Borno.exe</strong> ডাউনলোড করুন।</p>
-                    <p style="margin-bottom: 0.8rem;">২. উইন্ডোজ SmartScreen ওয়ার্নিং দেখালে <strong>"More info" (অধিক তথ্য) → "Run anyway" (যেকোনোভাবে চালান)</strong> এ ক্লিক করুন।</p>
-                    <p style="margin-bottom: 1.2rem;">৩. যেকোনো উইন্ডোজ অ্যাপে বাংলা ⇋ ইংলিশ মোডে সুইচ করতে <strong>F12</strong> চাপুন।</p>
-                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win" style="padding: 0.6rem 1.2rem; font-size: 0.95rem;">
-                        ডাউনলোড Borno.exe
+                    <p style="margin-bottom: 0.6rem; font-size: 0.88rem;">১. PowerShell-এ কমান্ডটি চালান অথবা <strong>Borno.exe</strong> ডাউনলোড করুন।</p>
+                    <p style="margin-bottom: 0.6rem; font-size: 0.88rem;">২. যদি SmartScreen আসে তবে <strong>"More info" → "Run anyway"</strong> চাপুন।</p>
+                    <p style="margin-bottom: 1.1rem; font-size: 0.88rem;">৩. যেকোনো অ্যাপে বাংলা ও ইংরেজি সুইচ করতে কীবোর্ডের <strong>F12</strong> কী চাপুন।</p>
+                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win" style="padding: 0.55rem 1.15rem; font-size: 0.88rem;">
+                        Borno.exe ডাউনলোড করুন
                     </a>
                 </div>
             </div>
@@ -1183,37 +1991,37 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>উইন্ডোজে "Windows protected your PC" ওয়ার্নিং দেখালে কী করব?</span>
+                    <span>উইন্ডোজে "Windows protected your PC" কেন দেখায়?</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    বর্ণ একটি সম্পূর্ণ ওপেন-সোর্স ও বিনামূল্যের সফটওয়্যার। নতুন বা আনসাইনড অ্যাপ চালু করার সময় উইন্ডোজ ডিফেন্ডার স্মার্টস্ক্রিন এই বার্তা দেয়। এটি সমাধানের জন্য ডায়ালগের <strong>"More info" (অধিক তথ্য)</strong> তে ক্লিক করে <strong>"Run anyway" (যেকোনোভাবে চালান)</strong> সিলেক্ট করুন। অ্যাপটি ১০০% নিরাপদ ও অফলাইন।
+                    Borno একটি ১০০% ফ্রি ও ওপেন সোর্স সফটওয়্যার। উইন্ডোজের নিয়ম অনুযায়ী কোনো পেইড এন্টারপ্রাইজ সার্টিফিকেট না থাকলে SmartScreen নীল ব্যানারটি দেখায়। এটি সম্পূর্ণ নিরাপদ; <strong>"More info"</strong> এ ক্লিক করে <strong>"Run anyway"</strong> চাপলেই এটি চালু হয়ে যাবে।
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>অ্যাডোবি ইলাস্ট্রেটরে আ-কার বা ই-কার ভেঙে যাওয়ার সমাধান কী?</span>
+                    <span>অ্যাডোবি ইলাস্ট্রেটরে কীভাবে ভাঙা অক্ষর ছাড়া টাইপ করব?</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    খুব সহজ! মেনুবার অথবা সেটিংস থেকে Borno-র <strong>Output Encoding</strong> কে <strong>ANSI</strong> মোডে সেট করুন। এরপর ইলাস্ট্রেটরে আপনার ANSI ফন্ট (যেমন: SutonnyMJ) সিলেক্ট করে স্বাভাবিকভাবে টাইপ করুন। সমস্ত কার ও যুক্তবর্ণ স্বয়ংক্রিয়ভাবে নির্ভুলভাবে বসবে!
+                    মেনু বার বা সেটিংস থেকে Borno-র <strong>Output Encoding</strong> মোড <strong>ANSI</strong> তে পরিবর্তন করুন। এরপর ইলাস্ট্রেটরে আপনার ANSI ফন্ট (যেমন: SutonnyMJ) সিলেক্ট করে সরাসরি টাইপ করুন।
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>বর্ণ কি কোনো টাইপিং ডাটা সংগ্রহ করে?</span>
+                    <span>Borno কি কোনো টাইপিং ডাটা বা কি-লগ সংরক্ষণ করে?</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    একদমই না! বর্ণ শতভাগ অফলাইন ও ওপেন-সোর্স। অ্যাপটিতে কোনো নেটওয়ার্ক পারমিশন বা ট্র্যাকার নেই।
+                    না! Borno সম্পূর্ণ ১০০% অফলাইন সফটওয়্যার। এর কোনো ইন্টারনেট অ্যাক্সেস বা টেলিমেট্রি নেই। আপনার টাইপ করা প্রতিটি তথ্য সম্পূর্ণ নিরাপদ।
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>বাংলা এবং ইংরেজিতে স্যুইচ করব কীভাবে?</span>
+                    <span>ইংরেজি থেকে বাংলায় কীভাবে পরিবর্তন করব?</span>
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
@@ -1223,27 +2031,77 @@
         </section>
     </div>
 
-    <!-- Footer -->
+    <!-- Modern Professional Footer -->
     <footer>
-        <div class="footer-inner">
-            <div class="footer-left">
-                <img src="../borno-logo-transparent.png" alt="Borno Logo" style="height: 28px;" />
-                <div>
-                    <strong>বর্ণ (Borno)</strong> · নির্মাতা: <a href="https://github.com/yahiabinzaman" style="color: #fff; text-decoration: none; font-weight: 600;">Yahia Bin Zaman</a>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand & Mission Column -->
+                <div class="footer-brand-col">
+                    <div class="footer-logo-row">
+                        <img src="../borno-logo-transparent.png" alt="Borno Logo" style="height: 32px; width: auto;" />
+                        <span class="footer-brand-title">Borno (বর্ণ)</span>
+                        <span class="brand-version">v0.2.5</span>
+                    </div>
+                    <p class="footer-desc">
+                        ম্যাক ও উইন্ডোজের জন্য আধুনিক ও অতি দ্রুতগতির বাংলা কীবোর্ড। সরাসরি ইন-মেমরি টাইপিং, ইউনিকোড ও অ্যানসি সমর্থন এবং ১০০% অফলাইন নিরাপত্তা।
+                    </p>
+                    <div class="footer-telemetry">
+                        <span class="footer-pulse"></span>
+                        <span>Universal Binary · সম্পূর্ণ ফ্রি ও ওপেন সোর্স</span>
+                    </div>
+                </div>
+
+                <!-- Column 1: Downloads -->
+                <div class="footer-col">
+                    <h4>ডাউনলোড</h4>
+                    <ul>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg">macOS (.dmg)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe">Windows (.exe)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno-Windows-x64.zip">Windows (.zip)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases">GitHub রিলিজ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Product & Docs -->
+                <div class="footer-col">
+                    <h4>প্রোডাক্ট</h4>
+                    <ul>
+                        <li><a href="#features">বৈশিষ্ট্যসমূহ</a></li>
+                        <li><a href="#encoding">ইউনিকোড ও অ্যানসি</a></li>
+                        <li><a href="#layouts">কীবোর্ড লেআউট</a></li>
+                        <li><a href="#playground">লাইভ স্টুডিও</a></li>
+                        <li><a href="#cheatsheet">টাইপিং চিট-শিট</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Open Source -->
+                <div class="footer-col">
+                    <h4>ওপেন সোর্স</h4>
+                    <ul>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard" target="_blank" rel="noopener">GitHub রিপোজিটরি</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/issues" target="_blank" rel="noopener">সমস্যা রিপোর্ট করুন</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/blob/main/LICENSE" target="_blank" rel="noopener">MIT লাইসেন্স</a></li>
+                        <li><a href="https://github.com/yahiabinzaman" target="_blank" rel="noopener">Yahia Bin Zaman</a></li>
+                    </ul>
                 </div>
             </div>
 
-            <ul class="footer-links">
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard" target="_blank" rel="noopener">GitHub</a></li>
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases" target="_blank" rel="noopener">Releases</a></li>
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
-                <li><a href="../index.html">English Version</a></li>
-            </ul>
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    © 2026 Borno. ডেভলপার: <a href="https://github.com/yahiabinzaman" target="_blank" rel="noopener" style="color: #fff; text-decoration: none; font-weight: 600;">Yahia Bin Zaman</a>.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="../index.html" class="lang-switch">English Version</a>
+                    <a href="#" class="btn-back-to-top">↑ উপরে যান</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- Interactive JavaScript Engine -->
     <script>
+        // Terminal Tab Switcher
         const commands = {
             mac: "curl -fsSL https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.sh | bash",
             win: "irm https://raw.githubusercontent.com/yahiabinzaman/borno-keyboard/main/scripts/install.ps1 | iex"
@@ -1266,11 +2124,12 @@
                 label.innerText = 'কপি হয়েছে!';
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    label.innerText = 'Copy';
+                    label.innerText = 'কপি করুন';
                 }, 2000);
             });
         }
 
+        // Live Playground Engine
         let currentEnc = 'unicode';
 
         function setPlaygroundEnc(enc) {
@@ -1285,6 +2144,7 @@
             updatePlayground();
         }
 
+        // Lightweight Client-Side Transliteration for Web Demo
         const vowelsMap = {
             "a": "আ", "i": "ই", "I": "ঈ", "u": "উ", "U": "ঊ",
             "rri": "ঋ", "e": "এ", "OI": "ঐ", "O": "ও", "OU": "ঔ"
@@ -1302,6 +2162,7 @@
 
         function transliterateDemo(input) {
             if (!input) return "";
+            
             const wordDict = {
                 "amar": "আমার", "sonar": "সোনার", "bangla": "বাংলা",
                 "ami": "আমি", "tomay": "তোমায়", "bhalobashi": "ভালোবাসি",
@@ -1352,12 +2213,13 @@
                 bng = toAnsiDemo(bng);
             }
             const t1 = performance.now();
-            document.getElementById('demo-output').innerText = bng || "(উপরে টাইপ করুন...)";
-            document.getElementById('stats-latency').innerText = `লেটেন্সি: ~${Math.max(0.1, (t1 - t0)).toFixed(1)}ms · ${currentEnc.toUpperCase()} মোড`;
+            document.getElementById('demo-output').innerText = bng || "(উপরে কিছু টাইপ করুন...)";
+            document.getElementById('stats-latency').innerText = `ল্যাটেন্সি: ~${Math.max(0.1, (t1 - t0)).toFixed(1)}ms · ${currentEnc === 'ansi' ? 'ANSI' : 'Unicode'} মোড`;
         }
 
         document.getElementById('demo-input').addEventListener('input', updatePlayground);
 
+        // Cheatsheet Search Filter
         function filterCheatsheet() {
             const query = document.getElementById('cheat-search').value.toLowerCase().trim();
             const rows = document.querySelectorAll('#cheat-tbody tr');
@@ -1367,10 +2229,133 @@
             });
         }
 
+        // FAQ Toggle
         function toggleFaq(elem) {
             const item = elem.parentElement;
             item.classList.toggle('open');
         }
+
+        // ==========================================
+        // Converter by Yaza Bi-directional Controller
+        // ==========================================
+        let convVersion = 'v1';
+        let isSyncingConv = false;
+
+        const convVersionMeta = {
+            'v1': { name: 'অ্যানসি V1', tag: 'বিজয় / সুতন্নিএমজে' },
+            'v2': { name: 'অ্যানসি V2', tag: 'স্ট্যান্ডার্ড অ্যানসি' },
+            'v3': { name: 'অ্যানসি V3', tag: 'মডার্ন ডিজাইন গ্লিফ' }
+        };
+
+        function setConverterVersion(ver) {
+            convVersion = ver;
+            ['v1', 'v2', 'v3'].forEach(v => {
+                const tab = document.getElementById(`conv-tab-${v}`);
+                if (tab) tab.classList.toggle('active', v === ver);
+            });
+            const meta = convVersionMeta[ver] || convVersionMeta['v1'];
+            const titleElem = document.getElementById('conv-ansi-title');
+            const tagElem = document.getElementById('conv-ansi-tag');
+            if (titleElem) titleElem.innerText = meta.name;
+            if (tagElem) tagElem.innerText = meta.tag;
+
+            syncFromUnicode();
+        }
+
+        function updateConvCounts() {
+            const uniVal = document.getElementById('conv-unicode-input').value;
+            const ansiVal = document.getElementById('conv-ansi-input').value;
+
+            const uniWords = uniVal.trim() ? uniVal.trim().split(/\s+/).length : 0;
+            const ansiWords = ansiVal.trim() ? ansiVal.trim().split(/\s+/).length : 0;
+
+            const toBnDigits = (n) => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+            const uniCountElem = document.getElementById('conv-uni-chars');
+            const ansiCountElem = document.getElementById('conv-ansi-chars');
+
+            if (uniCountElem) uniCountElem.innerText = `${toBnDigits(uniVal.length)} অক্ষর · ${toBnDigits(uniWords)} শব্দ`;
+            if (ansiCountElem) ansiCountElem.innerText = `${toBnDigits(ansiVal.length)} অক্ষর · ${toBnDigits(ansiWords)} শব্দ`;
+        }
+
+        function syncFromUnicode() {
+            if (isSyncingConv) return;
+            isSyncingConv = true;
+            try {
+                const uniText = document.getElementById('conv-unicode-input').value;
+                if (!window.YazaConverter) {
+                    console.warn('YazaConverter engine not loaded yet');
+                    return;
+                }
+                const converted = window.YazaConverter.unicodeToAnsi(uniText, convVersion);
+                document.getElementById('conv-ansi-input').value = converted;
+                updateConvCounts();
+            } finally {
+                isSyncingConv = false;
+            }
+        }
+
+        function syncFromAnsi() {
+            if (isSyncingConv) return;
+            isSyncingConv = true;
+            try {
+                const ansiText = document.getElementById('conv-ansi-input').value;
+                if (!window.YazaConverter) {
+                    console.warn('YazaConverter engine not loaded yet');
+                    return;
+                }
+                const converted = window.YazaConverter.ansiToUnicode(ansiText, convVersion);
+                document.getElementById('conv-unicode-input').value = converted;
+                updateConvCounts();
+            } finally {
+                isSyncingConv = false;
+            }
+        }
+
+        function copyConvText(type) {
+            const targetId = type === 'uni' ? 'conv-unicode-input' : 'conv-ansi-input';
+            const btnId = type === 'uni' ? 'btn-copy-uni' : 'btn-copy-ansi';
+            const txtId = type === 'uni' ? 'txt-copy-uni' : 'txt-copy-ansi';
+            const text = document.getElementById(targetId).value;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                const txt = document.getElementById(txtId);
+                if (btn) btn.classList.add('copied');
+                if (txt) txt.innerText = 'কপি হয়েছে!';
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('copied');
+                    if (txt) txt.innerText = 'কপি';
+                }, 2000);
+            });
+        }
+
+        async function pasteConvText(type) {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (type === 'uni') {
+                    document.getElementById('conv-unicode-input').value = text;
+                    syncFromUnicode();
+                } else {
+                    document.getElementById('conv-ansi-input').value = text;
+                    syncFromAnsi();
+                }
+            } catch (err) {
+                console.warn('Clipboard read permission denied or unavailable:', err);
+            }
+        }
+
+        function clearConvBoxes() {
+            document.getElementById('conv-unicode-input').value = '';
+            document.getElementById('conv-ansi-input').value = '';
+            updateConvCounts();
+        }
+
+        function setConvDemo(text) {
+            document.getElementById('conv-unicode-input').value = text;
+            syncFromUnicode();
+        }
     </script>
+    <script src="../converter-engine.js"></script>
 </body>
 </html>

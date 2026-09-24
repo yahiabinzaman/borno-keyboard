@@ -20,23 +20,21 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <style>
         :root {
-            --bg: #05080c;
-            --bg-subtle: #090e15;
-            --card-bg: rgba(13, 20, 30, 0.7);
+            --bg: #030305;
+            --bg-subtle: #08080c;
+            --card-bg: rgba(18, 18, 24, 0.7);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(56, 189, 248, 0.3);
+            --card-border-hover: rgba(255, 255, 255, 0.22);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
-            --accent-primary: #10b981;
-            --accent-cyan: #06b6d4;
-            --accent-purple: #8b5cf6;
+            --accent-glow: rgba(255, 255, 255, 0.06);
             --font-main: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-bangla: "Hind Siliguri", -apple-system, sans-serif;
+            --font-bangla: "Anek Bangla", "Hind Siliguri", -apple-system, sans-serif;
             --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
         }
 
@@ -46,6 +44,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text-primary);
@@ -53,33 +55,44 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 85% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 15% 40%, rgba(139, 92, 246, 0.06) 0%, transparent 40%);
-            background-attachment: fixed;
+            position: relative;
         }
 
-        /* Subtle modern grid */
-        .bg-grid {
+        /* Pure Dark Stealth Horizon Lighting */
+        .ambient-glow {
             position: fixed;
-            inset: 0;
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            max-width: 1400px;
+            height: 600px;
+            background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 75%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Navbar */
+        .ambient-beam {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            box-shadow: 0 0 25px 1px rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        /* Header */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(5, 8, 12, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(4, 4, 6, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
@@ -101,28 +114,29 @@
         }
 
         .brand-logo-img {
-            height: 36px;
+            height: 32px;
             width: auto;
-            filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.3));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
         }
 
         .brand-name {
             font-weight: 700;
-            font-size: 1.15rem;
-            letter-spacing: -0.02em;
+            font-size: 1.12rem;
+            letter-spacing: -0.03em;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
         }
 
         .brand-version {
-            font-size: 0.72rem;
-            padding: 0.15rem 0.45rem;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
+            font-size: 0.7rem;
+            padding: 0.12rem 0.45rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
             border-radius: 999px;
             font-weight: 600;
+            font-family: var(--font-mono);
         }
 
         nav {
@@ -134,15 +148,16 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.4rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.86rem;
             font-weight: 500;
+            letter-spacing: -0.01em;
             transition: color 0.15s ease;
         }
 
@@ -161,11 +176,11 @@
             align-items: center;
             padding: 0.3rem 0.75rem;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 500;
             font-family: var(--font-bangla);
             transition: all 0.2s;
@@ -177,23 +192,24 @@
         }
 
         .nav-btn-download {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
+            background: #ffffff;
+            color: #030305;
             text-decoration: none;
-            padding: 0.45rem 1.1rem;
+            padding: 0.42rem 1.05rem;
             border-radius: 999px;
-            font-size: 0.86rem;
+            font-size: 0.84rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
             transition: all 0.2s;
         }
 
         .nav-btn-download:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+            background: #f1f5f9;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
         }
 
         /* Container */
@@ -207,120 +223,144 @@
 
         /* Hero */
         .hero {
-            padding: 5.5rem 0 3.5rem;
+            padding: 4.8rem 0 3rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .pill-badge {
+        .status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.35rem 0.95rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.25);
+            gap: 0.55rem;
+            padding: 0.32rem 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 999px;
-            font-size: 0.84rem;
-            color: #34d399;
-            margin-bottom: 1.8rem;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin-bottom: 1.6rem;
             font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
         }
 
         .hero h1 {
-            font-size: clamp(2.4rem, 6vw, 4.4rem);
+            font-size: clamp(2.4rem, 5.8vw, 4.2rem);
             font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            max-width: 920px;
-            margin-bottom: 1.3rem;
-            background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
+            letter-spacing: -0.035em;
+            line-height: 1.12;
+            max-width: 860px;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(180deg, #ffffff 30%, #888899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-wrap: balance;
+            hyphens: none;
+            -webkit-hyphens: none;
+            word-break: normal;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 680px;
-            margin-bottom: 2.4rem;
+            max-width: 660px;
+            margin-bottom: 2.2rem;
             line-height: 1.6;
+            letter-spacing: -0.01em;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.9rem;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
         }
 
         .btn-main {
-            padding: 0.85rem 1.7rem;
+            padding: 0.8rem 1.6rem;
             border-radius: 999px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.94rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.55rem;
             text-decoration: none;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: -0.01em;
         }
 
         .btn-mac {
             background: #ffffff;
-            color: #000000;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+            color: #030305;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 20px rgba(255, 255, 255, 0.1);
         }
 
         .btn-mac:hover {
             transform: translateY(-2px);
             background: #f1f5f9;
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 8px 25px rgba(255, 255, 255, 0.18);
         }
 
         .btn-win {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #ffffff;
+            backdrop-filter: blur(12px);
         }
 
         .btn-win:hover {
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
         }
 
         /* 1-Line Terminal Commands */
         .terminal-container {
             width: 100%;
-            max-width: 640px;
-            background: rgba(13, 20, 30, 0.85);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 0.5rem 0.6rem 0.5rem 1rem;
+            max-width: 620px;
+            background: rgba(14, 14, 18, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 0.45rem 0.5rem 0.45rem 0.9rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 0.75rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(16px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
         }
 
         .terminal-tabs {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
 
         .term-tab {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
+            padding: 0.2rem 0.45rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -332,8 +372,8 @@
 
         .term-code {
             font-family: var(--font-mono);
-            font-size: 0.84rem;
-            color: #38bdf8;
+            font-size: 0.8rem;
+            color: #f1f5f9;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -342,12 +382,12 @@
         }
 
         .btn-copy-term {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
-            padding: 0.35rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.76rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.15s;
@@ -357,33 +397,72 @@
         }
 
         .btn-copy-term:hover {
-            background: rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.14);
         }
 
         .btn-copy-term.copied {
-            background: #10b981;
+            background: #ffffff;
             color: #000;
             font-weight: 700;
-            border-color: #10b981;
+            border-color: #ffffff;
+        }
+
+        /* Pro Telemetry Spec Bar */
+        .spec-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto 3rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+        }
+
+        .spec-item {
+            background: rgba(10, 10, 14, 0.9);
+            padding: 0.9rem 1rem;
+            text-align: center;
+        }
+
+        .spec-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+            font-family: var(--font-mono);
+        }
+
+        .spec-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 0.15rem;
+            font-weight: 600;
         }
 
         /* Interactive Live Studio Playground */
         .studio-card {
             width: 100%;
-            max-width: 760px;
-            margin: 1.5rem auto 4rem;
-            background: rgba(13, 20, 30, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            max-width: 780px;
+            margin: 0 auto 4rem;
+            background: rgba(14, 14, 18, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(16, 185, 129, 0.08);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
             text-align: left;
+            backdrop-filter: blur(20px);
         }
 
         .studio-topbar {
-            padding: 0.85rem 1.2rem;
-            background: rgba(9, 14, 21, 0.9);
-            border-bottom: 1px solid var(--card-border);
+            padding: 0.75rem 1.1rem;
+            background: rgba(8, 8, 11, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -391,119 +470,129 @@
 
         .studio-dots {
             display: flex;
-            gap: 6px;
+            gap: 7px;
+            align-items: center;
         }
 
         .dot {
             width: 11px;
             height: 11px;
             border-radius: 50%;
+            transition: all 0.15s ease;
         }
-        .dot-r { background: #ef4444; }
-        .dot-y { background: #eab308; }
-        .dot-g { background: #22c55e; }
+        .dot-r {
+            background: #ff5f56;
+            box-shadow: inset 0 0 0 1px rgba(224, 68, 62, 0.3);
+        }
+        .dot-y {
+            background: #ffbd2e;
+            box-shadow: inset 0 0 0 1px rgba(222, 161, 35, 0.3);
+        }
+        .dot-g {
+            background: #27c93f;
+            box-shadow: inset 0 0 0 1px rgba(26, 171, 41, 0.3);
+        }
 
         .studio-title {
-            font-size: 0.84rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
+            font-family: var(--font-mono);
         }
 
         .studio-controls {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             align-items: center;
         }
 
         .studio-pill-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            padding: 0.25rem 0.6rem;
+            padding: 0.22rem 0.55rem;
             border-radius: 999px;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .studio-pill-btn.active {
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .studio-body {
-            padding: 1.5rem;
+            padding: 1.4rem;
         }
 
         .studio-input-label {
-            font-size: 0.78rem;
+            font-size: 0.74rem;
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            margin-bottom: 0.45rem;
         }
 
         .studio-input {
             width: 100%;
-            background: #06090e;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.9rem 1.1rem;
-            color: #f8fafc;
+            background: rgba(8, 8, 11, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 0.92rem;
             outline: none;
-            transition: border-color 0.2s;
-            margin-bottom: 1.2rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 1.1rem;
         }
 
         .studio-input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
         }
 
         .studio-output-box {
-            background: #06090e;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 1.2rem 1.1rem;
-            min-height: 80px;
+            background: rgba(8, 8, 11, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
             font-family: var(--font-bangla);
-            font-size: 1.8rem;
+            font-size: 1.45rem;
             font-weight: 600;
-            color: #ffffff;
+            color: #f8fafc;
+            min-height: 60px;
             display: flex;
             align-items: center;
+            margin-bottom: 1.1rem;
             word-break: break-word;
         }
 
         .studio-chips {
-            margin-top: 1rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
             align-items: center;
-        }
-
-        .studio-chips span {
-            font-size: 0.78rem;
+            gap: 0.45rem;
+            margin-bottom: 1.1rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-weight: 500;
         }
 
         .chip-btn {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             color: var(--text-secondary);
-            padding: 0.25rem 0.65rem;
-            border-radius: 6px;
-            font-size: 0.78rem;
             font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 0.22rem 0.5rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -511,224 +600,261 @@
         .chip-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .studio-footer-status {
-            margin-top: 1.2rem;
-            padding-top: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            font-size: 0.78rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
+            font-family: var(--font-mono);
         }
 
         /* Section Headings */
         .section-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            max-width: 680px;
+            margin: 0 auto 3rem;
         }
 
         .section-tag {
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            color: #38bdf8;
-            text-transform: uppercase;
+            color: var(--text-muted);
             letter-spacing: 0.08em;
-            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.8rem;
+            letter-spacing: -0.035em;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(180deg, #ffffff 40%, #9999aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-desc {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-secondary);
-            max-width: 620px;
-            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* Grid Cards */
-        .grid-3 {
+        /* Bento Grid Layout */
+        .bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
-
-        .feature-card {
+        .bento-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(16px);
-            transition: all 0.25s ease;
+            border-radius: 14px;
+            padding: 1.75rem;
             position: relative;
-            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(16px);
         }
 
-        .feature-card:hover {
-            transform: translateY(-3px);
+        .bento-card:hover {
             border-color: var(--card-border-hover);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
         }
 
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .bento-span-2 {
+            grid-column: span 2;
+        }
+
+        .bento-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f1f5f9;
+            margin-bottom: 1.1rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.25rem;
+        .bento-card h3 {
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 0.6rem;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: #fff;
         }
 
-        .feature-card p {
-            font-size: 0.95rem;
+        .bento-card p {
+            font-size: 0.88rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
         /* Dual Encoding Showcase */
         .encoding-box {
-            background: linear-gradient(180deg, rgba(13, 20, 30, 0.9) 0%, rgba(9, 14, 21, 0.95) 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 6rem;
-            position: relative;
+            background: linear-gradient(180deg, rgba(16, 16, 22, 0.8) 0%, rgba(8, 8, 12, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.75rem 2rem;
+            margin-bottom: 5.5rem;
+            backdrop-filter: blur(20px);
+            text-align: center;
         }
 
         .encoding-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
+            text-align: left;
         }
 
         .encoding-col {
-            background: rgba(6, 9, 14, 0.7);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
+            background: rgba(8, 8, 12, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             padding: 1.6rem;
+            transition: all 0.2s;
         }
 
         .encoding-col.highlight {
-            border-color: rgba(139, 92, 246, 0.35);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .encoding-badge {
             display: inline-block;
-            font-size: 0.75rem;
+            font-size: 0.68rem;
             font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            margin-bottom: 0.8rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            font-family: var(--font-mono);
         }
 
         .badge-uni {
-            background: rgba(56, 189, 248, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .badge-ansi {
-            background: rgba(168, 85, 247, 0.15);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.22);
         }
 
         .encoding-col h4 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+            color: #fff;
         }
 
         .encoding-col ul {
             list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.9rem;
         }
 
-        .encoding-col ul li {
-            font-size: 0.9rem;
+        .encoding-col li {
+            font-size: 0.84rem;
             color: var(--text-secondary);
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .encoding-col ul li::before {
+        .encoding-col li::before {
             content: "✓";
-            color: #10b981;
+            color: #ffffff;
             font-weight: bold;
+            font-size: 0.75rem;
         }
 
-        /* Interactive Cheatsheet Search */
+        /* Layouts Showcase */
+        .layouts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
+        }
+
+        /* Interactive Cheatsheet Search (Compact & Minimal) */
         .cheatsheet-section {
-            margin-bottom: 6rem;
+            margin-bottom: 5.5rem;
         }
 
         .cheat-search-bar {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto 2rem;
+            max-width: 360px;
+            margin: 0 auto 1.25rem;
             position: relative;
         }
 
         .cheat-input {
             width: 100%;
-            background: rgba(13, 20, 30, 0.8);
+            background: rgba(14, 14, 18, 0.85);
             border: 1px solid var(--card-border);
             border-radius: 999px;
-            padding: 0.75rem 1.25rem 0.75rem 2.8rem;
+            padding: 0.48rem 0.9rem 0.48rem 2.3rem;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             outline: none;
             transition: all 0.2s;
         }
 
         .cheat-input:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
         }
 
         .cheat-icon {
             position: absolute;
-            left: 1.1rem;
+            left: 0.85rem;
             top: 50%;
             transform: translateY(-50%);
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
         .table-wrap {
-            background: var(--card-bg);
+            max-width: 740px;
+            margin: 0 auto;
+            max-height: 310px;
+            overflow-y: auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            background: rgba(14, 14, 18, 0.8);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        .table-wrap::-webkit-scrollbar {
+            width: 5px;
+        }
+        .table-wrap::-webkit-scrollbar-track {
+            background: rgba(10, 10, 14, 0.5);
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
         }
 
         table {
@@ -738,9 +864,13 @@
         }
 
         th {
-            background: rgba(9, 14, 21, 0.9);
-            padding: 1rem 1.5rem;
-            font-size: 0.82rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: rgba(10, 10, 14, 0.98);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -749,9 +879,9 @@
         }
 
         td {
-            padding: 0.9rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.92rem;
+            padding: 0.45rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.82rem;
         }
 
         tr:last-child td {
@@ -761,55 +891,281 @@
         .key-badge {
             display: inline-block;
             font-family: var(--font-mono);
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 0.2rem 0.55rem;
-            border-radius: 6px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.12rem 0.42rem;
+            border-radius: 4px;
             color: #f8fafc;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
 
         .bng-out {
             font-family: var(--font-bangla);
-            font-size: 1.35rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        /* Converter by Yaza Section */
+        .converter-section {
+            margin-bottom: 5.5rem;
+        }
+
+        .converter-card {
+            background: linear-gradient(180deg, rgba(16, 16, 22, 0.85) 0%, rgba(8, 8, 12, 0.95) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .converter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .converter-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            font-family: var(--font-mono);
+            margin-bottom: 0.8rem;
+        }
+
+        .converter-versions-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .conv-ver-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.84rem;
+            font-weight: 600;
+            padding: 0.5rem 1.15rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .conv-ver-tab:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .conv-ver-tab.active {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
             font-weight: 700;
-            color: #38bdf8;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .converter-workspace {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .conv-panel {
+            background: rgba(10, 10, 14, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .conv-panel:focus-within {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
+        }
+
+        .conv-topbar {
+            padding: 0.75rem 1rem;
+            background: rgba(14, 14, 18, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .conv-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .conv-label-tag {
+            font-size: 0.68rem;
+            padding: 0.15rem 0.45rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .conv-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-conv-action {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 0.28rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-conv-action:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-conv-action.copied {
+            background: #ffffff;
+            color: #030305;
+            border-color: #ffffff;
+            font-weight: 700;
+        }
+
+        .conv-textarea {
+            width: 100%;
+            height: 240px;
+            padding: 1rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            resize: vertical;
+            font-family: var(--font-bangla);
+        }
+
+        .conv-textarea.ansi-box {
+            font-family: var(--font-mono);
+            font-size: 0.92rem;
+            color: #cbd5e1;
+        }
+
+        .conv-footer-bar {
+            padding: 0.45rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            background: rgba(6, 6, 9, 0.4);
+        }
+
+        .conv-sync-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .conv-sync-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1f5f9;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .conv-presets {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Step by Step Install */
+        .install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 5.5rem;
         }
 
         /* FAQ Section */
         .faq-wrap {
-            max-width: 800px;
+            max-width: 740px;
             margin: 0 auto 6rem;
         }
 
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
             overflow: hidden;
             transition: all 0.2s;
+            backdrop-filter: blur(12px);
         }
 
         .faq-question {
-            padding: 1.25rem 1.5rem;
-            cursor: pointer;
+            padding: 1.1rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.94rem;
+            letter-spacing: -0.01em;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-
-        .faq-question:hover {
-            color: #38bdf8;
+            cursor: pointer;
+            user-select: none;
         }
 
         .faq-answer {
-            padding: 0 1.5rem 1.25rem;
+            padding: 0 1.25rem 1.1rem;
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             line-height: 1.6;
             display: none;
         }
@@ -824,66 +1180,481 @@
 
         .faq-arrow {
             transition: transform 0.2s;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 3.5rem 0 2.5rem;
-            background: #030508;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
         }
 
-        .footer-inner {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        /* Modern Professional Multi-Column Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5rem 0 3rem;
+            background: #020204;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .footer-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-desc {
+            color: var(--text-secondary);
+            font-size: 0.86rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-telemetry {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.65rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            width: fit-content;
+        }
+
+        .footer-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-col h4 {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.25rem;
+            font-family: var(--font-mono);
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.15s ease;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1.5rem;
+            font-size: 0.82rem;
         }
 
-        .footer-left {
+        .footer-bottom-links {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .footer-links a {
+        .btn-back-to-top {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-secondary);
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
             text-decoration: none;
-            transition: color 0.15s;
+            font-size: 0.78rem;
+            transition: all 0.15s;
         }
 
-        .footer-links a:hover {
+        .btn-back-to-top:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .encoding-grid {
+        /* Complete Mobile Optimization & Responsive Engine */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem;
+            }
+            .bento-grid {
                 grid-template-columns: 1fr;
             }
-            .grid-2 {
+            .bento-span-2 {
+                grid-column: span 1;
+            }
+            .encoding-grid, .layouts-grid, .install-grid {
                 grid-template-columns: 1fr;
+            }
+            .converter-workspace {
+                grid-template-columns: 1fr;
+            }
+            .conv-sync-divider {
+                padding: 0.4rem 0;
+                transform: rotate(90deg);
+            }
+            .spec-strip {
+                grid-template-columns: repeat(2, 1fr);
             }
             .nav-links {
                 display: none;
             }
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.15rem;
+            }
+            .hero {
+                padding: 3.2rem 0 2rem;
+            }
+            .hero h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+                margin-bottom: 1rem;
+            }
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.8rem;
+            }
+            .encoding-box {
+                padding: 2rem 1.25rem;
+            }
+            .section-title {
+                font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+            }
+            .section-header {
+                margin-bottom: 2rem;
+            }
+            .bento-grid, .layouts-grid, .install-grid, .cheatsheet-section {
+                margin-bottom: 3.8rem;
+            }
+            .faq-wrap {
+                margin-bottom: 4rem;
+            }
+        }
+
+        @media (max-width: 580px) {
+            header {
+                padding: 0;
+            }
+            .header-inner {
+                padding: 0.65rem 1rem;
+            }
+            .brand {
+                gap: 0.55rem;
+            }
+            .brand-logo-img {
+                height: 28px;
+            }
+            .brand-name {
+                font-size: 0.98rem;
+            }
+            .brand-version {
+                font-size: 0.65rem;
+                padding: 0.08rem 0.35rem;
+            }
+            .nav-actions {
+                gap: 0.45rem;
+            }
+            .lang-switch {
+                padding: 0.28rem 0.6rem;
+                font-size: 0.76rem;
+            }
+            .nav-btn-download {
+                padding: 0.32rem 0.8rem;
+                font-size: 0.78rem;
+            }
+
+            .hero {
+                padding: 2.2rem 0 1.5rem;
+            }
+            .status-pill {
+                font-size: 0.72rem;
+                padding: 0.28rem 0.75rem;
+                margin-bottom: 1.2rem;
+                text-align: center;
+                line-height: 1.35;
+            }
+            .hero h1 {
+                font-size: 1.85rem;
+                letter-spacing: -0.035em;
+                line-height: 1.15;
+            }
+            .hero p {
+                font-size: 0.92rem;
+                line-height: 1.55;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.65rem;
+                margin-bottom: 1.6rem;
+            }
+            .btn-main {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            /* Terminal responsive */
+            .terminal-container {
+                flex-wrap: wrap;
+                padding: 0.6rem 0.75rem;
+                gap: 0.5rem;
+                border-radius: 8px;
+                margin-bottom: 1.6rem;
+            }
+            .terminal-tabs {
+                width: auto;
+            }
+            .term-code {
+                order: 3;
+                width: 100%;
+                font-size: 0.72rem;
+                padding: 0.45rem 0.6rem;
+                background: rgba(0, 0, 0, 0.4);
+                border-radius: 6px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .term-code::-webkit-scrollbar {
+                display: none;
+            }
+            .btn-copy-term {
+                margin-left: auto;
+                padding: 0.25rem 0.6rem;
+                font-size: 0.72rem;
+            }
+
+            /* Spec Strip 2-col */
+            .spec-strip {
+                grid-template-columns: repeat(2, 1fr);
+                margin-bottom: 2.2rem;
+                border-radius: 10px;
+            }
+            .spec-item {
+                padding: 0.75rem 0.6rem;
+            }
+            .spec-value {
+                font-size: 1rem;
+            }
+            .spec-label {
+                font-size: 0.66rem;
+            }
+
+            /* Studio Card */
+            .studio-card {
+                margin-bottom: 3rem;
+                border-radius: 12px;
+            }
+            .studio-topbar {
+                padding: 0.6rem 0.8rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .studio-title {
+                font-size: 0.75rem;
+            }
+            .studio-controls {
+                gap: 0.3rem;
+            }
+            .studio-pill-btn {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.68rem;
+            }
+            .studio-body {
+                padding: 1rem;
+            }
+            .studio-input {
+                font-size: 0.88rem;
+                padding: 0.65rem 0.8rem;
+                margin-bottom: 0.85rem;
+            }
+            .studio-output-box {
+                font-size: 1.25rem;
+                min-height: 52px;
+                padding: 0.75rem 0.85rem;
+                margin-bottom: 0.85rem;
+            }
+            .studio-chips {
+                gap: 0.35rem;
+                font-size: 0.7rem;
+                margin-bottom: 0.85rem;
+            }
+            .chip-btn {
+                padding: 0.2rem 0.45rem;
+                font-size: 0.68rem;
+            }
+            .studio-footer-status {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+                font-size: 0.68rem;
+            }
+
+            /* Bento Cards */
+            .bento-card {
+                padding: 1.35rem 1.15rem;
+                border-radius: 12px;
+            }
+            .bento-icon {
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0.85rem;
+            }
+            .bento-card h3 {
+                font-size: 1.05rem;
+            }
+            .bento-card p {
+                font-size: 0.84rem;
+            }
+
+            /* Encoding Box */
+            .encoding-box {
+                padding: 1.75rem 1rem;
+                border-radius: 14px;
+            }
+            .encoding-col {
+                padding: 1.25rem 1rem;
+                border-radius: 10px;
+            }
+            .encoding-col h4 {
+                font-size: 1rem;
+            }
+            .encoding-col li {
+                font-size: 0.8rem;
+            }
+
+            /* Cheatsheet Table */
+            .cheat-search-bar {
+                max-width: 100%;
+            }
+            .table-wrap {
+                border-radius: 8px;
+                max-height: 280px;
+            }
+            th, td {
+                padding: 0.45rem 0.65rem;
+                font-size: 0.78rem;
+            }
+            .key-badge {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.35rem;
+            }
+            .bng-out {
+                font-size: 0.95rem;
+            }
+
+            /* FAQ */
+            .faq-question {
+                padding: 0.9rem 1rem;
+                font-size: 0.88rem;
+            }
+            .faq-answer {
+                padding: 0 1rem 0.9rem;
+                font-size: 0.82rem;
+            }
+
+            /* Footer */
+            footer {
+                padding: 3.5rem 0 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2.5rem;
+            }
+            .footer-brand-title {
+                font-size: 1.05rem;
+            }
+            .footer-desc {
+                font-size: 0.82rem;
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.2rem;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                width: 100%;
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-inner {
+                padding: 0.6rem 0.75rem;
+            }
+            .brand-name {
+                font-size: 0.9rem;
+            }
+            .brand-version {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 1.65rem;
+            }
+            .spec-strip {
+                grid-template-columns: 1fr;
+            }
+            .studio-topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
+    <div class="ambient-glow"></div>
+    <div class="ambient-beam"></div>
 
     <!-- Header -->
     <header>
@@ -899,6 +1670,7 @@
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#encoding">Unicode & ANSI</a></li>
+                    <li><a href="converter.html">Converter</a></li>
                     <li><a href="#layouts">Layouts</a></li>
                     <li><a href="#playground">Playground</a></li>
                     <li><a href="#install">Install</a></li>
@@ -918,25 +1690,26 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <div class="pill-badge">
-                ⚡️ Next-Gen Bengali Input Engine · Universal Binary (Apple Silicon & Intel) + Windows
+            <div class="status-pill">
+                <span class="live-dot"></span>
+                <span>The All-New Borno · Built for macOS & Windows</span>
             </div>
 
-            <h1>Type Bengali with Pure Precision & Native Speed</h1>
+            <h1>The Bengali keyboard you’ve always wanted.</h1>
 
             <p>
-                Borno (বর্ণ) is the fast, minimal, native Bengali keyboard for <strong>macOS</strong> and <strong>Windows</strong>.
-                Featuring pure direct typing, multiple layouts, and full dual-encoding support across <strong>Unicode & ANSI</strong>.
+                Borno (বর্ণ) is a lightning-fast, beautifully crafted Bengali keyboard for <strong>macOS</strong> and <strong>Windows</strong>.
+                Experience pure direct typing, zero background bloat, and seamless support across <strong>Unicode & Adobe ANSI</strong>.
             </p>
 
             <div class="hero-actions">
                 <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.06.62-2.73 1.39-.58.67-1.09 1.74-.96 2.77 1.03.08 2.16-.54 2.77-1.31z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.92.04-2.06.62-2.73 1.39-.58.67-1.09 1.74-.96 2.77 1.03.08 2.16-.54 2.77-1.31z"/></svg>
                     Download for macOS (.dmg)
                 </a>
 
                 <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
                     Download for Windows (.exe)
                 </a>
             </div>
@@ -953,6 +1726,26 @@
                 </button>
             </div>
 
+            <!-- Pro Spec Strip -->
+            <div class="spec-strip">
+                <div class="spec-item">
+                    <div class="spec-value">&lt; 0.2ms</div>
+                    <div class="spec-label">Input Latency</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">0% CPU</div>
+                    <div class="spec-label">Zero Daemon Bloat</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">Dual Engine</div>
+                    <div class="spec-label">Unicode + ANSI</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">100% Local</div>
+                    <div class="spec-label">Air-Gapped Privacy</div>
+                </div>
+            </div>
+
             <!-- Interactive Live Testing Studio -->
             <div class="studio-card" id="playground">
                 <div class="studio-topbar">
@@ -962,7 +1755,7 @@
                         <div class="dot dot-g"></div>
                     </div>
                     <div class="studio-title">
-                        <span>⌨️ Live Phonetic & ANSI Studio</span>
+                        <span>Live Phonetic & ANSI Studio</span>
                     </div>
                     <div class="studio-controls">
                         <button class="studio-pill-btn active" id="enc-uni-btn" onclick="setPlaygroundEnc('unicode')">Unicode</button>
@@ -970,14 +1763,14 @@
                     </div>
                 </div>
                 <div class="studio-body">
-                    <div class="studio-input-label">Type Phonetic English Below:</div>
+                    <div class="studio-input-label">Type Phonetic English:</div>
                     <input type="text" class="studio-input" id="demo-input" placeholder="e.g. amar sonar bangla..." value="amar sonar bangla" autocomplete="off" autocorrect="off" spellcheck="false" />
                     
                     <div class="studio-input-label">Bengali Live Output:</div>
                     <div class="studio-output-box" id="demo-output">আমার সোনার বাংলা</div>
 
                     <div class="studio-chips">
-                        <span>Try Examples:</span>
+                        <span>Presets:</span>
                         <button class="chip-btn" onclick="setDemoText('amar sonar bangla')">amar sonar bangla</button>
                         <button class="chip-btn" onclick="setDemoText('kkhoma o shanti')">kkhoma o shanti</button>
                         <button class="chip-btn" onclick="setDemoText('projukti o shrishti')">projukti o shrishti</button>
@@ -985,56 +1778,52 @@
                     </div>
 
                     <div class="studio-footer-status">
-                        <span>⚡️ Engine: Native Rust (riti) Transliteration</span>
+                        <span>Engine: Native Rust (riti) Transliteration</span>
                         <span id="stats-latency">Latency: ~0.2ms · Pure Direct Stream</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Grid -->
-        <section id="features" style="padding-top: 2rem;">
+        <!-- Bento Grid Features -->
+        <section id="features">
             <div class="section-header">
-                <div class="section-tag">ENGINEERING HIGHLIGHTS</div>
+                <div class="section-tag">ENGINEERING ARCHITECTURE</div>
                 <h2 class="section-title">Built for Unmatched Speed & Privacy</h2>
                 <p class="section-desc">Zero floating window disruption, direct text streaming, and 100% offline local execution.</p>
             </div>
 
-            <div class="grid-3">
-                <div class="feature-card">
-                    <div class="card-icon">🚀</div>
-                    <h3>Pure Direct Typing</h3>
-                    <p>Bengali characters stream instantly into your active text cursor without flickering popup overlays or candidate delay.</p>
+            <div class="bento-grid">
+                <div class="bento-card bento-span-2">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>Direct Kernel/IME Stream</h3>
+                    <p>Bengali characters stream instantly into your active text cursor without flickering popup candidate overlays or input lag. No background daemon consuming battery or memory.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🎨</div>
-                    <h3>Dual Output Engine</h3>
-                    <p>Seamlessly toggle between standard <strong>Unicode</strong> for modern apps and <strong>ANSI</strong> for Adobe Illustrator & Photoshop.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="card-icon">⚡️</div>
-                    <h3>Sub-Millisecond Speed</h3>
-                    <p>Powered by an ultra-fast Rust core (<code>riti</code>) delivering immediate key processing with near-zero RAM footprint.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="card-icon">🔒</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
                     <h3>100% Offline & Private</h3>
-                    <p>Zero network calls, zero telemetry, and zero analytics. Everything is processed strictly locally on your machine.</p>
+                    <p>Zero telemetry, zero network permissions, and zero tracking. Your keystrokes never touch the internet.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">⌨️</div>
-                    <h3>Multiple Layout Standards</h3>
-                    <p>Supports <strong>Borno (Phonetic)</strong>, <strong>National / Bijoy (জাতীয়)</strong>, and <strong>Probhat (প্রভাত)</strong> layouts.</p>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+                    </div>
+                    <h3>Native Rust Core (riti)</h3>
+                    <p>Powered by an ultra-optimized Rust transliteration engine with deterministic sub-millisecond execution.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🍎</div>
-                    <h3>Universal macOS & Windows</h3>
-                    <p>Native Apple Silicon (ARM64) + Intel (x86_64) on macOS Ventura, Sonoma, Sequoia, and native Win32 on Windows 10/11.</p>
+                <div class="bento-card bento-span-2">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                    </div>
+                    <h3>Dual Output Engine (Unicode & ANSI)</h3>
+                    <p>Seamlessly toggle between standard Unicode for web & modern apps, and direct ANSI for Adobe Illustrator & Photoshop with automatic vowel reordering.</p>
                 </div>
             </div>
         </section>
@@ -1043,18 +1832,18 @@
         <section id="encoding">
             <div class="encoding-box">
                 <div class="section-tag">DUAL ENCODING ARCHITECTURE</div>
-                <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.6rem;">
+                <h2 style="font-size: 2.1rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.6rem;">
                     The End of Broken Vowel Boxes in Design Apps
                 </h2>
-                <p style="color: var(--text-secondary); max-width: 700px; font-size: 1.05rem;">
-                    Borno solves the #1 challenge in the Bengali design industry by offering instant output conversion between modern Unicode and legacy ANSI.
+                <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: 0.95rem;">
+                    Borno solves the #1 challenge in the Bengali design industry with instant output conversion between modern Unicode and legacy ANSI.
                 </p>
 
                 <div class="encoding-grid">
                     <div class="encoding-col">
                         <span class="encoding-badge badge-uni">UNICODE MODE</span>
                         <h4>For Modern Web & Apps</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <p style="font-size: 0.86rem; color: var(--text-secondary);">
                             Outputs standard UTF-8 Bengali characters. Perfect for typing across modern browsers, word processors, and communication tools.
                         </p>
                         <ul>
@@ -1068,7 +1857,7 @@
                     <div class="encoding-col highlight">
                         <span class="encoding-badge badge-ansi">ANSI MODE</span>
                         <h4>For Adobe Creative Cloud</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <p style="font-size: 0.86rem; color: var(--text-secondary);">
                             Converts text in real-time to direct ANSI glyphs. Eliminates broken Kar boxes (আ-কার, ই-কার) in print publishing.
                         </p>
                         <ul>
@@ -1078,6 +1867,13 @@
                             <li>Direct typing without external converter tools</li>
                         </ul>
                     </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="converter.html" class="btn-copy-term" style="padding: 0.55rem 1.35rem; font-size: 0.86rem; text-decoration: none; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.18);">
+                        <span>⚡ Launch Standalone Universal Script Converter</span>
+                        <span style="opacity: 0.7;">→</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1090,21 +1886,27 @@
                 <p class="section-desc">Switch seamlessly between Phonetic and fixed layouts from the menu bar or settings.</p>
             </div>
 
-            <div class="grid-3">
-                <div class="feature-card">
-                    <div class="card-icon">🗣️</div>
+            <div class="layouts-grid">
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/></svg>
+                    </div>
                     <h3>Borno (Phonetic)</h3>
-                    <p>Natural Avro-compatible phonetic transliteration. Type in English letters to get accurate Bengali words (e.g. <code>ami</code> → <code>আমি</code>).</p>
+                    <p>Intuitive Romanized phonetic typing (e.g. <code>amar</code> → <code>আমার</code>). Full conjunct support and smart vowel logic.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🇧🇩</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+                    </div>
                     <h3>National / Bijoy (জাতীয়)</h3>
-                    <p>Standard Bangladesh National layout. Ideal for professional typists, journalists, and print media publishers (e.g. <code>Av</code> → <code>আ</code>, <code>g</code> → <code>ম</code>).</p>
+                    <p>Standard Bangladesh National layout. Ideal for professional typists, journalists, and print media publishers.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="card-icon">🌅</div>
+                <div class="bento-card">
+                    <div class="bento-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </div>
                     <h3>Probhat (প্রভাত)</h3>
                     <p>The classic Probhat fixed layout mapping, built with modern responsive modifiers and full conjunct support.</p>
                 </div>
@@ -1113,7 +1915,7 @@
 
         <!-- Cheatsheet Section -->
         <section id="cheatsheet" class="cheatsheet-section">
-            <div class="section-header">
+            <div class="section-header" style="margin-bottom: 1.5rem;">
                 <div class="section-tag">QUICK REFERENCE</div>
                 <h2 class="section-title">Phonetic Mapping Cheat-Sheet</h2>
                 <p class="section-desc">Search any letter, key, or conjunct for instant reference.</p>
@@ -1165,25 +1967,25 @@
                 <h2 class="section-title">Get Started in 3 Simple Steps</h2>
             </div>
 
-            <div class="grid-2">
-                <div class="feature-card">
-                    <div style="font-size: 0.82rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">🍎 macOS SETUP</div>
+            <div class="install-grid">
+                <div class="bento-card">
+                    <div style="font-size: 0.78rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.4rem; font-family: var(--font-mono);">macOS SETUP</div>
                     <h3>macOS (Ventura, Sonoma, Sequoia)</h3>
-                    <p style="margin-bottom: 0.8rem;">1. Run the 1-line terminal command or download <strong>Borno.dmg</strong>.</p>
-                    <p style="margin-bottom: 0.8rem;">2. Open <strong>System Settings → Keyboard → Input Sources</strong> (Edit...). Click <strong>+</strong>, search for <strong>Borno</strong>, and add it.</p>
-                    <p style="margin-bottom: 1.2rem;">3. Press <strong>Control + Space</strong> or tap the <strong>Globe (🌐)</strong> key anytime to switch input methods.</p>
-                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">
+                    <p style="margin-bottom: 0.6rem; font-size: 0.86rem;">1. Run the 1-line terminal command or download <strong>Borno.dmg</strong>.</p>
+                    <p style="margin-bottom: 0.6rem; font-size: 0.86rem;">2. Open <strong>System Settings → Keyboard → Input Sources</strong> (Edit...). Click <strong>+</strong>, search for <strong>Borno</strong>, and add it.</p>
+                    <p style="margin-bottom: 1.1rem; font-size: 0.86rem;">3. Press <strong>Control + Space</strong> or tap <strong>Globe (🌐)</strong> key to switch anytime.</p>
+                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg" class="btn-main btn-mac" style="padding: 0.55rem 1.15rem; font-size: 0.86rem;">
                         Download Borno.dmg
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div style="font-size: 0.82rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.4rem;">🪟 WINDOWS SETUP</div>
+                <div class="bento-card">
+                    <div style="font-size: 0.78rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.4rem; font-family: var(--font-mono);">WINDOWS SETUP</div>
                     <h3>Windows 10 / 11</h3>
-                    <p style="margin-bottom: 0.8rem;">1. Run the 1-line PowerShell script or download <strong>Borno.exe</strong>.</p>
-                    <p style="margin-bottom: 0.8rem;">2. If Windows SmartScreen shows <em>"Windows protected your PC"</em>, click <strong>"More info" → "Run anyway"</strong>.</p>
-                    <p style="margin-bottom: 1.2rem;">3. Press <strong>F12</strong> anytime to toggle between English and Bengali mode across any app.</p>
-                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">
+                    <p style="margin-bottom: 0.6rem; font-size: 0.86rem;">1. Run the 1-line PowerShell script or download <strong>Borno.exe</strong>.</p>
+                    <p style="margin-bottom: 0.6rem; font-size: 0.86rem;">2. If Windows SmartScreen appears, click <strong>"More info" → "Run anyway"</strong>.</p>
+                    <p style="margin-bottom: 1.1rem; font-size: 0.86rem;">3. Press <strong>F12</strong> anytime to toggle between English and Bengali mode.</p>
+                    <a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe" class="btn-main btn-win" style="padding: 0.55rem 1.15rem; font-size: 0.86rem;">
                         Download Borno.exe
                     </a>
                 </div>
@@ -1203,7 +2005,7 @@
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Borno is 100% open-source and free software without an expensive corporate digital signature. When Windows Defender SmartScreen appears, simply click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>. It is completely safe, offline, and contains zero malware.
+                    Borno is 100% open-source and free software without an expensive corporate digital signature. When Windows Defender SmartScreen appears, simply click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>. It is completely safe, offline, and contains zero telemetry.
                 </div>
             </div>
 
@@ -1213,7 +2015,7 @@
                     <span class="faq-arrow">▼</span>
                 </div>
                 <div class="faq-answer">
-                    Simply switch Borno's <strong>Output Encoding</strong> to <strong>ANSI</strong> from the Menu Bar or Settings. In Illustrator or Photoshop, select your ANSI font (e.g. SutonnyMJ) and type normally. Borno automatically reorders all vowels and conjuncts!
+                    Simply switch Borno's <strong>Output Encoding</strong> to <strong>ANSI</strong> from the Menu Bar or Settings. In Illustrator or Photoshop, select your ANSI font (e.g. SutonnyMJ) and type normally. Borno automatically reorders all vowels and conjuncts in real-time.
                 </div>
             </div>
 
@@ -1239,22 +2041,71 @@
         </section>
     </div>
 
-    <!-- Footer -->
+    <!-- Modern Professional Footer -->
     <footer>
-        <div class="footer-inner">
-            <div class="footer-left">
-                <img src="borno-logo-transparent.png" alt="Borno Logo" style="height: 28px;" />
-                <div>
-                    <strong>Borno (বর্ণ)</strong> · Developed by <a href="https://github.com/yahiabinzaman" style="color: #fff; text-decoration: none; font-weight: 600;">Yahia Bin Zaman</a>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand & Mission Column -->
+                <div class="footer-brand-col">
+                    <div class="footer-logo-row">
+                        <img src="borno-logo-transparent.png" alt="Borno Logo" style="height: 32px; width: auto;" />
+                        <span class="footer-brand-title">Borno (বর্ণ)</span>
+                        <span class="brand-version">v0.2.5</span>
+                    </div>
+                    <p class="footer-desc">
+                        The native, ultra-fast Bengali input engine for macOS and Windows. Designed for precision typing, dual Unicode & ANSI support, and complete offline privacy.
+                    </p>
+                    <div class="footer-telemetry">
+                        <span class="footer-pulse"></span>
+                        <span>Universal Binary · Free & Open Source</span>
+                    </div>
+                </div>
+
+                <!-- Column 1: Downloads -->
+                <div class="footer-col">
+                    <h4>Downloads</h4>
+                    <ul>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/latest/download/Borno.dmg">macOS (.dmg)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno.exe">Windows (.exe)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases/download/v0.2.5/Borno-Windows-x64.zip">Windows (.zip)</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases">GitHub Releases</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Product & Docs -->
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#encoding">Unicode & ANSI</a></li>
+                        <li><a href="#layouts">Keyboard Layouts</a></li>
+                        <li><a href="#playground">Live Testing Studio</a></li>
+                        <li><a href="#cheatsheet">Phonetic Cheat-Sheet</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Open Source -->
+                <div class="footer-col">
+                    <h4>Open Source</h4>
+                    <ul>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/issues" target="_blank" rel="noopener">Report an Issue</a></li>
+                        <li><a href="https://github.com/yahiabinzaman/borno-keyboard/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+                        <li><a href="https://github.com/yahiabinzaman" target="_blank" rel="noopener">Yahia Bin Zaman</a></li>
+                    </ul>
                 </div>
             </div>
 
-            <ul class="footer-links">
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard" target="_blank" rel="noopener">GitHub</a></li>
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard/releases" target="_blank" rel="noopener">Releases</a></li>
-                <li><a href="https://github.com/yahiabinzaman/borno-keyboard/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
-                <li><a href="bn/index.html">বাংলা সংস্করণ</a></li>
-            </ul>
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    © 2026 Borno. Developed with precision by <a href="https://github.com/yahiabinzaman" target="_blank" rel="noopener" style="color: #fff; text-decoration: none; font-weight: 600;">Yahia Bin Zaman</a>.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="bn/index.html" class="lang-switch">বাংলা সংস্করণ</a>
+                    <a href="#" class="btn-back-to-top">↑ Back to top</a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -1321,9 +2172,7 @@
 
         function transliterateDemo(input) {
             if (!input) return "";
-            let res = input;
             
-            // Common words
             const wordDict = {
                 "amar": "আমার", "sonar": "সোনার", "bangla": "বাংলা",
                 "ami": "আমি", "tomay": "তোমায়", "bhalobashi": "ভালোবাসি",
@@ -1335,7 +2184,6 @@
             const words = input.split(' ');
             return words.map(w => {
                 if (wordDict[w.toLowerCase()]) return wordDict[w.toLowerCase()];
-                // Simple character mapping fallback
                 let out = "";
                 let i = 0;
                 while (i < w.length) {
@@ -1358,7 +2206,6 @@
         }
 
         function toAnsiDemo(unicodeText) {
-            // Converts Unicode Bengali text to ANSI representation for preview
             const ansiMap = {
                 "আমার": "Avgvi", "সোনার": "†mvbvi", "বাংলা": "evsjv",
                 "আমি": "Avwg", "তোমায়": "†Zvgvq", "ভালোবাসি": "fvልevwm",
@@ -1397,6 +2244,126 @@
             const item = elem.parentElement;
             item.classList.toggle('open');
         }
+
+        // ==========================================
+        // Converter by Yaza Bi-directional Controller
+        // ==========================================
+        let convVersion = 'v1';
+        let isSyncingConv = false;
+
+        const convVersionMeta = {
+            'v1': { name: 'ANSI V1', tag: 'Bijoy / SutonnyMJ' },
+            'v2': { name: 'ANSI V2', tag: 'Standard ANSI' },
+            'v3': { name: 'ANSI V3', tag: 'Modern Design Glyphs' }
+        };
+
+        function setConverterVersion(ver) {
+            convVersion = ver;
+            ['v1', 'v2', 'v3'].forEach(v => {
+                const tab = document.getElementById(`conv-tab-${v}`);
+                if (tab) tab.classList.toggle('active', v === ver);
+            });
+            const meta = convVersionMeta[ver] || convVersionMeta['v1'];
+            const titleElem = document.getElementById('conv-ansi-title');
+            const tagElem = document.getElementById('conv-ansi-tag');
+            if (titleElem) titleElem.innerText = meta.name;
+            if (tagElem) tagElem.innerText = meta.tag;
+
+            syncFromUnicode();
+        }
+
+        function updateConvCounts() {
+            const uniVal = document.getElementById('conv-unicode-input').value;
+            const ansiVal = document.getElementById('conv-ansi-input').value;
+
+            const uniWords = uniVal.trim() ? uniVal.trim().split(/\s+/).length : 0;
+            const ansiWords = ansiVal.trim() ? ansiVal.trim().split(/\s+/).length : 0;
+
+            const uniCountElem = document.getElementById('conv-uni-chars');
+            const ansiCountElem = document.getElementById('conv-ansi-chars');
+
+            if (uniCountElem) uniCountElem.innerText = `${uniVal.length} characters · ${uniWords} words`;
+            if (ansiCountElem) ansiCountElem.innerText = `${ansiVal.length} characters · ${ansiWords} words`;
+        }
+
+        function syncFromUnicode() {
+            if (isSyncingConv) return;
+            isSyncingConv = true;
+            try {
+                const uniText = document.getElementById('conv-unicode-input').value;
+                if (!window.YazaConverter) {
+                    console.warn('YazaConverter engine not loaded yet');
+                    return;
+                }
+                const converted = window.YazaConverter.unicodeToAnsi(uniText, convVersion);
+                document.getElementById('conv-ansi-input').value = converted;
+                updateConvCounts();
+            } finally {
+                isSyncingConv = false;
+            }
+        }
+
+        function syncFromAnsi() {
+            if (isSyncingConv) return;
+            isSyncingConv = true;
+            try {
+                const ansiText = document.getElementById('conv-ansi-input').value;
+                if (!window.YazaConverter) {
+                    console.warn('YazaConverter engine not loaded yet');
+                    return;
+                }
+                const converted = window.YazaConverter.ansiToUnicode(ansiText, convVersion);
+                document.getElementById('conv-unicode-input').value = converted;
+                updateConvCounts();
+            } finally {
+                isSyncingConv = false;
+            }
+        }
+
+        function copyConvText(type) {
+            const targetId = type === 'uni' ? 'conv-unicode-input' : 'conv-ansi-input';
+            const btnId = type === 'uni' ? 'btn-copy-uni' : 'btn-copy-ansi';
+            const txtId = type === 'uni' ? 'txt-copy-uni' : 'txt-copy-ansi';
+            const text = document.getElementById(targetId).value;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                const txt = document.getElementById(txtId);
+                if (btn) btn.classList.add('copied');
+                if (txt) txt.innerText = 'Copied!';
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('copied');
+                    if (txt) txt.innerText = 'Copy';
+                }, 2000);
+            });
+        }
+
+        async function pasteConvText(type) {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (type === 'uni') {
+                    document.getElementById('conv-unicode-input').value = text;
+                    syncFromUnicode();
+                } else {
+                    document.getElementById('conv-ansi-input').value = text;
+                    syncFromAnsi();
+                }
+            } catch (err) {
+                console.warn('Clipboard read permission denied or unavailable:', err);
+            }
+        }
+
+        function clearConvBoxes() {
+            document.getElementById('conv-unicode-input').value = '';
+            document.getElementById('conv-ansi-input').value = '';
+            updateConvCounts();
+        }
+
+        function setConvDemo(text) {
+            document.getElementById('conv-unicode-input').value = text;
+            syncFromUnicode();
+        }
     </script>
+    <script src="converter-engine.js"></script>
 </body>
 </html>

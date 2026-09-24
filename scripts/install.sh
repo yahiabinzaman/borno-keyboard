@@ -81,8 +81,36 @@ xattr -cr "$INSTALL_DIR/$APP_NAME.app" 2>/dev/null || true
 rm -f "/Applications/$APP_NAME.app" 2>/dev/null || true
 ln -sf "$INSTALL_DIR/$APP_NAME.app" "/Applications/$APP_NAME.app" 2>/dev/null || true
 
-# Launch IME service
-echo ">>> Launching $APP_NAME..."
+# Register user LaunchAgent for automatic startup & background keepalive
+LAUNCH_AGENT_DIR="$HOME/Library/LaunchAgents"
+LAUNCH_AGENT_PLIST="$LAUNCH_AGENT_DIR/com.borno.inputmethod.Borno.plist"
+mkdir -p "$LAUNCH_AGENT_DIR"
+launchctl unload "$LAUNCH_AGENT_PLIST" 2>/dev/null || true
+
+cat <<EOF > "$LAUNCH_AGENT_PLIST"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.borno.inputmethod.Borno</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>$INSTALL_DIR/$APP_NAME.app/Contents/MacOS/$APP_NAME</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Interactive</string>
+</dict>
+</plist>
+EOF
+
+# Load and launch IME service
+echo ">>> Starting Borno background service..."
+launchctl load "$LAUNCH_AGENT_PLIST" 2>/dev/null || true
 open "$INSTALL_DIR/$APP_NAME.app" 2>/dev/null || true
 
 echo ""

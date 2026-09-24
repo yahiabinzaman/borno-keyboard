@@ -26,6 +26,8 @@
 	<string>com.borno.inputmethod.Borno_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>BornoInputController</string>
+	<key>InputMethodServerDelegateClass</key>
+	<string>BornoInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>LSUIElement</key>
@@ -49,6 +51,10 @@
 		<dict>
 			<key>com.borno.inputmethod.Borno</key>
 			<dict>
+				<key>TISInputSourceID</key>
+				<string>com.borno.inputmethod.Borno</string>
+				<key>TISIntendedLanguage</key>
+				<string>bn</string>
 				<key>tsInputModeCharacterRepertoireKey</key>
 				<array>
 					<string>Latn</string>

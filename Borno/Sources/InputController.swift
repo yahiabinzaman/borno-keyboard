@@ -74,6 +74,7 @@ class BornoInputController: IMKInputController {
     private var selectedIndex: UInt = 0
     private var candidatePanel: CandidatePanel?
     private var lastKnownCursorRect: NSRect = .zero
+    private var mouseMonitor: Any?
 
     /// Bengali digits ০-৯ indexed by 0-9
     private static let bengaliDigits: [Character] = [
@@ -104,6 +105,19 @@ class BornoInputController: IMKInputController {
             name: .bornoEncodingChanged,
             object: nil
         )
+        mouseMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
+            guard let self = self else { return }
+            if let ctx = self.engineCtx, riti_context_ongoing_input_session(ctx) {
+                if let client = self.client() as (any IMKTextInput)? {
+                    self.commitTopCandidate(client: client)
+                } else {
+                    riti_context_finish_input_session(ctx)
+                    self.finishPhoneticShadow()
+                    self.freeSuggestion()
+                    self.hideCandidates()
+                }
+            }
+        }
     }
 
     private func initializeEngine() {
@@ -300,6 +314,10 @@ class BornoInputController: IMKInputController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        if let monitor = mouseMonitor {
+            NSEvent.removeMonitor(monitor)
+            mouseMonitor = nil
+        }
         freeSuggestion()
         if let ctx = engineCtx {
             riti_context_free(ctx)
@@ -789,6 +807,40 @@ class BornoInputController: IMKInputController {
 
     // MARK: - Session lifecycle
 
+    override func commitComposition(_ sender: Any!) {
+        if let client = (sender as? (any IMKTextInput)) ?? (self.client() as (any IMKTextInput)?),
+           riti_context_ongoing_input_session(engineCtx) {
+            commitTopCandidate(client: client)
+        } else {
+            finishPhoneticShadow()
+            freeSuggestion()
+            hideCandidates()
+        }
+    }
+
+    override func cancelComposition() {
+        if let client = self.client() as (any IMKTextInput)?,
+           riti_context_ongoing_input_session(engineCtx) {
+            riti_context_finish_input_session(engineCtx)
+            finishPhoneticShadow()
+            freeSuggestion()
+            client.setMarkedText(
+                "" as NSString,
+                selectionRange: NSRange(location: 0, length: 0),
+                replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
+            )
+            hideCandidates()
+        }
+    }
+
+    override func mouseDown(onCharacterIndex index: Int, coordinate point: NSPoint, withModifier flags: Int, continueTracking keepTracking: UnsafeMutablePointer<ObjCBool>!, client sender: Any!) -> Bool {
+        if let client = (sender as? (any IMKTextInput)) ?? (self.client() as (any IMKTextInput)?),
+           riti_context_ongoing_input_session(engineCtx) {
+            commitTopCandidate(client: client)
+        }
+        return false
+    }
+
     override func activateServer(_ sender: Any!) {
         super.activateServer(sender)
         selectedIndex = 0
@@ -828,7 +880,18 @@ class BornoInputController: IMKInputController {
         return result
     }
 
-    // MARK: - Input Method Menu
+    // MARK: - Input Method Menu & Modes
+
+    override func modes(_ sender: Any!) -> [AnyHashable : Any]! {
+        return [
+            "tsInputModeListKey": [
+                "com.borno.inputmethod.Borno": [
+                    "tsInputModeIsVisibleKey": true,
+                    "tsInputModeDefaultStateKey": true
+                ]
+            ]
+        ]
+    }
 
     override func menu() -> NSMenu! {
         let menu = NSMenu(title: "Borno")
@@ -893,36 +956,36 @@ class BornoInputController: IMKInputController {
         return menu
     }
 
-    @objc private func setLayoutPhonetic() {
+    @objc func setLayoutPhonetic() {
         UserDefaults.standard.set("avro_phonetic", forKey: BornoInputController.keyboardLayoutKey)
         NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
     }
 
-    @objc private func setLayoutNational() {
+    @objc func setLayoutNational() {
         UserDefaults.standard.set("National", forKey: BornoInputController.keyboardLayoutKey)
         NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
     }
 
-    @objc private func setLayoutProbhat() {
+    @objc func setLayoutProbhat() {
         UserDefaults.standard.set("Probhat", forKey: BornoInputController.keyboardLayoutKey)
         NotificationCenter.default.post(name: .bornoLayoutChanged, object: nil)
     }
 
-    @objc private func layoutChanged() {
+    @objc func layoutChanged() {
         rebuildEngine()
     }
 
-    @objc private func setOutputUnicode() {
+    @objc func setOutputUnicode() {
         UserDefaults.standard.set("Unicode", forKey: BornoInputController.outputEncodingKey)
         NotificationCenter.default.post(name: .bornoEncodingChanged, object: nil)
     }
 
-    @objc private func setOutputANSI() {
+    @objc func setOutputANSI() {
         UserDefaults.standard.set("ANSI", forKey: BornoInputController.outputEncodingKey)
         NotificationCenter.default.post(name: .bornoEncodingChanged, object: nil)
     }
 
-    @objc private func openWelcomeWindow() {
+    @objc func openWelcomeWindow() {
         WelcomeWindowController.shared.showWindow()
     }
 }
